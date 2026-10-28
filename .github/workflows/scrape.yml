@@ -2,7 +2,8 @@ name: 🗡️ WoW Forever Daily News Scraper
 
 on:
   schedule:
-    - cron: "0 8 * * *"   # 09:00 CET / 10:00 CEST
+    # 08:00 UTC = 09:00 CET (Vienna / Sarajevo)
+    - cron: "0 8 * * *"
   workflow_dispatch:
 
 permissions:
@@ -24,7 +25,7 @@ jobs:
       - name: 📦 Install dependencies
         run: pip install -r scraper/requirements.txt
 
-      - name: 🔍 Run scraper
+      - name: 🔍 Run scraper & AI validator
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: python scraper/scrape.py
@@ -33,6 +34,6 @@ jobs:
         run: |
           git config --global user.name  "WoW-Bot 🤖"
           git config --global user.email "wow-bot@faruk-mirza.github.io"
-          git add data/news.json data/seen_ids.json data/bis.json || true
-          git diff --cached --quiet || git commit -m "🗞️ Daily update $(date -u '+%Y-%m-%d %H:%M UTC')"
+          git add data/news.json data/seen_ids.json data/guides.json data/bis.json || true
+          git diff --cached --quiet || git commit -m "🗞️ Daily verified update $(date -u '+%Y-%m-%d %H:%M UTC')"
           git push

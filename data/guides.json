@@ -1,88 +1,106 @@
 {
-  "launch_date": "2026-11-04T23:00:00Z",
-  "hunter_pets": {
-    "categories": [
+  "version": "WoW Forever 1.0 (Blizzard Official)",
+  "verified_date": "2026-10-28",
+  "launch_cet": "2026-11-05T00:00:00+01:00",
+  "launch_utc": "2026-11-04T23:00:00Z",
+  "player_profiles": {
+    "Faruk": {
+      "primary_class": "Hunter",
+      "spec": "Beast Mastery",
+      "faction": "Allianz",
+      "professions": ["Kürschnerei (Skinning)", "Bergbau (Mining)"],
+      "focus": "Fast Leveling, Rare Pet Taming, Ranged DPS, Group Farming"
+    },
+    "Mirza": {
+      "primary_class": "Shaman",
+      "alt_classes": ["Priest", "Rogue"],
+      "spec": "Enhancement / Restoration",
+      "faction": "Allianz",
+      "professions": ["Kräuterkunde (Herbalism)", "Alchemie / Ingenieurskunst"],
+      "focus": "Melee DPS, Totem Utility, Camping Alchemy Lab, Dungeon Support"
+    }
+  },
+  "forever_systems": {
+    "camping": {
+      "title": "🏕️ Das Camping-System (WoW Forever Core Feature)",
+      "status": "Blizzard Bestätigt",
+      "source_url": "https://worldofwarcraft.blizzard.com/en-us/news/24303313",
+      "overview": "In WoW Forever ist das Kochen-Lagerfeuer (Campfire) ein mobiler Knotenpunkt für Erholung und mächtige Gruppen-Buffs. 1 Minute Ausruhen am Camp aktiviert den Erholt-Status (Rested) in der offenen Welt.",
+      "profession_contributions": [
+        {"prof": "Schmiedekunst (Blacksmithing)", "item": "Schleifstein-Rad (Sharpening Wheel)", "buff": "+Angriffskraft (Attack Power) für 1 Stunde."},
+        {"prof": "Schneiderei (Tailoring)", "item": "Fraktions-Banner", "buff": "+Wille (Spirit) für schnellere Mana- & Lebens-Regeneration."},
+        {"prof": "Kräuterkunde (Herbalism)", "item": "Räucherkerze (Incense Candle)", "buff": "+Intelligenz (Intellect) für Zauberklassen."},
+        {"prof": "Alchemie (Alchemy)", "item": "Mobiles Alchemielabor", "buff": "Ermöglicht das Brauen von High-End Elixieren & Tränken unterwegs ohne Scholomance!"},
+        {"prof": "Lederverarbeitung (Leatherworking)", "item": "Gerberbock (Tanning Rack)", "buff": "Verarbeitung seltener Felle direkt im Camp."},
+        {"prof": "Kochkunst Upgrade (Leveling)", "item": "Größeres Lagerfeuer", "buff": "Erhöht die Anzahl platzierbarer Berufsgegenstände von 1 auf bis zu 5–10 und schaltet temporäre Reparatur-Händler frei."}
+      ],
+      "tactics_faruk_mirza": "Kombination: Faruk (Kürschnerei/Bergbau) + Mirza (Kräuter/Alchemie). Mirza stellt das mobile Alchemielabor im Camp auf, Faruk liefert Tierfelle/Erze. Beide holen sich vor Dungeons den Schleifstein- und Räucherkerzen-Buff!"
+    },
+    "legacy": {
+      "title": "🏛️ Das Legacy-System (Accountweiter Fortschritt)",
+      "status": "Blizzard Bestätigt",
+      "source_url": "https://worldofwarcraft.blizzard.com/en-us/news/24303313",
+      "overview": "Meilensteine auf Hauptcharakteren schalten konto- und serverweite Boni für Twinks und Erkundung frei. Über 1.000 neue Quests und neue Zonen füttern direkt das Legacy-Level.",
+      "key_perks": [
+        "Schnellerer Rufaufbau bei Allianz-Fraktionen für Zweitcharaktere.",
+        "Konto-gebundene Komfort-Vorteile beim Reisen zwischen den neuen Forever-Zonen.",
+        "Erhöhte Ausbeute bei Welt-Ressourcen nach Erreichen wichtiger Meilensteine."
+      ]
+    }
+  },
+  "hunter_forever": {
+    "title": "🏹 Jäger & Pets in WoW Forever (Wichtige Änderungen ggü. Classic 1.12)",
+    "status": "Blizzard Bestätigt",
+    "source_url": "https://worldofwarcraft.blizzard.com/en-us/news/24301515",
+    "core_changes": [
       {
-        "role": "⚡ Schnelles Leveling & Solo-Farm",
-        "name": "Katze (Katzenartige)",
-        "icon": "🐯",
-        "why": "Höchster DPS-Modifikator (+10% Schaden), schleicht sich an (Prowl) und erzeugt schnell Aggro.",
-        "best_targets": [
-          {"name": "Dunkelpirscher / Berglöwe", "level": "10-11", "zone": "Dun Morogh / Loch Modan", "speed": "1.2s", "note": "Perfekt direkt nach Level 10 Quest"},
-          {"name": "Schattenkralle", "level": "13", "zone": "Dunkelküste (Darkshore)", "speed": "1.5s", "note": "Hat Klaue Rang 2 von Anfang an"}
-        ],
-        "feed": "Fleisch, Fisch"
+        "change": "Pet-Stat-Skalierung",
+        "detail": "In Forever skalieren Begleiter-Attribute (Angriffskraft, Rüstung, Ausdauer, Widerstände) direkt mit der Ausrüstung des Jägers! Anders als in Vanilla bleibt das Pet auch im Endgame schlagkräftig."
       },
       {
-        "role": "🛡️ Tank & Komfort-Leveling",
-        "name": "Eber (Wildschwein)",
-        "icon": "🐗",
-        "why": "Sturmangriff (Charge) immobilisiert Ziel für 1 Sekunde und gibt +Attack Power. Frisst absolut ALLES.",
-        "best_targets": [
-          {"name": "Fleischreißer / Bergebere", "level": "10-12", "zone": "Loch Modan / Westfall", "speed": "2.0s", "note": "Charge Rang 2 direkt zähmbar"}
-        ],
-        "feed": "Alles (Brot, Käse, Fleisch, Fisch, Obst, Pilze)"
+        "change": "Familien-Spezialisierungen",
+        "detail": "Pet-Familien besitzen überarbeitete Talente und Utility-Fertigkeiten. Katzen bleiben Top-Single-Target DPS, Wölfe bieten unverzichtbare Gruppen-Buffs, Eber bringen unschlagbaren Opener-Charge."
       },
       {
-        "role": "👑 Endspiel & Raids (DPS-Buff)",
-        "name": "Wolf",
-        "icon": "🐺",
-        "why": "Furioses Heulen (Furious Howl) erhöht den physischen Schaden der nächsten Attacke für die gesamte Gruppe.",
-        "best_targets": [
-          {"name": "Waldwolf / Kojote", "level": "10-11", "zone": "Wald von Elwynn / Westfall", "speed": "1.4s", "note": "Sehr früh verfügbar für Allianz"},
-          {"name": "Worg der Felsspitzschnauzen", "level": "19-20", "zone": "Rotkammgebirge", "speed": "1.3s", "note": "Furioses Heulen Rang 2"}
-        ],
-        "feed": "Fleisch"
-      },
-      {
-        "role": "🎯 PvP & Caster-Albtraum (1.0s Speed)",
-        "name": "Angriffstempo 1.0 - 1.2 Pets",
-        "icon": "⚡",
-        "why": "Extrem schnelles Attack Speed bricht Zauberzeit (Pushback) von Magiern, Hexenmeistern und Priestern komplett ab.",
-        "best_targets": [
-          {"name": "Zahnkraller / Seltene Katze", "level": "37-43", "zone": "Ödland (Badlands)", "speed": "1.0s", "note": "Extrem begehrt, Timer campen!"}
-        ],
-        "feed": "Fleisch"
+        "change": "Talent-Rebalance",
+        "detail": "Tierherrschaft (Beast Mastery) und Treffsicherheit (Marksmanship) wurden angepasst, um mit den neuen Forever-Dungeon- und Raid-Mechaniken zu harmonieren."
       }
     ],
-    "skills_guide": [
-      {"skill": "Knurren (Growl)", "how": "Wird beim Tierausbilder in der Hauptstadt für Gold aufgewertet (alle 10 Level)."},
-      {"skill": "Beißen (Bite)", "how": "Muss von Wildtieren gelernt werden (z.B. Wölfe, Spinnen), danach dem eigenen Pet beibringen."},
-      {"skill": "Klaue (Claw)", "how": "Muss von Bären/Katzen gelernt werden. Schneller Focus-Verbrauch, ideal für Katzen."}
+    "pet_recommendations": [
+      {
+        "family": "Katze (Katzenartige)",
+        "role": "Single-Target DPS & schnelles Grinden",
+        "why": "Höchster Grundschaden (+10% Modifikator). Profitiert durch Forever-Stat-Skalierung extrem von Jäger-Agilität.",
+        "forever_note": "Spurt & Klaue maximieren. Beste Wahl für Solo-Leveling.",
+        "location_allianz": "Dunkelpirscher (Loch Modan, Stufe 10-11) oder Berglöwen."
+      },
+      {
+        "family": "Wolf",
+        "role": "Dungeon & Raid Pflicht-Pet",
+        "why": "Furioses Heulen (Furious Howl) bufft den nächsten physischen Angriff für Faruk und Mirza.",
+        "forever_note": "Unverzichtbar bei Bosskämpfen in Gruppen.",
+        "location_allianz": "Kojoten (Westfall, Stufe 10-11), Worgs (Rotkammgebirge, Stufe 19-20)."
+      },
+      {
+        "family": "Eber (Wildschwein)",
+        "role": "Pacing & Komfort-Leveling",
+        "why": "Sturmangriff (Charge) bindet Gegner sofort. Frisst jede Art von Nahrung (kein teures Fleisch kaufen).",
+        "forever_note": "Ideal für unwegsames Gelände und schwierige Elite-Quests zu zweit.",
+        "location_allianz": "Bergebere (Loch Modan, Stufe 10-12)."
+      }
     ]
   },
-  "leveling_guide": {
-    "faction": "Allianz (Alliance)",
-    "zones": [
-      {"range": "Level 1 - 10", "zone": "Startgebiete", "desc": "Wald von Elwynn (Menschen) oder Dun Morogh (Zwerge). Mit Level 10 sofort Pet-Quest (Jäger) / Klassenquest abschließen!"},
-      {"range": "Level 10 - 16", "zone": "Westfall & Loch Modan", "desc": "Westfall Quests bis Deadmines-Vorquests. Loch Modan für einfache Zwergen-Quests mitnehmen."},
-      {"range": "Level 16 - 20", "zone": "Rotkammgebirge & Dunkelküste", "desc": "Rotkammgebirge (Redridge) Startquests. Vorbereitung für die Todesminen (Deadmines)."},
-      {"range": "Level 20 - 25", "zone": "Dämmerwald (Duskwood)", "desc": "Eine der besten Questzonen der Allianz. Riesige XP-Pakete (Hermit, Morbent Fel Vorquests)."},
-      {"range": "Level 25 - 30", "zone": "Süderstade & Tausend Nadeln", "desc": "Hügelangrat / Süderstade Quests. Vorsicht vor Open-PvP!"},
-      {"range": "Level 30 - 38", "zone": "Schlingendorntal (Stranglethorn) & Arathi", "desc": "Rebellencamp & Nesingwary Jagdquests (super XP für Jäger)."},
-      {"range": "Level 38 - 45", "zone": "Ödland, Tanaris & Feralas", "desc": "Tanaris Gadgetzan Quests und Zul'Farrak Vorbereitung."},
-      {"range": "Level 45 - 52", "zone": "Hinterland, Sengende Schlucht", "desc": "Elite-Quests in Jintha'Alor zu zweit machen (blaue Belohnungen!)."},
-      {"range": "Level 52 - 60", "zone": "Pestländer & Brennende Steppe", "desc": "Westliche/Östliche Pestländer, Schlüssel für Scholo/Stratholme holen, Level 60 Ding!"}
-    ],
-    "dungeons": [
-      {"name": "Die Todesminen (Deadmines)", "level": "18 - 23", "zone": "Westfall", "loot": "Brust der Bruderschaft, Smite's Hammer, Umhang"},
-      {"name": "Das Verlies (Stockade)", "level": "23 - 27", "zone": "Sturmwind (Stormwind)", "loot": "Schneller XP-Run mitten in der Hauptstadt"},
-      {"name": "Gnomeregan", "level": "28 - 34", "zone": "Dun Morogh", "loot": "Hydrostock, Triprunner-Hose (extrem stark!)"},
-      {"name": "Scharlachrotes Kloster (SM)", "level": "32 - 42", "zone": "Tirisfal", "loot": "Waffen, Kette/Leder Rüstungsset, Herodes Schulter"},
-      {"name": "Zul'Farrak (ZF)", "level": "43 - 48", "zone": "Tanaris", "loot": "Karottengriffel (+Mountspeed), Jang'thraze, Kaskade"},
-      {"name": "Versunkener Tempel (ST)", "level": "50 - 55", "zone": "Sümpfe des Elends", "loot": "Klassenquest-Items für Stufe 50!"},
-      {"name": "BRD (Blackrocktiefen)", "level": "53 - 60", "zone": "Schwarzfels", "loot": "Schlüssel-Quest, Vor-Raid-BiS Paradies"}
-    ]
-  },
-  "gold_guide": {
-    "professions": [
-      {"combo": "Kürschnerei (Skinning) + Bergbau / Kräuterkunde", "type": "Tipp zum Start", "desc": "Vom ersten Mob an alles häuten. Leder und Rohmetalle in Woche 1 im Auktionshaus verkaufen, wenn Raider schnell Leveln wollen."},
-      {"combo": "Ingenieurskunst (Engineering)", "type": "PvP & Endgame", "desc": "Granaten, Zielfernrohre für Fernkampfwaffen und Überlebens-Gadgets. Unverzichtbar für Jäger und Schurken."}
-    ],
-    "rules": [
-      "Kauft mit Level 40 nicht sofort unnötige Zauberränge: Spart 90-100 Gold für das Reittier (Mount = 60% schnelleres Vorankommen)!",
-      "Graue Waffen immer an NPC-Händler verkaufen, niemals zerstören.",
-      "Taschen-Priorität: Investiert die ersten paar Silber sofort in 6-8 Slot Taschen, damit ihr keine Beute liegen lassen müsst."
+  "leveling_roadmap": {
+    "status": "Optimiert für WoW Forever Allianz-Paar (Hunter + Shaman/Priest)",
+    "steps": [
+      {"range": "Stufe 1 - 10", "zone": "Elwynn / Dun Morogh", "priority": "Klassenquest sofort auf Stufe 10 machen. Faruk zähmt erstes Pet (Eber oder Katze), Mirza schaltet erste Totems frei."},
+      {"range": "Stufe 10 - 18", "zone": "Loch Modan & Westfall", "priority": "Erste Camping-Upgrades ausprobieren. Todesminen (Deadmines) Vorquests in Westfall abschließen."},
+      {"range": "Stufe 18 - 24", "zone": "Todesminen (DM) & Rotkamm", "priority": "Deadmines Dungeon-Run für die ersten blauen Items. Rotkammgebirge Gruppenquests zu zweit lösen."},
+      {"range": "Stufe 24 - 30", "zone": "Dämmerwald (Duskwood) & Verlies", "priority": "Dämmerwald-Questreihe gibt massive XP. Schneller Verlies (Stockades)-Run in Sturmwind."},
+      {"range": "Stufe 30 - 38", "zone": "Schlingendorntal (STV) & Kloster", "priority": "Nesingwary Jagdquests in STV. Scharlachrotes Kloster (SM) Waffen & Kettenrüstung farmen."},
+      {"range": "Stufe 38 - 45", "zone": "Ödland & Zul'Farrak (Tanaris)", "priority": "Level 40: Goldreserve für Reittier (Mount) nutzen! Zul'Farrak für Karottengriffel (+Mountspeed)."},
+      {"range": "Stufe 45 - 52", "zone": "Hinterland & Versunkener Tempel", "priority": "Elite-Quests in Jintha'Alor (mächtige blaue Belohnungen). Versunkener Tempel Klassenquest Stufe 50."},
+      {"range": "Stufe 52 - 60", "zone": "Pestländer & Blackrocktiefen (BRD)", "priority": "Schlüssel-Quests (Scholo, Stratholme, BRD) abschließen. Pre-Raid BiS farmen und Ding 60!"}
     ]
   }
 }

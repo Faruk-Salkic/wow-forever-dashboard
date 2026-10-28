@@ -151,6 +151,38 @@
     .alert-txt { font-size: 0.85rem; color: #ffcdd2; line-height: 1.4; }
     .alert-txt strong { color: #fff; }
 
+    /* PROFILES & HEUTE */
+    .profile-bar {
+      display: flex; gap: 10px; justify-content: center; margin-bottom: 20px;
+    }
+    .profile-btn {
+      padding: 7px 18px; border-radius: 100px;
+      border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.04);
+      color: var(--dim); font-size: 0.82rem; cursor: pointer; transition: 0.2s;
+    }
+    .profile-btn:hover { border-color: rgba(240,192,64,0.4); color: #fff; }
+    .profile-btn.active {
+      background: rgba(240,192,64,0.15); border-color: var(--gold); color: var(--gold); font-weight: 600;
+    }
+
+    .heute-box {
+      margin-bottom: 20px; padding: 18px 22px;
+      background: linear-gradient(135deg, rgba(79,195,247,0.08), rgba(15,30,70,0.6));
+      border: 1px solid rgba(79,195,247,0.25); border-radius: 18px;
+    }
+    .heute-title { font-family:'Cinzel',serif; color: var(--blue); font-size: 0.95rem; margin-bottom: 10px; font-weight: 700; }
+    .heute-list { list-style: none; padding: 0; }
+    .heute-list li {
+      font-size: 0.85rem; color: var(--text); padding: 5px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04); display: flex; align-items: flex-start; gap: 8px;
+    }
+    .heute-list li:last-child { border-bottom: none; }
+
+    /* STATUS PILLS */
+    .status-confirmed { background: rgba(102,187,106,0.15); color: #81c784; border: 1px solid rgba(102,187,106,0.3); }
+    .status-fixed     { background: rgba(158,158,158,0.15); color: #bdbdbd; border: 1px solid rgba(158,158,158,0.3); }
+    .status-unconfirmed { background: rgba(239,83,80,0.15); color: #e57373; border: 1px solid rgba(239,83,80,0.3); }
+
     /* PET & GUIDE TABLES */
     .guide-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin-top: 10px; }
     .guide-table th { padding: 10px 12px; text-align: left; color: var(--gold); font-family: 'Cinzel', serif; font-size: 0.78rem; border-bottom: 1px solid rgba(240,192,64,0.2); }
@@ -375,7 +407,7 @@
     </div>
     <h1 class="hero-title">Faruk &amp; Mirza</h1>
     <p class="hero-sub">WoW Forever — Neuigkeiten &amp; Updates</p>
-    <div class="hero-badge">⚔️ Allianz &nbsp;|&nbsp; Start: 04.11.2026 (23:00 UTC)</div>
+    <div class="hero-badge">⚔️ Allianz &nbsp;|&nbsp; Start: 05.11.2026 um 00:00 Uhr CET (Wien / BiH)</div>
 
     <!-- COUNTDOWN -->
     <div class="countdown-box" id="launch-countdown">
@@ -389,6 +421,7 @@
   <!-- NAV -->
   <div class="nav-tabs">
     <button class="nav-tab active" data-section="news">📰 Neuigkeiten</button>
+    <button class="nav-tab" data-section="camping">🏕️ Camping &amp; Legacy</button>
     <button class="nav-tab" data-section="bis">🏆 BiS-Items</button>
     <button class="nav-tab" data-section="pets">🐾 Jäger-Pets</button>
     <button class="nav-tab" data-section="leveling">🗺️ Leveling &amp; Dungeons</button>
@@ -404,6 +437,23 @@
   </div>
 
   <div class="container">
+
+    <!-- SPIELER-PROFIL SWITCHER -->
+    <div class="profile-bar">
+      <button class="profile-btn active" onclick="setProfile('all')">👥 Alle Klassen</button>
+      <button class="profile-btn" onclick="setProfile('Faruk')">🏹 Faruk (Hunter)</button>
+      <button class="profile-btn" onclick="setProfile('Mirza')">🌊 Mirza (Shaman / Priest / Rogue)</button>
+    </div>
+
+    <!-- HEUTE FÜR UNS (PRIORITÄTEN) -->
+    <div class="heute-box fade" id="heute-box">
+      <div class="heute-title">⭐ Heute für uns (Fokus &amp; Vorbereitung)</div>
+      <ul class="heute-list" id="heute-list">
+        <li><span>1.</span> <strong>Camping-Kombi festlegen:</strong> Faruk (Kürschnerei/Bergbau) + Mirza (Kräuter/Alchemie für mobiles Alchemielabor).</li>
+        <li><span>2.</span> <strong>Hunter Pet-Start:</strong> Ab Stufe 10 sofort Katze (Dun Morogh/Loch Modan) oder Eber für Charge zähmen. Begleiter skalieren in Forever mit Agilität!</li>
+        <li><span>3.</span> <strong>Lokalzeit:</strong> Server öffnet um Mitternacht (05.11. 00:00 CET). Bis dahin Charaktere planen &amp; Vorrats-Taschen sichern.</li>
+      </ul>
+    </div>
 
     <!-- ══ NEWS SECTION ══ -->
     <div id="section-news">
@@ -477,6 +527,20 @@
             </div>
           </div>
           <div class="last-upd" id="last-upd">–</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ CAMPING & LEGACY SECTION ══ -->
+    <div id="section-camping" style="display:none">
+      <div class="card fade">
+        <div class="card-hdr">
+          <span class="card-ico">🏕️</span>
+          <span class="card-ttl">WoW Forever Spezial-Systeme: Camping &amp; Legacy</span>
+          <span class="badge b-gold">Blizzard Bestätigt</span>
+        </div>
+        <div style="padding:22px" id="camping-container">
+          <div class="empty"><div class="empty-ico">⏳</div><div>Lade Forever-Systemdaten...</div></div>
         </div>
       </div>
     </div>
@@ -628,7 +692,7 @@ if(sessionStorage.getItem(SK)){
 
 // ── NAV TABS ───────────────────────────────────────────────────────────────
 let currentSection = 'news';
-const SECTIONS = ['news','bis','pets','leveling','gold','castle'];
+const SECTIONS = ['news','camping','bis','pets','leveling','gold','castle'];
 document.querySelectorAll('.nav-tab').forEach(btn => {
   btn.addEventListener('click', () => {
     document.querySelectorAll('.nav-tab').forEach(b=>b.classList.remove('active'));
@@ -642,14 +706,49 @@ document.querySelectorAll('.nav-tab').forEach(btn => {
   });
 });
 
-// ── COUNTDOWN ──────────────────────────────────────────────────────────────
+// ── PROFIL FILTER ──────────────────────────────────────────────────────────
+let activeProfile = 'all';
+function setProfile(prof) {
+  activeProfile = prof;
+  document.querySelectorAll('.profile-btn').forEach(b => {
+    b.classList.toggle('active', b.textContent.includes(prof) || (prof === 'all' && b.textContent.includes('Alle')));
+  });
+
+  const hList = document.getElementById('heute-list');
+  if (prof === 'Faruk') {
+    hList.innerHTML = `
+      <li><span>1.</span> <strong>Jäger-Fokus:</strong> Auf Stufe 10 sofort Pet zähmen (Katze in Dun Morogh/Loch Modan). In Forever skalieren Stats mit deiner Agilität!</li>
+      <li><span>2.</span> <strong>Berufe:</strong> Kürschnerei sofort aktivieren – Tierfelle für Mirzas Camping-Zelt sammeln. Bergbau für spätere Schusswaffen &amp; Munition.</li>
+      <li><span>3.</span> <strong>Level-Zone:</strong> Loch Modan nach Dun Morogh ansteuern für schnelle Quests.</li>
+    `;
+    activeF = 'cls-hunter';
+  } else if (prof === 'Mirza') {
+    hList.innerHTML = `
+      <li><span>1.</span> <strong>Schamane/Priester Utility:</strong> Kräuterkunde + Alchemie lernen, um das <em>Mobile Alchemielabor</em> im Camping-System freizuschalten!</li>
+      <li><span>2.</span> <strong>Totem-Quest:</strong> Erdtotem-Questreihe sofort auf Stufe 4 abschließen (Steinhaut für Faruks Pet).</li>
+      <li><span>3.</span> <strong>Dungeon Support:</strong> Vor Deadmines Räucherkerze (+Intelligenz) im Camp entzünden für maximale Gruppen-Mana-Regeneration.</li>
+    `;
+    activeF = 'cls-shaman';
+  } else {
+    hList.innerHTML = `
+      <li><span>1.</span> <strong>Camping-Kombi:</strong> Faruk (Kürschner/Bergbau) + Mirza (Kräuter/Alchemie für mobiles Alchemielabor).</li>
+      <li><span>2.</span> <strong>Hunter Pet-Start:</strong> Ab Stufe 10 sofort Katze oder Eber zähmen. Begleiter skalieren in Forever mit Agilität!</li>
+      <li><span>3.</span> <strong>Lokalzeit:</strong> Server öffnet um Mitternacht (05.11. 00:00 CET). Bis dahin Charaktere planen &amp; Vorrats-Taschen sichern.</li>
+    `;
+    activeF = 'all';
+  }
+  document.querySelectorAll('.flt').forEach(x => x.classList.toggle('on', x.dataset.f === activeF));
+  applyFilter();
+}
+
+// ── COUNTDOWN (CET LOKALZEIT: 05.11.2026 um 00:00 Uhr CET) ─────────────────
 const LAUNCH_DATE = new Date("2026-11-04T23:00:00Z").getTime();
 function updateCountdown() {
   const now = new Date().getTime();
   const diff = LAUNCH_DATE - now;
   if (diff <= 0) {
     const el = document.getElementById('launch-countdown');
-    if (el) el.innerHTML = '<div style="color:var(--gold);font-family:Cinzel,serif;font-weight:700;font-size:1.1rem">🔥 WoW Forever ist LIVE! 🔥</div>';
+    if (el) el.innerHTML = '<div style="color:var(--gold);font-family:Cinzel,serif;font-weight:700;font-size:1.1rem">🔥 WoW Forever ist JETZT LIVE (CET)! 🔥</div>';
     return;
   }
   const d = Math.floor(diff / (1000 * 60 * 60 * 24));
@@ -680,12 +779,61 @@ async function loadGuides() {
   try {
     const r = await fetch('data/guides.json?v='+Date.now());
     guidesData = await r.json();
+    renderCamping();
     renderPets();
     renderLeveling();
     renderGold();
   } catch(e) {
     console.error("Guides error:", e);
   }
+}
+
+function renderCamping() {
+  const c = document.getElementById('camping-container');
+  if (!c || !guidesData.forever_systems) return;
+  const camp = guidesData.forever_systems.camping;
+  const legacy = guidesData.forever_systems.legacy;
+
+  let profRows = camp.profession_contributions.map(p => `
+    <tr>
+      <td style="color:var(--gold);font-weight:700">${esc(p.prof)}</td>
+      <td style="color:#fff;font-weight:600">${esc(p.item)}</td>
+      <td style="color:#81c784">${esc(p.buff)}</td>
+    </tr>
+  `).join('');
+
+  let legacyPerks = legacy.key_perks.map(k => `<li>${esc(k)}</li>`).join('');
+
+  c.innerHTML = `
+    <!-- CAMPING -->
+    <div style="margin-bottom:26px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+        <h3 style="font-family:'Cinzel',serif;color:var(--gold);font-size:1.05rem">${esc(camp.title)}</h3>
+        <span class="badge b-gold">${esc(camp.status)}</span>
+      </div>
+      <p style="font-size:0.85rem;color:var(--dim);line-height:1.6;margin-bottom:14px">${esc(camp.overview)}</p>
+
+      <div style="padding:12px 16px;background:rgba(240,192,64,0.06);border-left:3px solid var(--gold);border-radius:0 10px 10px 0;margin-bottom:16px;font-size:0.83rem">
+        <strong>🤝 Faruk &amp; Mirza Taktik:</strong> ${esc(camp.tactics_faruk_mirza)}
+      </div>
+
+      <div style="font-family:'Cinzel',serif;color:#fff;font-size:0.88rem;margin-bottom:8px">🛠️ Berufsgegenstände im Lagerfeuer-Camp:</div>
+      <table class="guide-table">
+        <thead><tr><th>Beruf</th><th>Gegenstand</th><th>Gruppen-Vorteil / 1h-Buff</th></tr></thead>
+        <tbody>${profRows}</tbody>
+      </table>
+    </div>
+
+    <!-- LEGACY -->
+    <div style="padding-top:16px;border-top:1px solid rgba(255,255,255,0.07)">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+        <h3 style="font-family:'Cinzel',serif;color:var(--blue);font-size:1.05rem">${esc(legacy.title)}</h3>
+        <span class="badge b-blue">${esc(legacy.status)}</span>
+      </div>
+      <p style="font-size:0.85rem;color:var(--dim);line-height:1.6;margin-bottom:12px">${esc(legacy.overview)}</p>
+      <ul class="info-tips">${legacyPerks}</ul>
+    </div>
+  `;
 }
 
 function renderPets() {
@@ -915,7 +1063,20 @@ function renderNews(items){
   }
   list.innerHTML=items.slice(0,60).map((item,idx)=>{
     const classes=(item.classes||[]);
+    
+    // Status Badge (Blizzard Bestätigt / Guide / Fixed)
+    let statusBadge = '';
+    if (item.radar_status === 'fixed') {
+      statusBadge = '<span class="tag status-fixed">🛠️ Gefixt (Entwarnung)</span>';
+    } else if (item.radar_status === 'confirmed') {
+      statusBadge = '<span class="tag status-unconfirmed">🚨 Bestätigter Exploit/Bug</span>';
+    } else if (item.verified_type) {
+      const clsType = item.verified_type.includes('Blizzard') ? 'status-confirmed' : '';
+      statusBadge = `<span class="tag ${clsType}">🛡️ ${esc(item.verified_type)}</span>`;
+    }
+
     const tags=[
+      statusBadge,
       ...classes.map(c=>`<span class="tag ${TAG_MAP[c]||''}">${c}</span>`),
       item.category&&TAG_MAP[item.category]?`<span class="tag ${TAG_MAP[item.category]}">${CAT_DE[item.category]||item.category}</span>`:'',
       `<span class="tag">${item.source_icon||''} ${item.source||''}</span>`,
@@ -931,10 +1092,10 @@ function renderNews(items){
           ${item.is_new?'<span class="new-badge">NEU</span>':''}
           <div class="ni-title" style="margin:0">${esc(item.title||'')}</div>
         </div>
-        ${teaser?`<div class="ni-ai"><span class="ni-ai-label">🤖 KI-Zusammenfassung</span>${esc(teaser)}</div>`:''}
+        ${teaser?`<div class="ni-ai"><span class="ni-ai-label">🤖 KI-Analyse &amp; Status</span>${esc(teaser)}</div>`:''}
         <div class="ni-meta">
           ${tags}
-          ${hasArticle?`<span class="tag" style="color:var(--gold);border-color:rgba(240,192,64,.3);cursor:pointer">📖 Artikel lesen →</span>`:''}
+          ${hasArticle?`<span class="tag" style="color:var(--gold);border-color:rgba(240,192,64,.3);cursor:pointer">📖 Ganzen Bericht lesen →</span>`:''}
         </div>
       </div>
     </div>`;
