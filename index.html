@@ -120,6 +120,51 @@
     .modal-src-link:hover { background:rgba(79,195,247,.18); }
     .modal-date { font-size:.75rem; color:var(--dim); }
 
+    /* COUNTDOWN */
+    .countdown-box {
+      margin-top: 18px;
+      display: flex; gap: 12px; justify-content: center; align-items: center;
+    }
+    .cd-item {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(240,192,64,0.25);
+      border-radius: 12px; padding: 6px 14px; text-align: center;
+      min-width: 60px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+    .cd-val { font-family:'Cinzel',serif; font-size: 1.3rem; font-weight: 700; color: var(--gold); }
+    .cd-lbl { font-size: 0.65rem; color: var(--dim); text-transform: uppercase; letter-spacing: 1px; }
+
+    /* ALERT BANNER */
+    .exploit-alert {
+      background: linear-gradient(90deg, rgba(239,83,80,0.2), rgba(239,83,80,0.05));
+      border: 1px solid rgba(239,83,80,0.4);
+      border-radius: 14px; padding: 14px 20px; margin-bottom: 20px;
+      display: flex; align-items: center; gap: 14px;
+      animation: pulse-border 2s infinite;
+    }
+    @keyframes pulse-border {
+      0%, 100% { border-color: rgba(239,83,80,0.4); }
+      50% { border-color: rgba(239,83,80,0.8); }
+    }
+    .alert-ico { font-size: 1.6rem; animation: float 2s infinite ease-in-out; }
+    .alert-txt { font-size: 0.85rem; color: #ffcdd2; line-height: 1.4; }
+    .alert-txt strong { color: #fff; }
+
+    /* PET & GUIDE TABLES */
+    .guide-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin-top: 10px; }
+    .guide-table th { padding: 10px 12px; text-align: left; color: var(--gold); font-family: 'Cinzel', serif; font-size: 0.78rem; border-bottom: 1px solid rgba(240,192,64,0.2); }
+    .guide-table td { padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); vertical-align: top; }
+    .guide-table tr:hover td { background: rgba(255,255,255,0.02); }
+    
+    .pet-card {
+      background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 14px; padding: 16px; margin-bottom: 14px;
+    }
+    .pet-hdr { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+    .pet-name { font-family: 'Cinzel', serif; font-size: 1rem; color: #fff; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+    .pet-role { font-size: 0.72rem; padding: 3px 10px; border-radius: 100px; background: rgba(171,214,86,0.15); color: #abd656; border: 1px solid rgba(171,214,86,0.3); }
+
     /* Clickable news item cursor */
     .news-item { cursor:pointer; }
 
@@ -330,13 +375,24 @@
     </div>
     <h1 class="hero-title">Faruk &amp; Mirza</h1>
     <p class="hero-sub">WoW Forever — Neuigkeiten &amp; Updates</p>
-    <div class="hero-badge">⚔️ Allianz &nbsp;|&nbsp; Start: 04.11.2026</div>
+    <div class="hero-badge">⚔️ Allianz &nbsp;|&nbsp; Start: 04.11.2026 (23:00 UTC)</div>
+
+    <!-- COUNTDOWN -->
+    <div class="countdown-box" id="launch-countdown">
+      <div class="cd-item"><div class="cd-val" id="cd-days">00</div><div class="cd-lbl">Tage</div></div>
+      <div class="cd-item"><div class="cd-val" id="cd-hours">00</div><div class="cd-lbl">Std</div></div>
+      <div class="cd-item"><div class="cd-val" id="cd-mins">00</div><div class="cd-lbl">Min</div></div>
+      <div class="cd-item"><div class="cd-val" id="cd-secs">00</div><div class="cd-lbl">Sek</div></div>
+    </div>
   </section>
 
   <!-- NAV -->
   <div class="nav-tabs">
     <button class="nav-tab active" data-section="news">📰 Neuigkeiten</button>
     <button class="nav-tab" data-section="bis">🏆 BiS-Items</button>
+    <button class="nav-tab" data-section="pets">🐾 Jäger-Pets</button>
+    <button class="nav-tab" data-section="leveling">🗺️ Leveling &amp; Dungeons</button>
+    <button class="nav-tab" data-section="gold">💰 Gold &amp; Berufe</button>
     <button class="nav-tab" data-section="castle">🏰 Burgen &amp; PvP</button>
   </div>
 
@@ -351,6 +407,14 @@
 
     <!-- ══ NEWS SECTION ══ -->
     <div id="section-news">
+      <!-- EXPLOIT & RADAR ALERT -->
+      <div class="exploit-alert fade" id="exploit-alert-box" style="display:none">
+        <div class="alert-ico">🚨</div>
+        <div class="alert-txt" id="exploit-alert-text">
+          <strong>ACHTUNG:</strong> Neuer Exploit / Fehler im Spiel entdeckt! Siehe unten für Details.
+        </div>
+      </div>
+
       <div class="summary fade" id="summary-box">
         <div class="sum-ttl">📋 Tagesbriefing</div>
         <div class="sum-txt" id="sum-txt">Wird geladen...</div>
@@ -433,6 +497,46 @@
         </div>
         <div class="bis-content" id="bis-content">
           <div class="empty"><div class="empty-ico">⏳</div><div>BiS-Daten werden geladen...</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ PETS SECTION ══ -->
+    <div id="section-pets" style="display:none">
+      <div class="card fade">
+        <div class="card-hdr">
+          <span class="card-ico">🐾</span>
+          <span class="card-ttl">Jäger Pet Cheat-Sheet (Alliance)</span>
+          <span class="badge b-gold">WoW Forever</span>
+        </div>
+        <div style="padding:20px" id="pets-container">
+          <div class="empty"><div class="empty-ico">⏳</div><div>Lade Pet-Daten...</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ LEVELING & DUNGEONS SECTION ══ -->
+    <div id="section-leveling" style="display:none">
+      <div class="card fade">
+        <div class="card-hdr">
+          <span class="card-ico">🗺️</span>
+          <span class="card-ttl">Allianz Leveling-Route &amp; Dungeon Quest Checklist</span>
+        </div>
+        <div style="padding:20px" id="leveling-container">
+          <div class="empty"><div class="empty-ico">⏳</div><div>Lade Leveling-Route...</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ GOLD & PROFESSIONS SECTION ══ -->
+    <div id="section-gold" style="display:none">
+      <div class="card fade">
+        <div class="card-hdr">
+          <span class="card-ico">💰</span>
+          <span class="card-ttl">Gold-Making &amp; Berufe-Leitfaden (Launch Tag 1)</span>
+        </div>
+        <div style="padding:20px" id="gold-container">
+          <div class="empty"><div class="empty-ico">⏳</div><div>Lade Berufs-Empfehlungen...</div></div>
         </div>
       </div>
     </div>
@@ -524,24 +628,189 @@ if(sessionStorage.getItem(SK)){
 
 // ── NAV TABS ───────────────────────────────────────────────────────────────
 let currentSection = 'news';
+const SECTIONS = ['news','bis','pets','leveling','gold','castle'];
 document.querySelectorAll('.nav-tab').forEach(btn => {
   btn.addEventListener('click', () => {
     document.querySelectorAll('.nav-tab').forEach(b=>b.classList.remove('active'));
     btn.classList.add('active');
     const s = btn.dataset.section;
     currentSection = s;
-    ['news','bis','castle'].forEach(id=>{
+    SECTIONS.forEach(id=>{
       const el=document.getElementById('section-'+id);
       if(el) el.style.display = id===s ? 'block' : 'none';
     });
   });
 });
 
+// ── COUNTDOWN ──────────────────────────────────────────────────────────────
+const LAUNCH_DATE = new Date("2026-11-04T23:00:00Z").getTime();
+function updateCountdown() {
+  const now = new Date().getTime();
+  const diff = LAUNCH_DATE - now;
+  if (diff <= 0) {
+    const el = document.getElementById('launch-countdown');
+    if (el) el.innerHTML = '<div style="color:var(--gold);font-family:Cinzel,serif;font-weight:700;font-size:1.1rem">🔥 WoW Forever ist LIVE! 🔥</div>';
+    return;
+  }
+  const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+  const s = Math.floor((diff % (1000 * 60)) / 1000);
+
+  const ed = document.getElementById('cd-days');
+  const eh = document.getElementById('cd-hours');
+  const em = document.getElementById('cd-mins');
+  const es = document.getElementById('cd-secs');
+  if (ed) ed.textContent = String(d).padStart(2, '0');
+  if (eh) eh.textContent = String(h).padStart(2, '0');
+  if (em) em.textContent = String(m).padStart(2, '0');
+  if (es) es.textContent = String(s).padStart(2, '0');
+}
+setInterval(updateCountdown, 1000);
+updateCountdown();
+
 // ── DATA ───────────────────────────────────────────────────────────────────
-let allItems=[], bisData={};
+let allItems=[], bisData={}, guidesData={};
 
 async function init() {
-  await Promise.all([loadNews(), loadBis()]);
+  await Promise.all([loadNews(), loadBis(), loadGuides()]);
+}
+
+async function loadGuides() {
+  try {
+    const r = await fetch('data/guides.json?v='+Date.now());
+    guidesData = await r.json();
+    renderPets();
+    renderLeveling();
+    renderGold();
+  } catch(e) {
+    console.error("Guides error:", e);
+  }
+}
+
+function renderPets() {
+  const c = document.getElementById('pets-container');
+  if (!c || !guidesData.hunter_pets) return;
+  const p = guidesData.hunter_pets;
+
+  let html = `<div style="margin-bottom:16px;color:var(--dim);font-size:0.85rem">
+    Kompakte Übersicht aller unverzichtbaren Pets für den Jäger auf Allianz-Seite:
+  </div>`;
+
+  p.categories.forEach(cat => {
+    let targets = cat.best_targets.map(t => `
+      <tr>
+        <td style="color:#fff;font-weight:600">${esc(t.name)}</td>
+        <td style="color:var(--gold)">Lvl ${esc(t.level)}</td>
+        <td>${esc(t.zone)}</td>
+        <td style="color:#66bb6a;font-weight:600">${esc(t.speed)}</td>
+        <td style="color:var(--dim);font-size:0.75rem">${esc(t.note)}</td>
+      </tr>
+    `).join('');
+
+    html += `
+      <div class="pet-card">
+        <div class="pet-hdr">
+          <div class="pet-name">${cat.icon} ${esc(cat.name)}</div>
+          <span class="pet-role">${esc(cat.role)}</span>
+        </div>
+        <div style="font-size:0.82rem;color:var(--dim);margin-bottom:10px">💡 <strong>Vorteil:</strong> ${esc(cat.why)}</div>
+        <div style="font-size:0.78rem;color:var(--dim);margin-bottom:8px">🥩 <strong>Futter:</strong> ${esc(cat.feed)}</div>
+        <table class="guide-table">
+          <thead>
+            <tr>
+              <th>Tiername</th>
+              <th>Stufe</th>
+              <th>Standort (Zone)</th>
+              <th>Tempo</th>
+              <th>Hinweis</th>
+            </tr>
+          </thead>
+          <tbody>${targets}</tbody>
+        </table>
+      </div>
+    `;
+  });
+
+  html += `<div style="margin-top:20px;padding:16px;background:rgba(255,255,255,0.03);border-radius:12px;border:1px solid rgba(255,255,255,0.06)">
+    <div style="font-family:Cinzel,serif;color:var(--gold);font-size:0.9rem;margin-bottom:8px">🐾 Wichtigste Pet-Fähigkeiten erlernen</div>
+    <ul class="info-tips">
+      ${p.skills_guide.map(s => `<li><strong>${esc(s.skill)}:</strong> ${esc(s.how)}</li>`).join('')}
+    </ul>
+  </div>`;
+
+  c.innerHTML = html;
+}
+
+function renderLeveling() {
+  const c = document.getElementById('leveling-container');
+  if (!c || !guidesData.leveling_guide) return;
+  const l = guidesData.leveling_guide;
+
+  let zoneRows = l.zones.map(z => `
+    <tr>
+      <td style="color:var(--gold);font-weight:700;white-space:nowrap">${esc(z.range)}</td>
+      <td style="color:#fff;font-weight:600">${esc(z.zone)}</td>
+      <td style="color:var(--dim);line-height:1.5">${esc(z.desc)}</td>
+    </tr>
+  `).join('');
+
+  let dungRows = l.dungeons.map(d => `
+    <tr>
+      <td style="color:#fff;font-weight:600">${esc(d.name)}</td>
+      <td style="color:var(--gold);white-space:nowrap">Lvl ${esc(d.level)}</td>
+      <td>${esc(d.zone)}</td>
+      <td style="color:#4fc3f7">${esc(d.loot)}</td>
+    </tr>
+  `).join('');
+
+  c.innerHTML = `
+    <div style="margin-bottom:24px">
+      <div style="font-family:Cinzel,serif;color:var(--gold);font-size:0.95rem;margin-bottom:10px">🗺️ Optimale Allianz-Zonenroute (1 - 60)</div>
+      <table class="guide-table">
+        <thead><tr><th>Stufe</th><th>Empfohlene Zone</th><th>Strategie &amp; Tipps</th></tr></thead>
+        <tbody>${zoneRows}</tbody>
+      </table>
+    </div>
+
+    <div>
+      <div style="font-family:Cinzel,serif;color:var(--gold);font-size:0.95rem;margin-bottom:10px">🏰 Dungeon Checklist (XP &amp; Must-Have Loot)</div>
+      <table class="guide-table">
+        <thead><tr><th>Instanz</th><th>Stufe</th><th>Zone</th><th>Wichtigste Beute (Loot)</th></tr></thead>
+        <tbody>${dungRows}</tbody>
+      </table>
+    </div>
+  `;
+}
+
+function renderGold() {
+  const c = document.getElementById('gold-container');
+  if (!c || !guidesData.gold_guide) return;
+  const g = guidesData.gold_guide;
+
+  let profCards = g.professions.map(p => `
+    <div style="padding:14px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:12px;margin-bottom:12px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+        <span style="font-weight:700;color:var(--gold)">${esc(p.combo)}</span>
+        <span class="badge b-gold">${esc(p.type)}</span>
+      </div>
+      <div style="font-size:0.83rem;color:var(--dim);line-height:1.5">${esc(p.desc)}</div>
+    </div>
+  `).join('');
+
+  let ruleItems = g.rules.map(r => `<li>${esc(r)}</li>`).join('');
+
+  c.innerHTML = `
+    <div style="margin-bottom:20px">
+      <div style="font-family:Cinzel,serif;color:var(--gold);font-size:0.95rem;margin-bottom:12px">🛠️ Berufs-Kombinationen für Start &amp; Leveling</div>
+      ${profCards}
+    </div>
+
+    <div style="padding:16px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:12px">
+      <div style="font-family:Cinzel,serif;color:var(--gold);font-size:0.9rem;margin-bottom:8px">💡 3 Gold-Regeln für die ersten 40 Level</div>
+      <ul class="info-tips">${ruleItems}</ul>
+    </div>
+  `;
 }
 
 async function loadNews() {
@@ -576,11 +845,24 @@ async function loadBis() {
 function renderStats(d) {
   const items=d.items||[];
   const nw=items.filter(i=>i.is_new).length;
-  const ex=items.filter(i=>i.category==='exploit').length;
+  const exploits=items.filter(i=>i.category==='exploit');
   document.getElementById('s-new').textContent=nw;
   document.getElementById('s-total').textContent=items.length;
-  document.getElementById('s-exploit').textContent=ex;
+  document.getElementById('s-exploit').textContent=exploits.length;
   document.getElementById('new-badge').textContent=nw+' neu';
+
+  // EXPLOIT ALERT RADAR
+  const alertBox = document.getElementById('exploit-alert-box');
+  const alertTxt = document.getElementById('exploit-alert-text');
+  if (alertBox && alertTxt) {
+    if (exploits.length > 0) {
+      alertBox.style.display = 'flex';
+      const first = exploits[0];
+      alertTxt.innerHTML = `<strong>🚨 EXPLOIT-ALARM:</strong> ${esc(first.title)} — Klicke unten für Details und wie wir davon profitieren können!`;
+    } else {
+      alertBox.style.display = 'none';
+    }
+  }
 }
 
 function renderSummary(d) {

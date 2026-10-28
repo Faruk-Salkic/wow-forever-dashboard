@@ -1,0 +1,88 @@
+{
+  "launch_date": "2026-11-04T23:00:00Z",
+  "hunter_pets": {
+    "categories": [
+      {
+        "role": "⚡ Schnelles Leveling & Solo-Farm",
+        "name": "Katze (Katzenartige)",
+        "icon": "🐯",
+        "why": "Höchster DPS-Modifikator (+10% Schaden), schleicht sich an (Prowl) und erzeugt schnell Aggro.",
+        "best_targets": [
+          {"name": "Dunkelpirscher / Berglöwe", "level": "10-11", "zone": "Dun Morogh / Loch Modan", "speed": "1.2s", "note": "Perfekt direkt nach Level 10 Quest"},
+          {"name": "Schattenkralle", "level": "13", "zone": "Dunkelküste (Darkshore)", "speed": "1.5s", "note": "Hat Klaue Rang 2 von Anfang an"}
+        ],
+        "feed": "Fleisch, Fisch"
+      },
+      {
+        "role": "🛡️ Tank & Komfort-Leveling",
+        "name": "Eber (Wildschwein)",
+        "icon": "🐗",
+        "why": "Sturmangriff (Charge) immobilisiert Ziel für 1 Sekunde und gibt +Attack Power. Frisst absolut ALLES.",
+        "best_targets": [
+          {"name": "Fleischreißer / Bergebere", "level": "10-12", "zone": "Loch Modan / Westfall", "speed": "2.0s", "note": "Charge Rang 2 direkt zähmbar"}
+        ],
+        "feed": "Alles (Brot, Käse, Fleisch, Fisch, Obst, Pilze)"
+      },
+      {
+        "role": "👑 Endspiel & Raids (DPS-Buff)",
+        "name": "Wolf",
+        "icon": "🐺",
+        "why": "Furioses Heulen (Furious Howl) erhöht den physischen Schaden der nächsten Attacke für die gesamte Gruppe.",
+        "best_targets": [
+          {"name": "Waldwolf / Kojote", "level": "10-11", "zone": "Wald von Elwynn / Westfall", "speed": "1.4s", "note": "Sehr früh verfügbar für Allianz"},
+          {"name": "Worg der Felsspitzschnauzen", "level": "19-20", "zone": "Rotkammgebirge", "speed": "1.3s", "note": "Furioses Heulen Rang 2"}
+        ],
+        "feed": "Fleisch"
+      },
+      {
+        "role": "🎯 PvP & Caster-Albtraum (1.0s Speed)",
+        "name": "Angriffstempo 1.0 - 1.2 Pets",
+        "icon": "⚡",
+        "why": "Extrem schnelles Attack Speed bricht Zauberzeit (Pushback) von Magiern, Hexenmeistern und Priestern komplett ab.",
+        "best_targets": [
+          {"name": "Zahnkraller / Seltene Katze", "level": "37-43", "zone": "Ödland (Badlands)", "speed": "1.0s", "note": "Extrem begehrt, Timer campen!"}
+        ],
+        "feed": "Fleisch"
+      }
+    ],
+    "skills_guide": [
+      {"skill": "Knurren (Growl)", "how": "Wird beim Tierausbilder in der Hauptstadt für Gold aufgewertet (alle 10 Level)."},
+      {"skill": "Beißen (Bite)", "how": "Muss von Wildtieren gelernt werden (z.B. Wölfe, Spinnen), danach dem eigenen Pet beibringen."},
+      {"skill": "Klaue (Claw)", "how": "Muss von Bären/Katzen gelernt werden. Schneller Focus-Verbrauch, ideal für Katzen."}
+    ]
+  },
+  "leveling_guide": {
+    "faction": "Allianz (Alliance)",
+    "zones": [
+      {"range": "Level 1 - 10", "zone": "Startgebiete", "desc": "Wald von Elwynn (Menschen) oder Dun Morogh (Zwerge). Mit Level 10 sofort Pet-Quest (Jäger) / Klassenquest abschließen!"},
+      {"range": "Level 10 - 16", "zone": "Westfall & Loch Modan", "desc": "Westfall Quests bis Deadmines-Vorquests. Loch Modan für einfache Zwergen-Quests mitnehmen."},
+      {"range": "Level 16 - 20", "zone": "Rotkammgebirge & Dunkelküste", "desc": "Rotkammgebirge (Redridge) Startquests. Vorbereitung für die Todesminen (Deadmines)."},
+      {"range": "Level 20 - 25", "zone": "Dämmerwald (Duskwood)", "desc": "Eine der besten Questzonen der Allianz. Riesige XP-Pakete (Hermit, Morbent Fel Vorquests)."},
+      {"range": "Level 25 - 30", "zone": "Süderstade & Tausend Nadeln", "desc": "Hügelangrat / Süderstade Quests. Vorsicht vor Open-PvP!"},
+      {"range": "Level 30 - 38", "zone": "Schlingendorntal (Stranglethorn) & Arathi", "desc": "Rebellencamp & Nesingwary Jagdquests (super XP für Jäger)."},
+      {"range": "Level 38 - 45", "zone": "Ödland, Tanaris & Feralas", "desc": "Tanaris Gadgetzan Quests und Zul'Farrak Vorbereitung."},
+      {"range": "Level 45 - 52", "zone": "Hinterland, Sengende Schlucht", "desc": "Elite-Quests in Jintha'Alor zu zweit machen (blaue Belohnungen!)."},
+      {"range": "Level 52 - 60", "zone": "Pestländer & Brennende Steppe", "desc": "Westliche/Östliche Pestländer, Schlüssel für Scholo/Stratholme holen, Level 60 Ding!"}
+    ],
+    "dungeons": [
+      {"name": "Die Todesminen (Deadmines)", "level": "18 - 23", "zone": "Westfall", "loot": "Brust der Bruderschaft, Smite's Hammer, Umhang"},
+      {"name": "Das Verlies (Stockade)", "level": "23 - 27", "zone": "Sturmwind (Stormwind)", "loot": "Schneller XP-Run mitten in der Hauptstadt"},
+      {"name": "Gnomeregan", "level": "28 - 34", "zone": "Dun Morogh", "loot": "Hydrostock, Triprunner-Hose (extrem stark!)"},
+      {"name": "Scharlachrotes Kloster (SM)", "level": "32 - 42", "zone": "Tirisfal", "loot": "Waffen, Kette/Leder Rüstungsset, Herodes Schulter"},
+      {"name": "Zul'Farrak (ZF)", "level": "43 - 48", "zone": "Tanaris", "loot": "Karottengriffel (+Mountspeed), Jang'thraze, Kaskade"},
+      {"name": "Versunkener Tempel (ST)", "level": "50 - 55", "zone": "Sümpfe des Elends", "loot": "Klassenquest-Items für Stufe 50!"},
+      {"name": "BRD (Blackrocktiefen)", "level": "53 - 60", "zone": "Schwarzfels", "loot": "Schlüssel-Quest, Vor-Raid-BiS Paradies"}
+    ]
+  },
+  "gold_guide": {
+    "professions": [
+      {"combo": "Kürschnerei (Skinning) + Bergbau / Kräuterkunde", "type": "Tipp zum Start", "desc": "Vom ersten Mob an alles häuten. Leder und Rohmetalle in Woche 1 im Auktionshaus verkaufen, wenn Raider schnell Leveln wollen."},
+      {"combo": "Ingenieurskunst (Engineering)", "type": "PvP & Endgame", "desc": "Granaten, Zielfernrohre für Fernkampfwaffen und Überlebens-Gadgets. Unverzichtbar für Jäger und Schurken."}
+    ],
+    "rules": [
+      "Kauft mit Level 40 nicht sofort unnötige Zauberränge: Spart 90-100 Gold für das Reittier (Mount = 60% schnelleres Vorankommen)!",
+      "Graue Waffen immer an NPC-Händler verkaufen, niemals zerstören.",
+      "Taschen-Priorität: Investiert die ersten paar Silber sofort in 6-8 Slot Taschen, damit ihr keine Beute liegen lassen müsst."
+    ]
+  }
+}
