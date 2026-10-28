@@ -1,0 +1,38 @@
+name: 🗡️ WoW Forever Daily News Scraper
+
+on:
+  schedule:
+    # Every day at 08:00 UTC (09:00 CET / 10:00 CEST)
+    - cron: "0 8 * * *"
+  workflow_dispatch:  # Manual trigger from GitHub UI
+
+permissions:
+  contents: write
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout repo
+        uses: actions/checkout@v4
+
+      - name: 🐍 Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: 📦 Install dependencies
+        run: pip install requests feedparser beautifulsoup4
+
+      - name: 🔍 Run scraper
+        run: python scraper/scrape.py
+
+      - name: 💾 Commit & push updated news.json
+        run: |
+          git config --global user.name  "WoW-Bot 🤖"
+          git config --global user.email "wow-bot@faruk-mirza.github.io"
+          git add data/news.json data/seen_ids.json
+          git diff --cached --quiet || git commit -m "🗞️ Daily news update $(date -u '+%Y-%m-%d %H:%M UTC')"
+          git push
+

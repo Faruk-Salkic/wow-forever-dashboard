@@ -1,0 +1,53 @@
+{
+  "last_updated": "2026-10-28T18:00:00",
+  "classes": ["Hunter", "Shaman", "Priest", "Rogue"],
+  "faction": "Alliance",
+  "items": [
+    {
+      "id": "sample_1",
+      "date": "2026-10-28",
+      "source": "Wowhead",
+      "source_icon": "🌐",
+      "category": "patch",
+      "classes": ["Hunter"],
+      "title": "WoW Forever Launch: Hunter Survival Guide",
+      "summary": "Complete breakdown of Hunter talents and BiS gear for launch day.",
+      "url": "https://www.wowhead.com",
+      "is_new": true,
+      "tags": ["Hunter", "BiS", "Launch"]
+    },
+    {
+      "id": "sample_2",
+      "date": "2026-10-28",
+      "source": "MMO-Champion",
+      "source_icon": "⚔️",
+      "category": "hotfix",
+      "classes": ["Rogue", "Priest"],
+      "title": "Beta Hotfix: Rogue & Priest Balance Changes",
+      "summary": "Shadowstep cooldown reduced. Holy Light cast time adjusted.",
+      "url": "https://www.mmo-champion.com",
+      "is_new": true,
+      "tags": ["Rogue", "Priest", "Balance"]
+    },
+    {
+      "id": "sample_3",
+      "date": "2026-10-27",
+      "source": "Reddit",
+      "source_icon": "💬",
+      "category": "community",
+      "classes": ["Shaman"],
+      "title": "[Reddit] Enhancement Shaman pre-patch BiS list",
+      "summary": "Community compiled best in slot gear for Enhancement Shaman before launch.",
+      "url": "https://reddit.com/r/classicwow",
+      "is_new": false,
+      "tags": ["Shaman", "BiS", "Enhancement"]
+    }
+  ],
+  "castle_status": {
+    "last_checked": "2026-10-28T18:00:00",
+    "status": "No active siege reported",
+    "details": "World PvP kastle status will appear here after launch (04.11.2026)"
+  },
+  "daily_summary": "WoW Forever launches November 4th! Hunter survival guides live on Wowhead. Rogue & Priest beta balance hotfixes dropped. Check your classes above."
+}
+

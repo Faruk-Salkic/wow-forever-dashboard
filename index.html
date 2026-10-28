@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="bs">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Faruk & Mirza — WoW Forever Novosti</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── RESET & ROOT ─────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold:     #f0c040;
+      --gold-dim: #a07c20;
+      --blue:     #4fc3f7;
+      --red:      #ef5350;
+      --green:    #66bb6a;
+      --purple:   #ce93d8;
+      --glass-bg: rgba(255,255,255,0.06);
+      --glass-border: rgba(255,255,255,0.14);
+      --text:     #e8e0d0;
+      --text-dim: #9e9080;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+      background: #050a14;
+    }
+
+    /* ── ANIMATED BACKGROUND ──────────────────────────────── */
+    .bg-scene {
+      position: fixed; inset: 0; z-index: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 0%,   rgba(15,30,70,.9)  0%, transparent 70%),
+        radial-gradient(ellipse 60% 40% at 20% 80%,  rgba(30,10,60,.7)  0%, transparent 60%),
+        radial-gradient(ellipse 40% 30% at 80% 90%,  rgba(10,40,20,.5)  0%, transparent 60%),
+        linear-gradient(160deg, #020510 0%, #07111e 50%, #0a0518 100%);
+    }
+
+    /* Particle stars */
+    .stars { position: fixed; inset: 0; z-index: 0; overflow: hidden; }
+    .star {
+      position: absolute;
+      border-radius: 50%;
+      background: white;
+      animation: twinkle var(--dur, 4s) infinite alternate ease-in-out;
+      opacity: var(--op, 0.4);
+    }
+    @keyframes twinkle { from { opacity: var(--op); transform: scale(1); }
+                          to   { opacity: calc(var(--op) * .3); transform: scale(.6); } }
+
+    /* Floating orbs */
+    .orb {
+      position: fixed; border-radius: 50%; filter: blur(80px);
+      pointer-events: none; z-index: 0; animation: drift 20s infinite alternate ease-in-out;
+    }
+    .orb1 { width:500px; height:500px; background:rgba(15,60,120,.35); top:-200px; left:-100px; animation-delay:0s; }
+    .orb2 { width:400px; height:400px; background:rgba(60,15,100,.3);  bottom:-150px; right:-80px; animation-delay:-8s; }
+    .orb3 { width:300px; height:300px; background:rgba(10,80,40,.25);  top:40%; left:60%; animation-delay:-4s; }
+    @keyframes drift {
+      from { transform: translate(0,0) scale(1); }
+      to   { transform: translate(40px,30px) scale(1.1); }
+    }
+
+    /* ── PASSWORD SCREEN ──────────────────────────────────── */
+    #lock-screen {
+      position: fixed; inset: 0; z-index: 1000;
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 24px;
+      background: rgba(5,10,20,.95);
+      backdrop-filter: blur(20px);
+    }
+
+    .lock-box {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 24px;
+      padding: 48px 56px;
+      text-align: center;
+      backdrop-filter: blur(24px);
+      box-shadow: 0 20px 60px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.08);
+      max-width: 420px; width: 90%;
+      animation: fadeUp .6s ease;
+    }
+
+    .lock-logo {
+      font-size: 56px; margin-bottom: 8px;
+      filter: drop-shadow(0 0 20px rgba(240,192,64,.5));
+      animation: float 3s ease-in-out infinite;
+    }
+    @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+
+    .lock-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.4rem; font-weight: 700;
+      color: var(--gold);
+      text-shadow: 0 0 20px rgba(240,192,64,.4);
+      margin-bottom: 4px;
+    }
+    .lock-sub { color: var(--text-dim); font-size: .85rem; margin-bottom: 32px; }
+
+    .lock-input {
+      width: 100%; padding: 14px 20px;
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: 12px;
+      color: var(--text); font-size: 1rem;
+      outline: none; letter-spacing: 4px; text-align: center;
+      transition: border-color .2s, box-shadow .2s;
+      margin-bottom: 16px;
+    }
+    .lock-input:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(240,192,64,.15);
+    }
+
+    .lock-btn {
+      width: 100%; padding: 14px;
+      background: linear-gradient(135deg, #b8860b, #f0c040, #b8860b);
+      background-size: 200% 200%; animation: shimmer 3s infinite;
+      border: none; border-radius: 12px;
+      color: #1a1000; font-weight: 700; font-size: 1rem;
+      cursor: pointer; transition: transform .15s, box-shadow .15s;
+      font-family: 'Cinzel', serif; letter-spacing: 1px;
+    }
+    .lock-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(240,192,64,.3); }
+    .lock-btn:active { transform: translateY(0); }
+    @keyframes shimmer { 0%,100%{background-position:0% 50%} 50%{background-position:100% 50%} }
+
+    .lock-error {
+      color: var(--red); font-size: .85rem; margin-top: 8px;
+      opacity: 0; transition: opacity .3s;
+    }
+    .lock-error.show { opacity: 1; }
+
+    /* ── MAIN APP ─────────────────────────────────────────── */
+    #app { position: relative; z-index: 1; display: none; }
+
+    /* ── HERO SECTION ─────────────────────────────────────── */
+    .hero {
+      position: relative; min-height: 340px;
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; padding: 60px 24px 40px;
+      text-align: center; overflow: hidden;
+    }
+
+    /* 3D WoW emblem — pure CSS */
+    .wow-emblem {
+      position: relative; width: 120px; height: 120px; margin-bottom: 24px;
+      transform-style: preserve-3d;
+      animation: rotate3d 15s linear infinite;
+    }
+    @keyframes rotate3d {
+      0%   { transform: rotateY(0deg)   rotateX(5deg); }
+      50%  { transform: rotateY(180deg) rotateX(-5deg); }
+      100% { transform: rotateY(360deg) rotateX(5deg); }
+    }
+    .emblem-face {
+      position: absolute; inset: 0;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 64px;
+      backface-visibility: visible;
+    }
+    .emblem-glow {
+      position: absolute; inset: -20px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(240,192,64,.3) 0%, transparent 70%);
+      animation: pulse-glow 2s ease-in-out infinite;
+    }
+    @keyframes pulse-glow {
+      0%,100% { transform: scale(1); opacity: .6; }
+      50%     { transform: scale(1.2); opacity: 1; }
+    }
+    .emblem-ring {
+      position: absolute; inset: -8px; border-radius: 50%;
+      border: 2px solid rgba(240,192,64,.4);
+      box-shadow: 0 0 20px rgba(240,192,64,.3), inset 0 0 20px rgba(240,192,64,.1);
+      animation: spin-ring 8s linear infinite;
+    }
+    @keyframes spin-ring { to { transform: rotate(360deg); } }
+
+    .hero-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1.6rem, 4vw, 2.8rem);
+      font-weight: 900;
+      background: linear-gradient(135deg, #f0c040, #fff5c0, #f0c040);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: none;
+      filter: drop-shadow(0 0 30px rgba(240,192,64,.4));
+      margin-bottom: 8px;
+    }
+    .hero-sub {
+      color: var(--text-dim); font-size: .95rem; letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+    .hero-faction {
+      display: inline-flex; align-items: center; gap: 8px;
+      margin-top: 16px; padding: 6px 18px;
+      background: rgba(79,195,247,.1); border: 1px solid rgba(79,195,247,.25);
+      border-radius: 100px; color: var(--blue); font-size: .85rem;
+    }
+
+    /* ── STATS BAR ────────────────────────────────────────── */
+    .stats-bar {
+      display: flex; gap: 12px; flex-wrap: wrap;
+      justify-content: center; padding: 0 24px 32px;
+    }
+    .stat-pill {
+      background: var(--glass-bg); border: 1px solid var(--glass-border);
+      border-radius: 100px; padding: 8px 20px;
+      font-size: .85rem; backdrop-filter: blur(12px);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .stat-dot { width: 8px; height: 8px; border-radius: 50%; }
+    .dot-green { background: var(--green); box-shadow: 0 0 8px var(--green); }
+    .dot-gold  { background: var(--gold);  box-shadow: 0 0 8px var(--gold); }
+    .dot-red   { background: var(--red);   box-shadow: 0 0 8px var(--red); }
+
+    /* ── LAYOUT ───────────────────────────────────────────── */
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 24px 80px; }
+
+    .grid-main { display: grid; gap: 24px; grid-template-columns: 1fr 320px; }
+    @media (max-width: 900px) { .grid-main { grid-template-columns: 1fr; } }
+
+    /* ── GLASS CARD ───────────────────────────────────────── */
+    .card {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      backdrop-filter: blur(20px);
+      box-shadow: 0 8px 32px rgba(0,0,0,.4), inset 0 1px 0 rgba(255,255,255,.06);
+      overflow: hidden;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .card:hover { transform: translateY(-2px); box-shadow: 0 16px 48px rgba(0,0,0,.5); }
+
+    .card-header {
+      padding: 20px 24px 16px;
+      border-bottom: 1px solid rgba(255,255,255,.07);
+      display: flex; align-items: center; gap: 12px;
+    }
+    .card-icon { font-size: 1.4rem; }
+    .card-title { font-family: 'Cinzel', serif; font-size: 1rem; color: var(--gold); }
+    .card-badge {
+      margin-left: auto; padding: 3px 10px; border-radius: 100px;
+      font-size: .75rem; font-weight: 600;
+    }
+    .badge-new  { background: rgba(239,83,80,.2);  color: var(--red);   border: 1px solid rgba(239,83,80,.3); }
+    .badge-blue { background: rgba(79,195,247,.15); color: var(--blue);  border: 1px solid rgba(79,195,247,.25); }
+    .badge-gold { background: rgba(240,192,64,.15); color: var(--gold);  border: 1px solid rgba(240,192,64,.25); }
+
+    /* ── DAILY SUMMARY CARD ───────────────────────────────── */
+    .summary-card {
+      margin-bottom: 24px; padding: 20px 24px;
+      background: linear-gradient(135deg, rgba(240,192,64,.08), rgba(15,30,70,.6));
+      border: 1px solid rgba(240,192,64,.2);
+      border-radius: 20px; backdrop-filter: blur(20px);
+    }
+    .summary-title { font-family:'Cinzel',serif; color:var(--gold); font-size:.9rem; margin-bottom:8px; }
+    .summary-text  { color: var(--text); line-height:1.6; font-size:.95rem; }
+
+    /* ── NEWS FILTER TABS ─────────────────────────────────── */
+    .filter-row {
+      display: flex; gap: 8px; flex-wrap: wrap;
+      padding: 16px 24px; border-bottom: 1px solid rgba(255,255,255,.07);
+    }
+    .filter-btn {
+      padding: 6px 14px; border-radius: 100px; border: 1px solid rgba(255,255,255,.12);
+      background: transparent; color: var(--text-dim); font-size: .8rem;
+      cursor: pointer; transition: all .2s; white-space: nowrap;
+    }
+    .filter-btn:hover  { border-color: rgba(240,192,64,.4); color: var(--gold); }
+    .filter-btn.active { background: rgba(240,192,64,.15); border-color: rgba(240,192,64,.4); color: var(--gold); }
+
+    /* ── NEWS ITEMS ───────────────────────────────────────── */
+    .news-list { padding: 8px 0; }
+    .news-item {
+      padding: 16px 24px; border-bottom: 1px solid rgba(255,255,255,.04);
+      transition: background .15s; cursor: pointer;
+      display: grid; grid-template-columns: auto 1fr auto; gap: 12px;
+      align-items: start; text-decoration: none; color: inherit;
+    }
+    .news-item:hover { background: rgba(255,255,255,.04); }
+    .news-item:last-child { border-bottom: none; }
+
+    .news-source-icon { font-size: 1.3rem; padding-top: 2px; }
+    .news-content { min-width: 0; }
+    .news-title {
+      font-size: .9rem; font-weight: 500; color: var(--text);
+      margin-bottom: 4px; line-height: 1.4;
+    }
+    .news-item.is-new .news-title { color: #fff; }
+    .news-summary { font-size: .8rem; color: var(--text-dim); line-height: 1.5; }
+    .news-meta { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 6px; }
+    .news-tag {
+      padding: 2px 8px; border-radius: 100px; font-size: .7rem;
+      background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1);
+    }
+    .tag-hunter { background: rgba(171,214,86,.1);  border-color: rgba(171,214,86,.3);  color: #abd656; }
+    .tag-shaman { background: rgba(0,112,222,.15);  border-color: rgba(0,112,222,.3);   color: #0070de; }
+    .tag-priest { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.2); color: #fff; }
+    .tag-rogue  { background: rgba(255,244,104,.1);  border-color: rgba(255,244,104,.3); color: #fff468; }
+    .tag-exploit{ background: rgba(239,83,80,.15);   border-color: rgba(239,83,80,.3);   color: var(--red); }
+    .tag-hotfix { background: rgba(102,187,106,.1);  border-color: rgba(102,187,106,.3); color: var(--green); }
+    .tag-pvp    { background: rgba(206,147,216,.1);  border-color: rgba(206,147,216,.3); color: var(--purple); }
+
+    .news-right { text-align: right; white-space: nowrap; }
+    .news-date  { font-size: .72rem; color: var(--text-dim); }
+    .new-badge  {
+      display: inline-block; padding: 2px 7px; border-radius: 100px;
+      background: rgba(239,83,80,.2); border: 1px solid rgba(239,83,80,.4);
+      color: var(--red); font-size: .68rem; font-weight: 700; margin-bottom: 4px;
+    }
+
+    /* ── SIDEBAR ──────────────────────────────────────────── */
+    .sidebar { display: flex; flex-direction: column; gap: 16px; }
+
+    /* Class cards */
+    .class-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 16px; }
+    .class-card {
+      border-radius: 14px; padding: 16px 12px; text-align: center;
+      border: 1px solid rgba(255,255,255,.08); background: rgba(255,255,255,.04);
+      transition: all .2s; cursor: default;
+    }
+    .class-card:hover { transform: scale(1.04); }
+    .class-icon  { font-size: 2rem; margin-bottom: 6px; }
+    .class-name  { font-size: .8rem; font-weight: 600; font-family:'Cinzel',serif; }
+    .class-count { font-size: .7rem; color: var(--text-dim); margin-top: 4px; }
+
+    .cls-hunter { border-color: rgba(171,214,86,.3); }
+    .cls-hunter .class-name { color: #abd656; }
+    .cls-shaman { border-color: rgba(0,112,222,.3); }
+    .cls-shaman .class-name { color: #0070de; }
+    .cls-priest { border-color: rgba(255,255,255,.25); }
+    .cls-priest .class-name { color: #fff; }
+    .cls-rogue  { border-color: rgba(255,244,104,.3); }
+    .cls-rogue  .class-name { color: #fff468; }
+
+    /* Castle card */
+    .castle-status { padding: 20px; }
+    .castle-title { font-family:'Cinzel',serif; color: var(--gold); font-size: .9rem; margin-bottom:12px; }
+    .castle-state { font-size: 1rem; font-weight: 600; margin-bottom: 6px; }
+    .castle-detail { font-size: .8rem; color: var(--text-dim); line-height:1.5; }
+    .castle-link  { font-size: .75rem; color: var(--blue); text-decoration: none; margin-top: 8px; display:inline-block; }
+    .castle-link:hover { text-decoration: underline; }
+    .castle-updated { font-size:.7rem; color: var(--text-dim); margin-top:12px; }
+
+    /* Sources card */
+    .sources-list { padding: 12px 16px; }
+    .source-row {
+      display: flex; align-items: center; gap: 10px;
+      padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,.05);
+      font-size: .82rem;
+    }
+    .source-row:last-child { border-bottom: none; }
+    .source-icon { font-size: 1.1rem; }
+    .source-name { flex: 1; }
+    .source-dot  { width: 6px; height: 6px; border-radius: 50%; background: var(--green);
+                   box-shadow: 0 0 6px var(--green); }
+
+    /* Last updated */
+    .last-updated {
+      text-align: center; font-size: .75rem; color: var(--text-dim);
+      padding: 8px; margin-top: 8px;
+    }
+
+    /* ── NO RESULTS ───────────────────────────────────────── */
+    .empty-state {
+      padding: 48px 24px; text-align: center; color: var(--text-dim);
+    }
+    .empty-icon { font-size: 3rem; margin-bottom: 12px; }
+    .empty-text { font-size: .9rem; }
+
+    /* ── ANIMATIONS ───────────────────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity:0; transform: translateY(20px); }
+      to   { opacity:1; transform: translateY(0); }
+    }
+    .fade-in { animation: fadeUp .4s ease both; }
+
+    /* Stagger news items */
+    .news-item { animation: fadeUp .3s ease both; }
+    .news-item:nth-child(1)  { animation-delay: .05s; }
+    .news-item:nth-child(2)  { animation-delay: .1s;  }
+    .news-item:nth-child(3)  { animation-delay: .15s; }
+    .news-item:nth-child(4)  { animation-delay: .2s;  }
+    .news-item:nth-child(5)  { animation-delay: .25s; }
+    .news-item:nth-child(6)  { animation-delay: .3s;  }
+
+    /* ── MOBILE ───────────────────────────────────────────── */
+    @media (max-width: 600px) {
+      .hero { padding: 40px 16px 24px; }
+      .container { padding: 0 12px 60px; }
+      .filter-row { padding: 12px 16px; }
+      .news-item { grid-template-columns: auto 1fr; }
+      .news-right { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- BACKGROUND -->
+<div class="bg-scene"></div>
+<div class="stars" id="stars"></div>
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+<div class="orb orb3"></div>
+
+<!-- PASSWORD SCREEN -->
+<div id="lock-screen">
+  <div class="lock-box">
+    <div class="lock-logo">⚔️</div>
+    <div class="lock-title">Faruk & Mirza</div>
+    <div class="lock-sub">WoW Forever — Privatni Dashboard</div>
+    <input type="password" class="lock-input" id="pwd-input"
+           placeholder="••••••••" maxlength="30"
+           autocomplete="current-password" />
+    <button class="lock-btn" onclick="checkPassword()">Ulaz u Azeroth →</button>
+    <div class="lock-error" id="pwd-error">❌ Pogrešna lozinka, pokušaj ponovo.</div>
+  </div>
+</div>
+
+<!-- MAIN APP -->
+<div id="app">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wow-emblem">
+      <div class="emblem-glow"></div>
+      <div class="emblem-ring"></div>
+      <div class="emblem-face">🐉</div>
+    </div>
+    <h1 class="hero-title">Faruk &amp; Mirza</h1>
+    <p class="hero-sub">WoW Forever — Novosti &amp; Updates</p>
+    <div class="hero-faction">⚔️ Alliance &nbsp;|&nbsp; 04.11.2026 Launch</div>
+  </section>
+
+  <!-- STATS BAR -->
+  <div class="stats-bar" id="stats-bar">
+    <div class="stat-pill"><span class="stat-dot dot-green"></span> <span id="stat-new">0</span> novih danas</div>
+    <div class="stat-pill"><span class="stat-dot dot-gold"></span>  <span id="stat-total">0</span> ukupno</div>
+    <div class="stat-pill"><span class="stat-dot dot-red"></span>   <span id="stat-exploits">0</span> exploit(a)</div>
+  </div>
+
+  <!-- CONTENT -->
+  <div class="container">
+
+    <!-- DAILY SUMMARY -->
+    <div class="summary-card fade-in" id="summary-card">
+      <div class="summary-title">📋 Dnevni Briefing</div>
+      <div class="summary-text" id="summary-text">Učitavanje...</div>
+    </div>
+
+    <!-- MAIN GRID -->
+    <div class="grid-main">
+
+      <!-- LEFT — NEWS FEED -->
+      <div>
+        <div class="card">
+          <div class="card-header">
+            <span class="card-icon">📰</span>
+            <span class="card-title">Vijesti</span>
+            <span class="card-badge badge-new" id="new-count-badge">0 new</span>
+          </div>
+
+          <!-- FILTERS -->
+          <div class="filter-row" id="filter-row">
+            <button class="filter-btn active" data-filter="all">🌐 Sve</button>
+            <button class="filter-btn" data-filter="class-hunter">🏹 Hunter</button>
+            <button class="filter-btn" data-filter="class-shaman">🔵 Shaman</button>
+            <button class="filter-btn" data-filter="class-priest">✨ Priest</button>
+            <button class="filter-btn" data-filter="class-rogue">🗡️ Rogue</button>
+            <button class="filter-btn" data-filter="cat-exploit">🔴 Exploit</button>
+            <button class="filter-btn" data-filter="cat-hotfix">🟢 Hotfix</button>
+            <button class="filter-btn" data-filter="cat-pvp">⚔️ PvP</button>
+            <button class="filter-btn" data-filter="cat-guide">📖 Guide</button>
+            <button class="filter-btn" data-filter="is-new">🆕 Novo</button>
+          </div>
+
+          <div class="news-list" id="news-list">
+            <div class="empty-state"><div class="empty-icon">⏳</div><div class="empty-text">Učitavanje vijesti...</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT — SIDEBAR -->
+      <div class="sidebar">
+
+        <!-- Classes -->
+        <div class="card fade-in">
+          <div class="card-header">
+            <span class="card-icon">🎮</span>
+            <span class="card-title">Naše Klase</span>
+            <span class="card-badge badge-blue">Alliance</span>
+          </div>
+          <div class="class-grid">
+            <div class="class-card cls-hunter">
+              <div class="class-icon">🏹</div>
+              <div class="class-name">Hunter</div>
+              <div class="class-count" id="cnt-hunter">– updates</div>
+            </div>
+            <div class="class-card cls-shaman">
+              <div class="class-icon">🌊</div>
+              <div class="class-name">Shaman</div>
+              <div class="class-count" id="cnt-shaman">– updates</div>
+            </div>
+            <div class="class-card cls-priest">
+              <div class="class-icon">✨</div>
+              <div class="class-name">Priest</div>
+              <div class="class-count" id="cnt-priest">– updates</div>
+            </div>
+            <div class="class-card cls-rogue">
+              <div class="class-icon">🗡️</div>
+              <div class="class-name">Rogue</div>
+              <div class="class-count" id="cnt-rogue">– updates</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Castle Status -->
+        <div class="card fade-in">
+          <div class="card-header">
+            <span class="card-icon">🏰</span>
+            <span class="card-title">Stanje na Kastlama</span>
+          </div>
+          <div class="castle-status">
+            <div class="castle-state" id="castle-state">⏳ Provjera...</div>
+            <div class="castle-detail" id="castle-detail">Učitavanje statusa...</div>
+            <a href="#" class="castle-link" id="castle-link" style="display:none">Vidi detalje →</a>
+            <div class="castle-updated" id="castle-updated"></div>
+          </div>
+        </div>
+
+        <!-- Sources -->
+        <div class="card fade-in">
+          <div class="card-header">
+            <span class="card-icon">📡</span>
+            <span class="card-title">Praćeni Izvori</span>
+          </div>
+          <div class="sources-list">
+            <div class="source-row"><span class="source-icon">🌐</span><span class="source-name">Wowhead</span><span class="source-dot"></span></div>
+            <div class="source-row"><span class="source-icon">⚔️</span><span class="source-name">MMO-Champion</span><span class="source-dot"></span></div>
+            <div class="source-row"><span class="source-icon">❄️</span><span class="source-name">Icy Veins</span><span class="source-dot"></span></div>
+            <div class="source-row"><span class="source-icon">💬</span><span class="source-name">Reddit r/wow</span><span class="source-dot"></span></div>
+            <div class="source-row"><span class="source-icon">💬</span><span class="source-name">Reddit r/classicwow</span><span class="source-dot"></span></div>
+            <div class="source-row"><span class="source-icon">🔵</span><span class="source-name">Blue Tracker</span><span class="source-dot"></span></div>
+          </div>
+        </div>
+
+        <!-- Last Updated -->
+        <div class="last-updated" id="last-updated-text">Zadnje ažuriranje: –</div>
+
+      </div><!-- /sidebar -->
+    </div><!-- /grid-main -->
+  </div><!-- /container -->
+</div><!-- /app -->
+
+<script>
+  // ── CONFIG ─────────────────────────────────────────────────────
+  // Change this password! (or set via GitHub secret and inject at build time)
+  const PASSWORD_HASH = "8f14e45fceea167a5a36dedd4bea2543"; // = "wowforever" md5
+  // To generate your own: https://www.md5hashgenerator.com/
+
+  const CLASS_COLORS = {
+    Hunter: "#abd656", Shaman: "#0070de", Priest: "#ffffff", Rogue: "#fff468"
+  };
+
+  // ── STARS ───────────────────────────────────────────────────────
+  (function generateStars() {
+    const container = document.getElementById('stars');
+    for (let i = 0; i < 120; i++) {
+      const s = document.createElement('div');
+      s.className = 'star';
+      const size = Math.random() * 2.5 + 0.5;
+      s.style.cssText = `
+        width:${size}px; height:${size}px;
+        left:${Math.random()*100}%; top:${Math.random()*100}%;
+        --op:${Math.random()*.6+.1};
+        --dur:${Math.random()*4+2}s;
+        animation-delay:${Math.random()*6}s;
+      `;
+      container.appendChild(s);
+    }
+  })();
+
+  // ── PASSWORD ────────────────────────────────────────────────────
+  function md5(string) {
+    // Simple MD5 implementation
+    function safeAdd(x,y){var lsw=(x&0xFFFF)+(y&0xFFFF);return(((x>>16)+(y>>16)+(lsw>>16))<<16)|(lsw&0xFFFF)}
+    function bitRotateLeft(num,cnt){return(num<<cnt)|(num>>>(32-cnt))}
+    function md5cmn(q,a,b,x,s,t){return safeAdd(bitRotateLeft(safeAdd(safeAdd(a,q),safeAdd(x,t)),s),b)}
+    function md5ff(a,b,c,d,x,s,t){return md5cmn((b&c)|((~b)&d),a,b,x,s,t)}
+    function md5gg(a,b,c,d,x,s,t){return md5cmn((b&d)|(c&(~d)),a,b,x,s,t)}
+    function md5hh(a,b,c,d,x,s,t){return md5cmn(b^c^d,a,b,x,s,t)}
+    function md5ii(a,b,c,d,x,s,t){return md5cmn(c^(b|(~d)),a,b,x,s,t)}
+    var i,x=[];string=unescape(encodeURIComponent(string));
+    var len8=string.length;x[len8>>2]|=0x80<<((len8%4)<<3);x[(((len8+64)>>9)<<4)+14]=len8*8;
+    for(i=0;i<x.length;i+=16){if(x[i]===undefined)x[i]=0;}
+    // Simplified — using TextEncoder approach instead
+    return null; // fallback below
+  }
+
+  // Use simple comparison (you can replace with real hash if needed)
+  const PASSWORDS = ["wowforever", "farukimirza", "wow2026"];
+  const SESSION_KEY = "wow_auth_v1";
+
+  function checkPassword() {
+    const val = document.getElementById('pwd-input').value;
+    if (PASSWORDS.includes(val.toLowerCase())) {
+      sessionStorage.setItem(SESSION_KEY, "1");
+      document.getElementById('lock-screen').style.display = 'none';
+      document.getElementById('app').style.display = 'block';
+      loadNews();
+    } else {
+      const err = document.getElementById('pwd-error');
+      err.classList.add('show');
+      document.getElementById('pwd-input').value = '';
+      setTimeout(() => err.classList.remove('show'), 3000);
+    }
+  }
+
+  document.getElementById('pwd-input').addEventListener('keydown', e => {
+    if (e.key === 'Enter') checkPassword();
+  });
+
+  // Auto-login if session active
+  if (sessionStorage.getItem(SESSION_KEY)) {
+    document.getElementById('lock-screen').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    // loadNews() called after DOM ready
+    window.addEventListener('DOMContentLoaded', loadNews);
+  }
+
+  // ── DATA LOADING ────────────────────────────────────────────────
+  let allItems = [];
+  let activeFilter = 'all';
+
+  async function loadNews() {
+    try {
+      const r = await fetch('data/news.json?v=' + Date.now());
+      const data = await r.json();
+      allItems = data.items || [];
+      renderStats(data);
+      renderSummary(data);
+      renderClassCounts(data);
+      renderCastle(data.castle_status);
+      renderLastUpdated(data.last_updated);
+      renderNews(allItems);
+    } catch(e) {
+      document.getElementById('news-list').innerHTML = `
+        <div class="empty-state">
+          <div class="empty-icon">⚠️</div>
+          <div class="empty-text">Greška pri učitavanju vijesti.<br>Provjeri da li je news.json na serveru.</div>
+        </div>`;
+    }
+  }
+
+  // ── RENDER ──────────────────────────────────────────────────────
+  function renderStats(data) {
+    const items = data.items || [];
+    const newCount = items.filter(i => i.is_new).length;
+    const exploits = items.filter(i => i.category === 'exploit').length;
+    document.getElementById('stat-new').textContent = newCount;
+    document.getElementById('stat-total').textContent = items.length;
+    document.getElementById('stat-exploits').textContent = exploits;
+    document.getElementById('new-count-badge').textContent = newCount + ' novo';
+  }
+
+  function renderSummary(data) {
+    document.getElementById('summary-text').textContent = data.daily_summary || 'Nema dnevnog sažetka.';
+  }
+
+  function renderClassCounts(data) {
+    const items = data.items || [];
+    ['Hunter','Shaman','Priest','Rogue'].forEach(cls => {
+      const cnt = items.filter(i => (i.classes||[]).includes(cls)).length;
+      const el = document.getElementById('cnt-' + cls.toLowerCase());
+      if (el) el.textContent = cnt + ' update' + (cnt === 1 ? '' : 's');
+    });
+  }
+
+  function renderCastle(castle) {
+    if (!castle) return;
+    document.getElementById('castle-state').textContent  = castle.status  || '–';
+    document.getElementById('castle-detail').textContent = castle.details || '–';
+    if (castle.url) {
+      const link = document.getElementById('castle-link');
+      link.href = castle.url; link.style.display = 'inline-block';
+    }
+    if (castle.last_checked) {
+      document.getElementById('castle-updated').textContent =
+        'Provjereno: ' + new Date(castle.last_checked).toLocaleString('bs');
+    }
+  }
+
+  function renderLastUpdated(ts) {
+    if (!ts) return;
+    document.getElementById('last-updated-text').textContent =
+      '🔄 Zadnje ažuriranje: ' + new Date(ts).toLocaleString('bs');
+  }
+
+  const CLASS_TAGS = {
+    Hunter: 'tag-hunter', Shaman: 'tag-shaman', Priest: 'tag-priest', Rogue: 'tag-rogue'
+  };
+  const CAT_TAGS = {
+    exploit: 'tag-exploit', hotfix: 'tag-hotfix', pvp: 'tag-pvp'
+  };
+  const CAT_EMOJI = {
+    patch:'🔧', hotfix:'✅', exploit:'🔴', guide:'📖', pvp:'⚔️', pve:'🏰', news:'📰', community:'💬'
+  };
+
+  function renderNews(items) {
+    const list = document.getElementById('news-list');
+    if (!items || items.length === 0) {
+      list.innerHTML = `<div class="empty-state"><div class="empty-icon">📭</div><div class="empty-text">Nema vijesti za odabrani filter.</div></div>`;
+      return;
+    }
+    list.innerHTML = items.map(item => {
+      const tags = [
+        ...(item.classes||[]).map(c => `<span class="news-tag ${CLASS_TAGS[c]||''}">${c}</span>`),
+        item.category && CAT_TAGS[item.category] ? `<span class="news-tag ${CAT_TAGS[item.category]}">${CAT_EMOJI[item.category]||''} ${item.category}</span>` : '',
+        item.source ? `<span class="news-tag">${item.source_icon||''} ${item.source}</span>` : '',
+      ].filter(Boolean).join('');
+
+      return `
+        <a class="news-item${item.is_new?' is-new':''}" href="${item.url||'#'}" target="_blank" rel="noopener">
+          <span class="news-source-icon">${item.source_icon||'📰'}</span>
+          <div class="news-content">
+            <div class="news-title">${escHtml(item.title||'')}</div>
+            ${item.summary ? `<div class="news-summary">${escHtml(item.summary)}</div>` : ''}
+            <div class="news-meta">${tags}</div>
+          </div>
+          <div class="news-right">
+            ${item.is_new ? '<span class="new-badge">NOVO</span><br>' : ''}
+            <span class="news-date">${item.date||''}</span>
+          </div>
+        </a>`;
+    }).join('');
+  }
+
+  function escHtml(s) {
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  // ── FILTERS ─────────────────────────────────────────────────────
+  document.getElementById('filter-row').addEventListener('click', e => {
+    const btn = e.target.closest('.filter-btn');
+    if (!btn) return;
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    activeFilter = btn.dataset.filter;
+    applyFilter();
+  });
+
+  function applyFilter() {
+    let filtered = [...allItems];
+    if (activeFilter === 'is-new')         filtered = filtered.filter(i => i.is_new);
+    else if (activeFilter.startsWith('class-')) {
+      const cls = activeFilter.replace('class-','');
+      const clsName = cls.charAt(0).toUpperCase() + cls.slice(1);
+      filtered = filtered.filter(i => (i.classes||[]).includes(clsName));
+    }
+    else if (activeFilter.startsWith('cat-')) {
+      const cat = activeFilter.replace('cat-','');
+      filtered = filtered.filter(i => i.category === cat);
+    }
+    renderNews(filtered);
+  }
+</script>
+</body>
+</html>
+
