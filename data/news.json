@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-10-28T17:55:35.599954",
+  "last_updated": "2026-10-28T18:06:52.005650",
   "classes": [
     "Hunter",
     "Shaman",
@@ -8,6 +8,36 @@
   ],
   "faction": "Alliance",
   "items": [
+    {
+      "id": "4714479aebb2",
+      "date": "2026-10-28",
+      "source": "Buffed.de",
+      "source_icon": "🇩🇪",
+      "source_lang": "de",
+      "category": "news",
+      "classes": [],
+      "title": "Patentiertes Feature endlich auch in Red Dead Redemption 2",
+      "teaser_de": "Geniale RDR2-Mod ignoriert ein Patent und bringt so eine grandiose Mechanik ins Spiel, die sich Fans schon seit einem Jahrzehnt für mehr Games wünschen.",
+      "article_de": "Geniale RDR2-Mod ignoriert ein Patent und bringt so eine grandiose Mechanik ins Spiel, die sich Fans schon seit einem Jahrzehnt für mehr Games wünschen.",
+      "url": "https://www.buffed.de/Red-Dead-Redemption-2-Spiel-59923/News/Nemesis-Mod-Mordors-Schatten-Warner-Patent-1558127/",
+      "is_new": true,
+      "tags": []
+    },
+    {
+      "id": "9ddc67cf1789",
+      "date": "2026-10-28",
+      "source": "Wowhead",
+      "source_icon": "🌐",
+      "source_lang": "en",
+      "category": "bis",
+      "classes": [],
+      "title": "Players Upset Latest Housing Bundles Breaks Stated Philosophy on Hearthsteel",
+      "teaser_de": "Many players are upset that the recent Grimtide housing bundle appears to break Blizzard's stated philosophy and guiding principles for real-money housing items.Continue reading »",
+      "article_de": "Many players are upset that the recent Grimtide housing bundle appears to break Blizzard's stated philosophy and guiding principles for real-money housing items.Continue reading »",
+      "url": "https://www.wowhead.com/news=383614/players-upset-latest-housing-bundles-breaks-stated-philosophy-on-hearthsteel",
+      "is_new": true,
+      "tags": []
+    },
     {
       "id": "ec30f2eb4e50",
       "date": "2026-10-28",
@@ -337,9 +367,9 @@
     }
   ],
   "castle_status": {
-    "last_checked": "2026-10-28T17:55:35.599880",
+    "last_checked": "2026-10-28T18:06:52.005567",
     "status": "🟢 Keine aktive Belagerung",
-    "details": "Keine Welt-PvP / Burg-Events in den letzten 24 Stunden."
+    "details": "Keine Welt-PvP- oder Burg-Events in den letzten 24 Stunden gefunden."
   },
-  "daily_summary": "📰 21 neue Meldungen heute. | 🏹 Hunter: 1 Update(s) | ✨ Priest: 2 Update(s) | 🗡️ Rogue: 1 Update(s) | 🔴 ACHTUNG: 1 Exploit(s) gefunden!"
+  "daily_summary": "📰 23 neue Meldungen heute. | 🏹 Hunter: 1 Update(s) | ✨ Priest: 2 Update(s) | 🗡️ Rogue: 1 Update(s) | 🔴 ACHTUNG: 1 Exploit(s) entdeckt!"
 }
