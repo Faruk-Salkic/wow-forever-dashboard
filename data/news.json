@@ -9,21 +9,6 @@
   "faction": "Alliance",
   "items": [
     {
-      "id": "ec30f2eb4e50",
-      "date": "2026-10-28",
-      "source": "Buffed.de",
-      "source_icon": "🇩🇪",
-      "source_lang": "de",
-      "category": "bis",
-      "classes": [],
-      "title": "WoW Midnight: Tiefen-Fans können sich diese Woche ein besonders mächtiges Item sichern",
-      "summary_orig": "Diese Woche schenkt euch Blizzard ein Myth-Item in World of Warcraft: Midnight, das ihr unter Umständen bis auf 341 aufwerten könnt.",
-      "summary_de": "Diese Woche schenkt euch Blizzard ein Myth-Item in World of Warcraft: Midnight, das ihr unter Umständen bis auf 341 aufwerten könnt.",
-      "url": "https://www.buffed.de/World-of-Warcraft-Spiel-42971/News/Midnight-Labyrinthe-Tiefen-Mythisch-Item-kostenlos-1558122/",
-      "is_new": true,
-      "tags": []
-    },
-    {
       "id": "124848add487",
       "date": "2026-10-28",
       "source": "Buffed.de",
@@ -196,19 +181,6 @@
       "title": "Class Tuning and Bug Fixes - Patch 12.1.5 Hotfixes for October 27th",
       "summary": "Blizzard has posted hotfixes for today, which includes class tuning and fixing a bug where Labyrinth scenarios were not granting Vault credit.Continue reading »",
       "url": "https://www.wowhead.com/news=383617/world-of-warcraft-midnight-hotfixes-october-27",
-      "is_new": true,
-      "tags": []
-    },
-    {
-      "id": "dccfc5d75b9a",
-      "date": "2026-10-28",
-      "source": "Wowhead",
-      "source_icon": "🌐",
-      "category": "news",
-      "classes": [],
-      "title": "Blizzard Takes Action Against RMT on Retail WoW - Gold Transactions Should Be Direct",
-      "summary": "Blizzard has taken action against RMT on Retail WoW, reminding players that Gold Transactions should be direct from buyer to seller.Continue reading »",
-      "url": "https://www.wowhead.com/news=383616/blizzard-takes-action-against-rmt-on-retail-wow-gold-transactions-should-be",
       "is_new": true,
       "tags": []
     },

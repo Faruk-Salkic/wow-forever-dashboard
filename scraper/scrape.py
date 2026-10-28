@@ -80,7 +80,29 @@ def categorise(text):
 
 def is_relevant(title, summary):
     text = (title + " " + summary).lower()
-    return any(k in text for k in REDDIT_KEYWORDS + ["wow","warcraft","azeroth","forever","blizzard"])
+    
+    # STRIKTNO ISKLJUČI sve druge ekspanzije / Retail teme:
+    blacklist = [
+        "midnight", "the war within", "dragonflight", "shadowlands", 
+        "battle for azeroth", "bfa", "legion", "warlords of draenor", "wod",
+        "mists of pandaria", "cataclysm", "wrath of the lich king", "wotlk",
+        "retail", "patch 11.", "patch 12.", "tiefen", "delves", "mythic+"
+    ]
+    if any(b in text for b in blacklist):
+        # Ako izričito spominje "forever", ne odbacuj, inače odbaci sve retail/midnight teme
+        if "forever" not in text:
+            return False
+
+    # Mora biti vezano za WoW Forever ili ključne mehanike WoW Forevera
+    forever_triggers = ["forever", "wow forever", "classic forever"]
+    has_forever = any(k in text for k in forever_triggers)
+    
+    # Ako je u pitanju opšti vanilla/classic hotfix/guide a spominje tvoje klase
+    class_triggers = ["hunter", "jäger", "shaman", "schamane", "priest", "priester", "rogue", "schurke"]
+    has_class_exploit = any(c in text for c in class_triggers) and any(x in text for x in ["exploit", "hotfix", "bug", "bis", "castle", "burg"])
+
+    return has_forever or has_class_exploit
+
 
 # ─── FULL ARTICLE FETCHER ─────────────────────────────────────────────────────
 def fetch_full_article(url: str) -> str:
