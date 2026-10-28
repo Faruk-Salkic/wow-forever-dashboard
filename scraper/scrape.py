@@ -81,27 +81,36 @@ def categorise(text):
 def is_relevant(title, summary):
     text = (title + " " + summary).lower()
     
-    # STRIKTNO ISKLJUČI sve druge ekspanzije / Retail teme:
+    # 1. RIGIDNA BLACKLISTA (igre koje nisu WoW, opšte gluposti, store, guild search, druge ekspanzije):
     blacklist = [
-        "midnight", "the war within", "dragonflight", "shadowlands", 
-        "battle for azeroth", "bfa", "legion", "warlords of draenor", "wod",
-        "mists of pandaria", "cataclysm", "wrath of the lich king", "wotlk",
+        "red dead", "rdr2", "diablo", "overwatch", "hearthstone", "gta", "playstation", "xbox", "nintendo",
+        "housing", "bundle", "shop", "store", "transmog", "mount", "trading post", "handelsauktion", "rabatt",
+        "portalraum", "gilde", "guild", "mitspieler", "discord-server",
+        "midnight", "the war within", "dragonflight", "shadowlands", "bfa", "legion", "wod", "mop", "cataclysm", "wotlk",
         "retail", "patch 11.", "patch 12.", "tiefen", "delves", "mythic+"
     ]
     if any(b in text for b in blacklist):
-        # Ako izričito spominje "forever", ne odbacuj, inače odbaci sve retail/midnight teme
-        if "forever" not in text:
-            return False
+        return False
 
-    # Mora biti vezano za WoW Forever ili ključne mehanike WoW Forevera
-    forever_triggers = ["forever", "wow forever", "classic forever"]
-    has_forever = any(k in text for k in forever_triggers)
-    
-    # Ako je u pitanju opšti vanilla/classic hotfix/guide a spominje tvoje klase
-    class_triggers = ["hunter", "jäger", "shaman", "schamane", "priest", "priester", "rogue", "schurke"]
-    has_class_exploit = any(c in text for c in class_triggers) and any(x in text for x in ["exploit", "hotfix", "bug", "bis", "castle", "burg"])
+    # 2. MORA BITI ISKLJUČIVO WOW FOREVER / WOW
+    if "forever" not in text and "warcraft" not in text and "wow" not in text:
+        return False
 
-    return has_forever or has_class_exploit
+    # 3. MORA BITI GAMEPLAY / PROFIT: Talenti, Buildovi, Nerf, Buff, Exploit, BiS, Klasa
+    gameplay_keywords = [
+        "talent", "build", "nerf", "buff", "exploit", "hotfix", "bis", "best in slot",
+        "pet", "leveling", "schaden", "damage", "dps", "stat", "skill", "op", "meta",
+        "tipps", "guide", "dungeon", "instanz", "boss"
+    ]
+    has_gameplay = any(g in text for g in gameplay_keywords)
+
+    # 4. Vaše klase
+    classes = detect_classes(text)
+    has_our_class = len(classes) > 0
+
+    # Prihvati ako je WoW Forever + (gameplay ili naša klasa)
+    return "forever" in text and (has_gameplay or has_our_class)
+
 
 
 # ─── FULL ARTICLE FETCHER ─────────────────────────────────────────────────────
