@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-10-28T17:42:58.641896",
+  "last_updated": "2026-10-28T17:55:35.599954",
   "classes": [
     "Hunter",
     "Shaman",
@@ -8,6 +8,145 @@
   ],
   "faction": "Alliance",
   "items": [
+    {
+      "id": "ec30f2eb4e50",
+      "date": "2026-10-28",
+      "source": "Buffed.de",
+      "source_icon": "🇩🇪",
+      "source_lang": "de",
+      "category": "bis",
+      "classes": [],
+      "title": "WoW Midnight: Tiefen-Fans können sich diese Woche ein besonders mächtiges Item sichern",
+      "summary_orig": "Diese Woche schenkt euch Blizzard ein Myth-Item in World of Warcraft: Midnight, das ihr unter Umständen bis auf 341 aufwerten könnt.",
+      "summary_de": "Diese Woche schenkt euch Blizzard ein Myth-Item in World of Warcraft: Midnight, das ihr unter Umständen bis auf 341 aufwerten könnt.",
+      "url": "https://www.buffed.de/World-of-Warcraft-Spiel-42971/News/Midnight-Labyrinthe-Tiefen-Mythisch-Item-kostenlos-1558122/",
+      "is_new": true,
+      "tags": []
+    },
+    {
+      "id": "124848add487",
+      "date": "2026-10-28",
+      "source": "Buffed.de",
+      "source_icon": "🇩🇪",
+      "source_lang": "de",
+      "category": "news",
+      "classes": [
+        "Priest"
+      ],
+      "title": "WoW: Auf der Suche nach Mitspielern? Portalraum öffnet auch für Forever-Version",
+      "summary_orig": "Um die Gruppen- und Gildensuche in WoW Forever einfacher zu gestalten, wurde die Portalkammer (Community-Discord-Server) samt Botschafter-System jetzt auch für das neue „Classic Plus“ eingeführt.",
+      "summary_de": "Um die Gruppen- und Gildensuche in WoW Forever einfacher zu gestalten, wurde die Portalkammer (Community-Discord-Server) samt Botschafter-System jetzt auch für das neue „Classic Plus“ eingeführt.",
+      "url": "https://www.buffed.de/World-of-Warcraft-Spiel-42971/News/WoW-Forever-Portalraum-Discord-1558074/",
+      "is_new": true,
+      "tags": [
+        "Priest"
+      ]
+    },
+    {
+      "id": "5f484e907514",
+      "date": "2026-10-28",
+      "source": "Buffed.de",
+      "source_icon": "🇩🇪",
+      "source_lang": "de",
+      "category": "news",
+      "classes": [],
+      "title": "Pfeift Blizzard auf die eigenen Vorgaben? So etwas sollte nicht im Shop von WoW sein",
+      "summary_orig": "Blizzard wollte so etwas in WoW nicht verkaufen, doch dieses neue Housing-Paket für 25 Euro wirkt für viele Fans wie ein klarer Vertrauensbruch. Was meint ihr?",
+      "summary_de": "Blizzard wollte so etwas in WoW nicht verkaufen, doch dieses neue Housing-Paket für 25 Euro wirkt für viele Fans wie ein klarer Vertrauensbruch. Was meint ihr?",
+      "url": "https://www.buffed.de/World-of-Warcraft-Spiel-42971/News/Echtgeld-Aerger-Shop-1558087/",
+      "is_new": true,
+      "tags": []
+    },
+    {
+      "id": "02bac69b53ab",
+      "date": "2026-10-28",
+      "source": "Buffed.de",
+      "source_icon": "🇩🇪",
+      "source_lang": "de",
+      "category": "news",
+      "classes": [],
+      "title": "Neue Spiele im November 2026: Die wichtigsten Releases für PC und Konsolen",
+      "summary_orig": "Der November ist ruhiger, hat aber dafür klare Highlights für PC, PS5, Xbox Series und Switch 2. Dazu gehören GTA 6, Zelda: Ocarina of Time Remake und World of Warcraft Forever. Wir haben die wichtigsten Neuerscheinungen und Ports für euch.",
+      "summary_de": "Der November ist ruhiger, hat aber dafür klare Highlights für PC, PS5, Xbox Series und Switch 2. Dazu gehören GTA 6, Zelda: Ocarina of Time Remake und World of Warcraft Forever. Wir haben die wichtigsten Neuerscheinungen und Ports für euch.",
+      "url": "https://www.buffed.de/Spiele-Thema-239104/Specials/Neuerscheinungen-Release-November-PC-Konsolen-1558073/",
+      "is_new": true,
+      "tags": []
+    },
+    {
+      "id": "457e496ffa1f",
+      "date": "2026-10-28",
+      "source": "Buffed.de",
+      "source_icon": "🇩🇪",
+      "source_lang": "de",
+      "category": "news",
+      "classes": [],
+      "title": "WoW Forever: Metal, Nostalgie und ein verdammt cooler Trailer",
+      "summary_orig": "Blizzard lässt in WoW Forever die Fetzen fliegen! Im neuen Musikvideo WARPATH treffen Horde und Allianz zu Metal-Klängen aufeinander. Fans wünschen sich gleich eine ganze Serie.",
+      "summary_de": "Blizzard lässt in WoW Forever die Fetzen fliegen! Im neuen Musikvideo WARPATH treffen Horde und Allianz zu Metal-Klängen aufeinander. Fans wünschen sich gleich eine ganze Serie.",
+      "url": "https://www.buffed.de/World-of-Warcraft-Spiel-42971/News/Forever-Metal-Nostalgie-und-ein-verdammt-cooler-Trailer-1558072/",
+      "is_new": true,
+      "tags": []
+    },
+    {
+      "id": "b01ba1ac849a",
+      "date": "2026-10-28",
+      "source": "Buffed.de",
+      "source_icon": "🇩🇪",
+      "source_lang": "de",
+      "category": "exploit",
+      "classes": [],
+      "title": "WoW Forever: Bug behoben – euer Lieblingsname könnte doch verfügbar sein",
+      "summary_orig": "Euer Wunschname für WoW Forever könnte womöglich doch verfügbar sein. Blizzard gibt einen Bug bei der Namensreservierung zu.",
+      "summary_de": "Euer Wunschname für WoW Forever könnte womöglich doch verfügbar sein. Blizzard gibt einen Bug bei der Namensreservierung zu.",
+      "url": "https://www.buffed.de/World-of-Warcraft-Spiel-42971/News/WoW-Forever-Namensreservierung-Bug-1558051/",
+      "is_new": true,
+      "tags": []
+    },
+    {
+      "id": "23f6dd086609",
+      "date": "2026-10-28",
+      "source": "Buffed.de",
+      "source_icon": "🇩🇪",
+      "source_lang": "de",
+      "category": "news",
+      "classes": [],
+      "title": "WoW Forever: Buff für Orcs und mehr – weitere Änderungen für Volksfähigkeiten",
+      "summary_orig": "Kurz vor Release von WoW Forever gibt es erneut Änderungen für Volksfähigkeiten, die vor allem Orcs besänftigen sollen.",
+      "summary_de": "Kurz vor Release von WoW Forever gibt es erneut Änderungen für Volksfähigkeiten, die vor allem Orcs besänftigen sollen.",
+      "url": "https://www.buffed.de/World-of-Warcraft-Spiel-42971/News/WoW-Forever-Volksfaehigkeiten-weitere-Aenderungen-1558044/",
+      "is_new": true,
+      "tags": []
+    },
+    {
+      "id": "bd3ec900a0be",
+      "date": "2026-10-28",
+      "source": "Wowhead",
+      "source_icon": "🌐",
+      "source_lang": "en",
+      "category": "news",
+      "classes": [],
+      "title": "Planet Azeroth: Episode 1 ft. Bill Bailey",
+      "summary_orig": "Learn more about wolves, boars and the Barrens Chat in the new YouTube video series, Planet Azeroth, narrated by Bill Bailey.Continue reading »",
+      "summary_de": "Learn more about wolves, boars and the Barrens Chat in the new YouTube video series, Planet Azeroth, narrated by Bill Bailey.Continue reading »",
+      "url": "https://www.wowhead.com/news=383630/planet-azeroth-episode-1-ft-bill-bailey",
+      "is_new": true,
+      "tags": []
+    },
+    {
+      "id": "3eb561b64692",
+      "date": "2026-10-28",
+      "source": "MMO-Champion",
+      "source_icon": "⚔️",
+      "source_lang": "en",
+      "category": "pve",
+      "classes": [],
+      "title": "Gold Transactions Must Be Direct",
+      "summary_orig": "Gold Transactions Must Be Direct\n\n\n\n\n\n\t\t\t\t\t\tOriginally Posted by Blizzard\n\t\t\t\t\t\t(Blue Tracker / Official Forums)\n\t\t\t\t\t\nWe’ve recently completed a round of actions taken against accounts that were found to have participated in spending real money on gold provided by a third party (RMT). Some of the a",
+      "summary_de": "Gold Transactions Must Be Direct\n\n\n\n\n\n\t\t\t\t\t\tOriginally Posted by Blizzard\n\t\t\t\t\t\t(Blue Tracker / Official Forums)\n\t\t\t\t\t\nWe’ve recently completed a round of actions taken against accounts that were found to have participated in spending real money on gold provided by a third party (RMT). Some of the a",
+      "url": "https://www.mmo-champion.com/content/14650-Gold-Transactions-Must-Be-Direct",
+      "is_new": true,
+      "tags": []
+    },
     {
       "id": "7c8792fc40ef",
       "date": "2026-10-28",
@@ -198,9 +337,9 @@
     }
   ],
   "castle_status": {
-    "last_checked": "2026-10-28T17:42:58.641078",
-    "status": "🟢 No active siege",
-    "details": "No castle / World PvP events found in last 24h."
+    "last_checked": "2026-10-28T17:55:35.599880",
+    "status": "🟢 Keine aktive Belagerung",
+    "details": "Keine Welt-PvP / Burg-Events in den letzten 24 Stunden."
   },
-  "daily_summary": "📰 12 novih vijesti danas. | 🏹 Hunter: 1 update(s) | ✨ Priest: 1 update(s) | 🗡️ Rogue: 1 update(s)"
+  "daily_summary": "📰 21 neue Meldungen heute. | 🏹 Hunter: 1 Update(s) | ✨ Priest: 2 Update(s) | 🗡️ Rogue: 1 Update(s) | 🔴 ACHTUNG: 1 Exploit(s) gefunden!"
 }
