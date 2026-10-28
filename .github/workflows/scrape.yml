@@ -2,9 +2,8 @@ name: 🗡️ WoW Forever Daily News Scraper
 
 on:
   schedule:
-    # Every day at 08:00 UTC (09:00 CET / 10:00 CEST)
-    - cron: "0 8 * * *"
-  workflow_dispatch:  # Manual trigger from GitHub UI
+    - cron: "0 8 * * *"   # 09:00 CET / 10:00 CEST
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -23,16 +22,17 @@ jobs:
           python-version: "3.11"
 
       - name: 📦 Install dependencies
-        run: pip install requests feedparser beautifulsoup4
+        run: pip install -r scraper/requirements.txt
 
       - name: 🔍 Run scraper
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: python scraper/scrape.py
 
-      - name: 💾 Commit & push updated news.json
+      - name: 💾 Commit & push
         run: |
           git config --global user.name  "WoW-Bot 🤖"
           git config --global user.email "wow-bot@faruk-mirza.github.io"
-          git add data/news.json data/seen_ids.json
-          git diff --cached --quiet || git commit -m "🗞️ Daily news update $(date -u '+%Y-%m-%d %H:%M UTC')"
+          git add data/news.json data/seen_ids.json data/bis.json || true
+          git diff --cached --quiet || git commit -m "🗞️ Daily update $(date -u '+%Y-%m-%d %H:%M UTC')"
           git push
-
