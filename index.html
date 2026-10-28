@@ -47,6 +47,82 @@
     .lock-err { color:var(--red);font-size:.82rem;margin-top:8px;opacity:0;transition:.3s; }
     .lock-err.show { opacity:1; }
 
+    /* ═══ MODAL ═══ */
+    #modal-overlay {
+      position:fixed; inset:0; z-index:500;
+      background:rgba(2,5,14,.85); backdrop-filter:blur(16px);
+      display:none; align-items:flex-start; justify-content:center;
+      padding:24px 16px; overflow-y:auto;
+    }
+    #modal-overlay.open { display:flex; animation:fadeIn .2s ease; }
+    @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+
+    .modal-box {
+      background: linear-gradient(160deg, rgba(10,20,50,.95), rgba(5,10,25,.98));
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:22px;
+      width:100%; max-width:760px;
+      box-shadow:0 30px 80px rgba(0,0,0,.7), inset 0 1px 0 rgba(255,255,255,.07);
+      animation:slideUp .3s ease;
+      overflow:hidden; margin:auto;
+    }
+    @keyframes slideUp { from{transform:translateY(30px);opacity:0} to{transform:translateY(0);opacity:1} }
+
+    .modal-header {
+      padding:24px 28px 18px;
+      border-bottom:1px solid rgba(255,255,255,.07);
+      display:flex; align-items:flex-start; gap:14px;
+    }
+    .modal-src-icon { font-size:1.6rem; flex-shrink:0; margin-top:2px; }
+    .modal-title-area { flex:1; min-width:0; }
+    .modal-title { font-family:'Cinzel',serif; font-size:1.1rem; font-weight:700; color:#fff; line-height:1.4; margin-bottom:8px; }
+    .modal-meta  { display:flex; gap:6px; flex-wrap:wrap; }
+    .modal-close {
+      flex-shrink:0; width:34px; height:34px; border-radius:50%;
+      background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12);
+      color:var(--dim); font-size:1.1rem; cursor:pointer; display:flex;
+      align-items:center; justify-content:center; transition:.15s;
+    }
+    .modal-close:hover { background:rgba(239,83,80,.2); color:var(--red); border-color:rgba(239,83,80,.3); }
+
+    .modal-body { padding:24px 28px 28px; }
+
+    /* AI Article content */
+    .modal-article {
+      font-size:.92rem; line-height:1.8; color:var(--text);
+    }
+    .modal-article p    { margin-bottom:14px; }
+    .modal-article strong { color:#fff; }
+
+    /* Section headers inside article (📌 What happened etc) */
+    .modal-section {
+      margin: 18px 0 10px;
+      padding: 10px 14px;
+      border-left: 3px solid var(--gold);
+      background: rgba(240,192,64,.05);
+      border-radius: 0 10px 10px 0;
+      font-weight: 600;
+      font-size: .9rem;
+      color: #f5d978;
+    }
+
+    .modal-footer {
+      padding:16px 28px;
+      border-top:1px solid rgba(255,255,255,.06);
+      display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;
+    }
+    .modal-src-link {
+      display:inline-flex; align-items:center; gap:6px;
+      padding:8px 18px; border-radius:100px;
+      background:rgba(79,195,247,.1); border:1px solid rgba(79,195,247,.2);
+      color:var(--blue); font-size:.82rem; text-decoration:none; transition:.15s;
+    }
+    .modal-src-link:hover { background:rgba(79,195,247,.18); }
+    .modal-date { font-size:.75rem; color:var(--dim); }
+
+    /* Clickable news item cursor */
+    .news-item { cursor:pointer; }
+
     /* APP */
     #app { position:relative;z-index:1;display:none; }
 
@@ -387,6 +463,29 @@
   </div><!-- /container -->
 </div><!-- /app -->
 
+<!-- ═══ ARTICLE MODAL ═══ -->
+<div id="modal-overlay" onclick="closeModal(event)">
+  <div class="modal-box" id="modal-box">
+    <div class="modal-header">
+      <span class="modal-src-icon" id="m-icon">📰</span>
+      <div class="modal-title-area">
+        <div class="modal-title" id="m-title">–</div>
+        <div class="modal-meta" id="m-meta"></div>
+      </div>
+      <button class="modal-close" onclick="closeModalDirect()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-article" id="m-article">Wird geladen...</div>
+    </div>
+    <div class="modal-footer">
+      <a class="modal-src-link" id="m-src-link" href="#" target="_blank" rel="noopener">
+        🔗 Originalartikel lesen
+      </a>
+      <span class="modal-date" id="m-date"></span>
+    </div>
+  </div>
+</div>
+
 <script>
 // ── PASSWORDS ──────────────────────────────────────────────────────────────
 const PWDS = ["wowforever","farukimirza","wow2026"];
@@ -524,6 +623,7 @@ const CAT_DE={
   hotfix:'✅ Hotfix',exploit:'🔴 Exploit',bis:'🏆 BiS',guide:'📖 Guide',
   pvp:'⚔️ PvP',pve:'🏰 PvE',news:'📰 News',community:'💬 Community',hunter:'🏹 Hunter'
 };
+const CLS_COLOR={Hunter:'#abd656',Shaman:'#5599ff',Priest:'#ffffff',Rogue:'#fff468'};
 
 function renderNews(items){
   const list=document.getElementById('news-list');
@@ -531,7 +631,7 @@ function renderNews(items){
     list.innerHTML='<div class="empty"><div class="empty-ico">📭</div><div>Keine Nachrichten für diesen Filter.</div></div>';
     return;
   }
-  list.innerHTML=items.slice(0,60).map(item=>{
+  list.innerHTML=items.slice(0,60).map((item,idx)=>{
     const classes=(item.classes||[]);
     const tags=[
       ...classes.map(c=>`<span class="tag ${TAG_MAP[c]||''}">${c}</span>`),
@@ -539,22 +639,92 @@ function renderNews(items){
       `<span class="tag">${item.source_icon||''} ${item.source||''}</span>`,
     ].filter(Boolean).join('');
 
-    const aiBox = item.summary_de
-      ? `<div class="ni-ai"><span class="ni-ai-label">🤖 KI-Zusammenfassung</span>${esc(item.summary_de)}</div>`
-      : '';
+    const teaser = item.teaser_de||item.summary_de||'';
+    const hasArticle = !!(item.article_de||item.summary_de||teaser);
 
-    return `<a class="news-item${item.is_new?' is-new':''}" href="${item.url||'#'}" target="_blank" rel="noopener">
+    return `<div class="news-item${item.is_new?' is-new':''}" data-idx="${idx}" onclick="openModal(${idx})">
       <span class="ni-ico">${item.source_icon||'📰'}</span>
       <div class="ni-body">
-        ${item.is_new?'<span class="new-badge">NEU</span>':''}
-        <div class="ni-title">${esc(item.title||'')}</div>
-        ${aiBox}
-        <div class="ni-meta">${tags}</div>
-        <a class="ni-link" href="${item.url||'#'}" target="_blank">→ Mehr lesen auf ${esc(item.source||'')}</a>
+        <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;flex-wrap:wrap">
+          ${item.is_new?'<span class="new-badge">NEU</span>':''}
+          <div class="ni-title" style="margin:0">${esc(item.title||'')}</div>
+        </div>
+        ${teaser?`<div class="ni-ai"><span class="ni-ai-label">🤖 KI-Zusammenfassung</span>${esc(teaser)}</div>`:''}
+        <div class="ni-meta">
+          ${tags}
+          ${hasArticle?`<span class="tag" style="color:var(--gold);border-color:rgba(240,192,64,.3);cursor:pointer">📖 Artikel lesen →</span>`:''}
+        </div>
       </div>
-    </a>`;
+    </div>`;
   }).join('');
 }
+
+// ── MODAL ──────────────────────────────────────────────────────────────────
+function openModal(idx) {
+  const item = allItems[idx];
+  if (!item) return;
+
+  // Header
+  document.getElementById('m-icon').textContent  = item.source_icon||'📰';
+  document.getElementById('m-title').textContent = item.title||'';
+
+  // Meta tags
+  const classes = item.classes||[];
+  const metaHtml = [
+    ...classes.map(c=>`<span class="tag ${TAG_MAP[c]||''}">${c}</span>`),
+    item.category&&TAG_MAP[item.category]?`<span class="tag ${TAG_MAP[item.category]}">${CAT_DE[item.category]||item.category}</span>`:'',
+    `<span class="tag">${item.source_icon||''} ${item.source||''}</span>`,
+  ].filter(Boolean).join('');
+  document.getElementById('m-meta').innerHTML = metaHtml;
+
+  // Article content — format markdown-like sections
+  const raw = item.article_de || item.summary_de || item.teaser_de || 'Kein Inhalt verfügbar.';
+  document.getElementById('m-article').innerHTML = formatArticle(raw);
+
+  // Footer
+  const link = document.getElementById('m-src-link');
+  link.href = item.url||'#';
+  link.textContent = `🔗 Originalartikel auf ${item.source||'Quelle'} lesen`;
+  document.getElementById('m-date').textContent = item.date ? `📅 ${item.date}` : '';
+
+  // Open
+  const overlay = document.getElementById('modal-overlay');
+  overlay.classList.add('open');
+  document.body.style.overflow='hidden';
+}
+
+function formatArticle(text) {
+  // Convert markdown-style bold and section headers to HTML
+  let html = esc(text)
+    // Bold **text**
+    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+    // Section headers starting with emoji + **
+    .replace(/(📌|🎮|💡|⚔️|🏹|🌊|✨|🗡️|🔴|✅|🏆|📖|💬|⚠️)\s*\*\*(.*?)\*\*/g,
+             '<div class="modal-section">$1 $2</div>')
+    // Lines starting with emoji acting as headers
+    .replace(/^(📌|🎮|💡|⚔️|🏆|📖|⚠️) (.+)$/gm,
+             '<div class="modal-section">$1 $2</div>')
+    // Paragraphs (double newline)
+    .replace(/\n\n+/g, '</p><p>')
+    // Single newlines
+    .replace(/\n/g, '<br>');
+
+  return '<p>' + html + '</p>';
+}
+
+function closeModal(e) {
+  // Only close if clicking the overlay backdrop itself
+  if (e.target === document.getElementById('modal-overlay')) closeModalDirect();
+}
+
+function closeModalDirect() {
+  document.getElementById('modal-overlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+
+// ESC key closes modal
+document.addEventListener('keydown', e => { if(e.key==='Escape') closeModalDirect(); });
+
 
 function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 
