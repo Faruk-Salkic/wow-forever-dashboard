@@ -1,13 +1,80 @@
 {
-  "last_updated": "2026-10-28T18:06:52.005650",
-  "classes": [
-    "Hunter",
-    "Shaman",
-    "Priest",
-    "Rogue"
-  ],
-  "faction": "Alliance",
+  "last_updated": "2026-10-29T14:54:15.776049+00:00",
+  "total_count": 10,
+  "new_count": 5,
   "items": [
+    {
+      "id": "1784d6e34d56",
+      "date": "2026-10-29",
+      "source": "WoWhead Forever",
+      "source_icon": "🌐",
+      "verified_type": "Community / Portal",
+      "radar_status": "normal",
+      "classes": [
+        "Hunter"
+      ],
+      "title": "New Class and Item Tuning on WoW: Forever - Hunter Changes",
+      "teaser_de": "With name reservations now live in WoW: Forever, there are some tuning changes for Hunters and an Alchemy potion.Continue reading »",
+      "article_de": "📌 **Originalmeldung von WoWhead Forever:**\nWith name reservations now live in WoW: Forever, there are some tuning changes for Hunters and an Alchemy potion.Continue reading »\n\n💡 **Handlungsempfehlung:** Link unten öffnen für vollständige Originaldetails.",
+      "url": "https://www.wowhead.com/news=383641/new-class-and-item-tuning-on-wow-forever-hunter-changes",
+      "is_new": true
+    },
+    {
+      "id": "ec9e600059c9",
+      "date": "2026-10-29",
+      "source": "WoWhead Forever",
+      "source_icon": "🌐",
+      "verified_type": "Community / Portal",
+      "radar_status": "normal",
+      "classes": [],
+      "title": "Retail Team Discussing Lighting and Water Improvements from WoW: Forever",
+      "teaser_de": "In an interview with IGN, Kris Zierhut confirms that the Retail WoW team has been discussing many of the lightning and water improvements from WoW: Forever.Continue reading »",
+      "article_de": "📌 **Originalmeldung von WoWhead Forever:**\nIn an interview with IGN, Kris Zierhut confirms that the Retail WoW team has been discussing many of the lightning and water improvements from WoW: Forever.Continue reading »\n\n💡 **Handlungsempfehlung:** Link unten öffnen für vollständige Originaldetails.",
+      "url": "https://www.wowhead.com/news=383637/retail-team-discussing-lighting-and-water-improvements-from-wow-forever",
+      "is_new": true
+    },
+    {
+      "id": "858bae63cdf7",
+      "date": "2026-10-29",
+      "source": "Buffed.de",
+      "source_icon": "🇩🇪",
+      "verified_type": "Community / Portal",
+      "radar_status": "normal",
+      "classes": [],
+      "title": "Keine Lust auf WoW: Forever? Im November kommt ein brandneues MMO auf Steam heraus",
+      "teaser_de": "Wer im November keine Lust auf WoW: Forever hat, kann sich trotzdem in ein brandneues MMORPG auf Steam werfen.",
+      "article_de": "📌 **Originalmeldung von Buffed.de:**\nWer im November keine Lust auf WoW: Forever hat, kann sich trotzdem in ein brandneues MMORPG auf Steam werfen.\n\n💡 **Handlungsempfehlung:** Link unten öffnen für vollständige Originaldetails.",
+      "url": "https://www.buffed.de/MMO-Thema-267704/News/WoW-Forever-Steam-Release-Spirit-Crossing-neu-1558234/",
+      "is_new": true
+    },
+    {
+      "id": "b05280d79919",
+      "date": "2026-10-29",
+      "source": "Buffed.de",
+      "source_icon": "🇩🇪",
+      "verified_type": "Community / Portal",
+      "radar_status": "normal",
+      "classes": [],
+      "title": "WoW Forever: Blizzard bestätigt neuen Patch-Zyklus und Timegating",
+      "teaser_de": "WoW Forever bekommt einige Timegating-Inhalte und längere Seasons. In einem neuen Interview verraten die Entwickler des MMOs mehr über die Menge an Patches und welche Retail-Fehler...",
+      "article_de": "📌 **Originalmeldung von Buffed.de:**\nWoW Forever bekommt einige Timegating-Inhalte und längere Seasons. In einem neuen Interview verraten die Entwickler des MMOs mehr über die Menge an Patches und welche Retail-Fehler man vermeiden will.\n\n💡 **Handlungsempfehlung:** Link unten öffnen für vollständige Originaldetails.",
+      "url": "https://www.buffed.de/World-of-Warcraft-Spiel-42971/News/WoW-Forever-Patch-Zyklus-Plaene-1558196/",
+      "is_new": true
+    },
+    {
+      "id": "a7d717662968",
+      "date": "2026-10-29",
+      "source": "MMO-Champion",
+      "source_icon": "⚔️",
+      "verified_type": "Community / Portal",
+      "radar_status": "normal",
+      "classes": [],
+      "title": "World of Warcraft: Forever AMV Launch Trailer - WARPATH",
+      "teaser_de": "World of Warcraft: Forever AMV Launch Trailer - WARPATH\nBlizzard has released a new AMV to celebrate the launch of WoW: Forever on November 4! Created in partnership with Brunch St...",
+      "article_de": "📌 **Originalmeldung von MMO-Champion:**\nWorld of Warcraft: Forever AMV Launch Trailer - WARPATH\nBlizzard has released a new AMV to celebrate the launch of WoW: Forever on November 4! Created in partnership with Brunch Studio, the trailer features \"End of You\" performed by Poppy, Amy Lee and Courtney LaPlante.\n\n\n\n💡 **Handlungsempfehlung:** Link unten öffnen für vollständige Originaldetails.",
+      "url": "https://www.mmo-champion.com/content/14648-World-of-Warcraft-Forever-AMV-Launch-Trailer-WARPATH",
+      "is_new": true
+    },
     {
       "id": "23f6dd086609",
       "date": "2026-10-28",
@@ -95,10 +162,10 @@
       ]
     }
   ],
-  "castle_status": {
-    "last_checked": "2026-10-28T18:06:52.005567",
-    "status": "🟢 Keine aktive Belagerung",
-    "details": "Keine Welt-PvP- oder Burg-Events in den letzten 24 Stunden gefunden."
-  },
-  "daily_summary": "📰 23 neue Meldungen heute. | 🏹 Hunter: 1 Update(s) | ✨ Priest: 2 Update(s) | 🗡️ Rogue: 1 Update(s) | 🔴 ACHTUNG: 1 Exploit(s) entdeckt!"
+  "sources_status": {
+    "blizzard_official": "OK",
+    "wowhead": "OK",
+    "buffed_de": "OK",
+    "pullpush_reddit": "OK"
+  }
 }
