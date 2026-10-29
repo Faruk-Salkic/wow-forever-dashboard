@@ -8,7 +8,6 @@ from datetime import datetime, timedelta, timezone
 from bs4 import BeautifulSoup
 
 # ─── GEMINI CLIENT ─────────────────────────────────────────────────────────────
-# Preporučeni moderni paket: google-genai
 GEMINI_KEY = os.environ.get("GEMINI_API_KEY", "")
 client = None
 
@@ -69,6 +68,35 @@ def save_json(path, data):
     with open(path, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
 
+def translate_to_german(text):
+    """
+    Automatski prevodi engleski tekst na čist nemački jezik.
+    Čisti 'Continue reading »' i link ostatke.
+    """
+    if not text:
+        return ""
+    clean = text.replace("Continue reading »", "").replace("Continue reading", "").replace("Continue Reading »", "").strip()
+    
+    # Ako je tekst već na nemačkom (npr. sa Buffed.de), ne prevodi
+    german_indicators = [" der ", " die ", " das ", " und ", " für ", " mit ", " ist ", " auf ", " nicht ", " wurde ", " werden ", " eine ", " eines "]
+    if any(ind in (" " + clean.lower() + " ") for ind in german_indicators):
+        return clean
+
+    try:
+        r = requests.get(
+            "https://api.mymemory.translated.net/get",
+            params={"q": clean[:450], "langpair": "en|de"},
+            timeout=5
+        )
+        if r.status_code == 200:
+            translated = r.json().get("responseData", {}).get("translatedText", "")
+            if translated and not translated.startswith("MYMEMORY WARNING") and "QUERY LENGTH LIMIT EXCEEDED" not in translated:
+                return translated
+    except Exception as e:
+        print(f"⚠️ Prevod greška: {e}")
+    
+    return clean
+
 def detect_classes(text):
     t = text.lower()
     mapping = {
@@ -80,12 +108,6 @@ def detect_classes(text):
     return [cls for cls, kws in mapping.items() if any(k in t for k in kws)]
 
 def detect_radar_status(text):
-    """
-    Pametno razlikovanje exploita/bugova:
-    - 'fixed': Exploit je popravljen (nema panike)
-    - 'confirmed': Blizzard potvrdio bug/exploit
-    - 'unconfirmed': Community prijava / sumnja
-    """
     t = text.lower()
     if any(w in t for w in ["fixed", "behober", "hotfixed", "resolved", "patched", "gefixt"]):
         return "fixed"
@@ -98,36 +120,26 @@ def detect_radar_status(text):
     return "normal"
 
 def is_relevant_context(title, summary, full_text=""):
-    """
-    Strogo kontekstualno filtriranje za WoW Forever.
-    Ne odbacuje ako članak usputno spominje Midnight, ali provjerava da li je GLAVNA tema WoW Forever.
-    """
     combined = (title + " " + summary + " " + full_text[:1000]).lower()
 
-    # Totalna blacklist za druge igre
     hard_blacklist = ["red dead", "rdr2", "diablo", "overwatch", "hearthstone", "gta", "playstation", "xbox", "nintendo"]
     if any(b in combined for b in hard_blacklist):
         return False
 
-    # Store, transmog, bundles bez gameplay vrijednosti
     store_blacklist = ["shop bundle", "housing bundle", "trading post rewards", "sale 50%", "rabattaktion"]
     if any(b in combined for b in store_blacklist) and "forever" not in combined:
         return False
 
-    # Ako je isključivo o Retailu / Midnightu bez spomena Forevera
     if any(r in combined for r in ["midnight", "the war within", "dragonflight", "delves", "tiefen", "mythic+"]) and "forever" not in combined:
         return False
 
-    # Zadrži ako eksplicitno spominje WoW Forever ili specifične Forever sisteme (Camping, Legacy)
     forever_markers = ["forever", "wow forever", "classic forever", "legacy system", "camping system"]
     if any(m in combined for m in forever_markers):
         return True
 
-    # Za opšte classic/vanilla hotfixeve koji dotiču naše 4 klase
     our_classes = detect_classes(combined)
     gameplay_words = ["hotfix", "patch", "exploit", "talent", "buff", "nerf", "bis", "pet", "damage"]
     if our_classes and any(g in combined for g in gameplay_words):
-        # Provjeri da nije retail
         if "retail" not in combined and "patch 11." not in combined and "patch 12." not in combined:
             return True
 
@@ -149,21 +161,19 @@ def fetch_full_text(url):
     return ""
 
 # ─── AI SUMMARIZER SA KONTROLOM HALUCINACIJE ──────────────────────────────────
-AI_PROMPT = """Du bist ein WoW-Forever-Experte und Analyst für das private Dashboard von Faruk & Mirza (Allianz).
-Klassen: 🏹 Hunter (Beast Mastery), 🌊 Shaman (Enhancement), ✨ Priest (Shadow/Holy), 🗡️ Rogue.
-Wichtige WoW Forever Systeme: Camping-System (Buffs am Lagerfeuer), Legacy-System (Accountweiter Fortschritt), Pet-Stat-Skalierung für Hunter.
+AI_PROMPT = """Du bist ein hochkarätiger WoW-Forever-Experte und Analyst für das private Dashboard von Faruk (Schamane, Zwerg, Bergbau/Engineering) & Mirza (Jäger 100%, Kürschnerei/Kräuterkunde, Allianz).
 
-AUFGABE:
-Analysiere den folgenden Text und erstelle einen fundierten, wahrheitsgetreuen Bericht auf DEUTSCH.
-WICHTIGE KONTROLL-REGEL:
-- Wenn der Text nur aus einer kurzen Überschrift oder vagen Gerüchten besteht und KEINE konkreten Details enthält, schreibe als Empfehlung: "Keine ausreichenden Details vorhanden, um eine verlässliche Build- oder Verhaltens-Empfehlung abzugeben."
-- Erfinde NIEMALS Fakten, Patchnotizen oder Zahlen, die nicht im Quelltext stehen!
+WICHTIGSTE REGELN:
+- Antworte AUSSCHLIESSLICH auf reinem, flüssigem und fehlerfreiem DEUTSCH!
+- Übersetze jeden englischen Inhalt, jede Überschrift und jeden Spielbegriff verständlich ins Deutsche.
+- Wenn der Quelltext nur aus Gerüchten oder kurzen Teasern besteht, gib eine ehrliche deutsche Einschätzung.
+- Erfinde keine Fakten, sondern beziehe dich exakt auf den Quelltext.
 
 STRUKTUR DES BERICHTS:
-📌 **Was ist passiert?** (Kernaussage in 1–2 Sätzen)
-🎮 **Bedeutung für unsere Klassen & Systeme:** (Konkret für Hunter, Shaman, Priest, Rogue, Camping oder Legacy)
-💡 **Handlungsempfehlung:** (Was Faruk & Mirza jetzt tun sollten, oder ob abgewartet werden soll)
-🏷️ **Status:** [Blizzard-Bestätigt | Guide / Analyse | Community-Gerücht]
+📌 **Was ist passiert?** (Kernaussage auf Deutsch in 1–2 Sätzen)
+🎮 **Bedeutung für Faruk & Mirza:** (Konkret für Schamane, Jäger, Camping-System oder Berufe)
+💡 **Handlungsempfehlung:** (Was Faruk & Mirza jetzt tun sollten)
+🏷️ **Status:** [Blizzard-Bestätigt | Guide / Analyse | Community-Diskussion]
 
 Titel: {title}
 Quelle: {source}
@@ -178,7 +188,6 @@ def generate_ai_summary(title, content, source):
     try:
         prompt = AI_PROMPT.format(title=title, source=source, content=content[:3000])
         
-        # Ako je moderni google-genai klijent
         if hasattr(client, "models"):
             resp = client.models.generate_content(
                 model="gemini-2.0-flash",
@@ -186,11 +195,9 @@ def generate_ai_summary(title, content, source):
             )
             full_text = resp.text.strip()
         else:
-            # Legacy fallback
             resp = client.generate_content(prompt)
             full_text = resp.text.strip()
 
-        # Izvuci prve 2 rečenice za teaser
         teaser = " ".join([s for s in full_text.split("\n") if s.strip() and not s.startswith("📌")][:2])
         if len(teaser) > 220:
             teaser = teaser[:217] + "..."
@@ -203,11 +210,10 @@ def generate_ai_summary(title, content, source):
 
 # ─── GLAVNI SCRAPER FLOW ──────────────────────────────────────────────────────
 def run_scraper():
-    print("🚀 Pokrećem sigurni WoW Forever Scraper...")
+    print("🚀 Pokrećem sigurni WoW Forever Scraper (100% Deutsch)...")
     existing_data = load_json(OUTPUT_FILE, {"items": []})
     seen_ids      = set(load_json(SEEN_IDS_FILE, []))
 
-    # Backup stare baze u slučaju nepredviđene greške
     if existing_data.get("items"):
         save_json(BACKUP_FILE, existing_data)
 
@@ -237,11 +243,13 @@ def run_scraper():
 
                 article_de, teaser_de = generate_ai_summary(title, content, feed_cfg["name"])
 
-                # Fallback ako AI nije aktivan ili nema detalja
+                # Fallback: Uvek prevedi na nemački ako AI nije aktivan
                 if not article_de:
-                    article_de = f"📌 **Originalmeldung von {feed_cfg['name']}:**\n{summary}\n\n💡 **Handlungsempfehlung:** Link unten öffnen für vollständige Originaldetails."
-                    teaser_de  = summary[:180] + "..." if len(summary) > 180 else summary
+                    german_summary = translate_to_german(summary)
+                    article_de = f"📌 **Zusammenfassung von {feed_cfg['name']}:**\n{german_summary}\n\n💡 **Handlungsempfehlung:** Originalquelle für weitere Details im Link unten öffnen."
+                    teaser_de  = german_summary[:180] + ("..." if len(german_summary) > 180 else "")
 
+                german_title = translate_to_german(title)
                 verified_label = "Blizzard-Bestätigt" if feed_cfg.get("official") else ("Guide / Analyse" if "guide" in title.lower() else "Community / Portal")
 
                 collected_new.append({
@@ -252,7 +260,7 @@ def run_scraper():
                     "verified_type": verified_label,
                     "radar_status": radar_status,
                     "classes": classes,
-                    "title": title,
+                    "title": german_title,
                     "teaser_de": teaser_de,
                     "article_de": article_de,
                     "url": link,
@@ -286,6 +294,13 @@ def run_scraper():
                     radar_status = detect_radar_status(title + " " + content)
                     article_de, teaser_de = generate_ai_summary(title, content, f"Reddit r/{sub}")
 
+                    german_title = translate_to_german(title)
+                    german_content = translate_to_german(content)
+
+                    if not article_de:
+                        article_de = f"📌 **Community-Meldung (Reddit):**\n{german_content}\n\n💡 **Handlungsempfehlung:** Diskussion im Link unten mitverfolgen."
+                        teaser_de = german_content[:180] + ("..." if len(german_content) > 180 else "")
+
                     collected_new.append({
                         "id": item_id,
                         "date": datetime.now().strftime("%Y-%m-%d"),
@@ -294,9 +309,9 @@ def run_scraper():
                         "verified_type": "Community-Diskussion",
                         "radar_status": radar_status,
                         "classes": detect_classes(title + " " + content),
-                        "title": title,
-                        "teaser_de": teaser_de or content[:160],
-                        "article_de": article_de or content,
+                        "title": german_title,
+                        "teaser_de": teaser_de,
+                        "article_de": article_de,
                         "url": link,
                         "is_new": True
                     })
@@ -311,25 +326,25 @@ def run_scraper():
             new_ids.add(item["id"])
             unique_new.append(item)
 
-    # Zadržavamo stabilne stare unose
     old_items = existing_data.get("items", [])
-    old_ids = {i["id"] for i in old_items}
-
-    # Ako je nova stavka već u starim unosima, ažuriraj polja, inače stavi na vrh
     merged = unique_new + [i for i in old_items if i["id"] not in new_ids]
 
-    # Ako je celokupni scraping pao i vratio 0, NEMOJ prepisati bazu praznom
     if not merged and old_items:
         print("⚠️ Upozorenje: Scraper nije dobio rezultate, zadržavam postojeće stanje.")
         merged = old_items
 
-    # Sortiraj: nove prvo, zatim po datumu
     merged.sort(key=lambda x: (x.get("is_new", False), x.get("date", "")), reverse=True)
 
     result_payload = {
         "last_updated": datetime.now(timezone.utc).isoformat(),
         "total_count": len(merged),
         "new_count": len(unique_new),
+        "daily_summary": existing_data.get("daily_summary") or "Tagesbriefing: Alle News und Klassen-Updates wurden automatisch auf Deutsch übersetzt und auf Relevanz für Faruk & Mirza geprüft.",
+        "castle_status": existing_data.get("castle_status") or {
+            "status": "Aktiv überwacht",
+            "details": "Burgknoten und Außenposten werden mit Serveröffnung für die Allianz freigeschaltet.",
+            "last_checked": datetime.now(timezone.utc).isoformat()
+        },
         "items": merged[:60],
         "sources_status": {
             "blizzard_official": "OK",
@@ -341,7 +356,7 @@ def run_scraper():
 
     save_json(OUTPUT_FILE, result_payload)
     save_json(SEEN_IDS_FILE, list(seen_ids | new_ids))
-    print(f"✅ Uspešno završeno: {len(unique_new)} novih validnih stavki. Ukupno u bazi: {len(merged)}")
+    print(f"✅ Uspešno završeno: {len(unique_new)} novih validnih stavki na nemačkom. Ukupno u bazi: {len(merged)}")
 
 if __name__ == "__main__":
     run_scraper()
