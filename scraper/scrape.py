@@ -2,10 +2,17 @@ import requests
 import feedparser
 import json
 import os
+import sys
 import hashlib
 import time
 from datetime import datetime, timedelta, timezone
 from bs4 import BeautifulSoup
+
+if hasattr(sys.stdout, "reconfigure"):
+    try:
+        sys.stdout.reconfigure(encoding='utf-8', errors='replace')
+    except Exception:
+        pass
 
 # ─── GEMINI CLIENT ─────────────────────────────────────────────────────────────
 GEMINI_KEY = os.environ.get("GEMINI_API_KEY", "")
@@ -28,12 +35,13 @@ if GEMINI_KEY:
             client = None
 
 # ─── KONFIGURACIJA ────────────────────────────────────────────────────────────
+REPO_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CLASSES = ["Hunter", "Shaman", "Priest", "Rogue"]
 FACTION = "Alliance"
 
-OUTPUT_FILE   = "data/news.json"
-SEEN_IDS_FILE = "data/seen_ids.json"
-BACKUP_FILE   = "data/news_backup.json"
+OUTPUT_FILE   = os.path.join(REPO_DIR, "data", "news.json")
+SEEN_IDS_FILE = os.path.join(REPO_DIR, "data", "seen_ids.json")
+BACKUP_FILE   = os.path.join(REPO_DIR, "data", "news_backup.json")
 
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
@@ -65,8 +73,17 @@ def load_json(path, default):
     return default
 
 def save_json(path, data):
-    with open(path, "w", encoding="utf-8") as f:
+    # Validacija pre snimanja specifično za news.json
+    if "news.json" in path:
+        if not isinstance(data, dict) or "items" not in data or not isinstance(data["items"], list):
+            raise ValueError("Neispravna struktura podataka za news.json pre snimanja!")
+    
+    os.makedirs(os.path.dirname(os.path.abspath(path)), exist_ok=True)
+    # Atomic save preko privremenog fajla
+    tmp_path = path + ".tmp"
+    with open(tmp_path, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
+    os.replace(tmp_path, path)
 
 def translate_to_german(text):
     """
@@ -77,7 +94,6 @@ def translate_to_german(text):
         return ""
     clean = text.replace("Continue reading »", "").replace("Continue reading", "").replace("Continue Reading »", "").strip()
     
-    # Ako je tekst već na nemačkom (npr. sa Buffed.de), ne prevodi
     german_indicators = [" der ", " die ", " das ", " und ", " für ", " mit ", " ist ", " auf ", " nicht ", " wurde ", " werden ", " eine ", " eines "]
     if any(ind in (" " + clean.lower() + " ") for ind in german_indicators):
         return clean
@@ -107,6 +123,20 @@ def detect_classes(text):
     }
     return [cls for cls, kws in mapping.items() if any(k in t for k in kws)]
 
+def detect_category(text):
+    t = text.lower()
+    if any(k in t for k in ["exploit", "abuse", "glitch"]):
+        return "exploit"
+    if any(k in t for k in ["hotfix", "patch notes", "patch", "tuning", "anpassung", "balance", "nerf", "buff"]):
+        return "hotfix"
+    if any(k in t for k in ["bis", "best in slot", "pre-raid", "gear guide"]):
+        return "bis"
+    if any(k in t for k in ["pvp", "battleground", "duell", "arena", "ehre"]):
+        return "pvp"
+    if any(k in t for k in ["guide", "leitfaden", "tipps", "leveling", "starter", "route"]):
+        return "guide"
+    return "news"
+
 def detect_radar_status(text):
     t = text.lower()
     if any(w in t for w in ["fixed", "behober", "hotfixed", "resolved", "patched", "gefixt"]):
@@ -122,7 +152,7 @@ def detect_radar_status(text):
 def is_relevant_context(title, summary, full_text=""):
     combined = (title + " " + summary + " " + full_text[:1000]).lower()
 
-    hard_blacklist = ["red dead", "rdr2", "diablo", "overwatch", "hearthstone", "gta", "playstation", "xbox", "nintendo"]
+    hard_blacklist = ["red dead", "rdr2", "diablo", "overwatch", "hearthstone", "gta", "playstation", "xbox", "nintendo", "steam release", "spirit crossing"]
     if any(b in combined for b in hard_blacklist):
         return False
 
@@ -164,7 +194,7 @@ def fetch_full_text(url):
 AI_PROMPT = """Du bist ein hochkarätiger WoW-Forever-Experte und Analyst für das private Dashboard von Faruk (Schamane, Zwerg, Bergbau/Engineering) & Mirza (Jäger 100%, Kürschnerei/Kräuterkunde, Allianz).
 
 WICHTIGSTE REGELN:
-- Antworte AUSSCHLIESSLICH auf reinem, flüssigem und fehlerfreiem DEUTSCH!
+- Antworte AUSSCHLIESSLICH auf reinem, flüssigem und professionellem DEUTSCH!
 - Übersetze jeden englischen Inhalt, jede Überschrift und jeden Spielbegriff verständlich ins Deutsche.
 - Wenn der Quelltext nur aus Gerüchten oder kurzen Teasern besteht, gib eine ehrliche deutsche Einschätzung.
 - Erfinde keine Fakten, sondern beziehe dich exakt auf den Quelltext.
@@ -210,7 +240,7 @@ def generate_ai_summary(title, content, source):
 
 # ─── GLAVNI SCRAPER FLOW ──────────────────────────────────────────────────────
 def run_scraper():
-    print("🚀 Pokrećem sigurni WoW Forever Scraper (100% Deutsch)...")
+    print("🚀 Pokrećem provereni WoW Forever Scraper (100% Deutsch)...")
     existing_data = load_json(OUTPUT_FILE, {"items": []})
     seen_ids      = set(load_json(SEEN_IDS_FILE, []))
 
@@ -218,13 +248,20 @@ def run_scraper():
         save_json(BACKUP_FILE, existing_data)
 
     collected_new = []
+    sources_health = {}
 
     # 1. RSS Izvori
     for feed_cfg in RSS_FEEDS:
+        feed_name = feed_cfg["name"]
         try:
             r = requests.get(feed_cfg["url"], headers=HEADERS, timeout=12)
+            if r.status_code != 200:
+                sources_health[feed_name] = f"HTTP {r.status_code}"
+                continue
+            
             feed = feedparser.parse(r.text)
-            print(f"📡 {feed_cfg['name']}: {len(feed.entries)} pristiglih stavki.")
+            sources_health[feed_name] = f"OK ({len(feed.entries)} Meldungen)"
+            print(f"📡 {feed_name}: {len(feed.entries)} pristiglih stavki.")
 
             for entry in feed.entries[:12]:
                 title   = entry.get("title", "").strip()
@@ -240,37 +277,48 @@ def run_scraper():
                 item_id = make_id(title + link)
                 classes = detect_classes(title + " " + content)
                 radar_status = detect_radar_status(title + " " + content)
+                category = detect_category(title + " " + content)
 
-                article_de, teaser_de = generate_ai_summary(title, content, feed_cfg["name"])
+                # Odvojeni datum objave
+                pub_parsed = entry.get("published_parsed") or entry.get("updated_parsed")
+                if pub_parsed:
+                    pub_date = time.strftime("%Y-%m-%d", pub_parsed)
+                else:
+                    pub_date = datetime.now().strftime("%Y-%m-%d")
+
+                article_de, teaser_de = generate_ai_summary(title, content, feed_name)
 
                 # Fallback: Uvek prevedi na nemački ako AI nije aktivan
                 if not article_de:
                     german_summary = translate_to_german(summary)
-                    article_de = f"📌 **Zusammenfassung von {feed_cfg['name']}:**\n{german_summary}\n\n💡 **Handlungsempfehlung:** Originalquelle für weitere Details im Link unten öffnen."
+                    article_de = f"📌 **Zusammenfassung von {feed_name}:**\n{german_summary}\n\n💡 **Handlungsempfehlung:** Originalquelle für weitere Details im Link unten öffnen."
                     teaser_de  = german_summary[:180] + ("..." if len(german_summary) > 180 else "")
 
                 german_title = translate_to_german(title)
-                verified_label = "Blizzard-Bestätigt" if feed_cfg.get("official") else ("Guide / Analyse" if "guide" in title.lower() else "Community / Portal")
+                verified_label = "Blizzard-Bestätigt" if feed_cfg.get("official") else ("Guide / Analyse" if category == "guide" else "Community / Portal")
 
                 collected_new.append({
                     "id": item_id,
-                    "date": datetime.now().strftime("%Y-%m-%d"),
-                    "source": feed_cfg["name"],
+                    "date": pub_date,
+                    "fetched_at": datetime.now(timezone.utc).isoformat(),
+                    "source": feed_name,
                     "source_icon": feed_cfg["icon"],
+                    "category": category,
                     "verified_type": verified_label,
                     "radar_status": radar_status,
                     "classes": classes,
                     "title": german_title,
                     "teaser_de": teaser_de,
                     "article_de": article_de,
-                    "url": link,
-                    "is_new": True
+                    "url": link
                 })
         except Exception as e:
-            print(f"⚠️ Greška pri čitanju {feed_cfg['name']}: {e}")
+            sources_health[feed_name] = f"Fehler: {str(e)[:50]}"
+            print(f"⚠️ Greška pri čitanju {feed_name}: {e}")
 
     # 2. Reddit (PullPush.io) sa proverom svežine
     yesterday = datetime.now(timezone.utc) - timedelta(days=2)
+    reddit_ok = False
     for sub in REDDIT_SUBREDDITS:
         for kw in ["forever", "hunter", "camping", "legacy", "exploit"]:
             try:
@@ -281,6 +329,7 @@ def run_scraper():
                 )
                 if r.status_code != 200:
                     continue
+                reddit_ok = True
                 for post in r.json().get("data", []):
                     title   = post.get("title", "")
                     content = post.get("selftext", "")[:1200]
@@ -292,6 +341,7 @@ def run_scraper():
 
                     item_id = make_id(title + link)
                     radar_status = detect_radar_status(title + " " + content)
+                    category = detect_category(title + " " + content)
                     article_de, teaser_de = generate_ai_summary(title, content, f"Reddit r/{sub}")
 
                     german_title = translate_to_german(title)
@@ -304,21 +354,24 @@ def run_scraper():
                     collected_new.append({
                         "id": item_id,
                         "date": datetime.now().strftime("%Y-%m-%d"),
+                        "fetched_at": datetime.now(timezone.utc).isoformat(),
                         "source": f"Reddit r/{sub}",
                         "source_icon": "💬",
+                        "category": category,
                         "verified_type": "Community-Diskussion",
                         "radar_status": radar_status,
                         "classes": detect_classes(title + " " + content),
                         "title": german_title,
                         "teaser_de": teaser_de,
                         "article_de": article_de,
-                        "url": link,
-                        "is_new": True
+                        "url": link
                     })
             except Exception as e:
                 print(f"⚠️ Reddit r/{sub} kw={kw} timeout ili greška: {e}")
+    
+    sources_health["Reddit (PullPush)"] = "OK" if reddit_ok else "Keine neuen Top-Meldungen"
 
-    # Spajanje sa prethodnim unosima bez prepisivanja
+    # Spajanje sa prethodnim unosima bez duplikata
     new_ids = set()
     unique_new = []
     for item in collected_new:
@@ -333,25 +386,27 @@ def run_scraper():
         print("⚠️ Upozorenje: Scraper nije dobio rezultate, zadržavam postojeće stanje.")
         merged = old_items
 
-    merged.sort(key=lambda x: (x.get("is_new", False), x.get("date", "")), reverse=True)
+    # Sortiraj po datumu opadajuće
+    merged.sort(key=lambda x: x.get("date", ""), reverse=True)
+
+    today_str = datetime.now().strftime("%d.%m.%Y")
+    top_headlines = [i["title"] for i in merged[:2] if i.get("title")]
+    headlines_summary = ("; ".join(top_headlines) + ".") if top_headlines else "Keine aktuellen Eilmeldungen."
+    daily_summary_text = f"Tagesbriefing ({today_str}): {len(merged)} relevante Meldungen aktiv ({len(unique_new)} neu erfasst). Wichtigste Themen: {headlines_summary}"
 
     result_payload = {
         "last_updated": datetime.now(timezone.utc).isoformat(),
         "total_count": len(merged),
         "new_count": len(unique_new),
-        "daily_summary": existing_data.get("daily_summary") or "Tagesbriefing: Alle News und Klassen-Updates wurden automatisch auf Deutsch übersetzt und auf Relevanz für Faruk & Mirza geprüft.",
-        "castle_status": existing_data.get("castle_status") or {
-            "status": "Aktiv überwacht",
-            "details": "Burgknoten und Außenposten werden mit Serveröffnung für die Allianz freigeschaltet.",
-            "last_checked": datetime.now(timezone.utc).isoformat()
+        "daily_summary": daily_summary_text,
+        "castle_status": {
+            "status": "Keine Live-Daten verifiziert",
+            "details": "Aktuell liegen keine automatischen Burgen-Telemetriedaten vor. Status wird nach Serverstart über Live-Events angebunden.",
+            "last_checked": datetime.now(timezone.utc).isoformat(),
+            "verified": False
         },
         "items": merged[:60],
-        "sources_status": {
-            "blizzard_official": "OK",
-            "wowhead": "OK",
-            "buffed_de": "OK",
-            "pullpush_reddit": "OK"
-        }
+        "sources_status": sources_health
     }
 
     save_json(OUTPUT_FILE, result_payload)

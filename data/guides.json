@@ -50,13 +50,12 @@
     "camping": {
       "title": "🏕️ Das Camping-System (WoW Forever Core Feature)",
       "status": "Blizzard Bestätigt",
-      "source_url": "https://worldofwarcraft.blizzard.com/en-us/news/24303313",
-      "overview": "In WoW Forever ist das Kochen-Lagerfeuer (Campfire) ein mobiler Knotenpunkt für Erholung und mächtige Gruppen-Buffs. 1 Minute Ausruhen am Camp aktiviert den Erholt-Status (Rested) in der offenen Welt.",
+      "overview": "In WoW Forever ist das Kochen-Lagerfeuer (Campfire) ein mobiler Knotenpunkt für Erholung und nützliche Gruppen-Buffs. Ausruhen am Camp aktiviert den Erholt-Status (Rested XP) in der offenen Welt.",
       "profession_contributions": [
         {
           "prof": "Kräuterkunde (Herbalism - Mirza)",
           "item": "Räucherkerze (Incense Candle)",
-          "buff": "+Intelligenz & Mana-Regen für Zauberklassen (Perfekt für Faruks Schamanen-Mana!)."
+          "buff": "+Intelligenz & Mana-Regen für Zauberklassen (Unterstützt Faruks Schamanen-Mana)."
         },
         {
           "prof": "Ingenieurskunst (Engineering - Faruk)",
@@ -71,7 +70,7 @@
         {
           "prof": "Bergbau & Schmiedekunst (Faruk liefert Erze)",
           "item": "Schleifstein-Rad (Sharpening Wheel)",
-          "buff": "+Angriffskraft (Attack Power) für 1 Stunde für Faruk & Mirzas Pet."
+          "buff": "+Angriffskraft (Attack Power) für Faruk & Mirzas Pet."
         },
         {
           "prof": "Schneiderei (Tailoring)",
@@ -89,8 +88,7 @@
     "legacy": {
       "title": "🏛️ Das Legacy-System (Accountweiter Fortschritt)",
       "status": "Blizzard Bestätigt",
-      "source_url": "https://worldofwarcraft.blizzard.com/en-us/news/24303313",
-      "overview": "Meilensteine auf Hauptcharakteren schalten konto- und serverweite Boni für Twinks und Erkundung frei. Über 1.000 neue Quests und neue Zonen füttern direkt das Legacy-Level.",
+      "overview": "Meilensteine auf Hauptcharakteren schalten konto- und serverweite Boni für Twinks und Erkundung frei. Neue Quests und Zonen füttern direkt das Legacy-Level.",
       "key_perks": [
         "Schnellerer Rufaufbau bei Allianz-Fraktionen für Zweitcharaktere.",
         "Konto-gebundene Komfort-Vorteile beim Reisen zwischen den neuen Forever-Zonen.",
@@ -141,25 +139,25 @@
       {"skill": "Knurren (Taunt)", "how": "Wird beim Tierausbilder (Pet Trainer) in Sturmwind oder Eisenschmiede gelernt. Immer auf maximalem Rang halten!"},
       {"skill": "Klaue (Claw)", "how": "Von Bären oder Katzen in Dun Morogh / Loch Modan lernen (vorübergehend zähmen, 3-5 Mobs bekämpfen)."},
       {"skill": "Beißen (Bite)", "how": "Von Spinnen in Dun Morogh oder Wölfen in Westfall lernen."},
-      {"skill": "Furioses Heulen (Furious Howl)", "how": "Exklusiv von Wölfen. Bufft Mirza und Faruk massiv vor Spezialangriffen."}
+      {"skill": "Furioses Heulen (Furious Howl)", "how": "Exklusiv von Wölfen. Bufft Mirza und Faruk vor Spezialangriffen."}
     ]
   },
   "leveling_guide": {
     "title": "Allianz Leveling-Route (1 - 60) — Optimiert für Faruk & Mirza",
     "zones": [
-      {"range": "Stufe 1 - 10", "zone": "Dun Morogh / Startgebiet", "desc": "Faruk schließt im Ambosstal Erdtotem (Lvl 4) und Kharanos Feuertotem (Lvl 10) ab. Mirza (falls Zwerg) levelt parallel und zähmt mit Level 10 erstes Pet. Gnomeregan liegt direkt im Nordwesten!"},
-      {"range": "Stufe 10 - 18", "zone": "Loch Modan & Westfall", "desc": "Thelsamar (Loch Modan) ist der ideale Treffpunkt. Quests rund um den See abschließen. Danach Flug nach Sturmwind & Westfall für Deadmines-Vorquests. Faruk sammelt Zinnerz, Mirza häutet Bären."},
+      {"range": "Stufe 1 - 10", "zone": "Dun Morogh / Startgebiet", "desc": "Faruk schließt im Ambosstal Erdtotem (Lvl 4) und Kharanos Feuertotem (Lvl 10) ab. Mirza levelt parallel und zähmt mit Level 10 erstes Pet. Gnomeregan liegt direkt im Nordwesten!"},
+      {"range": "Stufe 10 - 18", "zone": "Loch Modan & Westfall", "desc": "Thelsamar (Loch Modan) ist der ideale Treffpunkt. Quests rund um den See abschließen. Danach Flug nach Sturmwind & Westfall für Deadmines-Vorquests. Faruk sammelt Zinnerz, Mirza häutet Tiere."},
       {"range": "Stufe 18 - 24", "zone": "Todesminen (DM) & Rotkamm", "desc": "Todesminen Dungeon-Run mit voller Questliste! Danach Rotkammgebirge (Seenhain) für Gnoll- und Orc-Quests. Faruks Steinhauttotem entlastet Mirzas Pet bei Elite-Gegnern."},
       {"range": "Stufe 24 - 30", "zone": "Dämmerwald & Das Verlies", "desc": "Dämmerwald (Dunkelhain) bietet dichte Quest-Knotenpunkte mit massiver Erfahrung. Dazwischen schneller Durchlauf durch Das Verlies (Stockades) in Sturmwind."},
       {"range": "Stufe 30 - 38", "zone": "Schlingendorntal (STV) & Kloster (SM)", "desc": "Nesingwary-Lager im nördlichen STV (Kürschner-Paradies für Mirza!). Danach nach Süderstade reisen und Scharlachrotes Kloster (Bibliothek, Waffenkammer, Kathedrale) abfarmen."},
-      {"range": "Stufe 38 - 45", "zone": "Ödland & Zul'Farrak (Tanaris)", "desc": "Level 40 Meilenstein: Sofort 90 Gold für Reittier (Mount) nutzen für 60% Reit-Tempo! Tanaris & Zul'Farrak für Treppen-Event und Karottengriffel-Trinket."},
-      {"range": "Stufe 45 - 52", "zone": "Hinterland & Versunkener Tempel", "desc": "Hinterland Elite-Quests in Jintha'Alor (großartige Belohnungen). Auf Stufe 50 unbedingt die exklusiven Klassenquests für Schamane & Jäger im Versunkenen Tempel machen!"},
+      {"range": "Stufe 38 - 45", "zone": "Ödland & Zul'Farrak (Tanaris)", "desc": "Level 40 Meilenstein: Gold für Reittier (Mount) nutzen für 60% Reit-Tempo! Tanaris & Zul'Farrak für Treppen-Event und Karottengriffel-Trinket."},
+      {"range": "Stufe 45 - 52", "zone": "Hinterland & Versunkener Tempel", "desc": "Hinterland Elite-Quests in Jintha'Alor. Auf Stufe 50 unbedingt die exklusiven Klassenquests für Schamane & Jäger im Versunkenen Tempel machen!"},
       {"range": "Stufe 52 - 60", "zone": "Pestländer & Blackrocktiefen (BRD)", "desc": "Schlüssel-Quests für Scholo, Stratholme und BRD abschließen. Pre-Raid BiS farmen und gemeinsam Stufe 60 erreichen!"}
     ]
   },
   "dungeon_quests": {
     "title": "🏰 Komplette Allianz Dungeon-Quest Checkliste (Alle Quests & Standorte)",
-    "note": "Nie wieder eine Quest vergessen! Hier siehst du genau, welche Quests du in Städten vorher annehmen musst.",
+    "note": "Getrennte Checklisten für Faruk & Mirza. Klicke die Häkchen deines Spielers an, um den Fortschritt festzuhalten.",
     "dungeons": [
       {
         "id": "dm",
@@ -170,6 +168,7 @@
         "key_loot": "Grausamkeitswiderhaken (Schwert), Chaoshandschuhe, Defias-Set, Smiter's Hammer",
         "quests": [
           {
+            "id": "dm_defias_chain",
             "title": "Die Bruderschaft der Defias",
             "min_lvl": "18",
             "giver": "Gryan Stoutmantle (Späherkuppe, Westfall)",
@@ -177,6 +176,7 @@
             "reward": "Chaoshandschuhe / Stab der Westfall-Garde / Defias-Gürtel"
           },
           {
+            "id": "dm_underground_assault",
             "title": "Unterirdischer Angriff",
             "min_lvl": "15",
             "giver": "Wilder Distelklette (Zwergenviertel, Sturmwind)",
@@ -184,6 +184,7 @@
             "reward": "Bergarbeiter-Spitzhacke / Beinkleider"
           },
           {
+            "id": "dm_oh_brother",
             "title": "Oh Bruder...",
             "min_lvl": "15",
             "giver": "Wilder Distelklette (Zwergenviertel, Sturmwind)",
@@ -191,6 +192,7 @@
             "reward": "Schwere Bergarbeiter-Stiefel"
           },
           {
+            "id": "dm_goldtooth",
             "title": "Gesucht: 'Captain' Goldzahn",
             "min_lvl": "15",
             "giver": "Steckbrief (Außerhalb der Späherkuppe, Westfall)",
@@ -198,6 +200,7 @@
             "reward": "Erfahrung & Gold"
           },
           {
+            "id": "dm_unsent_letter",
             "title": "Der unverschickte Brief",
             "min_lvl": "18",
             "giver": "Drop von Endboss Edwin van Cleef",
@@ -215,6 +218,7 @@
         "key_loot": "Gefängnis-Schultern, Ring der Eisenknöchel, Kammerjäger-Dolch",
         "quests": [
           {
+            "id": "stk_crime_punishment",
             "title": "Verbrechen und Strafe",
             "min_lvl": "22",
             "giver": "Ratsherr Stonebrow (Eisenschmiede - Halle der Forscher)",
@@ -222,6 +226,7 @@
             "reward": "Ring des Gesetzeshüters (Top Ring für Level 25)"
           },
           {
+            "id": "stk_what_comes_around",
             "title": "Wie du mir, so ich dir",
             "min_lvl": "22",
             "giver": "Wache Adams (Seenhain, Rotkammgebirge)",
@@ -229,6 +234,7 @@
             "reward": "Leder- & Schwere Rüstungsteile"
           },
           {
+            "id": "stk_color_of_blood",
             "title": "Die Farbe des Blutes",
             "min_lvl": "22",
             "giver": "Nikova Raskol (Altstadt, Sturmwind)",
@@ -236,6 +242,7 @@
             "reward": "Erfahrung & Gold"
           },
           {
+            "id": "stk_riot",
             "title": "Aufstand im Verlies",
             "min_lvl": "22",
             "giver": "Wärter Thelwater (Direkt vor dem Verlies-Portal)",
@@ -243,6 +250,7 @@
             "reward": "Lukrative Belohnungstasche"
           },
           {
+            "id": "stk_bazil_thredd",
             "title": "Bazil Thredd",
             "min_lvl": "22",
             "giver": "Gryan Stoutmantle (Westfall / Sturmwind)",
@@ -260,6 +268,7 @@
         "key_loot": "Großknecht-Hose, Hydrokran, Manasauger, Werkstattschlüssel",
         "quests": [
           {
+            "id": "gnome_thermaplugg",
             "title": "Der Großknecht Thermadraht",
             "min_lvl": "27",
             "giver": "Hochtüftler Mekkadrill (Eisenschmiede - Tüftlerstadt)",
@@ -267,6 +276,7 @@
             "reward": "Großknecht-Hose (extrem starke Kettenbeine) / Dreifaltigkeitskugel"
           },
           {
+            "id": "gnome_tink",
             "title": "Rettet Tinks Dochtlader",
             "min_lvl": "25",
             "giver": "Tink Dochtlader (Eisenschmiede - Tüftlerstadt)",
@@ -274,6 +284,7 @@
             "reward": "Mechanische Vorräte & XP"
           },
           {
+            "id": "gnome_shredder",
             "title": "Der verseuchte Schredder",
             "min_lvl": "25",
             "giver": "Gnoarn (Eisenschmiede - Tüftlerstadt)",
@@ -281,6 +292,7 @@
             "reward": "Ingenieurs-Materialien & Erfahrung"
           },
           {
+            "id": "gnome_shoni",
             "title": "Kriegsmaschinen der Gnome",
             "min_lvl": "25",
             "giver": "Shoni die Lautlose (Zwergenviertel, Sturmwind)",
@@ -288,6 +300,7 @@
             "reward": "Thermapluggs linker Daumen"
           },
           {
+            "id": "gnome_cards",
             "title": "Gitterwerk-Lochkarten (A, B, C, D)",
             "min_lvl": "25",
             "giver": "Matrix-Lochkartenleser im Dungeon",
@@ -305,6 +318,7 @@
         "key_loot": "Verwüster (Axt), Mograines Macht, Triumphet-Helm, Kugel von Lorley",
         "quests": [
           {
+            "id": "sm_in_the_name_of_light",
             "title": "Im Namen des Lichts",
             "min_lvl": "34",
             "giver": "Raleigh der Andächtige (Süderstade, Vorgebirge von Hillsbrad)",
@@ -312,6 +326,7 @@
             "reward": "Schwert des Friedensrichters / Omenwerfer (Armbrust für Mirza!) / Drachentöter-Axt (für Faruk!)"
           },
           {
+            "id": "sm_mythology_titans",
             "title": "Mythologie der Titanen",
             "min_lvl": "28",
             "giver": "Bibliothekar Mae Peller (Eisenschmiede - Halle der Forscher)",
@@ -319,6 +334,7 @@
             "reward": "Forscher-Halskette & XP"
           },
           {
+            "id": "sm_compendium",
             "title": "Kompendium der Gefallenen",
             "min_lvl": "28",
             "giver": "Sage Truthseeker (Eisenschmiede - Halle der Forscher)",
@@ -336,6 +352,7 @@
         "key_loot": "Karottengriffel, Sul'thraze der Peitscher, Sandpolierer",
         "quests": [
           {
+            "id": "zf_gahzrilla",
             "title": "Gahz'rilla (Trinket-Pflicht!)",
             "min_lvl": "40",
             "giver": "Wizzik Niederhopf (Schimmernde Ebene / Tausend Nadeln)",
@@ -343,6 +360,7 @@
             "reward": "Karottengriffel (+3% Reittiertempo Trinket — Bis Endgame aktiv!)"
           },
           {
+            "id": "zf_scarab_shells",
             "title": "Skarabäus-Panzer",
             "min_lvl": "40",
             "giver": "Tran'rek (Gadgetzan, Tanaris)",
@@ -350,6 +368,7 @@
             "reward": "Robuster Ledergurt & XP"
           },
           {
+            "id": "zf_tiara_of_deep",
             "title": "Die Tiara der Tiefe",
             "min_lvl": "40",
             "giver": "Taldan (Dampfdruck-Pier, Tanaris)",
@@ -357,6 +376,7 @@
             "reward": "Mächtiger Caster-Ring für Faruk"
           },
           {
+            "id": "zf_nekrum_amulet",
             "title": "Nekrit-Amulett",
             "min_lvl": "40",
             "giver": "Thadius Grimmschein (Verwüstete Lande)",
@@ -374,6 +394,7 @@
         "key_loot": "Klassenquest-Epics, Drachenseelen-Stab, Kettengürtel des Erwachens",
         "quests": [
           {
+            "id": "st_class_quest_50",
             "title": "Stufe 50 Klassenquest (Schamane & Jäger)",
             "min_lvl": "50",
             "giver": "Klassenlehrer in Eisenschmiede / Sturmwind",
@@ -381,6 +402,7 @@
             "reward": "Epischer Schmuck / Waffe / Rüstung (extrem mächtig für Level 50-60)"
           },
           {
+            "id": "st_into_temple",
             "title": "In den Tempel von Atal'Hakkar",
             "min_lvl": "46",
             "giver": "Angelas Mondhauch (Fehpumpen / Feralas)",
@@ -388,6 +410,7 @@
             "reward": "Mächtiger Allianz-Umhang"
           },
           {
+            "id": "st_jammalan",
             "title": "Jammal'an der Prophet",
             "min_lvl": "46",
             "giver": "Atal'ai-Exilant (Sümpfe des Elends)",
@@ -405,6 +428,7 @@
         "key_loot": "Hand der Gerechtigkeit, Zweiter Wind, Schattenschmiede-Schlüssel",
         "quests": [
           {
+            "id": "brd_shadowforge_key",
             "title": "Schlüssel zur Schattenschmiede (Geisterquest!)",
             "min_lvl": "48",
             "giver": "Franclorn Forgewright (Nur in Geisterform sichtbar auf dem Grabstein im Schwarzfels!)",
@@ -412,6 +436,7 @@
             "reward": "Schattenschmiede-Schlüssel (Öffnet alle Abkürzungen in BRD!)"
           },
           {
+            "id": "brd_rescue_princess",
             "title": "Die Rettung von Prinzessin Moira",
             "min_lvl": "53",
             "giver": "König Magni Bronzebeard (Große Schmiede, Eisenschmiede)",
@@ -419,6 +444,7 @@
             "reward": "Königlicher Siegelring von Ironforge"
           },
           {
+            "id": "brd_jailbreak_onyxia",
             "title": "Jailbreak! (Onyxia-Prequest Kette)",
             "min_lvl": "54",
             "giver": "Marschall Windsor (In den Gefängniszellen von BRD)",
@@ -431,7 +457,7 @@
   },
   "intel_sources": {
     "title": "📡 Verifizierte Informationsquellen für WoW Forever Insights",
-    "description": "Die besten Kanäle, um tagesaktuelle, ungefilterte und akkurate Daten zu Exploits, Klassenänderungen und Hotfixes zu erhalten:",
+    "description": "Die besten Kanäle für tagesaktuelle, ungefilterte und akkurate Daten zu Exploits, Klassenänderungen und Hotfixes:",
     "channels": [
       {
         "name": "Blizzard Blue Tracker (US & EU)",
@@ -487,7 +513,7 @@
     "rules": [
       "1. Gold sparen für Stufe 40 Mount: Kaufe beim Klassenlehrer nur absolut notwendige Angriffs- & Heilfähigkeiten (keine nutzlosen Zauberränge).",
       "2. Sammelberufe nie vernachlässigen: Mirza hält Kürschnerei immer auf Zonenlevel, Faruk schmilzt Erze direkt ein für Ingenieurs-Punkte.",
-      "3. Camping vor jedem Dungeon aktivieren: 1 Minute Campen schaltet Rested-Bonus und Berufs-Buffs frei, spart Heiltränke und beschleunigt den Dungeonrun um 25%."
+      "3. Camping vor Dungeons nutzen: 1 Minute am Lagerfeuer aktiviert den Erholt-Bonus (Rested XP) in der offenen Welt und ermöglicht wertvolle Berufs-Buffs vor Bosskämpfen."
     ]
   }
 }

@@ -30,6 +30,9 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: python scraper/scrape.py
 
+      - name: 🧪 Verify data integrity
+        run: python test_dashboard.py
+
       - name: 💾 Commit & push
         run: |
           git config --global user.name  "WoW-Bot 🤖"
