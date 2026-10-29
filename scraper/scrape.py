@@ -41,14 +41,16 @@ HEADERS = {
 }
 
 RSS_FEEDS = [
-    {"name": "Blizzard News",     "icon": "🔵", "url": "https://worldofwarcraft.blizzard.com/en-us/news/rss", "lang": "en", "official": True},
-    {"name": "WoWhead Forever",   "icon": "🌐", "url": "https://www.wowhead.com/news/rss/all",                "lang": "en", "official": False},
-    {"name": "Buffed.de",         "icon": "🇩🇪", "url": "https://www.buffed.de/feed/",                       "lang": "de", "official": False},
-    {"name": "MMO-Champion",      "icon": "⚔️", "url": "https://www.mmo-champion.com/external.php?do=rss&type=newcontent&sectionid=1&days=2&count=25", "lang": "en", "official": False},
-    {"name": "Icy Veins",         "icon": "❄️", "url": "https://www.icy-veins.com/wow/feed",                  "lang": "en", "official": False},
+    {"name": "Blizzard News",        "icon": "🔵", "url": "https://worldofwarcraft.blizzard.com/en-us/news/rss", "lang": "en", "official": True},
+    {"name": "Blizzard Blue Tracker","icon": "🔷", "url": "https://us.forums.blizzard.com/en/wow/c/classic/classic-discussion.rss", "lang": "en", "official": True},
+    {"name": "WoWhead Forever",      "icon": "🌐", "url": "https://www.wowhead.com/news/rss/all",                "lang": "en", "official": False},
+    {"name": "Buffed.de",            "icon": "🇩🇪", "url": "https://www.buffed.de/feed/",                       "lang": "de", "official": False},
+    {"name": "MMO-Champion",         "icon": "⚔️", "url": "https://www.mmo-champion.com/external.php?do=rss&type=newcontent&sectionid=1&days=2&count=25", "lang": "en", "official": False},
+    {"name": "Icy Veins",            "icon": "❄️", "url": "https://www.icy-veins.com/wow/feed",                  "lang": "en", "official": False},
+    {"name": "Warcraft Tavern",      "icon": "🍺", "url": "https://www.warcrafttavern.com/feed/",               "lang": "en", "official": False},
 ]
 
-REDDIT_SUBREDDITS = ["wow", "classicwow", "wowforever"]
+REDDIT_SUBREDDITS = ["classicwow", "wowforever", "wow"]
 
 # ─── POMOĆNE FUNKCIJE ─────────────────────────────────────────────────────────
 def make_id(text):

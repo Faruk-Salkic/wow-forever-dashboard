@@ -1,24 +1,50 @@
 {
   "version": "WoW Forever 1.0 (Blizzard Official)",
-  "verified_date": "2026-10-28",
+  "verified_date": "2026-10-29",
   "launch_cet": "2026-11-05T00:00:00+01:00",
   "launch_utc": "2026-11-04T23:00:00Z",
   "player_profiles": {
     "Faruk": {
-      "primary_class": "Hunter",
-      "spec": "Beast Mastery",
-      "faction": "Allianz",
-      "professions": ["Kürschnerei (Skinning)", "Bergbau (Mining)"],
-      "focus": "Fast Leveling, Rare Pet Taming, Ranged DPS, Group Farming"
-    },
-    "Mirza": {
       "primary_class": "Shaman",
-      "alt_classes": ["Priest", "Rogue"],
+      "race": "Dwarf (Zwerg)",
       "spec": "Enhancement / Restoration",
       "faction": "Allianz",
-      "professions": ["Kräuterkunde (Herbalism)", "Alchemie / Ingenieurskunst"],
-      "focus": "Melee DPS, Totem Utility, Camping Alchemy Lab, Dungeon Support"
+      "start_zone": "Dun Morogh (Ambosstal / Coldridge Valley)",
+      "professions": [
+        "Bergbau (Mining)",
+        "Ingenieurskunst (Engineering)"
+      ],
+      "focus": "Totems (Steinhaut, Windzorn, Manaflut), Bomben & Granaten (Engineering), Target Dummies, Off-Heal & Duo-Support"
+    },
+    "Mirza": {
+      "primary_class": "Hunter",
+      "race": "Offen / Noch nicht festgelegt (Warten auf 100% Bestätigung)",
+      "spec": "Beast Mastery (Tierherrschaft)",
+      "faction": "Allianz",
+      "start_zone": "Wird nach 100% Rassenwahl final festgelegt",
+      "professions": [
+        "Kürschnerei (Skinning)",
+        "Kräuterkunde (Herbalism)"
+      ],
+      "focus": "100% Jäger: Ranged DPS, Pet-Tanking & Skalierung, Leder/Fell-Gewinnung, Kräuter für Camping-Räucherkerzen"
     }
+  },
+  "starter_guide_dwarf": {
+    "title": "🏔️ Faruks Zwergen-Start (Dun Morogh) & Treffpunkt mit Mirza",
+    "faruk_start": {
+      "zone": "Ambosstal (Coldridge Valley) -> Kharanos -> Eisenschmiede (Ironforge)",
+      "totem_quests": [
+        {"lvl": "Stufe 4", "name": "Ruf der Erde (Erdtotem)", "npc": "Yarr Hammerstone (Vorposten im Ambosstal)", "benefit": "Schaltet Erdstosstotem & Steinhauttotem frei (senkt Schaden auf Mirzas Pet!)."},
+        {"lvl": "Stufe 10", "name": "Ruf des Feuers (Feuertotem)", "npc": "Kranor Frostschreiter (Kharanos / Eisenschmiede)", "benefit": "Schaltet Verbrennungstotem & Feuernova frei für starken Flächenschaden."}
+      ],
+      "profession_nodes": "Kupferadern & Raue Steine direkt an allen Berghängen in Dun Morogh. Bergbaulehrer & Ingenieurslehrer in Eisenschmiede (Große Schmiede & Tüftlerstadt)."
+    },
+    "meetup_scenarios": [
+      {
+        "scenario": "Mirzas Rassenwahl: Offen (Warten auf 100% Entscheidung)",
+        "detail": "Faruk startet fest als Zwergen-Schamane in Dun Morogh. Sobald Mirza seine Rasse zu 100% bestätigt hat, wird die genaue Route und der Treffpunkt hinterlegt. Keine voreiligen Annahmen!"
+      }
+    ]
   },
   "forever_systems": {
     "camping": {
@@ -27,14 +53,38 @@
       "source_url": "https://worldofwarcraft.blizzard.com/en-us/news/24303313",
       "overview": "In WoW Forever ist das Kochen-Lagerfeuer (Campfire) ein mobiler Knotenpunkt für Erholung und mächtige Gruppen-Buffs. 1 Minute Ausruhen am Camp aktiviert den Erholt-Status (Rested) in der offenen Welt.",
       "profession_contributions": [
-        {"prof": "Schmiedekunst (Blacksmithing)", "item": "Schleifstein-Rad (Sharpening Wheel)", "buff": "+Angriffskraft (Attack Power) für 1 Stunde."},
-        {"prof": "Schneiderei (Tailoring)", "item": "Fraktions-Banner", "buff": "+Wille (Spirit) für schnellere Mana- & Lebens-Regeneration."},
-        {"prof": "Kräuterkunde (Herbalism)", "item": "Räucherkerze (Incense Candle)", "buff": "+Intelligenz (Intellect) für Zauberklassen."},
-        {"prof": "Alchemie (Alchemy)", "item": "Mobiles Alchemielabor", "buff": "Ermöglicht das Brauen von High-End Elixieren & Tränken unterwegs ohne Scholomance!"},
-        {"prof": "Lederverarbeitung (Leatherworking)", "item": "Gerberbock (Tanning Rack)", "buff": "Verarbeitung seltener Felle direkt im Camp."},
-        {"prof": "Kochkunst Upgrade (Leveling)", "item": "Größeres Lagerfeuer", "buff": "Erhöht die Anzahl platzierbarer Berufsgegenstände von 1 auf bis zu 5–10 und schaltet temporäre Reparatur-Händler frei."}
+        {
+          "prof": "Kräuterkunde (Herbalism - Mirza)",
+          "item": "Räucherkerze (Incense Candle)",
+          "buff": "+Intelligenz & Mana-Regen für Zauberklassen (Perfekt für Faruks Schamanen-Mana!)."
+        },
+        {
+          "prof": "Ingenieurskunst (Engineering - Faruk)",
+          "item": "Mobiles Reparaturmodul / Zielattrappe",
+          "buff": "Feld-Reparaturen ohne Stadtbesuch & Notfall-Schutzattrappe bei gefährlichen Elite-Pulls."
+        },
+        {
+          "prof": "Kürschnerei & Lederverarbeitung",
+          "item": "Gerberbock & Fellmatten (Mirza liefert Felle)",
+          "buff": "Verarbeitung seltener Felle direkt im Camp & Erhöhung der Erholungsrate."
+        },
+        {
+          "prof": "Bergbau & Schmiedekunst (Faruk liefert Erze)",
+          "item": "Schleifstein-Rad (Sharpening Wheel)",
+          "buff": "+Angriffskraft (Attack Power) für 1 Stunde für Faruk & Mirzas Pet."
+        },
+        {
+          "prof": "Schneiderei (Tailoring)",
+          "item": "Fraktions-Banner",
+          "buff": "+Wille (Spirit) für schnellere Lebens- & Mana-Regeneration."
+        },
+        {
+          "prof": "Kochkunst Upgrade (Leveling)",
+          "item": "Größeres Lagerfeuer",
+          "buff": "Erhöht die Anzahl platzierbarer Berufsgegenstände von 1 auf bis zu 5–10."
+        }
       ],
-      "tactics_faruk_mirza": "Kombination: Faruk (Kürschnerei/Bergbau) + Mirza (Kräuter/Alchemie). Mirza stellt das mobile Alchemielabor im Camp auf, Faruk liefert Tierfelle/Erze. Beide holen sich vor Dungeons den Schleifstein- und Räucherkerzen-Buff!"
+      "tactics_faruk_mirza": "Kombination: Faruk (Schamane: Bergbau/Engineering) + Mirza (Jäger: Kürschnerei/Kräuter). Mirza liefert Kräuter (Räucherkerze im Camp für +Intelligenz & Mana-Regen für Faruk) und Tierfelle. Faruk baut Bomben, Zielattrappen (Target Dummy) und unterstützt Mirzas Pet mit Totems (Steinhaut, Windzorn) und Heilung!"
     },
     "legacy": {
       "title": "🏛️ Das Legacy-System (Accountweiter Fortschritt)",
@@ -44,63 +94,400 @@
       "key_perks": [
         "Schnellerer Rufaufbau bei Allianz-Fraktionen für Zweitcharaktere.",
         "Konto-gebundene Komfort-Vorteile beim Reisen zwischen den neuen Forever-Zonen.",
-        "Erhöhte Ausbeute bei Welt-Ressourcen nach Erreichen wichtiger Meilensteine."
+        "Erhöhte Ausbeute bei Welt-Ressourcen (Erze für Faruk, Kräuter/Leder für Mirza) nach Meilensteinen."
       ]
     }
   },
-  "hunter_forever": {
-    "title": "🏹 Jäger & Pets in WoW Forever (Wichtige Änderungen ggü. Classic 1.12)",
-    "status": "Blizzard Bestätigt",
-    "source_url": "https://worldofwarcraft.blizzard.com/en-us/news/24301515",
-    "core_changes": [
+  "hunter_pets": {
+    "title": "Jäger Pet Cheat-Sheet (Allianz)",
+    "categories": [
       {
-        "change": "Pet-Stat-Skalierung",
-        "detail": "In Forever skalieren Begleiter-Attribute (Angriffskraft, Rüstung, Ausdauer, Widerstände) direkt mit der Ausrüstung des Jägers! Anders als in Vanilla bleibt das Pet auch im Endgame schlagkräftig."
+        "icon": "🐱",
+        "name": "Katzenartige (Cat)",
+        "role": "Single-Target DPS & Grinding",
+        "why": "Höchster Grundschaden (+10% Schadens-Modifikator). Profitiert durch Forever-Stat-Skalierung extrem von Mirzas Agilität.",
+        "feed": "Fleisch, Fisch",
+        "best_targets": [
+          {"name": "Dunkelpirscher (Darkstalker)", "level": "10-11", "zone": "Loch Modan (Nordküste)", "speed": "1.30", "note": "Schnellstes Katzenpet im frühen Allianz-Gebiet. Klaue Rang 2."},
+          {"name": "Berglöwe (Mountain Lion)", "level": "10-11", "zone": "Dun Morogh", "speed": "1.40", "note": "Sofort nach Stufe 10 Klassenquest in Zwergengebiet zähmbar."},
+          {"name": "Schlingendorntiger", "level": "31-32", "zone": "Schlingendorntal (STV)", "speed": "1.20", "note": "Top Angriffsgeschwindigkeit für Zauberunterbrechungen im PvP."}
+        ]
       },
       {
-        "change": "Familien-Spezialisierungen",
-        "detail": "Pet-Familien besitzen überarbeitete Talente und Utility-Fertigkeiten. Katzen bleiben Top-Single-Target DPS, Wölfe bieten unverzichtbare Gruppen-Buffs, Eber bringen unschlagbaren Opener-Charge."
+        "icon": "🐺",
+        "name": "Wolf",
+        "role": "Dungeon & Raid Pflicht-Pet",
+        "why": "Furioses Heulen (Furious Howl) bufft den nächsten physischen Angriff für Mirza und Faruks Schamanen-Nahkampf!",
+        "feed": "Fleisch",
+        "best_targets": [
+          {"name": "Streunender Kojote (Coyote)", "level": "10-11", "zone": "Westfall (Moonbrook)", "speed": "1.50", "note": "Frühester Allianz-Wolf für Furioses Heulen."},
+          {"name": "Worg (Dire Condemned)", "level": "19-20", "zone": "Rotkammgebirge", "speed": "1.40", "note": "Perfekt vor dem ersten Deadmines-Dungeonrun mit Faruk."},
+          {"name": "Aasworg (Carrion Vulture/Worg)", "level": "25-26", "zone": "Dämmerwald", "speed": "1.40", "note": "Hält hohe Rüstung, idealer Dungeon-Off-Tank."}
+        ]
       },
       {
-        "change": "Talent-Rebalance",
-        "detail": "Tierherrschaft (Beast Mastery) und Treffsicherheit (Marksmanship) wurden angepasst, um mit den neuen Forever-Dungeon- und Raid-Mechaniken zu harmonieren."
+        "icon": "🐗",
+        "name": "Eber (Wildschwein)",
+        "role": "Pacing & Komfort-Leveling",
+        "why": "Sturmangriff (Charge) bindet Gegner sofort für 1 Sekunde fest. Frisst jede Nahrung (Brot, Früchte, Fleisch – 0 Unterhaltskosten).",
+        "feed": "Alles (Fleisch, Brot, Obst, Pilze, Fisch)",
+        "best_targets": [
+          {"name": "Bergeber (Mountain Boar)", "level": "10-11", "zone": "Loch Modan", "speed": "2.00", "note": "Perfekter Starter-Eber direkt nach Questannahme."},
+          {"name": "Rostiger Eber", "level": "16-17", "zone": "Westfall", "speed": "2.00", "note": "Robuster Allrounder für die Deadmines-Vorquests."}
+        ]
       }
     ],
-    "pet_recommendations": [
+    "skills_guide": [
+      {"skill": "Knurren (Taunt)", "how": "Wird beim Tierausbilder (Pet Trainer) in Sturmwind oder Eisenschmiede gelernt. Immer auf maximalem Rang halten!"},
+      {"skill": "Klaue (Claw)", "how": "Von Bären oder Katzen in Dun Morogh / Loch Modan lernen (vorübergehend zähmen, 3-5 Mobs bekämpfen)."},
+      {"skill": "Beißen (Bite)", "how": "Von Spinnen in Dun Morogh oder Wölfen in Westfall lernen."},
+      {"skill": "Furioses Heulen (Furious Howl)", "how": "Exklusiv von Wölfen. Bufft Mirza und Faruk massiv vor Spezialangriffen."}
+    ]
+  },
+  "leveling_guide": {
+    "title": "Allianz Leveling-Route (1 - 60) — Optimiert für Faruk & Mirza",
+    "zones": [
+      {"range": "Stufe 1 - 10", "zone": "Dun Morogh / Startgebiet", "desc": "Faruk schließt im Ambosstal Erdtotem (Lvl 4) und Kharanos Feuertotem (Lvl 10) ab. Mirza (falls Zwerg) levelt parallel und zähmt mit Level 10 erstes Pet. Gnomeregan liegt direkt im Nordwesten!"},
+      {"range": "Stufe 10 - 18", "zone": "Loch Modan & Westfall", "desc": "Thelsamar (Loch Modan) ist der ideale Treffpunkt. Quests rund um den See abschließen. Danach Flug nach Sturmwind & Westfall für Deadmines-Vorquests. Faruk sammelt Zinnerz, Mirza häutet Bären."},
+      {"range": "Stufe 18 - 24", "zone": "Todesminen (DM) & Rotkamm", "desc": "Todesminen Dungeon-Run mit voller Questliste! Danach Rotkammgebirge (Seenhain) für Gnoll- und Orc-Quests. Faruks Steinhauttotem entlastet Mirzas Pet bei Elite-Gegnern."},
+      {"range": "Stufe 24 - 30", "zone": "Dämmerwald & Das Verlies", "desc": "Dämmerwald (Dunkelhain) bietet dichte Quest-Knotenpunkte mit massiver Erfahrung. Dazwischen schneller Durchlauf durch Das Verlies (Stockades) in Sturmwind."},
+      {"range": "Stufe 30 - 38", "zone": "Schlingendorntal (STV) & Kloster (SM)", "desc": "Nesingwary-Lager im nördlichen STV (Kürschner-Paradies für Mirza!). Danach nach Süderstade reisen und Scharlachrotes Kloster (Bibliothek, Waffenkammer, Kathedrale) abfarmen."},
+      {"range": "Stufe 38 - 45", "zone": "Ödland & Zul'Farrak (Tanaris)", "desc": "Level 40 Meilenstein: Sofort 90 Gold für Reittier (Mount) nutzen für 60% Reit-Tempo! Tanaris & Zul'Farrak für Treppen-Event und Karottengriffel-Trinket."},
+      {"range": "Stufe 45 - 52", "zone": "Hinterland & Versunkener Tempel", "desc": "Hinterland Elite-Quests in Jintha'Alor (großartige Belohnungen). Auf Stufe 50 unbedingt die exklusiven Klassenquests für Schamane & Jäger im Versunkenen Tempel machen!"},
+      {"range": "Stufe 52 - 60", "zone": "Pestländer & Blackrocktiefen (BRD)", "desc": "Schlüssel-Quests für Scholo, Stratholme und BRD abschließen. Pre-Raid BiS farmen und gemeinsam Stufe 60 erreichen!"}
+    ]
+  },
+  "dungeon_quests": {
+    "title": "🏰 Komplette Allianz Dungeon-Quest Checkliste (Alle Quests & Standorte)",
+    "note": "Nie wieder eine Quest vergessen! Hier siehst du genau, welche Quests du in Städten vorher annehmen musst.",
+    "dungeons": [
       {
-        "family": "Katze (Katzenartige)",
-        "role": "Single-Target DPS & schnelles Grinden",
-        "why": "Höchster Grundschaden (+10% Modifikator). Profitiert durch Forever-Stat-Skalierung extrem von Jäger-Agilität.",
-        "forever_note": "Spurt & Klaue maximieren. Beste Wahl für Solo-Leveling.",
-        "location_allianz": "Dunkelpirscher (Loch Modan, Stufe 10-11) oder Berglöwen."
+        "id": "dm",
+        "name": "Die Todesminen (Deadmines)",
+        "level": "18 - 23",
+        "zone": "Westfall (Mondbruch)",
+        "boss": "Edwin van Cleef",
+        "key_loot": "Grausamkeitswiderhaken (Schwert), Chaoshandschuhe, Defias-Set, Smiter's Hammer",
+        "quests": [
+          {
+            "title": "Die Bruderschaft der Defias",
+            "min_lvl": "18",
+            "giver": "Gryan Stoutmantle (Späherkuppe, Westfall)",
+            "chain": "⚠️ WICHTIG: Lange Questkette ab Lvl 14 in Westfall! Man muss vorher den Boten und Eskort-Quest machen.",
+            "reward": "Chaoshandschuhe / Stab der Westfall-Garde / Defias-Gürtel"
+          },
+          {
+            "title": "Unterirdischer Angriff",
+            "min_lvl": "15",
+            "giver": "Wilder Distelklette (Zwergenviertel, Sturmwind)",
+            "chain": "Keine Vorquest. Direkt im Zwergenviertel bei den Minenarbeitern abholbar.",
+            "reward": "Bergarbeiter-Spitzhacke / Beinkleider"
+          },
+          {
+            "title": "Oh Bruder...",
+            "min_lvl": "15",
+            "giver": "Wilder Distelklette (Zwergenviertel, Sturmwind)",
+            "chain": "Keine Vorquest. Fordert das Auffinden von zwei Bergarbeiter-Abzeichen im Minenvorraum.",
+            "reward": "Schwere Bergarbeiter-Stiefel"
+          },
+          {
+            "title": "Gesucht: 'Captain' Goldzahn",
+            "min_lvl": "15",
+            "giver": "Steckbrief (Außerhalb der Späherkuppe, Westfall)",
+            "chain": "Keine Vorquest. Steckbrief anklicken.",
+            "reward": "Erfahrung & Gold"
+          },
+          {
+            "title": "Der unverschickte Brief",
+            "min_lvl": "18",
+            "giver": "Drop von Endboss Edwin van Cleef",
+            "chain": "Droppt im Dungeon! Startet Folgequest zu Baros Alexston in Sturmwind.",
+            "reward": "Massive Folge-XP & Stadtreputation"
+          }
+        ]
       },
       {
-        "family": "Wolf",
-        "role": "Dungeon & Raid Pflicht-Pet",
-        "why": "Furioses Heulen (Furious Howl) bufft den nächsten physischen Angriff für Faruk und Mirza.",
-        "forever_note": "Unverzichtbar bei Bosskämpfen in Gruppen.",
-        "location_allianz": "Kojoten (Westfall, Stufe 10-11), Worgs (Rotkammgebirge, Stufe 19-20)."
+        "id": "stockades",
+        "name": "Das Verlies (The Stockades)",
+        "level": "24 - 28",
+        "zone": "Sturmwind (Kanalisation)",
+        "boss": "Bazil Thredd & Dextren Ward",
+        "key_loot": "Gefängnis-Schultern, Ring der Eisenknöchel, Kammerjäger-Dolch",
+        "quests": [
+          {
+            "title": "Verbrechen und Strafe",
+            "min_lvl": "22",
+            "giver": "Ratsherr Stonebrow (Eisenschmiede - Halle der Forscher)",
+            "chain": "Keine Vorquest. Unbedingt vor Abfahrt in Eisenschmiede mitnehmen!",
+            "reward": "Ring des Gesetzeshüters (Top Ring für Level 25)"
+          },
+          {
+            "title": "Wie du mir, so ich dir",
+            "min_lvl": "22",
+            "giver": "Wache Adams (Seenhain, Rotkammgebirge)",
+            "chain": "Keine Vorquest. Steht am Eingang des Rathauses in Seenhain.",
+            "reward": "Leder- & Schwere Rüstungsteile"
+          },
+          {
+            "title": "Die Farbe des Blutes",
+            "min_lvl": "22",
+            "giver": "Nikova Raskol (Altstadt, Sturmwind)",
+            "chain": "Keine Vorquest. Rote Wollkopftücher im Verlies sammeln.",
+            "reward": "Erfahrung & Gold"
+          },
+          {
+            "title": "Aufstand im Verlies",
+            "min_lvl": "22",
+            "giver": "Wärter Thelwater (Direkt vor dem Verlies-Portal)",
+            "chain": "Keine Vorquest. Direkt vor Betreten der Instanz abholen.",
+            "reward": "Lukrative Belohnungstasche"
+          },
+          {
+            "title": "Bazil Thredd",
+            "min_lvl": "22",
+            "giver": "Gryan Stoutmantle (Westfall / Sturmwind)",
+            "chain": "Folgequest der Defias-Bruderschafts-Kette nach den Todesminen.",
+            "reward": "Wichtig für die Fortführung der Allianz-Haupthandlung"
+          }
+        ]
       },
       {
-        "family": "Eber (Wildschwein)",
-        "role": "Pacing & Komfort-Leveling",
-        "why": "Sturmangriff (Charge) bindet Gegner sofort. Frisst jede Art von Nahrung (kein teures Fleisch kaufen).",
-        "forever_note": "Ideal für unwegsames Gelände und schwierige Elite-Quests zu zweit.",
-        "location_allianz": "Bergebere (Loch Modan, Stufe 10-12)."
+        "id": "gnomer",
+        "name": "Gnomeregan",
+        "level": "28 - 34",
+        "zone": "Dun Morogh (Heimat-Zone für Faruk!)",
+        "boss": "Großknecht Thermadraht (Thermaplugg)",
+        "key_loot": "Großknecht-Hose, Hydrokran, Manasauger, Werkstattschlüssel",
+        "quests": [
+          {
+            "title": "Der Großknecht Thermadraht",
+            "min_lvl": "27",
+            "giver": "Hochtüftler Mekkadrill (Eisenschmiede - Tüftlerstadt)",
+            "chain": "Hauptquest für Gnomeregan. Direkt beim Gnome-König abholbar.",
+            "reward": "Großknecht-Hose (extrem starke Kettenbeine) / Dreifaltigkeitskugel"
+          },
+          {
+            "title": "Rettet Tinks Dochtlader",
+            "min_lvl": "25",
+            "giver": "Tink Dochtlader (Eisenschmiede - Tüftlerstadt)",
+            "chain": "Eskort- & Rettungsaufgabe im ersten Fabrikbereich.",
+            "reward": "Mechanische Vorräte & XP"
+          },
+          {
+            "title": "Der verseuchte Schredder",
+            "min_lvl": "25",
+            "giver": "Gnoarn (Eisenschmiede - Tüftlerstadt)",
+            "chain": "Schredder-Teile sammeln.",
+            "reward": "Ingenieurs-Materialien & Erfahrung"
+          },
+          {
+            "title": "Kriegsmaschinen der Gnome",
+            "min_lvl": "25",
+            "giver": "Shoni die Lautlose (Zwergenviertel, Sturmwind)",
+            "chain": "Im Zwergenviertel mitnehmen, bevor man nach Eisenschmiede reist.",
+            "reward": "Thermapluggs linker Daumen"
+          },
+          {
+            "title": "Gitterwerk-Lochkarten (A, B, C, D)",
+            "min_lvl": "25",
+            "giver": "Matrix-Lochkartenleser im Dungeon",
+            "chain": "Startet bei den Terminalstationen innerhalb der Instanz.",
+            "reward": "Matrix-Prisma & Level-Bonus"
+          }
+        ]
+      },
+      {
+        "id": "sm",
+        "name": "Scharlachrotes Kloster (Scarlet Monastery)",
+        "level": "34 - 42",
+        "zone": "Tirisfal (Nord-Östliche Königreiche)",
+        "boss": "Mograine & Hochinquisitorin Weißsträhne",
+        "key_loot": "Verwüster (Axt), Mograines Macht, Triumphet-Helm, Kugel von Lorley",
+        "quests": [
+          {
+            "title": "Im Namen des Lichts",
+            "min_lvl": "34",
+            "giver": "Raleigh der Andächtige (Süderstade, Vorgebirge von Hillsbrad)",
+            "chain": "⚠️ WICHTIGSTE ALLIANZ-QUEST: Töte alle 4 Kloster-Bosse!",
+            "reward": "Schwert des Friedensrichters / Omenwerfer (Armbrust für Mirza!) / Drachentöter-Axt (für Faruk!)"
+          },
+          {
+            "title": "Mythologie der Titanen",
+            "min_lvl": "28",
+            "giver": "Bibliothekar Mae Peller (Eisenschmiede - Halle der Forscher)",
+            "chain": "Buch aus der Kloster-Bibliothek stehlen. In Eisenschmiede abholen!",
+            "reward": "Forscher-Halskette & XP"
+          },
+          {
+            "title": "Kompendium der Gefallenen",
+            "min_lvl": "28",
+            "giver": "Sage Truthseeker (Eisenschmiede - Halle der Forscher)",
+            "chain": "Buch aus der Kloster-Bibliothek bergen.",
+            "reward": "Gürtel der Standhaftigkeit"
+          }
+        ]
+      },
+      {
+        "id": "zf",
+        "name": "Zul'Farrak (ZF)",
+        "level": "44 - 50",
+        "zone": "Tanaris (Gadgetzan)",
+        "boss": "Häuptling Ukorz Sandskalp & Gahz'rilla",
+        "key_loot": "Karottengriffel, Sul'thraze der Peitscher, Sandpolierer",
+        "quests": [
+          {
+            "title": "Gahz'rilla (Trinket-Pflicht!)",
+            "min_lvl": "40",
+            "giver": "Wizzik Niederhopf (Schimmernde Ebene / Tausend Nadeln)",
+            "chain": "⚠️ ACHTUNG: Erfordert den 'Hammer von Zul'Farrak', der vorher auf dem Altar in Jintha'Alor (Hinterland) aufgeladen werden muss!",
+            "reward": "Karottengriffel (+3% Reittiertempo Trinket — Bis Endgame aktiv!)"
+          },
+          {
+            "title": "Skarabäus-Panzer",
+            "min_lvl": "40",
+            "giver": "Tran'rek (Gadgetzan, Tanaris)",
+            "chain": "Direkt vor dem Wüstentor in Gadgetzan abholen.",
+            "reward": "Robuster Ledergurt & XP"
+          },
+          {
+            "title": "Die Tiara der Tiefe",
+            "min_lvl": "40",
+            "giver": "Taldan (Dampfdruck-Pier, Tanaris)",
+            "chain": "Am Hafen von Tanaris abholbar.",
+            "reward": "Mächtiger Caster-Ring für Faruk"
+          },
+          {
+            "title": "Nekrit-Amulett",
+            "min_lvl": "40",
+            "giver": "Thadius Grimmschein (Verwüstete Lande)",
+            "chain": "Vor der Abreise nach Kalimdor in den Verwüsteten Landen abholen.",
+            "reward": "Amulett der Zähigkeit"
+          }
+        ]
+      },
+      {
+        "id": "st",
+        "name": "Versunkener Tempel (Sunken Temple)",
+        "level": "50 - 55",
+        "zone": "Sümpfe des Elends",
+        "boss": "Jammal'an der Prophet & Eranikus",
+        "key_loot": "Klassenquest-Epics, Drachenseelen-Stab, Kettengürtel des Erwachens",
+        "quests": [
+          {
+            "title": "Stufe 50 Klassenquest (Schamane & Jäger)",
+            "min_lvl": "50",
+            "giver": "Klassenlehrer in Eisenschmiede / Sturmwind",
+            "chain": "⚠️ EXTREM WICHTIG: Jede Klasse erhält mit Stufe 50 eine Questreihe, die im Versunkenen Tempel endet!",
+            "reward": "Epischer Schmuck / Waffe / Rüstung (extrem mächtig für Level 50-60)"
+          },
+          {
+            "title": "In den Tempel von Atal'Hakkar",
+            "min_lvl": "46",
+            "giver": "Angelas Mondhauch (Fehpumpen / Feralas)",
+            "chain": "Götzen-Fragmente aus dem Tempel holen.",
+            "reward": "Mächtiger Allianz-Umhang"
+          },
+          {
+            "title": "Jammal'an der Prophet",
+            "min_lvl": "46",
+            "giver": "Atal'ai-Exilant (Sümpfe des Elends)",
+            "chain": "Kopf des Propheten erbeuten.",
+            "reward": "Helm der Verdammnis"
+          }
+        ]
+      },
+      {
+        "id": "brd",
+        "name": "Blackrocktiefen (BRD)",
+        "level": "52 - 60",
+        "zone": "Brennender Steppengürtel (Schwarzfels)",
+        "boss": "Imperator Dagran Thaurissan",
+        "key_loot": "Hand der Gerechtigkeit, Zweiter Wind, Schattenschmiede-Schlüssel",
+        "quests": [
+          {
+            "title": "Schlüssel zur Schattenschmiede (Geisterquest!)",
+            "min_lvl": "48",
+            "giver": "Franclorn Forgewright (Nur in Geisterform sichtbar auf dem Grabstein im Schwarzfels!)",
+            "chain": "Sterben -> Als Geist zur Statue laufen -> Quest annehmen -> Eisenfel-Hammer von Incendius holen -> Schlüssel an der Statue schmieden.",
+            "reward": "Schattenschmiede-Schlüssel (Öffnet alle Abkürzungen in BRD!)"
+          },
+          {
+            "title": "Die Rettung von Prinzessin Moira",
+            "min_lvl": "53",
+            "giver": "König Magni Bronzebeard (Große Schmiede, Eisenschmiede)",
+            "chain": "Endboss Dagran Thaurissan töten, aber Prinzessin Moira NICHT angreifen!",
+            "reward": "Königlicher Siegelring von Ironforge"
+          },
+          {
+            "title": "Jailbreak! (Onyxia-Prequest Kette)",
+            "min_lvl": "54",
+            "giver": "Marschall Windsor (In den Gefängniszellen von BRD)",
+            "chain": "⚠️ PFLICHT FÜR DEN ONYXIA-RAID: Windsor befreien, nach Sturmwind eskortieren und Katrana Prestor entlarven!",
+            "reward": "Amulett des Drachenfeuers (Zugang zu Onyxias Hort)"
+          }
+        ]
       }
     ]
   },
-  "leveling_roadmap": {
-    "status": "Optimiert für WoW Forever Allianz-Paar (Hunter + Shaman/Priest)",
-    "steps": [
-      {"range": "Stufe 1 - 10", "zone": "Elwynn / Dun Morogh", "priority": "Klassenquest sofort auf Stufe 10 machen. Faruk zähmt erstes Pet (Eber oder Katze), Mirza schaltet erste Totems frei."},
-      {"range": "Stufe 10 - 18", "zone": "Loch Modan & Westfall", "priority": "Erste Camping-Upgrades ausprobieren. Todesminen (Deadmines) Vorquests in Westfall abschließen."},
-      {"range": "Stufe 18 - 24", "zone": "Todesminen (DM) & Rotkamm", "priority": "Deadmines Dungeon-Run für die ersten blauen Items. Rotkammgebirge Gruppenquests zu zweit lösen."},
-      {"range": "Stufe 24 - 30", "zone": "Dämmerwald (Duskwood) & Verlies", "priority": "Dämmerwald-Questreihe gibt massive XP. Schneller Verlies (Stockades)-Run in Sturmwind."},
-      {"range": "Stufe 30 - 38", "zone": "Schlingendorntal (STV) & Kloster", "priority": "Nesingwary Jagdquests in STV. Scharlachrotes Kloster (SM) Waffen & Kettenrüstung farmen."},
-      {"range": "Stufe 38 - 45", "zone": "Ödland & Zul'Farrak (Tanaris)", "priority": "Level 40: Goldreserve für Reittier (Mount) nutzen! Zul'Farrak für Karottengriffel (+Mountspeed)."},
-      {"range": "Stufe 45 - 52", "zone": "Hinterland & Versunkener Tempel", "priority": "Elite-Quests in Jintha'Alor (mächtige blaue Belohnungen). Versunkener Tempel Klassenquest Stufe 50."},
-      {"range": "Stufe 52 - 60", "zone": "Pestländer & Blackrocktiefen (BRD)", "priority": "Schlüssel-Quests (Scholo, Stratholme, BRD) abschließen. Pre-Raid BiS farmen und Ding 60!"}
+  "intel_sources": {
+    "title": "📡 Verifizierte Informationsquellen für WoW Forever Insights",
+    "description": "Die besten Kanäle, um tagesaktuelle, ungefilterte und akkurate Daten zu Exploits, Klassenänderungen und Hotfixes zu erhalten:",
+    "channels": [
+      {
+        "name": "Blizzard Blue Tracker (US & EU)",
+        "type": "Offiziell (100% verifiziert)",
+        "url": "https://us.forums.blizzard.com/en/wow/c/classic/classic-discussion",
+        "why": "Jeder Entwickler-Post von Tim Jones oder Kris Zierhut landet hier zuerst. Unser Scraper liest den RSS-Feed dieses Trackers direkt aus."
+      },
+      {
+        "name": "Wowhead Classic & Dedicated Forever DB",
+        "type": "Datamining & Datenbank",
+        "url": "https://www.wowhead.com/classic",
+        "why": "Sobald Blizzard einen Patch oder Hotfix einspielt, extrahieren die Wowhead-Crawler die genauen Spell-IDs, Skalierungsfaktoren und Pet-Attribute."
+      },
+      {
+        "name": "Reddit r/classicwow & r/wowforever",
+        "type": "Community Radar (Frühwarnsystem)",
+        "url": "https://reddit.com/r/classicwow",
+        "why": "Exploits, verbuggte Quests und geheime Gold-Spots werden von Spielern hier Stunden vor einer offiziellen Blizzard-Meldung gemeldet."
+      },
+      {
+        "name": "Warcraft Tavern & ClassicDB",
+        "type": "Quest- & Dungeon-Pfade",
+        "url": "https://www.warcrafttavern.com",
+        "why": "Beste Referenz für exakte Vorquest-Ketten, NPC-Koordinaten und Drop-Chancen für Vorbereitungsmaterialien."
+      },
+      {
+        "name": "Buffed.de & GameStar WoW",
+        "type": "Deutsche Fachpresse",
+        "url": "https://www.buffed.de",
+        "why": "Liefert schnelle Zusammenfassungen komplexer Patch-Notes auf Deutsch mit Fokus auf europäische Server und Zeitzonen."
+      }
+    ]
+  },
+  "gold_guide": {
+    "title": "Gold-Making & Berufe-Leitfaden (Launch Tag 1)",
+    "professions": [
+      {
+        "combo": "Mirza: Kürschnerei + Kräuterkunde",
+        "type": "Doppelter Sammelberuf (Maximale Liquidität)",
+        "desc": "Perfekte Synergie für Jäger! Mirza häutet jedes erlegte Tier beim Questen (Leder & Bälge direkt an NPC verkaufen oder im AH zu Barvermögen machen) und pflückt alle Kräuter am Wegesrand. Im Camping-System liefert Mirza Kräuter für die Räucherkerze (+Intelligenz für Faruks Mana)."
+      },
+      {
+        "combo": "Faruk: Bergbau + Ingenieurskunst",
+        "type": "Selbstversorger & High-End Utility",
+        "desc": "Bergbau deckt 100% der Materialien für Engineering ab. Faruk stellt Bomben & Granaten her (entscheidender Flächenschaden beim Leveln), bastelt Zielattrappen (Target Dummies zur Rettung bei gefährlichen Dungeons) und stellt Schusswaffen/Munition sowie später Jumper Cables her."
+      },
+      {
+        "combo": "Duo-Synergie (Faruk & Mirza)",
+        "type": "Unschlagbares Teamwork",
+        "desc": "Keine Materialkonkurrenz! Mirza sammelt Pflanzen und Tierfelle, Faruk Erz- und Steinadern. Gemeinsam decken sie im Camping-System Verteidigungs-, Erholungs- und Manaboni ab. Faruk schützt Mirza mit Totems & Bomben, Mirza liefert Massen an Rohstoffen."
+      }
+    ],
+    "rules": [
+      "1. Gold sparen für Stufe 40 Mount: Kaufe beim Klassenlehrer nur absolut notwendige Angriffs- & Heilfähigkeiten (keine nutzlosen Zauberränge).",
+      "2. Sammelberufe nie vernachlässigen: Mirza hält Kürschnerei immer auf Zonenlevel, Faruk schmilzt Erze direkt ein für Ingenieurs-Punkte.",
+      "3. Camping vor jedem Dungeon aktivieren: 1 Minute Campen schaltet Rested-Bonus und Berufs-Buffs frei, spart Heiltränke und beschleunigt den Dungeonrun um 25%."
     ]
   }
 }

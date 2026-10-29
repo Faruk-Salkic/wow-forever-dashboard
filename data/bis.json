@@ -1,9 +1,9 @@
 {
-  "last_updated": "2026-10-28",
+  "last_updated": "2026-10-29",
   "note": "BiS-Listen werden täglich automatisch aktualisiert. Quellen: Wowhead, Icy Veins.",
   "classes": {
     "Hunter": {
-      "spec": "Beast Mastery",
+      "spec": "Beast Mastery (Tierherrschaft)",
       "color": "#abd656",
       "icon": "🏹",
       "phase": "Launch / Phase 1",
@@ -25,18 +25,18 @@
         {"slot": "Fernkampf",    "item": "Später aktualisiert",  "source": "—", "url": ""},
         {"slot": "Köcher",       "item": "Später aktualisiert",  "source": "—", "url": ""}
       ],
-      "best_pet": "Wolf — Furioses Heulen (+5% Schaden party-weit)",
-      "key_talents": "Beast Mastery 41 Punkte + Marksmanship",
-      "leveling_tip": "Pet auf Aggressiv, Kill Command priorisieren. Quests mit Gruppenzielen im Party lösen.",
+      "best_pet": "Wolf — Furioses Heulen (+5% Schaden für die Gruppe, bufft auch Faruks Schamanen)",
+      "key_talents": "Tierherrschaft (Beast Mastery) 41 Punkte + Treffsicherheit",
+      "leveling_tip": "Pet auf Aggressiv/Defensiv, Knurren immer maximal halten. Duo-Quests mit Faruks Totems und Heals kombinieren.",
       "tips": [
-        "Wolf als Pet für Raids (Furioses Heulen Buff)",
-        "Aspekt des Adlers für Mana-Regen zwischen Kämpfen",
-        "Feign Death zum Agro-Reset nutzen",
-        "Traps (Frostfalle) für PvP unverzichtbar"
+        "Wolf als Pet für Raids & Dungeons (Furioses Heulen Buff für Mirza & Faruk)",
+        "Aspekt des Geparden/Rudels für schnelles Vorankommen zu zweit",
+        "Totstellen (Feign Death) zum Agro-Reset nutzen",
+        "Frostfalle für PvP und Schutz von Faruks Zaubern unverzichtbar"
       ]
     },
     "Shaman": {
-      "spec": "Enhancement / Elemental",
+      "spec": "Enhancement / Restoration",
       "color": "#0070de",
       "icon": "🌊",
       "phase": "Launch / Phase 1",
@@ -52,13 +52,13 @@
         {"slot": "Trikett 1",    "item": "Später aktualisiert",  "source": "—", "url": ""}
       ],
       "best_pet": "—",
-      "key_talents": "Enhancement (Nahkampf/DPS) oder Elemental (Zauber-DPS)",
-      "leveling_tip": "Enhancement für schnelles Leveling. Totems strategisch platzieren (Erdtotem für Rüstung, Windtotem für Angriffstempo).",
+      "key_talents": "Enhancement (Verstärkung) für Nahkampf & schnelles Duo-Leveln | Restoration für Dungeon-Heals",
+      "leveling_tip": "Enhancement mit Windfury für mächtigen Burst. Totems strategisch platzieren: Steinhaut schützt Mirzas Begleiter, Windzorn bufft die Gruppe.",
       "tips": [
-        "Waffenverzauberungen: Windfury auf Haupthand (massiver DPS-Boost)",
-        "Kettenblitz priorisieren für AoE-Pulls",
-        "Geistwolf-Form für schnelle Bewegung zwischen Quests",
-        "Alliance: Kein Schamane nativ — prüfe Rassen-Optionen!"
+        "Waffenverzauberungen: Windfury auf Haupthand für extreme Nahkampf-Bursts",
+        "Steinhaut-Totem immer aktiv halten, um Schaden auf Mirzas Pet zu minimieren",
+        "Engineering-Bomben nutzen: Eisengranaten und Zielattrappen retten brenzlige Situationen",
+        "Allianz-Schamane: Perfekte Synergie mit Jäger – Geisterwolf ab Stufe 20 für schnelles Reisen"
       ]
     },
     "Priest": {
@@ -113,4 +113,3 @@
     }
   }
 }
-

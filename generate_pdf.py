@@ -119,6 +119,7 @@ def generate_pdf_v2():
     # 2. WoW Forever Specificnosti
     story.append(Paragraph("2. Zvanicne WoW Forever Mehanike (Blizzard Potvrdjeno)", h1_style))
     story.append(Paragraph("Za razliku od starog Vanilla 1.12 koda, WoW Forever uvodi fundamentalne novine koje ovaj dashboard prati:", body_style))
+    story.append(Paragraph("• <b>Allianz Duo Sinergija (Faruk &amp; Mirza):</b> Mirza igra 100% Jäger (Kürschnerei &amp; Kräuterkunde) dok Faruk igra Schamana (Bergbau &amp; Engineering). Mirza prikuplja travke za kamping svijecu (+Intelligenz za Faruka) i kozu, dok Faruk rudari za inzenjerske bombe, target dummies (spasavanje od wipe-a u tamnicama) i podrsku totemima (Stoneskin, Windfury, Heals).", bullet_style))
     story.append(Paragraph("• <b>Camping Sistem:</b> Obicna vatra za kuvanje postaje mobilni kamp. 1 minut boravka daje Rested XP status na terenu. Profesije dodaju objekte: Kovaci (Sharpening Wheel: +AP), Krojaci (Faction Banner: +Spirit), Travari (Incense Candle: +Int), Alhemicari (Mobile Alchemielabor: craftovanje eliksira bez odlaska u Scholomance).", bullet_style))
     story.append(Paragraph("• <b>Hunter Pet Skaliranje:</b> Petovi vise ne kaskaju za likom u end-game fazi; njihova snaga, oklop i health direktno skaliraju sa agilnoscu i opremom Huntera.", bullet_style))
     story.append(Paragraph("• <b>Legacy Sistem:</b> Nalog-siroka progresija koja ubrzava razvoj alternativnih likova (twinkova) i istrazivanje novih Forever zona.", bullet_style))
@@ -137,12 +138,12 @@ def generate_pdf_v2():
     # 4. Moduli u Dashboardu
     story.append(Paragraph("4. Pregled Korisnickog Interfejsa (Dashboard Moduli)", h1_style))
     story.append(Paragraph("Dashboard (dostupan na https://faruk-salkic.github.io/wow-forever-dashboard/) sadrzi:", body_style))
-    story.append(Paragraph("1. <b>Profil Switcher (Faruk / Mirza):</b> Dinamicki prilagodjava sekciju 'Heute fur uns' prema primarnim profesijama i klasama igraca.", bullet_style))
+    story.append(Paragraph("1. <b>Profil Switcher (Faruk: Schamane / Mirza: Jäger 100%):</b> Dinamicki prilagodjava sekciju 'Heute fur uns' prema ulogama: Faruk (Bergbau &amp; Engineering) i Mirza (Kürschnerei &amp; Kräuterkunde).", bullet_style))
     story.append(Paragraph("2. <b>Lokalni Countdown:</b> Odbrojava tacno do ponoci 05.11.2026. (CET).", bullet_style))
     story.append(Paragraph("3. <b>In-App Modal Reader:</b> Prikaz kompletnih sazetaka na njemackom jeziku unutar elegantnog pop-up prozora.", bullet_style))
     story.append(Paragraph("4. <b>Tab 'Camping &amp; Legacy':</b> Detaljan pregled svih profesijskih predmeta i bonusa u kampu.", bullet_style))
     story.append(Paragraph("5. <b>Tab 'Jager-Pets':</b> Pregled petova (Katze, Eber, Wolf) sa lokacijama za Alijansu i ulogama u grupi.", bullet_style))
-    story.append(Paragraph("6. <b>Tab 'Leveling &amp; Dungeons':</b> Preporucena ruta kroz zone i checklist najvaznijeg loota u tamnicama.", bullet_style))
+    story.append(Paragraph("6. <b>Tab 'Leveling &amp; Dungeons':</b> Vodic za Farukov patuljacki start (Dun Morogh) uz cekanje na Mirzinu 100% potvrdu rase, zona ruta (1-60), te interaktivna checklista svih tamnickih questova (Deadmines, Stockades, Gnomeregan, SM, ZF, ST, BRD) sa lokacijama NPC-eva i pametnim pamtjenjem u browseru.", bullet_style))
     story.append(Paragraph("7. <b>Tab 'Gold &amp; Berufe':</b> Strategija profesija za prvi dan servera.", bullet_style))
 
     story.append(Spacer(1, 15))
