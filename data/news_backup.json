@@ -1,15 +1,30 @@
 {
-  "last_updated": "2026-10-30T15:16:21.138130+00:00",
-  "total_count": 3,
-  "new_count": 0,
-  "daily_summary": "Heute keine neuen relevanten Updates für Shaman und Hunter.",
+  "last_updated": "2026-10-30T15:20:23.590776+00:00",
+  "total_count": 5,
+  "new_count": 2,
+  "daily_summary": "Tagesbriefing (30.10.2026): 2 neue relevante Updates erfasst. Themen: Neue Klassen- und Item-Tuning auf WoW: Forever - Jäger-Änderungen; Kehre in World of Warcraft: Forever nach Azeroth zurück.",
   "castle_status": {
     "status": "Keine Live-Daten verifiziert",
     "details": "Aktuell liegen keine automatischen Burgen-Telemetriedaten vor. Status wird nach Serverstart über Live-Events angebunden.",
-    "last_checked": "2026-10-30T15:16:21.138138+00:00",
+    "last_checked": "2026-10-30T15:20:23.590788+00:00",
     "verified": false
   },
   "items": [
+    {
+      "id": "a2ae7d88fc6c",
+      "date": "2026-10-29",
+      "fetched_at": "2026-10-30T15:20:21.467528+00:00",
+      "source": "MMO-Champion",
+      "source_icon": "⚔️",
+      "category": "news",
+      "verified_type": "Community / Portal",
+      "radar_status": "normal",
+      "classes": [],
+      "title": "Kehre in World of Warcraft: Forever nach Azeroth zurück",
+      "teaser_de": "Kehre in World of Warcraft: Forever nach Azeroth zurück\n\n\n\n\n\n\t\t\t\t\t\tUrsprünglich geschrieben von Blizzard\n\t\t\t\t\t\t(Blauer Tracker / Offizielle Foren)\n\t\t\t\t\t\nWorld of Warcraft: Forever ...",
+      "article_de": "📌 **Zusammenfassung von MMO-Champion:**\nKehre in World of Warcraft: Forever nach Azeroth zurück\n\n\n\n\n\n\t\t\t\t\t\tUrsprünglich geschrieben von Blizzard\n\t\t\t\t\t\t(Blauer Tracker / Offizielle Foren)\n\t\t\t\t\t\nWorld of Warcraft: Forever beginnt eine neue Reise durch eine neu gestaltete Originalwelt mit neuen Zonen, Quests, Dungeons, Systemen und Charakteroptionen, die das Abenteuer erweitern und gleichzeitig seinen grundlegenden Charakter bewahren sollen. Wenn du nach Azeroth zurückkehrst, haben wir alles, was du brauchst, um deinen Weg zu beginnen.\n\n💡 **Handlungsempfehlung:** Originalquelle für weitere Details im Link unten öffnen.",
+      "url": "https://www.mmo-champion.com/content/14655-Return-to-Azeroth-in-World-of-Warcraft-Forever"
+    },
     {
       "id": "1784d6e34d56",
       "date": "2026-10-29",
@@ -25,6 +40,23 @@
       "title": "WoW Forever: Neues Klassen- & Item-Tuning – Anpassungen für Jäger & Alchemie",
       "teaser_de": "Mit dem Start der Namensreservierungen für WoW Forever hat Blizzard Balance-Anpassungen für Jäger (Hunter) und neue Alchemie-Tränke veröffentlicht.",
       "article_de": "📌 **Was ist passiert?**\nBlizzard hat zeitgleich mit den Namensreservierungen erste Balance-Anpassungen für WoW Forever eingespielt. Diese betreffen vor allem Jäger-Fertigkeiten sowie Alchemie-Tränke.\n\n🎮 **Bedeutung für Faruk & Mirza:**\n• **Mirza (Jäger):** Skalierungswerte und Mana-Effizienz für Jäger-Fähigkeiten wurden optimiert. Die Begleiter-Aggro wurde leicht angehoben.\n• **Duo-Synergie:** Durch Mirzas Kräuterkunde können seltene Pflanzen für die neuen Tränke im Camping-System optimal genutzt werden.\n\n💡 **Handlungsempfehlung:**\nMirza sollte zum Start Tierherrschaft (Beast Mastery) priorisieren, da Begleiter von den Forever-Skalierungen am meisten profitieren.",
+      "url": "https://www.wowhead.com/news=383641/new-class-and-item-tuning-on-wow-forever-hunter-changes"
+    },
+    {
+      "id": "74ba75a0b8da",
+      "date": "2026-10-28",
+      "fetched_at": "2026-10-30T15:20:17.702555+00:00",
+      "source": "WoWhead Forever",
+      "source_icon": "🌐",
+      "category": "news",
+      "verified_type": "Community / Portal",
+      "radar_status": "normal",
+      "classes": [
+        "Hunter"
+      ],
+      "title": "Neue Klassen- und Item-Tuning auf WoW: Forever - Jäger-Änderungen",
+      "teaser_de": "Mit Namensreservierungen, die jetzt in WoW: Forever verfügbar sind, gibt es einige Tuning-Änderungen für Jäger und einen Alchemie-Trank.",
+      "article_de": "📌 **Zusammenfassung von WoWhead Forever:**\nMit Namensreservierungen, die jetzt in WoW: Forever verfügbar sind, gibt es einige Tuning-Änderungen für Jäger und einen Alchemie-Trank.\n\n💡 **Handlungsempfehlung:** Originalquelle für weitere Details im Link unten öffnen.",
       "url": "https://www.wowhead.com/news=383641/new-class-and-item-tuning-on-wow-forever-hunter-changes"
     },
     {
@@ -61,14 +93,14 @@
     }
   ],
   "sources_status": {
-    "Blizzard News": "Fehler: HTTPSConnectionPool(host='worldofwarcraft.blizzard",
-    "Blizzard Blue Tracker": "Fehler: HTTPSConnectionPool(host='us.forums.blizzard.com',",
-    "WoWhead Forever": "Fehler: HTTPSConnectionPool(host='www.wowhead.com', port=4",
-    "Buffed.de": "Fehler: HTTPSConnectionPool(host='www.buffed.de', port=443",
-    "MMO-Champion": "Fehler: HTTPSConnectionPool(host='www.mmo-champion.com', p",
-    "Icy Veins Forever": "Fehler: HTTPSConnectionPool(host='www.icy-veins.com', port",
-    "Method Forever": "Fehler: HTTPSConnectionPool(host='www.method.gg', port=443",
-    "Warcraft Tavern": "Fehler: HTTPSConnectionPool(host='www.warcrafttavern.com',",
+    "Blizzard News": "HTTP 404",
+    "Blizzard Blue Tracker": "HTTP 404",
+    "WoWhead Forever": "OK (40 Meldungen)",
+    "Buffed.de": "OK (20 Meldungen)",
+    "MMO-Champion": "OK (5 Meldungen)",
+    "Icy Veins Forever": "HTTP 404",
+    "Method Forever": "HTTP 404",
+    "Warcraft Tavern": "OK (0 Meldungen)",
     "Reddit (r/wowforever & r/classicwow)": "Keine neuen Top-Meldungen"
   }
 }

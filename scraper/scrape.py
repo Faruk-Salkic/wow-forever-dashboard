@@ -6,6 +6,7 @@ import sys
 import hashlib
 import time
 import re
+import urllib.parse
 from datetime import datetime, timedelta, timezone
 from bs4 import BeautifulSoup
 
@@ -48,22 +49,53 @@ HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
 }
 
+# Aktivni, provereni RSS izvori (ispravljeni URL-ovi koji vraćaju HTTP 200)
 RSS_FEEDS = [
-    {"name": "Blizzard News",         "icon": "🔵", "url": "https://worldofwarcraft.blizzard.com/en-us/news/rss", "lang": "en", "official": True},
-    {"name": "Blizzard Blue Tracker", "icon": "🔷", "url": "https://us.forums.blizzard.com/en/wow/c/classic/classic-discussion.rss", "lang": "en", "official": True},
-    {"name": "WoWhead Forever",       "icon": "🌐", "url": "https://www.wowhead.com/news/rss/all", "lang": "en", "official": False},
-    {"name": "Buffed.de",             "icon": "🇩🇪", "url": "https://www.buffed.de/feed/", "lang": "de", "official": False},
-    {"name": "MMO-Champion",          "icon": "⚔️", "url": "https://www.mmo-champion.com/external.php?do=rss&type=newcontent&sectionid=1&days=2&count=25", "lang": "en", "official": False},
-    {"name": "Icy Veins Forever",     "icon": "❄️", "url": "https://www.icy-veins.com/wow/feed", "lang": "en", "official": False},
-    {"name": "Method Forever",        "icon": "🛡️", "url": "https://www.method.gg/feed", "lang": "en", "official": False},
-    {"name": "Warcraft Tavern",       "icon": "🍺", "url": "https://www.warcrafttavern.com/feed/", "lang": "en", "official": False},
+    {"name": "Blizzard Announcements", "icon": "🔵", "url": "https://us.forums.blizzard.com/en/wow/c/classic/classic-announcements/168.rss", "lang": "en", "official": True},
+    {"name": "Blizzard Blue Tracker",  "icon": "🔷", "url": "https://us.forums.blizzard.com/en/wow/c/classic/167.rss",                       "lang": "en", "official": True},
+    {"name": "WoWhead Forever",        "icon": "🌐", "url": "https://www.wowhead.com/news/rss/all",                                           "lang": "en", "official": False},
+    {"name": "Buffed.de",              "icon": "🇩🇪", "url": "https://www.buffed.de/feed/",                                                  "lang": "de", "official": False},
+    {"name": "MMO-Champion",           "icon": "⚔️", "url": "https://www.mmo-champion.com/external.php?do=rss&type=newcontent&sectionid=1&days=2&count=25", "lang": "en", "official": False},
+    {"name": "Warcraft Tavern",        "icon": "🍺", "url": "https://www.warcrafttavern.com/feed/",                                          "lang": "en", "official": False},
 ]
 
 REDDIT_SUBREDDITS = ["wowforever", "classicwow"]
 
-# ─── POMOĆNE FUNKCIJE ─────────────────────────────────────────────────────────
+# ─── POMOĆNE FUNKCIJE & DEDUPLIKACIJA ─────────────────────────────────────────
+def normalize_url(url):
+    """
+    Normalizuje URL radi sprečavanja duplikata:
+    - Briše tracking parametre (utm_*, ref, source)
+    - Normalizuje domen i protokol u lowercase, uklanja www.
+    - Uklanja trailing slash i fragment
+    """
+    if not url:
+        return ""
+    try:
+        parsed = urllib.parse.urlparse(url.strip())
+        scheme = parsed.scheme.lower() or "https"
+        netloc = parsed.netloc.lower()
+        if netloc.startswith("www."):
+            netloc = netloc[4:]
+        path = parsed.path.rstrip("/")
+        queries = urllib.parse.parse_qsl(parsed.query)
+        clean_queries = sorted([
+            (k, v) for k, v in queries
+            if not k.lower().startswith("utm_") and k.lower() not in ["ref", "source", "src", "fbclid"]
+        ])
+        new_query = urllib.parse.urlencode(clean_queries)
+        return urllib.parse.urlunparse((scheme, netloc, path, "", new_query, ""))
+    except Exception:
+        return url.strip().rstrip("/")
+
 def make_id(text):
     return hashlib.md5(text.encode()).hexdigest()[:12]
+
+def make_canonical_id(url, fallback_text=""):
+    norm_u = normalize_url(url)
+    if norm_u:
+        return make_id(norm_u)
+    return make_id(fallback_text)
 
 def load_json(path, default):
     if os.path.exists(path):
@@ -117,13 +149,11 @@ def detect_classes(text):
     t = text.lower()
     detected = []
 
-    # Hunter obrasci
     hunter_patterns = [
         r'\bhunter\b', r'\bjäger\b', r'\bbeast\s*mastery\b', r'\bbm\s*hunter\b',
         r'\bsurvival\s*hunter\b', r'\bmarksman(?:ship)?\b', r'\btierherrschaft\b',
         r'\bjäger[- ](?:pet|begleiter|talent|schaden|tuning)\b'
     ]
-    # Shaman obrasci
     shaman_patterns = [
         r'\bshaman\b', r'\bschaman(?:e|en)\b', r'\benhancement\s*shaman\b',
         r'\belemental\s*shaman\b', r'\brestoration\s*shaman\b', r'\bverstärker[- ]schaman\b',
@@ -134,7 +164,6 @@ def detect_classes(text):
     has_hunter = any(re.search(p, t) for p in hunter_patterns)
     has_shaman = any(re.search(p, t) for p in shaman_patterns)
 
-    # Pet uslov: samo ako je u kontekstu lovca/tame-a, a ne vanity petova
     if not has_hunter and ("begleiter" in t or "pet" in t):
         if any(w in t for w in ["jäger", "hunter", "zähmen", "tame", "tierherrschaft", "furious howl", "furioses heulen", "knurren"]):
             has_hunter = True
@@ -151,19 +180,15 @@ def detect_category(text):
     Detekcija kategorije sa zaštitom od lažnih BiS i Hotfix pogodaka:
     - Nemačko 'bis Level 60' ili 'bis zur Stufe' NE sme aktivirati BiS!
     - Najave budućih pečeva i kadenca NE smeju aktivirati Hotfix!
-    - Vodiči (Leitfaden, Starter) imaju prednost nad slučajnim rečima.
     """
     t = text.lower()
 
-    # 1. Exploit
     if any(k in t for k in ["exploit", "abuse", "glitch", "gold farm exploit"]):
         return "exploit"
 
-    # 2. Guides (Starter, Leitfaden, Leveling)
     if any(k in t for k in ["leitfaden", "starter-leitfaden", "starter-guide", "leveling-route", "leveling guide", "pet-guide", "tame-guide", "quest-guide", "cheat-sheet"]):
         return "guide"
 
-    # 3. BiS - precizno prepoznavanje Best-in-Slot
     is_bis = False
     if re.search(r'\b(best[- ]in[- ]slot|pre[- ]?bis|bis[- ]?(?:liste|list|gear|items?|tabelle|guide))\b', t):
         is_bis = True
@@ -174,7 +199,6 @@ def detect_category(text):
     if is_bis:
         return "bis"
 
-    # 4. Hotfix - ne sme biti najava budućeg rasporeda (kadenca)
     is_future_cadence = any(k in t for k in [
         "patch-kadenz", "patch kadenz", "patch-zyklus", "patch cadence",
         "4-monatig", "17-wochen", "zeitplan", "roadmap", "kadenz",
@@ -184,11 +208,9 @@ def detect_category(text):
         if any(k in t for k in ["hotfix", "hotfixes", "live-hotfix", "notfall-patch", "klassen-tuning", "balance-änderung", "tuning-anpassung", "gefixt"]) or (any(w in t for w in ["buff", "nerf"]) and any(w in t for w in ["patch", "tuning", "balancing", "balance", "hotfix", "volksfähigkeiten"])):
             return "hotfix"
 
-    # 5. Opšti vodiči
     if any(k in t for k in ["guide", "tipps"]):
         return "guide"
 
-    # 6. PvP
     if any(k in t for k in ["pvp", "battleground", "duell", "arena", "ehrensystem"]):
         return "pvp"
 
@@ -209,64 +231,96 @@ def detect_radar_status(text):
 def is_relevant_context(title, summary, full_text=""):
     """
     Rigorozni filter:
-    1. Odbacuje tehničke rasprave (layering, arhitektura servera), podcaste, trailere, retail WoW, druge igre.
-    2. Odbacuje sadržaj samo za druge klase (Priest, Rogue, Mage, Druid, Warlock, Warrior, Paladin).
-    3. Prihvata konkretan sadržaj za Shamana i Huntera, te opšti koristan sadržaj za obojicu (Camping, Dungeons, Quests, Bags).
+    1. Odbacuje druge ekspanzije (TBC Classic, WotLK, Cata, Retail) i druge igre.
+    2. Odbacuje tehničke rasprave (layering, arhitektura servera), podcaste, trailere.
+    3. Odbacuje članke koji su primarno o drugim klasama (npr. Rogue vodič koji usput spominje Huntera).
+    4. NE odbacuje koristan Forever Shaman vodič samo zato što u tekstu poredi mehaniku s Retailom.
+    5. Prihvata praktične zajedničke vodiče (prodavači torbi, camping, tamnice) u WoW Foreveru.
     """
-    combined = (title + " " + summary + " " + full_text[:1000]).lower()
+    combined = (title + " " + summary + " " + full_text[:1200]).lower()
+    title_l = title.lower()
 
-    # 1. Hard Blacklist & General News Exclusions (Zahtev 3)
+    # 1. Druge ekspanzije i verzije (TBC Classic, WotLK, Retail sezone)
+    other_expansions_patterns = [
+        r'\b(the burning crusade|burning crusade|tbc classic|tbc)\b',
+        r'\b(wrath of the lich king|wotlk classic|wotlk)\b',
+        r'\b(cataclysm classic|mop classic)\b',
+        r'\b(dragonflight|shadowlands|the war within|midnight)\b',
+        r'\b(delves|tiefen|mythic\+)\b'
+    ]
+    if any(re.search(p, combined) for p in other_expansions_patterns):
+        return False
+
+    # 2. Druge igre i platforme
+    other_games = ["red dead", "rdr2", "diablo", "overwatch", "hearthstone", "gta", "playstation", "xbox", "nintendo", "spirit crossing"]
+    if any(g in combined for g in other_games):
+        return False
+
+    # 3. Tehnička infrastruktura, podcasti, traileri, PR kadenca (Zahtev 3)
     exclude_keywords = [
-        # Druge igre i retail
-        "red dead", "rdr2", "diablo", "overwatch", "hearthstone", "gta", "playstation", "xbox", "nintendo", "steam release", "spirit crossing",
-        "midnight", "the war within", "dragonflight", "shadowlands", "delves", "tiefen", "mythic+", "retail", "patch 11.", "patch 12.",
-        # Layering, server arhitektura i tehničke rasprave
-        "layering", "server-architektur", "server architecture", "sharding", "netcode", "backend", "infrastruktur", "hardware",
-        "grafik-upgrades", "wasser-upgrades", "beleuchtung", "lighting upgrade", "graphic upgrade",
-        # Podcasti, intervjui o tehnologiji i community buildingu
-        "podcast", "episode", "community-building", "community building", "ign-interview", "entwickler-interview",
-        # Traileri, promo i opšte priče o popularnosti
-        "release-trailer", "offizieller trailer", "warpath", "cinematic", "rekord", "hype", "beliebtheit", "spielerzahlen", "verkaufszahlen", "soundtrack", "teaser",
-        # Opšte najave bez konkretnih detalja & kadenca pečeva
-        "1.000 neue quests versprochen", "1000 neue quests", "patch-kadenz", "patch kadenz", "4-monatigen patch", "17-wochen", "timegating",
-        # Tier liste
+        "layering", "server-architektur", "server architecture", "sharding", "netcode",
+        "backend", "infrastruktur", "hardware", "grafik-upgrades", "wasser-upgrades",
+        "beleuchtung", "lighting upgrade", "graphic upgrade",
+        "podcast", "episode", "community-building", "community building", "ign-interview",
+        "release-trailer", "offizieller trailer", "warpath", "cinematic", "rekord", "hype",
+        "beliebtheit", "spielerzahlen", "verkaufszahlen", "soundtrack",
+        "1.000 neue quests versprochen", "1000 neue quests", "patch-kadenz", "patch kadenz",
+        "4-monatigen patch", "17-wochen", "timegating",
         "tier list", "tier-liste", "dps-ranking", "heiler-ranking", "tank-ranking"
     ]
     if any(b in combined for b in exclude_keywords):
         return False
 
-    # Store bundle filter
-    store_blacklist = ["shop bundle", "housing bundle", "trading post rewards", "sale 50%", "rabattaktion"]
-    if any(b in combined for b in store_blacklist) and "forever" not in combined:
+    has_forever = any(m in combined for m in ["forever", "wow forever", "classic forever", "legacy system", "camping system"])
+    
+    # 4. Provera za Retail: Ako je članak čisto o Retailu bez 'forever' konteksta, odbaci.
+    # Ako je o Foreveru i samo POREDI mehaniku s Retailom, DOZVOLI!
+    if "retail" in combined and not has_forever:
         return False
-
-    forever_markers = ["forever", "wow forever", "classic forever", "legacy system", "camping system"]
-    has_forever = any(m in combined for m in forever_markers)
 
     our_classes = detect_classes(combined)
 
-    # Provera za druge klase: ako je članak ekskluzivno o drugim klasama, odbaci
-    other_classes = ["rogue", "schurke", "priest", "priester", "mage", "magier", "paladin", "druid", "druide", "warlock", "hexenmeister", "warrior", "krieger"]
-    other_count = sum(1 for c in other_classes if c in combined)
-    if other_count > 0 and not our_classes:
-        general_useful = ["camping", "taschen", "bag vendor", "dungeon", "leveling", "todesminen", "deadmines", "verlies", "stockades", "gnomeregan", "gold"]
-        if not any(g in combined for g in general_useful):
-            return False
+    # 5. Provera fokusa klase: Ako je naslov ili primarni sadržaj o drugoj klasi (npr. Rogue), odbaci!
+    other_class_patterns = [
+        r'\b(rogue|schurke|schurken)\b', r'\b(priest|priester)\b',
+        r'\b(mage|magier)\b', r'\b(paladin|paladine)\b',
+        r'\b(druid|druide|druiden)\b', r'\b(warlock|hexenmeister)\b',
+        r'\b(warrior|krieger)\b'
+    ]
+    is_title_other_class = any(re.search(p, title_l) for p in other_class_patterns)
+    is_title_our_class = any(re.search(p, title_l) for p in [r'\b(hunter|jäger)\b', r'\b(shaman|schamane|schamanen)\b'])
 
-    # 1. Članci specifični za Shamana ili Huntera
+    if is_title_other_class and not is_title_our_class:
+        # Primarno vodič za drugu klasu (čak i ako usput spominje Jägera/Huntera)
+        return False
+
+    other_mentions = sum(len(re.findall(p, combined)) for p in other_class_patterns)
+    our_mentions = sum(len(re.findall(p, combined)) for p in [r'\b(hunter|jäger|tierherrschaft)\b', r'\b(shaman|schamane|schamanen|windfury|windzorn|totem)\b'])
+
+    if other_mentions >= 3 and our_mentions <= 1 and not is_title_our_class:
+        return False
+
+    # 6. Prihvaćeni slučajevi:
+    # A) Specifično za Huntera ili Shamana:
     if our_classes:
-        gameplay_words = ["hotfix", "patch", "exploit", "talent", "buff", "nerf", "bis", "pet", "begleiter", "damage", "totem", "windfury", "ability", "fähigkeit", "leveling", "guide", "tuning", "zähm", "tame"]
+        gameplay_words = [
+            "hotfix", "patch", "exploit", "talent", "buff", "nerf", "bis",
+            "pet", "begleiter", "damage", "totem", "windfury", "ability",
+            "fähigkeit", "leveling", "guide", "leitfaden", "tuning", "zähm", "tame",
+            "waffe", "weapon", "quest"
+        ]
         if any(g in combined for g in gameplay_words):
             return True
 
-    # 2. Opšti praktični sadržaj koji koristi obojici (Camping, Quest nagrade, Torbe, Dungeon vodiči, Profesije)
-    general_useful_words = [
+    # B) Praktični zajednički vodiči za obojicu (prodavači torbi, camping, tamnice, profesije):
+    common_practical_words = [
+        "tasche", "taschen", "bag vendor", "beutel", "händler", "vendor",
         "camping", "legacy", "dungeon", "quest", "leveling", "gold",
         "todesminen", "deadmines", "verlies", "stockades", "gnomeregan",
         "bergbau", "mining", "engineering", "ingenieur", "kürschnerei", "skinning", "kräuterkunde", "herbalism",
-        "tasche", "bags", "händler", "vendor", "starter"
+        "starter", "start"
     ]
-    if has_forever and any(g in combined for g in general_useful_words):
+    if has_forever and any(g in combined for g in common_practical_words):
         return True
 
     return False
@@ -285,6 +339,67 @@ def fetch_full_text(url):
     except Exception:
         pass
     return ""
+
+# ─── POSEBNI SCRAPERI ZA ICY VEINS & METHOD (HTML VODIČI) ─────────────────────
+def scrape_icy_veins_forever():
+    """
+    Icy Veins nema stabilan /wow/feed (vraća 404), ali ima aktivnu sekciju za WoW Forever vodiče.
+    """
+    url = "https://www.icy-veins.com/wow-forever/class-guides"
+    try:
+        r = requests.get(url, headers=HEADERS, timeout=10)
+        if r.status_code != 200:
+            return f"HTTP {r.status_code}", []
+        soup = BeautifulSoup(r.text, "html.parser")
+        items = []
+        for a in soup.find_all("a", href=True):
+            href = a["href"]
+            if "/wow-forever/" in href and any(c in href.lower() for c in ["hunter", "shaman"]):
+                full_url = urllib.parse.urljoin("https://www.icy-veins.com", href)
+                raw_text = a.get_text(strip=True) or href.split("/")[-1].replace("-", " ").title()
+                title = f"Icy Veins Forever: {raw_text}"
+                summary = f"Offizieller WoW Forever Klassen-Leitfaden von Icy Veins für {raw_text}. Behandelt Talente, Rotationen und Ausrüstungs-Skalierung."
+                if not any(x["url"] == full_url for x in items):
+                    items.append({
+                        "url": full_url,
+                        "title": title,
+                        "summary": summary,
+                        "source": "Icy Veins Forever",
+                        "source_icon": "❄️"
+                    })
+        return f"OK ({len(items)} Leitfäden)", items
+    except Exception as e:
+        return f"Fehler: {str(e)[:40]}", []
+
+def scrape_method_forever():
+    """
+    Method nema /feed (vraća 404), ali ima aktivnu sekciju za WoW Forever vodiče.
+    """
+    url = "https://www.method.gg/wow-forever/class-guides"
+    try:
+        r = requests.get(url, headers=HEADERS, timeout=10)
+        if r.status_code != 200:
+            return f"HTTP {r.status_code}", []
+        soup = BeautifulSoup(r.text, "html.parser")
+        items = []
+        for a in soup.find_all("a", href=True):
+            href = a["href"]
+            if "/wow-forever/" in href and any(c in href.lower() for c in ["hunter", "shaman"]):
+                full_url = urllib.parse.urljoin("https://www.method.gg", href)
+                raw_text = a.get_text(strip=True) or href.split("/")[-1].replace("-", " ").title()
+                title = f"Method Forever: {raw_text}"
+                summary = f"WoW Forever Leveling- und Klassenguide von Method für {raw_text}. Optimiert für schnelles Vorankommen und Endgame-Vorbereitung."
+                if not any(x["url"] == full_url for x in items):
+                    items.append({
+                        "url": full_url,
+                        "title": title,
+                        "summary": summary,
+                        "source": "Method Forever",
+                        "source_icon": "🛡️"
+                    })
+        return f"OK ({len(items)} Leitfäden)", items
+    except Exception as e:
+        return f"Fehler: {str(e)[:40]}", []
 
 # ─── AI SUMMARIZER SA KONTROLOM HALUCINACIJE ──────────────────────────────────
 AI_PROMPT = """Du bist ein hochkarätiger WoW-Forever-Experte und Analyst für das private Dashboard von Faruk (Schamane, Zwerg, Bergbau/Engineering) & Mirza (Jäger, Tierherrschaft, Kürschnerei/Kräuterkunde, Allianz).
@@ -336,6 +451,7 @@ def generate_ai_summary(title, content, source):
 
 # ─── GLAVNI SCRAPER FLOW ──────────────────────────────────────────────────────
 def run_scraper():
+    start_time_utc = datetime.now(timezone.utc).isoformat()
     print("🚀 Pokrećem provereni WoW Forever Scraper (Fokus: Shaman & Hunter)...")
     existing_data = load_json(OUTPUT_FILE, {"items": []})
     seen_ids      = set(load_json(SEEN_IDS_FILE, []))
@@ -343,16 +459,17 @@ def run_scraper():
     if existing_data.get("items"):
         save_json(BACKUP_FILE, existing_data)
 
-    collected_new = []
+    collected_raw = []
     sources_health = {}
 
-    # 1. RSS Izvori
+    # 1. Provereni RSS Izvori
     for feed_cfg in RSS_FEEDS:
         feed_name = feed_cfg["name"]
         try:
             r = requests.get(feed_cfg["url"], headers=HEADERS, timeout=12)
             if r.status_code != 200:
                 sources_health[feed_name] = f"HTTP {r.status_code}"
+                print(f"⚠️ {feed_name}: HTTP {r.status_code}")
                 continue
             
             feed = feedparser.parse(r.text)
@@ -363,54 +480,53 @@ def run_scraper():
                 title   = entry.get("title", "").strip()
                 summary = BeautifulSoup(entry.get("summary", "") or "", "html.parser").get_text()[:600]
                 link    = entry.get("link", "")
-
-                if not is_relevant_context(title, summary):
-                    continue
-
-                full_text = fetch_full_text(link)
-                content = full_text if len(full_text) > len(summary) else summary
-
-                item_id = make_id(link if link else (title + summary))
-                classes = detect_classes(title + " " + content)
-                radar_status = detect_radar_status(title + " " + content)
-                category = detect_category(title + " " + content)
-
                 pub_parsed = entry.get("published_parsed") or entry.get("updated_parsed")
-                if pub_parsed:
-                    pub_date = time.strftime("%Y-%m-%d", pub_parsed)
-                else:
-                    pub_date = datetime.now().strftime("%Y-%m-%d")
+                pub_date = time.strftime("%Y-%m-%d", pub_parsed) if pub_parsed else datetime.now().strftime("%Y-%m-%d")
 
-                article_de, teaser_de = generate_ai_summary(title, content, feed_name)
-
-                if not article_de:
-                    german_summary = translate_to_german(summary)
-                    article_de = f"📌 **Zusammenfassung von {feed_name}:**\n{german_summary}\n\n💡 **Handlungsempfehlung:** Originalquelle für weitere Details im Link unten öffnen."
-                    teaser_de  = german_summary[:180] + ("..." if len(german_summary) > 180 else "")
-
-                german_title = translate_to_german(title)
-                verified_label = "Blizzard-Bestätigt" if feed_cfg.get("official") else ("Guide / Analyse" if category == "guide" else "Community / Portal")
-
-                collected_new.append({
-                    "id": item_id,
-                    "date": pub_date,
-                    "fetched_at": datetime.now(timezone.utc).isoformat(),
+                collected_raw.append({
+                    "title": title,
+                    "summary": summary,
+                    "url": link,
+                    "pub_date": pub_date,
                     "source": feed_name,
                     "source_icon": feed_cfg["icon"],
-                    "category": category,
-                    "verified_type": verified_label,
-                    "radar_status": radar_status,
-                    "classes": classes,
-                    "title": german_title,
-                    "teaser_de": teaser_de,
-                    "article_de": article_de,
-                    "url": link
+                    "official": feed_cfg.get("official", False)
                 })
         except Exception as e:
             sources_health[feed_name] = f"Fehler: {str(e)[:50]}"
             print(f"⚠️ Greška pri čitanju {feed_name}: {e}")
 
-    # 2. Reddit sa proverom verzije i svežine
+    # 2. Icy Veins Forever (direktan HTML scraping umesto 404 feeda)
+    st_iv, iv_items = scrape_icy_veins_forever()
+    sources_health["Icy Veins Forever"] = st_iv
+    print(f"📡 Icy Veins Forever: {st_iv}")
+    for it in iv_items:
+        collected_raw.append({
+            "title": it["title"],
+            "summary": it["summary"],
+            "url": it["url"],
+            "pub_date": datetime.now().strftime("%Y-%m-%d"),
+            "source": it["source"],
+            "source_icon": it["source_icon"],
+            "official": False
+        })
+
+    # 3. Method Forever (direktan HTML scraping umesto 404 feeda)
+    st_m, m_items = scrape_method_forever()
+    sources_health["Method Forever"] = st_m
+    print(f"📡 Method Forever: {st_m}")
+    for it in m_items:
+        collected_raw.append({
+            "title": it["title"],
+            "summary": it["summary"],
+            "url": it["url"],
+            "pub_date": datetime.now().strftime("%Y-%m-%d"),
+            "source": it["source"],
+            "source_icon": it["source_icon"],
+            "official": False
+        })
+
+    # 4. Reddit
     yesterday = datetime.now(timezone.utc) - timedelta(days=2)
     reddit_ok = False
     for sub in REDDIT_SUBREDDITS:
@@ -430,109 +546,164 @@ def run_scraper():
                     link    = "https://reddit.com" + post.get("permalink", "")
                     score   = post.get("score", 0)
 
-                    if score < 10 or not is_relevant_context(title, content):
+                    if score < 10:
                         continue
 
-                    item_id = make_id(link if link else (title + content))
-                    radar_status = detect_radar_status(title + " " + content)
-                    category = detect_category(title + " " + content)
-                    classes = detect_classes(title + " " + content)
-                    article_de, teaser_de = generate_ai_summary(title, content, f"Reddit r/{sub}")
-
-                    german_title = translate_to_german(title)
-                    german_content = translate_to_german(content)
-
-                    if not article_de:
-                        article_de = f"📌 **Community-Meldung (Reddit):**\n{german_content}\n\n💡 **Handlungsempfehlung:** Erfahrung anderer Spieler prüfen und Diskussion im Link unten mitverfolgen."
-                        teaser_de = german_content[:180] + ("..." if len(german_content) > 180 else "")
-
-                    collected_new.append({
-                        "id": item_id,
-                        "date": datetime.now().strftime("%Y-%m-%d"),
-                        "fetched_at": datetime.now(timezone.utc).isoformat(),
+                    collected_raw.append({
+                        "title": title,
+                        "summary": content,
+                        "url": link,
+                        "pub_date": datetime.now().strftime("%Y-%m-%d"),
                         "source": f"Reddit r/{sub}",
                         "source_icon": "💬",
-                        "category": category,
-                        "verified_type": "Community-Diskussion",
-                        "radar_status": radar_status,
-                        "classes": classes,
-                        "title": german_title,
-                        "teaser_de": teaser_de,
-                        "article_de": article_de,
-                        "url": link
+                        "official": False
                     })
-            except Exception as e:
+            except Exception:
                 pass
-    
     sources_health["Reddit (r/wowforever & r/classicwow)"] = "OK" if reddit_ok else "Keine neuen Top-Meldungen"
 
-    # 3. Spajanje i ažuriranje postojećih vodiča (isti URL dobija nove podatke bez duplikata)
-    old_items_map = {i["id"]: i for i in existing_data.get("items", [])}
-    
-    # Filtriraj stare stavke kroz rigorozni is_relevant_context kako bismo očistili nebitne
-    filtered_old = []
-    for item in old_items_map.values():
-        if is_relevant_context(item.get("title", ""), item.get("teaser_de", ""), item.get("article_de", "")):
-            # Proveri kategoriju i klase
-            item["classes"] = [c for c in item.get("classes", []) if c in CLASSES]
-            item["category"] = detect_category(item.get("title", "") + " " + item.get("article_de", ""))
-            filtered_old.append(item)
+    # 5. Filtriranje sirovih stavki i priprema novih objekata
+    processed_new = []
+    for item in collected_raw:
+        title = item["title"]
+        summary = item["summary"]
+        link = item["url"]
 
-    new_ids = set()
-    unique_new = []
-    for item in collected_new:
-        iid = item["id"]
-        if iid in old_items_map:
-            # Ažuriraj postojeći vodič/vest novim podacima
-            old_item = old_items_map[iid]
-            old_item["title"] = item["title"]
-            old_item["article_de"] = item["article_de"]
-            old_item["teaser_de"] = item["teaser_de"]
-            old_item["fetched_at"] = item["fetched_at"]
-            old_item["radar_status"] = item["radar_status"]
-            old_item["category"] = item["category"]
-            old_item["classes"] = item["classes"]
+        if not is_relevant_context(title, summary):
+            continue
+
+        full_text = fetch_full_text(link)
+        content = full_text if len(full_text) > len(summary) else summary
+
+        norm_url = normalize_url(link)
+        canonical_id = make_canonical_id(norm_url, title + summary)
+        classes = detect_classes(title + " " + content)
+        radar_status = detect_radar_status(title + " " + content)
+        category = detect_category(title + " " + content)
+
+        article_de, teaser_de = generate_ai_summary(title, content, item["source"])
+
+        if not article_de:
+            german_summary = translate_to_german(summary)
+            article_de = f"📌 **Zusammenfassung von {item['source']}:**\n{german_summary}\n\n💡 **Handlungsempfehlung:** Originalquelle für weitere Details im Link unten öffnen."
+            teaser_de  = german_summary[:180] + ("..." if len(german_summary) > 180 else "")
+
+        german_title = translate_to_german(title)
+        verified_label = "Blizzard-Bestätigt" if item["official"] else ("Guide / Analyse" if category == "guide" else "Community / Portal")
+
+        processed_new.append({
+            "id": canonical_id,
+            "migrated_ids": [],
+            "date": item["pub_date"],
+            "fetched_at": datetime.now(timezone.utc).isoformat(),
+            "source": item["source"],
+            "source_icon": item["source_icon"],
+            "category": category,
+            "verified_type": verified_label,
+            "radar_status": radar_status,
+            "classes": classes,
+            "title": german_title,
+            "teaser_de": teaser_de,
+            "article_de": article_de,
+            "url": link,
+            "normalized_url": norm_url
+        })
+
+    # 6. DEDUPLIKACIJA I MIGRACIJA PREMA NORMALIZOVANOM URL-u
+    existing_items = existing_data.get("items", [])
+    items_by_url = {}
+
+    # Učitaj postojeće stavke sa normalizacijom
+    for old_it in existing_items:
+        raw_u = old_it.get("url", "")
+        norm_u = normalize_url(raw_u)
+        old_id = old_it.get("id")
+        canonical_id = make_canonical_id(norm_u, old_it.get("title", ""))
+
+        # Filtriraj kroz strogi is_relevant_context
+        if not is_relevant_context(old_it.get("title", ""), old_it.get("teaser_de", ""), old_it.get("article_de", "")):
+            continue
+
+        if norm_u in items_by_url:
+            # Već postoji zapis sa istim URL-om -> spoji i migriraj ID-eve
+            existing = items_by_url[norm_u]
+            migrated = set(existing.get("migrated_ids", []))
+            if old_id and old_id != existing["id"]:
+                migrated.add(old_id)
+            if "migrated_ids" in old_it:
+                migrated.update(old_it["migrated_ids"])
+            existing["migrated_ids"] = sorted(list(migrated))
         else:
-            if iid not in new_ids:
-                new_ids.add(iid)
-                unique_new.append(item)
+            migrated = set(old_it.get("migrated_ids", []))
+            if old_id and old_id != canonical_id:
+                migrated.add(old_id)
+            old_it["id"] = canonical_id
+            old_it["migrated_ids"] = sorted(list(migrated))
+            old_it["normalized_url"] = norm_u
+            old_it["classes"] = [c for c in detect_classes(old_it.get("title", "") + " " + old_it.get("article_de", "")) if c in CLASSES]
+            old_it["category"] = detect_category(old_it.get("title", "") + " " + old_it.get("article_de", ""))
+            items_by_url[norm_u] = old_it
 
-    merged = unique_new + [i for i in filtered_old if i["id"] not in new_ids]
+    # Spoji novo prikupljene stavke
+    new_added_count = 0
+    for new_it in processed_new:
+        norm_u = new_it["normalized_url"]
+        if norm_u in items_by_url:
+            # Postojeći vodič/vest dobija nova ažuriranja na istom URL-u bez duplikata
+            existing = items_by_url[norm_u]
+            existing["title"] = new_it["title"]
+            existing["article_de"] = new_it["article_de"]
+            existing["teaser_de"] = new_it["teaser_de"]
+            existing["fetched_at"] = new_it["fetched_at"]
+            existing["radar_status"] = new_it["radar_status"]
+            existing["category"] = new_it["category"]
+            existing["classes"] = new_it["classes"]
+        else:
+            items_by_url[norm_u] = new_it
+            new_added_count += 1
 
-    if not merged and filtered_old:
-        merged = filtered_old
-
-    # Sortiraj po datumu opadajuće
+    merged = list(items_by_url.values())
     merged.sort(key=lambda x: x.get("date", ""), reverse=True)
 
     today_str = datetime.now().strftime("%d.%m.%Y")
     
-    # Zahtev 7: Ako nema novih relevantnih novosti
-    if len(unique_new) == 0:
+    # Zahtev 7: Ako nema novih relevantnih novosti za danas
+    if new_added_count == 0:
         daily_summary_text = "Heute keine neuen relevanten Updates für Shaman und Hunter."
     else:
-        top_headlines = [i["title"] for i in unique_new[:2] if i.get("title")]
+        top_headlines = [i["title"] for i in merged[:2] if i.get("title")]
         headlines_summary = ("; ".join(top_headlines) + ".") if top_headlines else "Updates aktiv."
-        daily_summary_text = f"Tagesbriefing ({today_str}): {len(unique_new)} neue relevante Updates erfasst. Themen: {headlines_summary}"
+        daily_summary_text = f"Tagesbriefing ({today_str}): {new_added_count} neue relevante Updates erfasst. Themen: {headlines_summary}"
+
+    finish_time_utc = datetime.now(timezone.utc).isoformat()
 
     result_payload = {
-        "last_updated": datetime.now(timezone.utc).isoformat(),
+        "scraper_started_at": start_time_utc,
+        "last_updated": finish_time_utc,
+        "published_at": finish_time_utc,
         "total_count": len(merged),
-        "new_count": len(unique_new),
+        "new_count": new_added_count,
         "daily_summary": daily_summary_text,
         "castle_status": {
             "status": "Keine Live-Daten verifiziert",
             "details": "Aktuell liegen keine automatischen Burgen-Telemetriedaten vor. Status wird nach Serverstart über Live-Events angebunden.",
-            "last_checked": datetime.now(timezone.utc).isoformat(),
+            "last_checked": finish_time_utc,
             "verified": False
         },
         "items": merged[:60],
         "sources_status": sources_health
     }
 
+    # Ažuriraj seen_ids skup sa svim trenutnim i migriranim ID-evima
+    all_known_ids = set(seen_ids)
+    for it in merged:
+        all_known_ids.add(it["id"])
+        for mid in it.get("migrated_ids", []):
+            all_known_ids.add(mid)
+
     save_json(OUTPUT_FILE, result_payload)
-    save_json(SEEN_IDS_FILE, list(seen_ids | new_ids))
-    print(f"✅ Uspešno završeno: {len(unique_new)} novih validnih stavki. Ukupno relevantnih: {len(merged)}")
+    save_json(SEEN_IDS_FILE, sorted(list(all_known_ids)))
+    print(f"✅ Uspešno završeno: {new_added_count} novih stavki. Ukupno unikatnih po URL-u: {len(merged)}")
 
 if __name__ == "__main__":
     run_scraper()

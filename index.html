@@ -809,15 +809,55 @@ function getReadArticles() {
   }
 }
 
-function isArticleRead(id) {
-  return getReadArticles().includes(String(id));
+function isArticleRead(itemOrId) {
+  const reads = getReadArticles();
+  if (!itemOrId) return false;
+  if (typeof itemOrId === 'object') {
+    if (reads.includes(String(itemOrId.id))) return true;
+    if (Array.isArray(itemOrId.migrated_ids)) {
+      return itemOrId.migrated_ids.some(mid => reads.includes(String(mid)));
+    }
+    return false;
+  }
+  const sId = String(itemOrId);
+  if (reads.includes(sId)) return true;
+  const found = (typeof allItems !== 'undefined' ? allItems : []).find(i => String(i.id) === sId || (Array.isArray(i.migrated_ids) && i.migrated_ids.map(String).includes(sId)));
+  if (found) {
+    if (reads.includes(String(found.id))) return true;
+    if (Array.isArray(found.migrated_ids)) {
+      return found.migrated_ids.some(mid => reads.includes(String(mid)));
+    }
+  }
+  return false;
 }
 
-function markArticleAsRead(id) {
+function markArticleAsRead(itemOrId) {
   const reads = getReadArticles();
-  const sId = String(id);
-  if (!reads.includes(sId)) {
-    reads.push(sId);
+  let idsToAdd = [];
+  if (typeof itemOrId === 'object' && itemOrId !== null) {
+    idsToAdd.push(String(itemOrId.id));
+    if (Array.isArray(itemOrId.migrated_ids)) {
+      idsToAdd.push(...itemOrId.migrated_ids.map(String));
+    }
+  } else {
+    const sId = String(itemOrId);
+    idsToAdd.push(sId);
+    const found = (typeof allItems !== 'undefined' ? allItems : []).find(i => String(i.id) === sId || (Array.isArray(i.migrated_ids) && i.migrated_ids.map(String).includes(sId)));
+    if (found) {
+      idsToAdd.push(String(found.id));
+      if (Array.isArray(found.migrated_ids)) {
+        idsToAdd.push(...found.migrated_ids.map(String));
+      }
+    }
+  }
+  let changed = false;
+  idsToAdd.forEach(id => {
+    if (id && !reads.includes(id)) {
+      reads.push(id);
+      changed = true;
+    }
+  });
+  if (changed) {
     try { localStorage.setItem('wow_read_articles', JSON.stringify(reads)); } catch(e){}
     updateStatsBadges();
   }
@@ -1385,7 +1425,7 @@ async function loadNews() {
     renderClassCounts(d);
     renderCastle(d.castle_status);
     renderSourcesStatus(d.sources_status);
-    renderLastUpd(d.last_updated);
+    renderLastUpd(d.last_updated, d.published_at);
     updateStatsBadges();
     applyFilter();
   } catch(e) {
@@ -1512,10 +1552,13 @@ function renderSourcesStatus(ss) {
   box.innerHTML = html;
 }
 
-function renderLastUpd(ts){
-  if(!ts) return;
+function renderLastUpd(ts, pubTs){
   const el = document.getElementById('last-upd');
-  if(el) el.textContent='🔄 Zuletzt aktualisiert: '+new Date(ts).toLocaleString('de-DE');
+  if(!el) return;
+  const timeToShow = pubTs || ts;
+  if(timeToShow) {
+    el.textContent = '🕒 Veröffentlicht: ' + new Date(timeToShow).toLocaleString('de-DE');
+  }
 }
 
 // ── RENDER NEWS & STABLE MODAL LOOKUP ───────────────────────────────────────
@@ -1582,10 +1625,10 @@ function renderNews(items){
 
 // ── OPEN MODAL BY STABLE ID ────────────────────────────────────────────────
 function openModalById(id) {
-  const item = allItems.find(i => String(i.id) === String(id));
+  const item = allItems.find(i => String(i.id) === String(id) || (Array.isArray(i.migrated_ids) && i.migrated_ids.map(String).includes(String(id))));
   if (!item) return;
 
-  markArticleAsRead(id);
+  markArticleAsRead(item);
 
   // Header
   document.getElementById('m-icon').textContent = item.source_icon || '📰';

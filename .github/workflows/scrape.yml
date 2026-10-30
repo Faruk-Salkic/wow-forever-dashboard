@@ -2,52 +2,32 @@ name: 🗡️ WoW Forever Daily News Scraper
 
 on:
   schedule:
-    # 09:50 UTC (in CEST/Summer = 11:50 Vienna) and 10:50 UTC (in CET/Winter = 11:50 Vienna)
-    # Automatic daylight saving time (DST) adjustment via Europe/Vienna timezone gate check.
-    # Running at :50 allows ~10 minutes for scraping, tests and GitHub Pages deployment so updates are live by 12:00.
-    - cron: "50 9,10 * * *"
+    # Daily scrape at 11:50 Europe/Vienna timezone.
+    # Running at 11:50 accounts for GitHub Actions runner start queue latency and execution time,
+    # ensuring data is verified and published to GitHub Pages by 12:00 Europe/Vienna.
+    - cron: "50 11 * * *"
+      timezone: "Europe/Vienna"
   workflow_dispatch:
 
 permissions:
   contents: write
 
 jobs:
-  gate:
-    name: ⏰ Timezone Gate (Europe/Vienna 12:00 Target)
-    runs-on: ubuntu-latest
-    outputs:
-      should_run: ${{ steps.gate.outputs.should_run }}
-    steps:
-      - name: 🌐 Check Europe/Vienna Local Time
-        id: gate
-        run: |
-          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            echo "Manual trigger (workflow_dispatch) - running immediately."
-            echo "should_run=true" >> "$GITHUB_OUTPUT"
-            exit 0
-          fi
-
-          VIENNA_TIME=$(TZ="Europe/Vienna" date '+%Y-%m-%d %H:%M:%S %Z')
-          VIENNA_HOUR=$(TZ="Europe/Vienna" date +'%H')
-          echo "Current Europe/Vienna local time: $VIENNA_TIME"
-          echo "Vienna Hour: $VIENNA_HOUR"
-
-          # Target window is 11:xx Europe/Vienna (leading up to 12:00)
-          if [ "$VIENNA_HOUR" -eq 11 ]; then
-            echo "✅ Target hour 11 verified. Proceeding with daily 12:00 publication."
-            echo "should_run=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "⏭️ Current Vienna hour ($VIENNA_HOUR) is outside target window (11:50 CET/CEST). Skipping this cron trigger."
-            echo "should_run=false" >> "$GITHUB_OUTPUT"
-          fi
-
   scrape:
     name: 🔍 Scrape, Validate & Deploy
-    needs: gate
-    if: needs.gate.outputs.should_run == 'true'
     runs-on: ubuntu-latest
 
     steps:
+      - name: ⏰ Log execution timing & runner delay
+        run: |
+          TARGET_SCHEDULE="11:50 Europe/Vienna"
+          CURRENT_VIENNA=$(TZ="Europe/Vienna" date '+%Y-%m-%d %H:%M:%S %Z')
+          CURRENT_UTC=$(date -u '+%Y-%m-%d %H:%M:%S UTC')
+          echo "⏰ Scheduled trigger target: $TARGET_SCHEDULE"
+          echo "🚀 Actual runner start time (Europe/Vienna): $CURRENT_VIENNA"
+          echo "🌐 Actual runner start time (UTC): $CURRENT_UTC"
+          echo "📋 GitHub event name: ${{ github.event_name }}"
+
       - name: 📥 Checkout repo
         uses: actions/checkout@v4
 

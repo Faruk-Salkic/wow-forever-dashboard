@@ -11,7 +11,7 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # Importuj funkcije iz scrapera
 sys.path.insert(0, BASE_DIR)
-from scraper.scrape import is_relevant_context, detect_classes, detect_category, CLASSES
+from scraper.scrape import is_relevant_context, detect_classes, detect_category, normalize_url, CLASSES
 
 def test_news_json():
     path = os.path.join(BASE_DIR, "data", "news.json")
@@ -23,6 +23,7 @@ def test_news_json():
     assert len(items) > 0, "news.json nema stavki!"
     
     seen_ids = set()
+    seen_urls = set()
     for item in items:
         # Check ID
         iid = str(item.get("id", ""))
@@ -35,9 +36,12 @@ def test_news_json():
         cat = item.get("category")
         assert cat in ["news", "hotfix", "bis", "guide", "exploit", "pvp", "pve"], f"Nepoznata kategorija: {cat}"
         
-        # Check URL
+        # Check URL & deduplication by normalized URL
         url = item.get("url", "")
         assert url.startswith("http"), f"Neispravan URL: {url}"
+        norm_url = normalize_url(url)
+        assert norm_url not in seen_urls, f"Pronađen duplikat normalizovanog URL-a: {norm_url}"
+        seen_urls.add(norm_url)
         
         # Check German text
         assert item.get("title"), "Nedostaje naslov!"
@@ -226,20 +230,48 @@ def test_content_relevance_and_categorization():
     )
     assert rogue_priest_article is False, "Članak samo za druge klase mora biti odbačen!"
 
-    # 8. Test kategorije: Nemačko 'bis Level 60' NE sme biti BiS
+    # 8. Zahtev: TBC Classic Hunter vodič mora biti odbačen
+    tbc_hunter = is_relevant_context(
+        "TBC Classic Hunter Leveling Guide: Beast Mastery Talente und Pet-Makros",
+        "The Burning Crusade bringt neue Talente und Fähigkeiten für Jäger in Outland"
+    )
+    assert tbc_hunter is False, "TBC Classic Hunter vodič mora biti odbačen!"
+
+    # 9. Zahtev: Primarno Rogue vodič s usputnim spominjanjem Huntera mora biti odbačen
+    rogue_incidental_hunter = is_relevant_context(
+        "Rogue Leveling and Talent Guide for Classic",
+        "Stealth, lockpicking, and best daggers for Rogue leveling. Can sometimes group up with hunters."
+    )
+    assert rogue_incidental_hunter is False, "Primarno Rogue vodič s usputnim spominjanjem Huntera mora biti odbačen!"
+
+    # 10. Zahtev: Koristan Forever Shaman vodič ne smije biti odbačen samo zato što poredi mehaniku s Retailom
+    forever_shaman_retail_comparison = is_relevant_context(
+        "WoW Forever Shaman Leveling & Totem Guide",
+        "Unlike retail WoW where totems are mostly utility cooldowns, in WoW Forever mana management and totem placement are crucial."
+    )
+    assert forever_shaman_retail_comparison is True, "Forever Shaman vodič s poređenjem sa Retailom mora biti prihvaćen!"
+
+    # 11. Zahtev: Praktični zajednički vodiči, primjerice prodavači torbi, trebaju ostati prihvaćeni
+    bag_vendor_guide = is_relevant_context(
+        "WoW Forever: Frühzeitige Taschen-Händler und 8-Slot Bag Fundorte",
+        "Hier findet ihr frühe Vendor-Standorte für billige 6-Slot und 8-Slot Taschen in Dun Morogh und Loch Modan."
+    )
+    assert bag_vendor_guide is True, "Praktični zajednički vodič za torbe/vendore mora biti prihvaćen!"
+
+    # 12. Test kategorije: Nemačko 'bis Level 60' NE sme biti BiS
     cat_bis_german = detect_category("Leveling-Route vom Start bis Level 60 Guide für Allianz")
     assert cat_bis_german != "bis", f"Nemačko 'bis' je pogrešno prepoznato kao BiS kategorija: {cat_bis_german}"
     assert cat_bis_german == "guide", f"Očekivana kategorija 'guide', dobijeno: {cat_bis_german}"
 
-    # 9. Test kategorije: Pravi BiS mora biti BiS
+    # 13. Test kategorije: Pravi BiS mora biti BiS
     cat_real_bis = detect_category("WoW Forever: Phase 1 Best-in-Slot Gear Guide für Jäger")
     assert cat_real_bis == "bis", f"Pravi BiS vodič mora dobiti kategoriju 'bis', dobijeno: {cat_real_bis}"
 
-    # 10. Test kategorije: Patch-Kadenz / raspored NE sme biti Hotfix
+    # 14. Test kategorije: Patch-Kadenz / raspored NE sme biti Hotfix
     cat_kadenz = detect_category("WoW: Forever strebt nach einer 4-monatigen Patch-Kadenz und Roadmap")
     assert cat_kadenz != "hotfix", f"Patch-kadenz je pogrešno prepoznata kao hotfix: {cat_kadenz}"
 
-    # 11. Test kategorije: Pravi hotfix mora biti hotfix
+    # 15. Test kategorije: Pravi hotfix mora biti hotfix
     cat_real_hotfix = detect_category("Blizzard Notfall-Patch: Klassen-Tuning & Live Hotfix für Jäger-Begleiter")
     assert cat_real_hotfix == "hotfix", f"Pravi live hotfix mora dobiti 'hotfix', dobijeno: {cat_real_hotfix}"
 
