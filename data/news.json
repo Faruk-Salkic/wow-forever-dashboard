@@ -1,21 +1,137 @@
 {
-  "scraper_started_at": "2026-10-30T15:44:49.310798+00:00",
-  "last_updated": "2026-10-30T15:44:49.419319+00:00",
-  "published_at": "2026-10-30T15:44:49.419319+00:00",
-  "total_count": 4,
-  "new_count": 0,
-  "daily_summary": "Heute keine neuen relevanten Updates für Shaman und Hunter.",
+  "scraper_started_at": "2026-10-30T15:48:57.732228+00:00",
+  "last_updated": "2026-10-30T15:49:17.294753+00:00",
+  "published_at": "2026-10-30T15:49:17.294753+00:00",
+  "total_count": 10,
+  "new_count": 6,
+  "daily_summary": "Tagesbriefing (30.10.2026): 6 neue relevante Updates erfasst. Themen: Eisige Adern für immer: Jägerübersicht; Eisige Adern für immer: Biest-Meisterung.",
   "castle_status": {
     "status": "Keine Live-Daten verifiziert",
     "details": "Aktuell liegen keine automatischen Burgen-Telemetriedaten vor. Status wird nach Serverstart über Live-Events angebunden.",
-    "last_checked": "2026-10-30T15:44:49.419319+00:00",
+    "last_checked": "2026-10-30T15:49:17.294753+00:00",
     "verified": false
   },
   "items": [
     {
+      "id": "9e068e89dcde",
+      "migrated_ids": [],
+      "date": "2026-10-30",
+      "fetched_at": "2026-10-30T15:49:09.099097+00:00",
+      "source": "Icy Veins Forever",
+      "source_icon": "❄️",
+      "category": "guide",
+      "verified_type": "Guide / Analyse",
+      "radar_status": "normal",
+      "classes": [
+        "Hunter"
+      ],
+      "title": "Eisige Adern für immer: Jägerübersicht",
+      "teaser_de": "Offizieller WoW Forever Klassen-Leitfaden von Icy Veins für Hunter Overview. Behandelt Talente, Rotationen und Ausrüstungs-Skalierung.",
+      "article_de": "📌 **Zusammenfassung von Icy Veins Forever:**\nOffizieller WoW Forever Klassen-Leitfaden von Icy Veins für Hunter Overview. Behandelt Talente, Rotationen und Ausrüstungs-Skalierung.\n\n💡 **Handlungsempfehlung:** Originalquelle für weitere Details im Link unten öffnen.",
+      "url": "https://www.icy-veins.com/wow-forever/hunter-class-overview",
+      "normalized_url": "https://icy-veins.com/wow-forever/hunter-class-overview"
+    },
+    {
+      "id": "8b995f16a50b",
+      "migrated_ids": [],
+      "date": "2026-10-30",
+      "fetched_at": "2026-10-30T15:49:11.465280+00:00",
+      "source": "Icy Veins Forever",
+      "source_icon": "❄️",
+      "category": "guide",
+      "verified_type": "Guide / Analyse",
+      "radar_status": "normal",
+      "classes": [
+        "Hunter",
+        "Shaman"
+      ],
+      "title": "Eisige Adern für immer: Biest-Meisterung",
+      "teaser_de": "Offizieller WoW Forever Klassen-Leitfaden von Icy Veins für Beast Mastery. Behandelt Talente, Rotationen und Ausrüstungs-Skalierung.",
+      "article_de": "📌 **Zusammenfassung von Icy Veins Forever:**\nOffizieller WoW Forever Klassen-Leitfaden von Icy Veins für Beast Mastery. Behandelt Talente, Rotationen und Ausrüstungs-Skalierung.\n\n💡 **Handlungsempfehlung:** Originalquelle für weitere Details im Link unten öffnen.",
+      "url": "https://www.icy-veins.com/wow-forever/beast-mastery-hunter-ranged-dps-pve-guide",
+      "normalized_url": "https://icy-veins.com/wow-forever/beast-mastery-hunter-ranged-dps-pve-guide"
+    },
+    {
+      "id": "4b280562b22e",
+      "migrated_ids": [],
+      "date": "2026-10-30",
+      "fetched_at": "2026-10-30T15:49:13.128643+00:00",
+      "source": "Icy Veins Forever",
+      "source_icon": "❄️",
+      "category": "guide",
+      "verified_type": "Guide / Analyse",
+      "radar_status": "normal",
+      "classes": [
+        "Hunter",
+        "Shaman"
+      ],
+      "title": "Eisige Adern für immer: Schießkunst",
+      "teaser_de": "Offizieller WoW Forever Klassen-Leitfaden von Icy Veins für Marksmanship. Behandelt Talente, Rotationen und Ausrüstungs-Skalierung.",
+      "article_de": "📌 **Zusammenfassung von Icy Veins Forever:**\nOffizieller WoW Forever Klassen-Leitfaden von Icy Veins für Marksmanship. Behandelt Talente, Rotationen und Ausrüstungs-Skalierung.\n\n💡 **Handlungsempfehlung:** Originalquelle für weitere Details im Link unten öffnen.",
+      "url": "https://www.icy-veins.com/wow-forever/marksmanship-hunter-ranged-dps-pve-guide",
+      "normalized_url": "https://icy-veins.com/wow-forever/marksmanship-hunter-ranged-dps-pve-guide"
+    },
+    {
+      "id": "d2b14bf6e4ae",
+      "migrated_ids": [],
+      "date": "2026-10-30",
+      "fetched_at": "2026-10-30T15:49:14.523796+00:00",
+      "source": "Icy Veins Forever",
+      "source_icon": "❄️",
+      "category": "guide",
+      "verified_type": "Guide / Analyse",
+      "radar_status": "normal",
+      "classes": [
+        "Shaman"
+      ],
+      "title": "Eisige Adern für immer: Schamanenübersicht",
+      "teaser_de": "Offizieller WoW Forever Klassen-Leitfaden von Icy Veins für Shaman Overview. Behandelt Talente, Rotationen und Ausrüstungs-Skalierung.",
+      "article_de": "📌 **Zusammenfassung von Icy Veins Forever:**\nOffizieller WoW Forever Klassen-Leitfaden von Icy Veins für Shaman Overview. Behandelt Talente, Rotationen und Ausrüstungs-Skalierung.\n\n💡 **Handlungsempfehlung:** Originalquelle für weitere Details im Link unten öffnen.",
+      "url": "https://www.icy-veins.com/wow-forever/shaman-class-overview",
+      "normalized_url": "https://icy-veins.com/wow-forever/shaman-class-overview"
+    },
+    {
+      "id": "edb04e992e47",
+      "migrated_ids": [],
+      "date": "2026-10-30",
+      "fetched_at": "2026-10-30T15:49:15.959649+00:00",
+      "source": "Method Forever",
+      "source_icon": "🛡️",
+      "category": "guide",
+      "verified_type": "Guide / Analyse",
+      "radar_status": "balance",
+      "classes": [
+        "Hunter"
+      ],
+      "title": "Methode für immer: Wow Forever Hunter Leveling Guide und Talente",
+      "teaser_de": "WoW Forever Leveling- und Klassenguide von Method für Wow Forever Hunter Leveling Guide And Talents. Optimiert für schnelles Vorankommen und Endgame-Vorbereitung.",
+      "article_de": "📌 **Zusammenfassung von Method Forever:**\nWoW Forever Leveling- und Klassenguide von Method für Wow Forever Hunter Leveling Guide And Talents. Optimiert für schnelles Vorankommen und Endgame-Vorbereitung.\n\n💡 **Handlungsempfehlung:** Originalquelle für weitere Details im Link unten öffnen.",
+      "url": "https://www.method.gg/wow-forever/wow-forever-hunter-leveling-guide-and-talents",
+      "normalized_url": "https://method.gg/wow-forever/wow-forever-hunter-leveling-guide-and-talents"
+    },
+    {
+      "id": "9121376df2fc",
+      "migrated_ids": [],
+      "date": "2026-10-30",
+      "fetched_at": "2026-10-30T15:49:17.291362+00:00",
+      "source": "Method Forever",
+      "source_icon": "🛡️",
+      "category": "guide",
+      "verified_type": "Guide / Analyse",
+      "radar_status": "normal",
+      "classes": [
+        "Shaman"
+      ],
+      "title": "Methode für immer: Wow für immer Schamanen-Leveling-Leitfaden und Talente",
+      "teaser_de": "WoW Forever Leveling- und Klassenguide von Method für Wow Forever Shaman Leveling Guide And Talents. Optimiert für schnelles Vorankommen und Endgame-Vorbereitung.",
+      "article_de": "📌 **Zusammenfassung von Method Forever:**\nWoW Forever Leveling- und Klassenguide von Method für Wow Forever Shaman Leveling Guide And Talents. Optimiert für schnelles Vorankommen und Endgame-Vorbereitung.\n\n💡 **Handlungsempfehlung:** Originalquelle für weitere Details im Link unten öffnen.",
+      "url": "https://www.method.gg/wow-forever/wow-forever-shaman-leveling-guide-and-talents",
+      "normalized_url": "https://method.gg/wow-forever/wow-forever-shaman-leveling-guide-and-talents"
+    },
+    {
       "id": "70436e7840dc",
       "date": "2026-10-29",
-      "fetched_at": "2026-10-30T15:20:21.467528+00:00",
+      "fetched_at": "2026-10-30T15:49:07.676562+00:00",
       "source": "MMO-Champion",
       "source_icon": "⚔️",
       "category": "news",
@@ -34,18 +150,18 @@
     {
       "id": "cb1178c4aaa8",
       "date": "2026-10-29",
-      "fetched_at": "2026-10-29T14:54:15Z",
+      "fetched_at": "2026-10-30T15:49:05.256779+00:00",
       "source": "WoWhead Forever",
       "source_icon": "🌐",
       "category": "news",
       "verified_type": "Guide / Analyse",
-      "radar_status": "balance",
+      "radar_status": "normal",
       "classes": [
         "Hunter"
       ],
-      "title": "WoW Forever: Neues Klassen- & Item-Tuning – Anpassungen für Jäger & Alchemie",
-      "teaser_de": "Mit dem Start der Namensreservierungen für WoW Forever hat Blizzard Balance-Anpassungen für Jäger (Hunter) und neue Alchemie-Tränke veröffentlicht.",
-      "article_de": "📌 **Was ist passiert?**\nBlizzard hat zeitgleich mit den Namensreservierungen erste Balance-Anpassungen für WoW Forever eingespielt. Diese betreffen vor allem Jäger-Fertigkeiten sowie Alchemie-Tränke.\n\n🎮 **Bedeutung für Faruk & Mirza:**\n• **Mirza (Jäger):** Skalierungswerte und Mana-Effizienz für Jäger-Fähigkeiten wurden optimiert. Die Begleiter-Aggro wurde leicht angehoben.\n• **Duo-Synergie:** Durch Mirzas Kräuterkunde können seltene Pflanzen für die neuen Tränke im Camping-System optimal genutzt werden.\n\n💡 **Handlungsempfehlung:**\nMirza sollte zum Start Tierherrschaft (Beast Mastery) priorisieren, da Begleiter von den Forever-Skalierungen am meisten profitieren.",
+      "title": "Neue Klassen- und Item-Tuning auf WoW: Forever - Jäger-Änderungen",
+      "teaser_de": "Mit Namensreservierungen, die jetzt in WoW: Forever verfügbar sind, gibt es einige Tuning-Änderungen für Jäger und einen Alchemie-Trank.",
+      "article_de": "📌 **Zusammenfassung von WoWhead Forever:**\nMit Namensreservierungen, die jetzt in WoW: Forever verfügbar sind, gibt es einige Tuning-Änderungen für Jäger und einen Alchemie-Trank.\n\n💡 **Handlungsempfehlung:** Originalquelle für weitere Details im Link unten öffnen.",
       "url": "https://www.wowhead.com/news=383641/new-class-and-item-tuning-on-wow-forever-hunter-changes",
       "migrated_ids": [
         "1784d6e34d56",
@@ -95,14 +211,14 @@
     }
   ],
   "sources_status": {
-    "Blizzard Announcements": "Fehler: HTTPSConnectionPool(host='us.forums.blizzard.com',",
-    "Blizzard Blue Tracker": "Fehler: HTTPSConnectionPool(host='us.forums.blizzard.com',",
-    "WoWhead Forever": "Fehler: HTTPSConnectionPool(host='www.wowhead.com', port=4",
-    "Buffed.de": "Fehler: HTTPSConnectionPool(host='www.buffed.de', port=443",
-    "MMO-Champion": "Fehler: HTTPSConnectionPool(host='www.mmo-champion.com', p",
-    "Warcraft Tavern": "Fehler: HTTPSConnectionPool(host='www.warcrafttavern.com',",
-    "Icy Veins Forever": "Fehler: HTTPSConnectionPool(host='www.icy-veins.",
-    "Method Forever": "Fehler: HTTPSConnectionPool(host='www.method.gg'",
+    "Blizzard Announcements": "OK (25 Meldungen)",
+    "Blizzard Blue Tracker": "OK (25 Meldungen)",
+    "WoWhead Forever": "OK (40 Meldungen)",
+    "Buffed.de": "OK (20 Meldungen)",
+    "MMO-Champion": "OK (5 Meldungen)",
+    "Warcraft Tavern": "OK (0 Meldungen)",
+    "Icy Veins Forever": "OK (8 Leitfäden)",
+    "Method Forever": "OK (2 Leitfäden)",
     "Reddit (r/wowforever & r/classicwow)": "Keine neuen Top-Meldungen"
   }
 }
