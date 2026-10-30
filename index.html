@@ -337,9 +337,11 @@
     .t-guide  { background:rgba(79,195,247,.1);  border-color:rgba(79,195,247,.25); color:var(--blue); }
     .t-news   { background:rgba(79,195,247,.1);  border-color:rgba(79,195,247,.25); color:var(--blue); }
     .tag-unread { background:rgba(79,195,247,0.15); border-color:rgba(79,195,247,0.35); color:#81d4fa; font-weight:600; }
+    .tag-updated { background:rgba(255,179,0,0.18); border-color:rgba(255,179,0,0.4); color:#ffca28; font-weight:600; }
     .tag-read   { background:rgba(255,255,255,0.03); border-color:rgba(255,255,255,0.07); color:var(--dim); opacity:0.8; }
 
     .new-badge { display:inline-block;padding:2px 7px;border-radius:100px;background:rgba(239,83,80,.18);border:1px solid rgba(239,83,80,.35);color:var(--red);font-size:.65rem;font-weight:700;margin-right:4px; }
+    .update-badge { display:inline-block;padding:2px 7px;border-radius:100px;background:rgba(255,179,0,.18);border:1px solid rgba(255,179,0,.45);color:#ffca28;font-size:.65rem;font-weight:700;margin-right:4px; }
 
     /* EMPTY & RETRY */
     .empty { padding:36px 20px;text-align:center;color:var(--dim); }
@@ -809,6 +811,23 @@ function getReadArticles() {
   }
 }
 
+function getReadVersions() {
+  try {
+    return JSON.parse(localStorage.getItem('wow_read_versions') || '{}');
+  } catch(e) {
+    return {};
+  }
+}
+
+function hasPendingUpdate(item) {
+  if (!item || !item.is_updated) return false;
+  if (!isArticleRead(item)) return false;
+  const versions = getReadVersions();
+  const currentVer = item.source_content_hash || item.updated_at || (item.content_version ? String(item.content_version) : 'updated');
+  const readVer = versions[String(item.id)];
+  return readVer !== currentVer;
+}
+
 function isArticleRead(itemOrId) {
   const reads = getReadArticles();
   if (!itemOrId) return false;
@@ -834,7 +853,9 @@ function isArticleRead(itemOrId) {
 function markArticleAsRead(itemOrId) {
   const reads = getReadArticles();
   let idsToAdd = [];
+  let currentItem = null;
   if (typeof itemOrId === 'object' && itemOrId !== null) {
+    currentItem = itemOrId;
     idsToAdd.push(String(itemOrId.id));
     if (Array.isArray(itemOrId.migrated_ids)) {
       idsToAdd.push(...itemOrId.migrated_ids.map(String));
@@ -844,6 +865,7 @@ function markArticleAsRead(itemOrId) {
     idsToAdd.push(sId);
     const found = (typeof allItems !== 'undefined' ? allItems : []).find(i => String(i.id) === sId || (Array.isArray(i.migrated_ids) && i.migrated_ids.map(String).includes(sId)));
     if (found) {
+      currentItem = found;
       idsToAdd.push(String(found.id));
       if (Array.isArray(found.migrated_ids)) {
         idsToAdd.push(...found.migrated_ids.map(String));
@@ -859,12 +881,20 @@ function markArticleAsRead(itemOrId) {
   });
   if (changed) {
     try { localStorage.setItem('wow_read_articles', JSON.stringify(reads)); } catch(e){}
-    updateStatsBadges();
   }
+  if (currentItem) {
+    const versions = getReadVersions();
+    const currentVer = currentItem.source_content_hash || currentItem.updated_at || (currentItem.content_version ? String(currentItem.content_version) : 'updated');
+    if (versions[String(currentItem.id)] !== currentVer) {
+      versions[String(currentItem.id)] = currentVer;
+      try { localStorage.setItem('wow_read_versions', JSON.stringify(versions)); } catch(e){}
+    }
+  }
+  updateStatsBadges();
 }
 
 function isArticleRecent(item) {
-  const dateStr = item.date || item.fetched_at;
+  const dateStr = (item.is_updated && item.updated_at) ? item.updated_at : (item.date || item.fetched_at);
   if (!dateStr) return false;
   const ts = new Date(dateStr).getTime();
   if (isNaN(ts)) return false;
@@ -1465,8 +1495,9 @@ async function loadBis() {
 
 // ── STATS & BADGES ─────────────────────────────────────────────────────────
 function updateStatsBadges() {
-  const nw = allItems.filter(i => isArticleRecent(i)).length;
-  const unread = allItems.filter(i => !isArticleRead(i.id)).length;
+  const nw = allItems.filter(i => isArticleRecent(i) && !i.is_updated).length;
+  const updated = allItems.filter(i => i.is_updated).length;
+  const unread = allItems.filter(i => !isArticleRead(i) || hasPendingUpdate(i)).length;
   const exploits = allItems.filter(i => i.category === 'exploit');
 
   const sNew = document.getElementById('s-new');
@@ -1475,11 +1506,19 @@ function updateStatsBadges() {
   const sExp = document.getElementById('s-exploit');
   const newBadge = document.getElementById('new-badge');
 
-  if (sNew) sNew.textContent = nw;
+  if (sNew) sNew.textContent = nw + updated;
   if (sUnread) sUnread.textContent = unread;
   if (sTot) sTot.textContent = allItems.length;
   if (sExp) sExp.textContent = exploits.length;
-  if (newBadge) newBadge.textContent = nw + ' neu';
+  if (newBadge) {
+    if (updated > 0 && nw > 0) {
+      newBadge.textContent = `${nw} neu / ${updated} akt.`;
+    } else if (updated > 0) {
+      newBadge.textContent = `${updated} akt.`;
+    } else {
+      newBadge.textContent = nw + ' neu';
+    }
+  }
 
   const alertBox = document.getElementById('exploit-alert-box');
   const alertTxt = document.getElementById('exploit-alert-text');
@@ -1552,12 +1591,12 @@ function renderSourcesStatus(ss) {
   box.innerHTML = html;
 }
 
-function renderLastUpd(ts, pubTs){
+function renderLastUpd(ts, procTs){
   const el = document.getElementById('last-upd');
   if(!el) return;
-  const timeToShow = pubTs || ts;
+  const timeToShow = procTs || ts;
   if(timeToShow) {
-    el.textContent = '🕒 Veröffentlicht: ' + new Date(timeToShow).toLocaleString('de-DE');
+    el.textContent = '⚙️ Daten verarbeitet: ' + new Date(timeToShow).toLocaleString('de-DE');
   }
 }
 
@@ -1581,7 +1620,8 @@ function renderNews(items){
   list.innerHTML = items.slice(0, 60).map((item) => {
     const classes = (item.classes || []);
     const isRecent = isArticleRecent(item);
-    const isRead = isArticleRead(item.id);
+    const isRead = isArticleRead(item);
+    const hasUpdate = hasPendingUpdate(item);
 
     let statusBadge = '';
     if (item.radar_status === 'fixed') {
@@ -1593,25 +1633,40 @@ function renderNews(items){
       statusBadge = `<span class="tag ${clsType}">🛡️ ${esc(item.verified_type)}</span>`;
     }
 
+    let readBadge = `<span class="tag tag-unread">Ungelesen</span>`;
+    if (hasUpdate) {
+      readBadge = `<span class="tag tag-updated">Update verfügbar</span>`;
+    } else if (isRead) {
+      readBadge = `<span class="tag tag-read">Gelesen</span>`;
+    }
+
     const tags = [
       statusBadge,
       ...classes.map(c => `<span class="tag ${TAG_MAP[c]||''}">${c}</span>`),
       item.category && TAG_MAP[item.category] ? `<span class="tag ${TAG_MAP[item.category]}">${CAT_DE[item.category] || item.category}</span>` : '',
       `<span class="tag">${item.source_icon||''} ${item.source||''}</span>`,
-      isRead ? `<span class="tag tag-read">Gelesen</span>` : `<span class="tag tag-unread">Ungelesen</span>`
+      readBadge
     ].filter(Boolean).join('');
 
     const teaser = item.teaser_de || item.summary_de || '';
     const hasArticle = !!(item.article_de || item.summary_de || teaser);
 
+    let badgeHtml = '';
+    if (item.is_updated) {
+      badgeHtml = '<span class="update-badge">AKTUALISIERT</span>';
+    } else if (isRecent) {
+      badgeHtml = '<span class="new-badge">NEU</span>';
+    }
+
     return `
-      <div class="news-item${isRecent ? ' is-new' : ''}" data-id="${esc(item.id)}" onclick="openModalById('${esc(item.id)}')">
+      <div class="news-item${isRecent ? ' is-new' : ''}${item.is_updated ? ' is-updated' : ''}" data-id="${esc(item.id)}" onclick="openModalById('${esc(item.id)}')">
         <span class="ni-ico">${item.source_icon || '📰'}</span>
         <div class="ni-body">
           <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;flex-wrap:wrap">
-            ${isRecent ? '<span class="new-badge">NEU</span>' : ''}
+            ${badgeHtml}
             <div class="ni-title" style="margin:0">${esc(item.title || '')}</div>
           </div>
+          ${item.update_note ? `<div style="font-size:0.75rem;color:#ffca28;margin-bottom:4px">🔄 <strong>Aktualisiert:</strong> ${esc(item.update_note)}</div>` : ''}
           ${teaser ? `<div class="ni-ai"><span class="ni-ai-label">🤖 KI-Analyse &amp; Status</span>${esc(teaser)}</div>` : ''}
           <div class="ni-meta">
             ${tags}
@@ -1637,6 +1692,7 @@ function openModalById(id) {
   // Meta tags
   const classes = item.classes || [];
   const metaHtml = [
+    item.is_updated ? `<span class="tag tag-updated">Aktualisiert</span>` : '',
     ...classes.map(c => `<span class="tag ${TAG_MAP[c]||''}">${c}</span>`),
     item.category && TAG_MAP[item.category] ? `<span class="tag ${TAG_MAP[item.category]}">${CAT_DE[item.category] || item.category}</span>` : '',
     `<span class="tag">${item.source_icon || ''} ${item.source || ''}</span>`,
@@ -1644,9 +1700,13 @@ function openModalById(id) {
   ].filter(Boolean).join('');
   document.getElementById('m-meta').innerHTML = metaHtml;
 
-  // Article content
+  // Article content & update notice
+  let updateNotice = '';
+  if (item.is_updated && item.update_note) {
+    updateNotice = `<div style="background:rgba(255,179,0,0.12);border-left:3px solid #ffb300;padding:8px 12px;margin-bottom:12px;border-radius:4px;font-size:0.85rem">🔄 <strong>Aktualisierung:</strong> ${esc(item.update_note)}</div>`;
+  }
   const raw = item.article_de || item.summary_de || item.teaser_de || 'Kein Inhalt verfügbar.';
-  document.getElementById('m-article').innerHTML = formatArticle(raw);
+  document.getElementById('m-article').innerHTML = updateNotice + formatArticle(raw);
 
   // Footer
   const link = document.getElementById('m-src-link');
@@ -1721,7 +1781,7 @@ function applyFilter() {
   if (activeFilter === 'is-new') {
     filtered = filtered.filter(i => isArticleRecent(i));
   } else if (activeFilter === 'is-unread') {
-    filtered = filtered.filter(i => !isArticleRead(i.id));
+    filtered = filtered.filter(i => !isArticleRead(i) || hasPendingUpdate(i));
   } else if (activeFilter.startsWith('cls-')) {
     const c = activeFilter.slice(4);
     const n = c[0].toUpperCase() + c.slice(1);

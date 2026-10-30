@@ -97,6 +97,185 @@ def make_canonical_id(url, fallback_text=""):
         return make_id(norm_u)
     return make_id(fallback_text)
 
+def clean_source_text(text):
+    """
+    Očisti tekst izvora tako da uklanja HTML, suvišne praznine i promenljive elemente.
+    Tako se promjena navigacije, timestampova ili formata ne tretira kao stvarna promena.
+    """
+    if not text:
+        return ""
+    text = re.sub(r'<[^>]+>', ' ', str(text))
+    text = re.sub(r'\b\d{4}-\d{2}-\d{2}[T\s]\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})?\b', ' ', text)
+    text = re.sub(r'\bvor\s+\d+\s+(?:minuten|stunden|tagen|sekunden)\b', ' ', text, flags=re.IGNORECASE)
+    text = re.sub(r'\s+', ' ', text).strip()
+    return text
+
+def compute_source_hash(title, content):
+    clean_t = clean_source_text(title)
+    clean_c = clean_source_text(content)
+    combined = (clean_t + " " + clean_c).lower()
+    return hashlib.sha256(combined.encode("utf-8")).hexdigest()[:16]
+
+def generate_update_summary(old_title, new_title, old_content, new_content):
+    clean_ot = clean_source_text(old_title).lower()
+    clean_nt = clean_source_text(new_title).lower()
+
+    if clean_ot and clean_nt and clean_ot != clean_nt:
+        t_display = new_title[:50] + "..." if len(new_title) > 50 else new_title
+        return f"Titel und Guide-Struktur angepasst: {t_display}"
+
+    clean_oc = clean_source_text(old_content)
+    clean_nc = clean_source_text(new_content)
+
+    nums_old = set(re.findall(r'\b\d+(?:[\.,]\d+)?%?\b', clean_oc))
+    nums_new = set(re.findall(r'\b\d+(?:[\.,]\d+)?%?\b', clean_nc))
+    if nums_old != nums_new:
+        return "Talent-Ränge, Schadenswerte oder Attribut-Skalierungen aktualisiert."
+
+    len_diff = len(clean_nc) - len(clean_oc)
+    if len_diff > 200:
+        return "Leitfaden um neue Abschnitte, Taktiken oder Beute-Hinweise erweitert."
+    elif len_diff < -200:
+        return "Veraltete Informationen entfernt und Empfehlungen gestrafft."
+
+    return "Inhaltliche Überarbeitung der Empfehlungen und Details."
+
+def merge_and_deduplicate_items(existing_items, incoming_items, sources_health=None, now_iso=None):
+    if sources_health is None:
+        sources_health = {}
+    if now_iso is None:
+        now_iso = datetime.now(timezone.utc).isoformat()
+
+    items_by_url = {}
+
+    # 1. Učitaj postojeće stavke sa normalizacijom
+    for old_it in existing_items:
+        raw_u = old_it.get("url", "")
+        norm_u = normalize_url(raw_u)
+        old_id = old_it.get("id")
+        canonical_id = make_canonical_id(norm_u, old_it.get("title", ""))
+
+        # Filtriraj kroz strogi is_relevant_context
+        if not is_relevant_context(old_it.get("title", ""), old_it.get("teaser_de", ""), old_it.get("article_de", "")):
+            continue
+
+        if norm_u in items_by_url:
+            existing = items_by_url[norm_u]
+            migrated = set(existing.get("migrated_ids", []))
+            if old_id and old_id != existing["id"]:
+                migrated.add(old_id)
+            if "migrated_ids" in old_it:
+                migrated.update(old_it["migrated_ids"])
+            existing["migrated_ids"] = sorted(list(migrated))
+        else:
+            migrated = set(old_it.get("migrated_ids", []))
+            if old_id and old_id != canonical_id:
+                migrated.add(old_id)
+            old_it["id"] = canonical_id
+            old_it["migrated_ids"] = sorted(list(migrated))
+            old_it["normalized_url"] = norm_u
+            old_it["classes"] = [c for c in detect_classes(old_it.get("title", "") + " " + old_it.get("article_de", "")) if c in CLASSES]
+            old_it["category"] = detect_category(old_it.get("title", "") + " " + old_it.get("article_de", ""))
+
+            # Osiguraj da postoji source_content_hash za postojeću stavku ako ga nema
+            if "source_content_hash" not in old_it:
+                old_it["source_content_hash"] = compute_source_hash(
+                    old_it.get("raw_title", old_it.get("title", "")),
+                    old_it.get("raw_content", old_it.get("article_de", ""))
+                )
+            items_by_url[norm_u] = old_it
+
+    # 2. Spoji novo prikupljene stavke
+    new_added_count = 0
+    updated_count = 0
+
+    for new_it in incoming_items:
+        norm_u = new_it["normalized_url"]
+        new_hash = new_it.get("source_content_hash") or compute_source_hash(
+            new_it.get("raw_title", new_it.get("title", "")),
+            new_it.get("raw_content", new_it.get("article_de", ""))
+        )
+        new_it["source_content_hash"] = new_hash
+
+        if norm_u in items_by_url:
+            existing = items_by_url[norm_u]
+            old_hash = existing.get("source_content_hash", "")
+
+            # Poređenje očišćenog sadržaja: ako je hash isti, nema stvarne promjene!
+            if old_hash and old_hash == new_hash:
+                existing["last_checked_at"] = now_iso
+                continue
+
+            # Stvarna promjena sadržaja postojećeg vodiča/objave
+            updated_count += 1
+            diff_note = generate_update_summary(
+                existing.get("raw_title", existing.get("title", "")),
+                new_it.get("raw_title", new_it.get("title", "")),
+                existing.get("raw_content", existing.get("article_de", "")),
+                new_it.get("raw_content", new_it.get("article_de", ""))
+            )
+
+            existing["title"] = new_it["title"]
+            existing["article_de"] = new_it["article_de"]
+            existing["teaser_de"] = new_it["teaser_de"]
+            existing["radar_status"] = new_it["radar_status"]
+            existing["category"] = new_it["category"]
+            existing["classes"] = new_it["classes"]
+            existing["source_content_hash"] = new_hash
+            existing["raw_title"] = new_it.get("raw_title", "")
+            existing["raw_content"] = new_it.get("raw_content", "")
+            
+            # Oznaka Aktualisiert i detalji
+            existing["is_updated"] = True
+            existing["updated_at"] = now_iso
+            existing["update_note"] = diff_note
+            existing["content_version"] = existing.get("content_version", 1) + 1
+            existing["last_checked_at"] = now_iso
+        else:
+            # Potpuno nova objava
+            new_it["is_updated"] = False
+            new_it["content_version"] = 1
+            new_it["last_checked_at"] = now_iso
+            items_by_url[norm_u] = new_it
+            new_added_count += 1
+
+    merged = list(items_by_url.values())
+    merged.sort(key=lambda x: (x.get("updated_at") if x.get("is_updated") else x.get("date", "")), reverse=True)
+
+    today_str = datetime.now().strftime("%d.%m.%Y")
+    
+    # Proveri da li su izvori uspešno provereni
+    critical_sources_failed = any(
+        ("Fehler" in st or "HTTP 4" in st or "HTTP 5" in st)
+        for st in sources_health.values()
+    )
+
+    if new_added_count == 0 and updated_count == 0:
+        if critical_sources_failed:
+            daily_summary_text = "Heute keine neuen relevanten Updates für Shaman und Hunter. (Hinweis: Einige Quellen meldeten Abruffehler; Details im Quellenstatus)."
+        else:
+            daily_summary_text = "Heute keine neuen relevanten Updates für Shaman und Hunter."
+    else:
+        active_headlines = []
+        for it in merged:
+            if it.get("is_updated") and it.get("updated_at", "").startswith(now_iso[:10]):
+                active_headlines.append(f"[Aktualisiert] {it['title']}")
+            elif not it.get("is_updated") and it.get("fetched_at", "").startswith(now_iso[:10]):
+                active_headlines.append(it["title"])
+        if not active_headlines:
+            active_headlines = [i["title"] for i in merged[:2] if i.get("title")]
+
+        headlines_summary = ("; ".join(active_headlines[:2]) + ".") if active_headlines else "Updates aktiv."
+
+        if new_added_count > 0 and updated_count > 0:
+            daily_summary_text = f"Tagesbriefing ({today_str}): {new_added_count} neue und {updated_count} aktualisierte Updates erfasst. Themen: {headlines_summary}"
+        elif updated_count > 0:
+            daily_summary_text = f"Tagesbriefing ({today_str}): {updated_count} bestehende Leitfäden wurden inhaltlich aktualisiert. Themen: {headlines_summary}"
+        else:
+            daily_summary_text = f"Tagesbriefing ({today_str}): {new_added_count} neue relevante Updates erfasst. Themen: {headlines_summary}"
+
+    return merged, new_added_count, updated_count, daily_summary_text
+
 def load_json(path, default):
     if os.path.exists(path):
         try:
@@ -576,6 +755,7 @@ def run_scraper():
         content = full_text if len(full_text) > len(summary) else summary
 
         norm_url = normalize_url(link)
+        src_hash = compute_source_hash(title, content)
         canonical_id = make_canonical_id(norm_url, title + summary)
         classes = detect_classes(title + " " + content)
         radar_status = detect_radar_status(title + " " + content)
@@ -606,83 +786,31 @@ def run_scraper():
             "teaser_de": teaser_de,
             "article_de": article_de,
             "url": link,
-            "normalized_url": norm_url
+            "normalized_url": norm_url,
+            "raw_title": title,
+            "raw_content": content,
+            "source_content_hash": src_hash
         })
 
-    # 6. DEDUPLIKACIJA I MIGRACIJA PREMA NORMALIZOVANOM URL-u
+    # 6. DEDUPLIKACIJA, PRAĆENJE NOVIH I IZMIJENJENIH OBJAVA
     existing_items = existing_data.get("items", [])
-    items_by_url = {}
-
-    # Učitaj postojeće stavke sa normalizacijom
-    for old_it in existing_items:
-        raw_u = old_it.get("url", "")
-        norm_u = normalize_url(raw_u)
-        old_id = old_it.get("id")
-        canonical_id = make_canonical_id(norm_u, old_it.get("title", ""))
-
-        # Filtriraj kroz strogi is_relevant_context
-        if not is_relevant_context(old_it.get("title", ""), old_it.get("teaser_de", ""), old_it.get("article_de", "")):
-            continue
-
-        if norm_u in items_by_url:
-            # Već postoji zapis sa istim URL-om -> spoji i migriraj ID-eve
-            existing = items_by_url[norm_u]
-            migrated = set(existing.get("migrated_ids", []))
-            if old_id and old_id != existing["id"]:
-                migrated.add(old_id)
-            if "migrated_ids" in old_it:
-                migrated.update(old_it["migrated_ids"])
-            existing["migrated_ids"] = sorted(list(migrated))
-        else:
-            migrated = set(old_it.get("migrated_ids", []))
-            if old_id and old_id != canonical_id:
-                migrated.add(old_id)
-            old_it["id"] = canonical_id
-            old_it["migrated_ids"] = sorted(list(migrated))
-            old_it["normalized_url"] = norm_u
-            old_it["classes"] = [c for c in detect_classes(old_it.get("title", "") + " " + old_it.get("article_de", "")) if c in CLASSES]
-            old_it["category"] = detect_category(old_it.get("title", "") + " " + old_it.get("article_de", ""))
-            items_by_url[norm_u] = old_it
-
-    # Spoji novo prikupljene stavke
-    new_added_count = 0
-    for new_it in processed_new:
-        norm_u = new_it["normalized_url"]
-        if norm_u in items_by_url:
-            # Postojeći vodič/vest dobija nova ažuriranja na istom URL-u bez duplikata
-            existing = items_by_url[norm_u]
-            existing["title"] = new_it["title"]
-            existing["article_de"] = new_it["article_de"]
-            existing["teaser_de"] = new_it["teaser_de"]
-            existing["fetched_at"] = new_it["fetched_at"]
-            existing["radar_status"] = new_it["radar_status"]
-            existing["category"] = new_it["category"]
-            existing["classes"] = new_it["classes"]
-        else:
-            items_by_url[norm_u] = new_it
-            new_added_count += 1
-
-    merged = list(items_by_url.values())
-    merged.sort(key=lambda x: x.get("date", ""), reverse=True)
-
-    today_str = datetime.now().strftime("%d.%m.%Y")
-    
-    # Zahtev 7: Ako nema novih relevantnih novosti za danas
-    if new_added_count == 0:
-        daily_summary_text = "Heute keine neuen relevanten Updates für Shaman und Hunter."
-    else:
-        top_headlines = [i["title"] for i in merged[:2] if i.get("title")]
-        headlines_summary = ("; ".join(top_headlines) + ".") if top_headlines else "Updates aktiv."
-        daily_summary_text = f"Tagesbriefing ({today_str}): {new_added_count} neue relevante Updates erfasst. Themen: {headlines_summary}"
-
     finish_time_utc = datetime.now(timezone.utc).isoformat()
+
+    merged, new_added_count, updated_count, daily_summary_text = merge_and_deduplicate_items(
+        existing_items=existing_items,
+        incoming_items=processed_new,
+        sources_health=sources_health,
+        now_iso=finish_time_utc
+    )
 
     result_payload = {
         "scraper_started_at": start_time_utc,
+        "data_processed_at": finish_time_utc,
         "last_updated": finish_time_utc,
         "published_at": finish_time_utc,
         "total_count": len(merged),
         "new_count": new_added_count,
+        "updated_count": updated_count,
         "daily_summary": daily_summary_text,
         "castle_status": {
             "status": "Keine Live-Daten verifiziert",
@@ -703,7 +831,7 @@ def run_scraper():
 
     save_json(OUTPUT_FILE, result_payload)
     save_json(SEEN_IDS_FILE, sorted(list(all_known_ids)))
-    print(f"✅ Uspešno završeno: {new_added_count} novih stavki. Ukupno unikatnih po URL-u: {len(merged)}")
+    print(f"✅ Uspešno završeno: {new_added_count} novih stavki, {updated_count} ažuriranih. Ukupno unikatnih po URL-u: {len(merged)}")
 
 if __name__ == "__main__":
     run_scraper()

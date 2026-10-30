@@ -11,7 +11,16 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # Importuj funkcije iz scrapera
 sys.path.insert(0, BASE_DIR)
-from scraper.scrape import is_relevant_context, detect_classes, detect_category, normalize_url, CLASSES
+from scraper.scrape import (
+    is_relevant_context,
+    detect_classes,
+    detect_category,
+    normalize_url,
+    merge_and_deduplicate_items,
+    compute_source_hash,
+    clean_source_text,
+    CLASSES
+)
 
 def test_news_json():
     path = os.path.join(BASE_DIR, "data", "news.json")
@@ -64,6 +73,9 @@ def test_news_json():
     assert len(ss) > 0, "Nedostaje sources_status!"
     for src, st in ss.items():
         assert "OK" in st or "HTTP" in st or "Keine" in st or "Fehler" in st, f"Sumnjiv status izvora: {src} -> {st}"
+
+    # Check data processing timestamp
+    assert data.get("data_processed_at") or data.get("published_at"), "Nedostaje timestamp obrade podataka (data_processed_at)!"
 
     print(f"✅ test_news_json prošao: {len(items)} validnih vesti (fokus Shaman & Hunter).")
 
@@ -169,6 +181,12 @@ def test_index_html():
     assert "section-addons" in content, "Nedostaje section-addons sekcija!"
     assert "level-bar" in content, "Nedostaje level-bar kontrola za ručni unos nivoa!"
     assert "setPlayerLevel" in content, "Nedostaje funkcija setPlayerLevel!"
+
+    # 7. Tracking izmena i oznake ažuriranja
+    assert "hasPendingUpdate" in content, "Nedostaje funkcija hasPendingUpdate!"
+    assert "wow_read_versions" in content, "Nedostaje spremanje pročitane verzije u localStorage!"
+    assert "update-badge" in content, "Nedostaje stil ili bedž update-badge za ažurirane vodiče!"
+    assert "Daten verarbeitet:" in content, "Vrijeme obrade podataka mora biti prikazano kao 'Daten verarbeitet:'!"
 
     print("✅ test_index_html prošao sve funkcionalne provere.")
 
@@ -277,9 +295,120 @@ def test_content_relevance_and_categorization():
 
     print("✅ test_content_relevance_and_categorization prošao sve testove filtriranja i kategorizacije.")
 
+def test_guide_update_tracking():
+    """
+    Ciljani test za praćenje izmjena postojećih vodiča:
+    - Isti URL s promijenjenim sadržajem mora ostati JEDAN zapis i pojaviti se među dnevnim ažuriranjima.
+    - Ponovno preuzimanje identičnog sadržaja ne smije stvarati obavijest.
+    - Oznaka 'is_updated' i 'update_note' se dodeljuju kod promene.
+    - Dnevni pregled uključuje ažurirane vodiče i ne tvrdi lažno 'keine neuen Updates'.
+    """
+    test_url = "https://www.wowhead.com/forever/guide=shaman-leveling-enhancement"
+    initial_title = "WoW Forever Schamane Leveling Guide"
+    initial_content = "Windfury Rank 1 skalira sa 20% weapon damage. Totems aufstellen ab Level 4."
+    
+    # 1. Početno stanje: vodič u bazi
+    initial_item = {
+        "id": "shaman_guide_canon_id",
+        "url": test_url,
+        "normalized_url": normalize_url(test_url),
+        "title": initial_title,
+        "teaser_de": "Schamane Leveling Guide für WoW Forever.",
+        "article_de": initial_content,
+        "date": "2026-10-29",
+        "fetched_at": "2026-10-29T10:00:00Z",
+        "source": "Wowhead Forever",
+        "source_icon": "🌐",
+        "category": "guide",
+        "verified_type": "Guide / Analyse",
+        "radar_status": "normal",
+        "classes": ["Shaman"],
+        "raw_title": initial_title,
+        "raw_content": initial_content,
+        "source_content_hash": compute_source_hash(initial_title, initial_content)
+    }
+
+    # 2. Ponovno preuzimanje IDENTIČNOG sadržaja sa istog URL-a (npr. sutrašnji scrape)
+    # Razlika u fetched_at ili blagoj rečeničnoj promeni AI teasera ne sme izazvati ažuriranje!
+    same_scraped_item = {
+        "url": test_url,
+        "normalized_url": normalize_url(test_url),
+        "title": initial_title,
+        "teaser_de": "Schamane Leveling Guide für WoW Forever (vom KI-Modell neu formuliert).",
+        "article_de": "📌 **Zusammenfassung:**\n" + initial_content,
+        "date": "2026-10-30",
+        "fetched_at": "2026-10-30T10:00:00Z",
+        "source": "Wowhead Forever",
+        "source_icon": "🌐",
+        "category": "guide",
+        "verified_type": "Guide / Analyse",
+        "radar_status": "normal",
+        "classes": ["Shaman"],
+        "raw_title": initial_title,
+        "raw_content": initial_content,
+        "source_content_hash": compute_source_hash(initial_title, initial_content)
+    }
+
+    merged_1, new_cnt_1, upd_cnt_1, summary_1 = merge_and_deduplicate_items(
+        existing_items=[initial_item],
+        incoming_items=[same_scraped_item],
+        sources_health={"WoWhead Forever": "OK"},
+        now_iso="2026-10-30T11:50:00Z"
+    )
+
+    # Verifikacija identičnog sadržaja:
+    assert len(merged_1) == 1, f"Očekivan tačno 1 zapis na istom URL-u, dobijeno: {len(merged_1)}"
+    assert new_cnt_1 == 0, f"Ponovno preuzimanje ne sme prijaviti novu stavku: {new_cnt_1}"
+    assert upd_cnt_1 == 0, f"Identičan sadržaj ne sme prijaviti ažuriranje: {upd_cnt_1}"
+    assert "Heute keine neuen relevanten Updates" in summary_1, f"Dnevni pregled mora glasiti da nema novih ažuriranja: {summary_1}"
+    assert merged_1[0].get("is_updated") is not True, "Identičan sadržaj ne sme dobiti is_updated: True!"
+
+    # 3. Preuzimanje sa STVARNO PROMIJENJENIM sadržajem na istom URL-u (promijenjene brojke/scaling)
+    updated_content = "Windfury Rank 1 wurde gebufft auf 35% weapon damage. Totems haben nun reduzierte Manakosten um 15%."
+    changed_scraped_item = {
+        "url": test_url,
+        "normalized_url": normalize_url(test_url),
+        "title": "WoW Forever Schamane Leveling Guide (Aktualisiert für Hotfix)",
+        "teaser_de": "Schamane Guide mit neuen Werten nach Hotfix.",
+        "article_de": updated_content,
+        "date": "2026-10-30",
+        "fetched_at": "2026-10-30T12:00:00Z",
+        "source": "Wowhead Forever",
+        "source_icon": "🌐",
+        "category": "guide",
+        "verified_type": "Guide / Analyse",
+        "radar_status": "normal",
+        "classes": ["Shaman"],
+        "raw_title": "WoW Forever Schamane Leveling Guide (Aktualisiert für Hotfix)",
+        "raw_content": updated_content,
+        "source_content_hash": compute_source_hash("WoW Forever Schamane Leveling Guide (Aktualisiert für Hotfix)", updated_content)
+    }
+
+    merged_2, new_cnt_2, upd_cnt_2, summary_2 = merge_and_deduplicate_items(
+        existing_items=merged_1,
+        incoming_items=[changed_scraped_item],
+        sources_health={"WoWhead Forever": "OK"},
+        now_iso="2026-10-30T12:00:00Z"
+    )
+
+    # Verifikacija promjene sadržaja:
+    assert len(merged_2) == 1, f"Mora ostati tačno 1 zapis na istom URL-u, dobijeno: {len(merged_2)}"
+    assert new_cnt_2 == 0, f"Ažurirani vodič na istom URL-u nije nova stavka (new_cnt mora biti 0): {new_cnt_2}"
+    assert upd_cnt_2 == 1, f"Ažurirani vodič mora biti prepoznat kao aktualisiert (upd_cnt == 1): {upd_cnt_2}"
+    
+    updated_rec = merged_2[0]
+    assert updated_rec.get("is_updated") is True, "Ažurirani zapis mora imati is_updated == True!"
+    assert updated_rec.get("update_note"), "Ažurirani zapis mora imati kratak opis izmjene (update_note)!"
+    assert updated_rec.get("content_version", 1) >= 2, "Ažurirani zapis mora imati uvećan content_version!"
+    assert "Heute keine neuen relevanten Updates" not in summary_2, f"Dnevni pregled ne sme reći da nema novosti kada postoji ažuriranje: {summary_2}"
+    assert "aktualisiert" in summary_2.lower(), f"Dnevni pregled mora spomenuti ažurirane vodiče: {summary_2}"
+
+    print("✅ test_guide_update_tracking prošao: isti URL ostaje 1 zapis, razlikuje novu obavijest od identičnog preuzimanja.")
+
 if __name__ == "__main__":
     test_news_json()
     test_guides_and_bis_json()
     test_index_html()
     test_content_relevance_and_categorization()
+    test_guide_update_tracking()
     print("🎉 SVI TESTOVI SU USPEŠNO PROŠLI!")
