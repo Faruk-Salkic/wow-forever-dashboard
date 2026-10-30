@@ -1,16 +1,16 @@
 {
-  "scraper_started_at": "2026-10-30T17:30:09.342687+00:00",
-  "data_processed_at": "2026-10-30T17:30:32.072735+00:00",
-  "last_updated": "2026-10-30T17:30:32.072735+00:00",
-  "published_at": "2026-10-30T17:30:32.072735+00:00",
+  "scraper_started_at": "2026-10-30T17:34:33.956924+00:00",
+  "data_processed_at": "2026-10-30T17:34:53.314116+00:00",
+  "last_updated": "2026-10-30T17:34:53.314116+00:00",
+  "published_at": "2026-10-30T17:34:53.314116+00:00",
   "total_count": 11,
   "new_count": 1,
-  "updated_count": 6,
-  "daily_summary": "Tagesbriefing (30.10.2026): 1 neue und 6 aktualisierte Updates erfasst. Themen: [Aktualisiert] Eisige Adern für immer: Jägerübersicht; [Aktualisiert] Eisige Adern für immer: Biest-Meisterung.",
+  "updated_count": 0,
+  "daily_summary": "Tagesbriefing (30.10.2026): 1 neue relevante Updates erfasst. Themen: [Aktualisiert] Eisige Adern für immer: Jägerübersicht; [Aktualisiert] Eisige Adern für immer: Biest-Meisterung.",
   "castle_status": {
     "status": "Keine Live-Daten verifiziert",
     "details": "Aktuell liegen keine automatischen Burgen-Telemetriedaten vor. Status wird nach Serverstart über Live-Events angebunden.",
-    "last_checked": "2026-10-30T17:30:32.072735+00:00",
+    "last_checked": "2026-10-30T17:34:53.314116+00:00",
     "verified": false
   },
   "items": [
@@ -25,8 +25,7 @@
       "verified_type": "Guide / Analyse",
       "radar_status": "balance",
       "classes": [
-        "Hunter",
-        "Shaman"
+        "Hunter"
       ],
       "title": "Eisige Adern für immer: Jägerübersicht",
       "teaser_de": "Offizieller WoW Forever Klassen-Leitfaden von Icy Veins für Hunter Overview. Behandelt Talente, Rotationen und Ausrüstungs-Skalierung.",
@@ -39,7 +38,7 @@
       "is_updated": true,
       "updated_at": "2026-10-30T17:30:32.072735+00:00",
       "content_version": 2,
-      "last_checked_at": "2026-10-30T17:30:32.072735+00:00",
+      "last_checked_at": "2026-10-30T17:34:53.314116+00:00",
       "update_note": "Talent-Ränge, Schadenswerte oder Attribut-Skalierungen aktualisiert."
     },
     {
@@ -53,8 +52,7 @@
       "verified_type": "Guide / Analyse",
       "radar_status": "balance",
       "classes": [
-        "Hunter",
-        "Shaman"
+        "Hunter"
       ],
       "title": "Eisige Adern für immer: Biest-Meisterung",
       "teaser_de": "Offizieller WoW Forever Klassen-Leitfaden von Icy Veins für Beast Mastery. Behandelt Talente, Rotationen und Ausrüstungs-Skalierung.",
@@ -67,7 +65,7 @@
       "is_updated": true,
       "updated_at": "2026-10-30T17:30:32.072735+00:00",
       "content_version": 2,
-      "last_checked_at": "2026-10-30T17:30:32.072735+00:00",
+      "last_checked_at": "2026-10-30T17:34:53.314116+00:00",
       "update_note": "Talent-Ränge, Schadenswerte oder Attribut-Skalierungen aktualisiert."
     },
     {
@@ -81,8 +79,7 @@
       "verified_type": "Guide / Analyse",
       "radar_status": "balance",
       "classes": [
-        "Hunter",
-        "Shaman"
+        "Hunter"
       ],
       "title": "Eisige Adern für immer: Schießkunst",
       "teaser_de": "Offizieller WoW Forever Klassen-Leitfaden von Icy Veins für Marksmanship. Behandelt Talente, Rotationen und Ausrüstungs-Skalierung.",
@@ -95,7 +92,7 @@
       "is_updated": true,
       "updated_at": "2026-10-30T17:30:32.072735+00:00",
       "content_version": 2,
-      "last_checked_at": "2026-10-30T17:30:32.072735+00:00",
+      "last_checked_at": "2026-10-30T17:34:53.314116+00:00",
       "update_note": "Talent-Ränge, Schadenswerte oder Attribut-Skalierungen aktualisiert."
     },
     {
@@ -109,7 +106,6 @@
       "verified_type": "Guide / Analyse",
       "radar_status": "balance",
       "classes": [
-        "Hunter",
         "Shaman"
       ],
       "title": "Eisige Adern für immer: Schamanenübersicht",
@@ -123,7 +119,7 @@
       "is_updated": true,
       "updated_at": "2026-10-30T17:30:32.072735+00:00",
       "content_version": 2,
-      "last_checked_at": "2026-10-30T17:30:32.072735+00:00",
+      "last_checked_at": "2026-10-30T17:34:53.314116+00:00",
       "update_note": "Talent-Ränge, Schadenswerte oder Attribut-Skalierungen aktualisiert."
     },
     {
@@ -150,7 +146,7 @@
       "is_updated": true,
       "updated_at": "2026-10-30T17:30:32.072735+00:00",
       "content_version": 2,
-      "last_checked_at": "2026-10-30T17:30:32.072735+00:00",
+      "last_checked_at": "2026-10-30T17:34:53.314116+00:00",
       "update_note": "Talent-Ränge, Schadenswerte oder Attribut-Skalierungen aktualisiert."
     },
     {
@@ -177,14 +173,14 @@
       "is_updated": true,
       "updated_at": "2026-10-30T17:30:32.072735+00:00",
       "content_version": 2,
-      "last_checked_at": "2026-10-30T17:30:32.072735+00:00",
+      "last_checked_at": "2026-10-30T17:34:53.314116+00:00",
       "update_note": "Talent-Ränge, Schadenswerte oder Attribut-Skalierungen aktualisiert."
     },
     {
       "id": "de76b279c0dd",
       "migrated_ids": [],
       "date": "2026-10-30",
-      "fetched_at": "2026-10-30T17:30:18.247729+00:00",
+      "fetched_at": "2026-10-30T17:34:41.371712+00:00",
       "source": "WoWhead Forever",
       "source_icon": "🌐",
       "category": "news",
@@ -201,7 +197,7 @@
       "source_content_hash": "1a569fcc4fd5f8e9",
       "is_updated": false,
       "content_version": 1,
-      "last_checked_at": "2026-10-30T17:30:32.072735+00:00"
+      "last_checked_at": "2026-10-30T17:34:53.314116+00:00"
     },
     {
       "id": "70436e7840dc",
@@ -227,7 +223,7 @@
       "is_updated": false,
       "updated_at": "2026-10-30T17:16:53.671512+00:00",
       "content_version": 1,
-      "last_checked_at": "2026-10-30T17:30:32.072735+00:00"
+      "last_checked_at": "2026-10-30T17:34:53.314116+00:00"
     },
     {
       "id": "cb1178c4aaa8",
