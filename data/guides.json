@@ -34,8 +34,18 @@
     "faruk_start": {
       "zone": "Ambosstal (Coldridge Valley) -> Kharanos -> Eisenschmiede (Ironforge)",
       "totem_quests": [
-        {"lvl": "Stufe 4", "name": "Ruf der Erde (Erdtotem)", "npc": "Yarr Hammerstone (Vorposten im Ambosstal)", "benefit": "Schaltet Erdstosstotem & Steinhauttotem frei (senkt Schaden auf Mirzas Pet!)."},
-        {"lvl": "Stufe 10", "name": "Ruf des Feuers (Feuertotem)", "npc": "Kranor Frostschreiter (Kharanos / Eisenschmiede)", "benefit": "Schaltet Verbrennungstotem & Feuernova frei für starken Flächenschaden."}
+        {
+          "lvl": "Stufe 4",
+          "name": "Ruf der Erde (Erdtotem)",
+          "npc": "Yarr Hammerstone (Vorposten im Ambosstal)",
+          "benefit": "Schaltet Erdstosstotem & Steinhauttotem frei (senkt Schaden auf Mirzas Pet!)."
+        },
+        {
+          "lvl": "Stufe 10",
+          "name": "Ruf des Feuers (Feuertotem)",
+          "npc": "Kranor Frostschreiter (Kharanos / Eisenschmiede)",
+          "benefit": "Schaltet Verbrennungstotem & Feuernova frei für starken Flächenschaden."
+        }
       ],
       "profession_nodes": "Kupferadern & Raue Steine direkt an allen Berghängen in Dun Morogh. Bergbaulehrer & Ingenieurslehrer in Eisenschmiede (Große Schmiede & Tüftlerstadt)."
     },
@@ -106,9 +116,27 @@
         "why": "Höchster Grundschaden (+10% Schadens-Modifikator). Profitiert durch Forever-Stat-Skalierung extrem von Mirzas Agilität.",
         "feed": "Fleisch, Fisch",
         "best_targets": [
-          {"name": "Dunkelpirscher (Darkstalker)", "level": "10-11", "zone": "Loch Modan (Nordküste)", "speed": "1.30", "note": "Schnellstes Katzenpet im frühen Allianz-Gebiet. Klaue Rang 2."},
-          {"name": "Berglöwe (Mountain Lion)", "level": "10-11", "zone": "Dun Morogh", "speed": "1.40", "note": "Sofort nach Stufe 10 Klassenquest in Zwergengebiet zähmbar."},
-          {"name": "Schlingendorntiger", "level": "31-32", "zone": "Schlingendorntal (STV)", "speed": "1.20", "note": "Top Angriffsgeschwindigkeit für Zauberunterbrechungen im PvP."}
+          {
+            "name": "Dunkelpirscher (Darkstalker)",
+            "level": "10-11",
+            "zone": "Loch Modan (Nordküste)",
+            "speed": "1.30",
+            "note": "Schnellstes Katzenpet im frühen Allianz-Gebiet. Klaue Rang 2."
+          },
+          {
+            "name": "Berglöwe (Mountain Lion)",
+            "level": "10-11",
+            "zone": "Dun Morogh",
+            "speed": "1.40",
+            "note": "Sofort nach Stufe 10 Klassenquest in Zwergengebiet zähmbar."
+          },
+          {
+            "name": "Schlingendorntiger",
+            "level": "31-32",
+            "zone": "Schlingendorntal (STV)",
+            "speed": "1.20",
+            "note": "Top Angriffsgeschwindigkeit für Zauberunterbrechungen im PvP."
+          }
         ]
       },
       {
@@ -118,9 +146,27 @@
         "why": "Furioses Heulen (Furious Howl) bufft den nächsten physischen Angriff für Mirza und Faruks Schamanen-Nahkampf!",
         "feed": "Fleisch",
         "best_targets": [
-          {"name": "Streunender Kojote (Coyote)", "level": "10-11", "zone": "Westfall (Moonbrook)", "speed": "1.50", "note": "Frühester Allianz-Wolf für Furioses Heulen."},
-          {"name": "Worg (Dire Condemned)", "level": "19-20", "zone": "Rotkammgebirge", "speed": "1.40", "note": "Perfekt vor dem ersten Deadmines-Dungeonrun mit Faruk."},
-          {"name": "Aasworg (Carrion Vulture/Worg)", "level": "25-26", "zone": "Dämmerwald", "speed": "1.40", "note": "Hält hohe Rüstung, idealer Dungeon-Off-Tank."}
+          {
+            "name": "Streunender Kojote (Coyote)",
+            "level": "10-11",
+            "zone": "Westfall (Moonbrook)",
+            "speed": "1.50",
+            "note": "Frühester Allianz-Wolf für Furioses Heulen."
+          },
+          {
+            "name": "Worg (Dire Condemned)",
+            "level": "19-20",
+            "zone": "Rotkammgebirge",
+            "speed": "1.40",
+            "note": "Perfekt vor dem ersten Deadmines-Dungeonrun mit Faruk."
+          },
+          {
+            "name": "Aasworg (Carrion Vulture/Worg)",
+            "level": "25-26",
+            "zone": "Dämmerwald",
+            "speed": "1.40",
+            "note": "Hält hohe Rüstung, idealer Dungeon-Off-Tank."
+          }
         ]
       },
       {
@@ -130,29 +176,85 @@
         "why": "Sturmangriff (Charge) bindet Gegner sofort für 1 Sekunde fest. Frisst jede Nahrung (Brot, Früchte, Fleisch – 0 Unterhaltskosten).",
         "feed": "Alles (Fleisch, Brot, Obst, Pilze, Fisch)",
         "best_targets": [
-          {"name": "Bergeber (Mountain Boar)", "level": "10-11", "zone": "Loch Modan", "speed": "2.00", "note": "Perfekter Starter-Eber direkt nach Questannahme."},
-          {"name": "Rostiger Eber", "level": "16-17", "zone": "Westfall", "speed": "2.00", "note": "Robuster Allrounder für die Deadmines-Vorquests."}
+          {
+            "name": "Bergeber (Mountain Boar)",
+            "level": "10-11",
+            "zone": "Loch Modan",
+            "speed": "2.00",
+            "note": "Perfekter Starter-Eber direkt nach Questannahme."
+          },
+          {
+            "name": "Rostiger Eber",
+            "level": "16-17",
+            "zone": "Westfall",
+            "speed": "2.00",
+            "note": "Robuster Allrounder für die Deadmines-Vorquests."
+          }
         ]
       }
     ],
     "skills_guide": [
-      {"skill": "Knurren (Taunt)", "how": "Wird beim Tierausbilder (Pet Trainer) in Sturmwind oder Eisenschmiede gelernt. Immer auf maximalem Rang halten!"},
-      {"skill": "Klaue (Claw)", "how": "Von Bären oder Katzen in Dun Morogh / Loch Modan lernen (vorübergehend zähmen, 3-5 Mobs bekämpfen)."},
-      {"skill": "Beißen (Bite)", "how": "Von Spinnen in Dun Morogh oder Wölfen in Westfall lernen."},
-      {"skill": "Furioses Heulen (Furious Howl)", "how": "Exklusiv von Wölfen. Bufft Mirza und Faruk vor Spezialangriffen."}
+      {
+        "skill": "Knurren (Taunt)",
+        "how": "Wird beim Tierausbilder (Pet Trainer) in Sturmwind oder Eisenschmiede gelernt. Immer auf maximalem Rang halten!"
+      },
+      {
+        "skill": "Klaue (Claw)",
+        "how": "Von Bären oder Katzen in Dun Morogh / Loch Modan lernen (vorübergehend zähmen, 3-5 Mobs bekämpfen)."
+      },
+      {
+        "skill": "Beißen (Bite)",
+        "how": "Von Spinnen in Dun Morogh oder Wölfen in Westfall lernen."
+      },
+      {
+        "skill": "Furioses Heulen (Furious Howl)",
+        "how": "Exklusiv von Wölfen. Bufft Mirza und Faruk vor Spezialangriffen."
+      }
     ]
   },
   "leveling_guide": {
     "title": "Allianz Leveling-Route (1 - 60) — Optimiert für Faruk & Mirza",
     "zones": [
-      {"range": "Stufe 1 - 10", "zone": "Dun Morogh / Startgebiet", "desc": "Faruk schließt im Ambosstal Erdtotem (Lvl 4) und Kharanos Feuertotem (Lvl 10) ab. Mirza levelt parallel und zähmt mit Level 10 erstes Pet. Gnomeregan liegt direkt im Nordwesten!"},
-      {"range": "Stufe 10 - 18", "zone": "Loch Modan & Westfall", "desc": "Thelsamar (Loch Modan) ist der ideale Treffpunkt. Quests rund um den See abschließen. Danach Flug nach Sturmwind & Westfall für Deadmines-Vorquests. Faruk sammelt Zinnerz, Mirza häutet Tiere."},
-      {"range": "Stufe 18 - 24", "zone": "Todesminen (DM) & Rotkamm", "desc": "Todesminen Dungeon-Run mit voller Questliste! Danach Rotkammgebirge (Seenhain) für Gnoll- und Orc-Quests. Faruks Steinhauttotem entlastet Mirzas Pet bei Elite-Gegnern."},
-      {"range": "Stufe 24 - 30", "zone": "Dämmerwald & Das Verlies", "desc": "Dämmerwald (Dunkelhain) bietet dichte Quest-Knotenpunkte mit massiver Erfahrung. Dazwischen schneller Durchlauf durch Das Verlies (Stockades) in Sturmwind."},
-      {"range": "Stufe 30 - 38", "zone": "Schlingendorntal (STV) & Kloster (SM)", "desc": "Nesingwary-Lager im nördlichen STV (Kürschner-Paradies für Mirza!). Danach nach Süderstade reisen und Scharlachrotes Kloster (Bibliothek, Waffenkammer, Kathedrale) abfarmen."},
-      {"range": "Stufe 38 - 45", "zone": "Ödland & Zul'Farrak (Tanaris)", "desc": "Level 40 Meilenstein: Gold für Reittier (Mount) nutzen für 60% Reit-Tempo! Tanaris & Zul'Farrak für Treppen-Event und Karottengriffel-Trinket."},
-      {"range": "Stufe 45 - 52", "zone": "Hinterland & Versunkener Tempel", "desc": "Hinterland Elite-Quests in Jintha'Alor. Auf Stufe 50 unbedingt die exklusiven Klassenquests für Schamane & Jäger im Versunkenen Tempel machen!"},
-      {"range": "Stufe 52 - 60", "zone": "Pestländer & Blackrocktiefen (BRD)", "desc": "Schlüssel-Quests für Scholo, Stratholme und BRD abschließen. Pre-Raid BiS farmen und gemeinsam Stufe 60 erreichen!"}
+      {
+        "range": "Stufe 1 - 10",
+        "zone": "Dun Morogh / Startgebiet",
+        "desc": "Faruk schließt im Ambosstal Erdtotem (Lvl 4) und Kharanos Feuertotem (Lvl 10) ab. Mirza levelt parallel und zähmt mit Level 10 erstes Pet. Gnomeregan liegt direkt im Nordwesten!"
+      },
+      {
+        "range": "Stufe 10 - 18",
+        "zone": "Loch Modan & Westfall",
+        "desc": "Thelsamar (Loch Modan) ist der ideale Treffpunkt. Quests rund um den See abschließen. Danach Flug nach Sturmwind & Westfall für Deadmines-Vorquests. Faruk sammelt Zinnerz, Mirza häutet Tiere."
+      },
+      {
+        "range": "Stufe 18 - 24",
+        "zone": "Todesminen (DM) & Rotkamm",
+        "desc": "Todesminen Dungeon-Run mit voller Questliste! Danach Rotkammgebirge (Seenhain) für Gnoll- und Orc-Quests. Faruks Steinhauttotem entlastet Mirzas Pet bei Elite-Gegnern."
+      },
+      {
+        "range": "Stufe 24 - 30",
+        "zone": "Dämmerwald & Das Verlies",
+        "desc": "Dämmerwald (Dunkelhain) bietet dichte Quest-Knotenpunkte mit massiver Erfahrung. Dazwischen schneller Durchlauf durch Das Verlies (Stockades) in Sturmwind."
+      },
+      {
+        "range": "Stufe 30 - 38",
+        "zone": "Schlingendorntal (STV) & Kloster (SM)",
+        "desc": "Nesingwary-Lager im nördlichen STV (Kürschner-Paradies für Mirza!). Danach nach Süderstade reisen und Scharlachrotes Kloster (Bibliothek, Waffenkammer, Kathedrale) abfarmen."
+      },
+      {
+        "range": "Stufe 38 - 45",
+        "zone": "Ödland & Zul'Farrak (Tanaris)",
+        "desc": "Level 40 Meilenstein: Gold für Reittier (Mount) nutzen für 60% Reit-Tempo! Tanaris & Zul'Farrak für Treppen-Event und Karottengriffel-Trinket."
+      },
+      {
+        "range": "Stufe 45 - 52",
+        "zone": "Hinterland & Versunkener Tempel",
+        "desc": "Hinterland Elite-Quests in Jintha'Alor. Auf Stufe 50 unbedingt die exklusiven Klassenquests für Schamane & Jäger im Versunkenen Tempel machen!"
+      },
+      {
+        "range": "Stufe 52 - 60",
+        "zone": "Pestländer & Blackrocktiefen (BRD)",
+        "desc": "Schlüssel-Quests für Scholo, Stratholme und BRD abschließen. Pre-Raid BiS farmen und gemeinsam Stufe 60 erreichen!"
+      }
     ]
   },
   "dungeon_quests": {
@@ -488,6 +590,18 @@
         "type": "Deutsche Fachpresse",
         "url": "https://www.buffed.de",
         "why": "Liefert schnelle Zusammenfassungen komplexer Patch-Notes auf Deutsch mit Fokus auf europäische Server und Zeitzonen."
+      },
+      {
+        "name": "Method Forever Class Guides",
+        "type": "Raid & Klassen-Leitfäden",
+        "url": "https://www.method.gg/wow-forever/class-guides",
+        "why": "Spezialisierte Endgame- und Leveling-Routen mit Talent-Analysen von Top-Raidern für Schamane und Jäger."
+      },
+      {
+        "name": "Icy Veins Forever Class Guides",
+        "type": "Detaillierte Klassenguides",
+        "url": "https://www.icy-veins.com/wow-forever/class-guides",
+        "why": "Kompakte Übersichten zu Stat-Prioritäten, Rotationen und Ausrüstungs-Upgrades während der Levelphase."
       }
     ]
   },
@@ -514,6 +628,78 @@
       "1. Gold sparen für Stufe 40 Mount: Kaufe beim Klassenlehrer nur absolut notwendige Angriffs- & Heilfähigkeiten (keine nutzlosen Zauberränge).",
       "2. Sammelberufe nie vernachlässigen: Mirza hält Kürschnerei immer auf Zonenlevel, Faruk schmilzt Erze direkt ein für Ingenieurs-Punkte.",
       "3. Camping vor Dungeons nutzen: 1 Minute am Lagerfeuer aktiviert den Erholt-Bonus (Rested XP) in der offenen Welt und ermöglicht wertvolle Berufs-Buffs vor Bosskämpfen."
+    ]
+  },
+  "addons": {
+    "title": "🔌 Empfohlene Addons für Faruk & Mirza (CurseForge)",
+    "description": "Fokussierte Auswahl kompatibler Addons für WoW Forever / Classic 1.15.x. Keine redundanten Tools.",
+    "items": [
+      {
+        "name": "Questie",
+        "target": "Faruk & Mirza (Gemeinsam)",
+        "icon": "🗺️",
+        "url": "https://www.curseforge.com/wow/addons/questie",
+        "role": "Leveling & Quest-Tracker",
+        "why": "Zeigt alle verfügbaren und annehmbaren Quests, Vorquest-Ketten, Questgeber-Standorte und Beute-Mobs auf der Weltkarte und Minikarte. Unverzichtbar für effizientes Leveln ohne Alt-Tab.",
+        "compatibility": "WoW Classic 1.15.x / Forever",
+        "overlap": "Ersetzt ClassicCodex und QuestHelper. Keine weiteren Quest-Tools nötig.",
+        "status": "Empfohlen für WoW Forever (Vorbereitet, noch nicht live im Raid getestet)"
+      },
+      {
+        "name": "TotemTimers",
+        "target": "Faruk (Schamane)",
+        "icon": "🌊",
+        "url": "https://www.curseforge.com/wow/addons/totemtimers",
+        "role": "Totem- & Waffenverzauberungs-Management",
+        "why": "Zeigt für Faruk die exakte Restdauer aller 4 aktiven Totems (Erde, Feuer, Wasser, Luft) sowie Waffen-Buffs (Windfury, Flammenzunge) mit Ein-Klick-Nachzaubern an. Warnt, wenn Totems außer Reichweite geraten.",
+        "compatibility": "WoW Classic 1.15.x / Forever",
+        "overlap": "Fokussiertes Klassen-Tool ohne Überschneidung mit General-UIs.",
+        "status": "Empfohlen für WoW Forever (Vorbereitet, noch nicht live im Raid getestet)"
+      },
+      {
+        "name": "WeaponSwingTimer (SixxFix)",
+        "target": "Mirza (Jäger) & Faruk (Schamane)",
+        "icon": "🏹",
+        "url": "https://www.curseforge.com/wow/addons/weaponswingtimer-sixxfix",
+        "role": "Auto-Shot & Nahkampf-Schwungbalken",
+        "why": "Unverzichtbar für Mirza, um automatisches Schießen (Auto-Shot) perfekt mit Bewegung (Kiting) und Fähigkeiten wie Gezielter Schuss zu verweben, ohne Schüsse abzubrechen. Für Faruk zeigt es den Schwungbalken für Windfury-Resets.",
+        "compatibility": "WoW Classic 1.15.x / Forever",
+        "overlap": "Keine Überschneidung. Deutlich präziser als Standard-Castbars.",
+        "status": "Empfohlen für WoW Forever (Vorbereitet, noch nicht live im Raid getestet)"
+      },
+      {
+        "name": "ClassicCastbars",
+        "target": "Faruk & Mirza (Gemeinsam)",
+        "icon": "⚡",
+        "url": "https://www.curseforge.com/wow/addons/classiccastbars",
+        "role": "Feindliche Zauberbalken & Unterbrechung",
+        "why": "Zeigt Zauberbalken von Ziel- und Fokus-Gegnern sowie Zauberdauer an. Essenziell für Faruks Erdschock (Earth Shock Rang 1) zum sofortigen Unterbrechen gefährlicher Heiler/Zauberer in Dungeons.",
+        "compatibility": "WoW Classic 1.15.x / Forever",
+        "overlap": "Leichtgewichtig; ersetzt ressourcenhungrige Namensplaketten-Suiten, wenn man nur Castbars benötigt.",
+        "status": "Empfohlen für WoW Forever (Vorbereitet, noch nicht live im Raid getestet)"
+      },
+      {
+        "name": "Leatrix Plus (Classic)",
+        "target": "Faruk & Mirza (Gemeinsam)",
+        "icon": "⚙️",
+        "url": "https://www.curseforge.com/wow/addons/leatrix-plus",
+        "role": "Komfort & Automatisierung (Quality of Life)",
+        "why": "Verkauft grauen Schrott automatisch beim Händler, repariert Rüstung automatisch, beschleunigt das Plündern (Faster Looting), automatisiert Quest-Abgaben und blendet störende Fehlermeldungen aus.",
+        "compatibility": "WoW Classic 1.15.x / Forever",
+        "overlap": "Reine Komfort-Sammlung; harmoniert perfekt mit Questie und Klassen-Addons.",
+        "status": "Empfohlen für WoW Forever (Vorbereitet, noch nicht live im Raid getestet)"
+      },
+      {
+        "name": "Details! Damage Meter (Classic)",
+        "target": "Faruk & Mirza (Gemeinsam)",
+        "icon": "📊",
+        "url": "https://www.curseforge.com/wow/addons/details",
+        "role": "Schadens- & Heilungsanalyse",
+        "why": "Ermöglicht genaue Analyse des Schadensanteils von Mirzas Jäger-Pet und Faruks Windfury-Procs. Sehr ressourcenschonend und präzise bei Classic-Mechaniken.",
+        "compatibility": "WoW Classic 1.15.x / Forever",
+        "overlap": "Ersetzt Recount und Skada.",
+        "status": "Empfohlen für WoW Forever (Vorbereitet, noch nicht live im Raid getestet)"
+      }
     ]
   }
 }

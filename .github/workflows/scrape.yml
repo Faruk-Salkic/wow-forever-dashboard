@@ -2,15 +2,49 @@ name: 🗡️ WoW Forever Daily News Scraper
 
 on:
   schedule:
-    # 08:00 UTC = 09:00 CET (Vienna / Sarajevo)
-    - cron: "0 8 * * *"
+    # 09:50 UTC (in CEST/Summer = 11:50 Vienna) and 10:50 UTC (in CET/Winter = 11:50 Vienna)
+    # Automatic daylight saving time (DST) adjustment via Europe/Vienna timezone gate check.
+    # Running at :50 allows ~10 minutes for scraping, tests and GitHub Pages deployment so updates are live by 12:00.
+    - cron: "50 9,10 * * *"
   workflow_dispatch:
 
 permissions:
   contents: write
 
 jobs:
+  gate:
+    name: ⏰ Timezone Gate (Europe/Vienna 12:00 Target)
+    runs-on: ubuntu-latest
+    outputs:
+      should_run: ${{ steps.gate.outputs.should_run }}
+    steps:
+      - name: 🌐 Check Europe/Vienna Local Time
+        id: gate
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "Manual trigger (workflow_dispatch) - running immediately."
+            echo "should_run=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          VIENNA_TIME=$(TZ="Europe/Vienna" date '+%Y-%m-%d %H:%M:%S %Z')
+          VIENNA_HOUR=$(TZ="Europe/Vienna" date +'%H')
+          echo "Current Europe/Vienna local time: $VIENNA_TIME"
+          echo "Vienna Hour: $VIENNA_HOUR"
+
+          # Target window is 11:xx Europe/Vienna (leading up to 12:00)
+          if [ "$VIENNA_HOUR" -eq 11 ]; then
+            echo "✅ Target hour 11 verified. Proceeding with daily 12:00 publication."
+            echo "should_run=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "⏭️ Current Vienna hour ($VIENNA_HOUR) is outside target window (11:50 CET/CEST). Skipping this cron trigger."
+            echo "should_run=false" >> "$GITHUB_OUTPUT"
+          fi
+
   scrape:
+    name: 🔍 Scrape, Validate & Deploy
+    needs: gate
+    if: needs.gate.outputs.should_run == 'true'
     runs-on: ubuntu-latest
 
     steps:

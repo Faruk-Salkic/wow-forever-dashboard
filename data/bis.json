@@ -8,22 +8,102 @@
       "icon": "🏹",
       "phase": "Launch / Phase 1",
       "slots": [
-        {"slot": "Kopf",         "item": "Später aktualisiert",  "source": "—", "url": ""},
-        {"slot": "Hals",         "item": "Später aktualisiert",  "source": "—", "url": ""},
-        {"slot": "Schulter",     "item": "Später aktualisiert",  "source": "—", "url": ""},
-        {"slot": "Rücken",       "item": "Später aktualisiert",  "source": "—", "url": ""},
-        {"slot": "Brust",        "item": "Später aktualisiert",  "source": "—", "url": ""},
-        {"slot": "Handgelenk",   "item": "Später aktualisiert",  "source": "—", "url": ""},
-        {"slot": "Hände",        "item": "Später aktualisiert",  "source": "—", "url": ""},
-        {"slot": "Gürtel",       "item": "Später aktualisiert",  "source": "—", "url": ""},
-        {"slot": "Beine",        "item": "Später aktualisiert",  "source": "—", "url": ""},
-        {"slot": "Füße",         "item": "Später aktualisiert",  "source": "—", "url": ""},
-        {"slot": "Ring 1",       "item": "Später aktualisiert",  "source": "—", "url": ""},
-        {"slot": "Ring 2",       "item": "Später aktualisiert",  "source": "—", "url": ""},
-        {"slot": "Trikett 1",    "item": "Später aktualisiert",  "source": "—", "url": ""},
-        {"slot": "Trikett 2",    "item": "Später aktualisiert",  "source": "—", "url": ""},
-        {"slot": "Fernkampf",    "item": "Später aktualisiert",  "source": "—", "url": ""},
-        {"slot": "Köcher",       "item": "Später aktualisiert",  "source": "—", "url": ""}
+        {
+          "slot": "Kopf",
+          "item": "Später aktualisiert",
+          "source": "—",
+          "url": ""
+        },
+        {
+          "slot": "Hals",
+          "item": "Später aktualisiert",
+          "source": "—",
+          "url": ""
+        },
+        {
+          "slot": "Schulter",
+          "item": "Später aktualisiert",
+          "source": "—",
+          "url": ""
+        },
+        {
+          "slot": "Rücken",
+          "item": "Später aktualisiert",
+          "source": "—",
+          "url": ""
+        },
+        {
+          "slot": "Brust",
+          "item": "Später aktualisiert",
+          "source": "—",
+          "url": ""
+        },
+        {
+          "slot": "Handgelenk",
+          "item": "Später aktualisiert",
+          "source": "—",
+          "url": ""
+        },
+        {
+          "slot": "Hände",
+          "item": "Später aktualisiert",
+          "source": "—",
+          "url": ""
+        },
+        {
+          "slot": "Gürtel",
+          "item": "Später aktualisiert",
+          "source": "—",
+          "url": ""
+        },
+        {
+          "slot": "Beine",
+          "item": "Später aktualisiert",
+          "source": "—",
+          "url": ""
+        },
+        {
+          "slot": "Füße",
+          "item": "Später aktualisiert",
+          "source": "—",
+          "url": ""
+        },
+        {
+          "slot": "Ring 1",
+          "item": "Später aktualisiert",
+          "source": "—",
+          "url": ""
+        },
+        {
+          "slot": "Ring 2",
+          "item": "Später aktualisiert",
+          "source": "—",
+          "url": ""
+        },
+        {
+          "slot": "Trikett 1",
+          "item": "Später aktualisiert",
+          "source": "—",
+          "url": ""
+        },
+        {
+          "slot": "Trikett 2",
+          "item": "Später aktualisiert",
+          "source": "—",
+          "url": ""
+        },
+        {
+          "slot": "Fernkampf",
+          "item": "Später aktualisiert",
+          "source": "—",
+          "url": ""
+        },
+        {
+          "slot": "Köcher",
+          "item": "Später aktualisiert",
+          "source": "—",
+          "url": ""
+        }
       ],
       "best_pet": "Wolf — Furioses Heulen (+5% Schaden für die Gruppe, bufft auch Faruks Schamanen)",
       "key_talents": "Tierherrschaft (Beast Mastery) 41 Punkte + Treffsicherheit",
@@ -41,15 +121,60 @@
       "icon": "🌊",
       "phase": "Launch / Phase 1",
       "slots": [
-        {"slot": "Kopf",         "item": "Später aktualisiert",  "source": "—", "url": ""},
-        {"slot": "Hals",         "item": "Später aktualisiert",  "source": "—", "url": ""},
-        {"slot": "Schulter",     "item": "Später aktualisiert",  "source": "—", "url": ""},
-        {"slot": "Rücken",       "item": "Später aktualisiert",  "source": "—", "url": ""},
-        {"slot": "Brust",        "item": "Später aktualisiert",  "source": "—", "url": ""},
-        {"slot": "Hände",        "item": "Später aktualisiert",  "source": "—", "url": ""},
-        {"slot": "Ring 1",       "item": "Später aktualisiert",  "source": "—", "url": ""},
-        {"slot": "Waffe",        "item": "Später aktualisiert",  "source": "—", "url": ""},
-        {"slot": "Trikett 1",    "item": "Später aktualisiert",  "source": "—", "url": ""}
+        {
+          "slot": "Kopf",
+          "item": "Später aktualisiert",
+          "source": "—",
+          "url": ""
+        },
+        {
+          "slot": "Hals",
+          "item": "Später aktualisiert",
+          "source": "—",
+          "url": ""
+        },
+        {
+          "slot": "Schulter",
+          "item": "Später aktualisiert",
+          "source": "—",
+          "url": ""
+        },
+        {
+          "slot": "Rücken",
+          "item": "Später aktualisiert",
+          "source": "—",
+          "url": ""
+        },
+        {
+          "slot": "Brust",
+          "item": "Später aktualisiert",
+          "source": "—",
+          "url": ""
+        },
+        {
+          "slot": "Hände",
+          "item": "Später aktualisiert",
+          "source": "—",
+          "url": ""
+        },
+        {
+          "slot": "Ring 1",
+          "item": "Später aktualisiert",
+          "source": "—",
+          "url": ""
+        },
+        {
+          "slot": "Waffe",
+          "item": "Später aktualisiert",
+          "source": "—",
+          "url": ""
+        },
+        {
+          "slot": "Trikett 1",
+          "item": "Später aktualisiert",
+          "source": "—",
+          "url": ""
+        }
       ],
       "best_pet": "—",
       "key_talents": "Enhancement (Verstärkung) für Nahkampf & schnelles Duo-Leveln | Restoration für Dungeon-Heals",
@@ -59,56 +184,6 @@
         "Steinhaut-Totem immer aktiv halten, um Schaden auf Mirzas Pet zu minimieren",
         "Engineering-Bomben nutzen: Eisengranaten und Zielattrappen retten brenzlige Situationen",
         "Allianz-Schamane: Perfekte Synergie mit Jäger – Geisterwolf ab Stufe 20 für schnelles Reisen"
-      ]
-    },
-    "Priest": {
-      "spec": "Holy / Shadow",
-      "color": "#ffffff",
-      "icon": "✨",
-      "phase": "Launch / Phase 1",
-      "slots": [
-        {"slot": "Kopf",         "item": "Später aktualisiert",  "source": "—", "url": ""},
-        {"slot": "Hals",         "item": "Später aktualisiert",  "source": "—", "url": ""},
-        {"slot": "Schulter",     "item": "Später aktualisiert",  "source": "—", "url": ""},
-        {"slot": "Rücken",       "item": "Später aktualisiert",  "source": "—", "url": ""},
-        {"slot": "Brust",        "item": "Später aktualisiert",  "source": "—", "url": ""},
-        {"slot": "Stab",         "item": "Später aktualisiert",  "source": "—", "url": ""},
-        {"slot": "Trikett 1",    "item": "Später aktualisiert",  "source": "—", "url": ""}
-      ],
-      "best_pet": "—",
-      "key_talents": "Holy für Heilung (Raids) | Shadow für Leveling (DPS)",
-      "leveling_tip": "Shadow-Build zum Leveln (Geistesform = 15% Schaden). Für Raids auf Holy wechseln.",
-      "tips": [
-        "Geistesform (Shadow) ermöglicht effizientes Solo-Leveling",
-        "Power Word: Schild immer vor Kämpfen einsetzen",
-        "Gedankenbeherrschung in PvP sehr stark",
-        "Heilige Nova für AoE-Heilung in engen Dungeons"
-      ]
-    },
-    "Rogue": {
-      "spec": "Subtlety / Assassination",
-      "color": "#fff468",
-      "icon": "🗡️",
-      "phase": "Launch / Phase 1",
-      "slots": [
-        {"slot": "Kopf",         "item": "Später aktualisiert",  "source": "—", "url": ""},
-        {"slot": "Hals",         "item": "Später aktualisiert",  "source": "—", "url": ""},
-        {"slot": "Schulter",     "item": "Später aktualisiert",  "source": "—", "url": ""},
-        {"slot": "Rücken",       "item": "Später aktualisiert",  "source": "—", "url": ""},
-        {"slot": "Brust",        "item": "Später aktualisiert",  "source": "—", "url": ""},
-        {"slot": "Hände",        "item": "Später aktualisiert",  "source": "—", "url": ""},
-        {"slot": "Waffe (MH)",   "item": "Später aktualisiert",  "source": "—", "url": ""},
-        {"slot": "Waffe (OH)",   "item": "Später aktualisiert",  "source": "—", "url": ""},
-        {"slot": "Trikett 1",    "item": "Später aktualisiert",  "source": "—", "url": ""}
-      ],
-      "best_pet": "—",
-      "key_talents": "Meucheln für PvE-DPS | Täuschung für PvP",
-      "leveling_tip": "Meucheln-Build für schnelles Leveling. Immer aus dem Hinterhalt angreifen für maximalen Schaden.",
-      "tips": [
-        "Hinterhalt + Nierenhieb = perfekter PvP-Opener",
-        "Schattenschritt (Täuschung) macht dich schwer zu kiten",
-        "Gifte immer auf Waffen: Wundgift (MH) + Betäubungsgift (OH)",
-        "Tricksen für Agro-Reset in Dungeons nutzen"
       ]
     }
   }

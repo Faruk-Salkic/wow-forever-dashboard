@@ -1,61 +1,49 @@
 # Faruk & Mirza — WoW Forever Dashboard 🐉
 
-Privatni daily-news dashboard za WoW Forever (04.11.2026).  
-Prati vijesti za **Hunter 🏹 · Shaman 🔵 · Priest ✨ · Rogue 🗡️** — Alliance.
+Privatni interaktivni dashboard i vodič za WoW Forever.  
+Fokusiran isključivo na potrebe igrača:
+- **Faruk** 🌊: Shaman (Dwarf · Enhancement/Resto · Mining & Engineering)
+- **Mirza** 🏹: Hunter (Beast Mastery · Skinning & Herbalism)
 
-## 🚀 Setup (5 minuta)
-
-### 1. Napravi GitHub repo
-- Idi na [github.com](https://github.com) → **New repository**
-- Ime: `wow-forever` (ili što hoćeš)
-- Visibility: **Private** ✅ (ne treba biti public!)
-- Klikni **Create repository**
-
-### 2. Upload fajlova
-- Uploadaj sve fajlove iz ovog foldera na GitHub
-- Ili koristi Git:
-```bash
-git init
-git add .
-git commit -m "🐉 WoW Forever Dashboard init"
-git remote add origin https://github.com/TVOJE_IME/wow-forever.git
-git push -u origin main
-```
-
-### 3. Uključi GitHub Pages
-- Idi na **Settings** → **Pages**
-- Source: **Deploy from a branch** → `main` → `/ (root)`
-- Sačuvaj → stranica će biti na: `https://TVOJE_IME.github.io/wow-forever`
-
-### 4. Promijeni lozinku!
-Otvori `index.html` i nađi ovu liniju:
-```js
-const PASSWORDS = ["wowforever", "farukimirza", "wow2026"];
-```
-Promijeni na svoju lozinku i pushai izmjenu.
-
-### 5. GitHub Actions — automatski scraper
-- Idi na **Settings** → **Actions** → **General**
-- Pod "Workflow permissions" → odaberi **Read and write permissions** → Sačuvaj
-- Scraper će se pokrenuti automatski svaki dan u 09:00 CET
-
-### 6. Ručno pokretanje prvog puta
-- Idi na tab **Actions** u svom repou
-- Klikni na `WoW Forever Daily News Scraper`
-- Klikni **Run workflow** → Run
-- Za 1-2 minute news.json će biti ažuriran!
+Stranica: [https://faruk-salkic.github.io/wow-forever-dashboard/](https://faruk-salkic.github.io/wow-forever-dashboard/)  
+Repozitorij: [https://github.com/Faruk-Salkic/wow-forever-dashboard](https://github.com/Faruk-Salkic/wow-forever-dashboard)
 
 ---
 
-## 🔗 Custom link opcije
+## 🌟 Ključne mogućnosti i arhitektura
 
-| Opcija | Link | Cijena |
-|--------|------|--------|
-| GitHub Pages (default) | `faruk.github.io/wow-forever` | Besplatno |
-| Netlify deploy | `wow-novosti.netlify.app` | Besplatno |
-| Custom domena | `wow.faruk.ba` ili sl. | ~\$10/god |
+1. **Strogi fokus na Shamana i Huntera**:
+   - Rogue i Priest su potpuno uklonjeni iz interfejsa, BiS tabela, profila i konfiguracije scrapera.
+   - Rigorozni filter sadržaja eliminiše opšte tehničke rasprave (layering, server arhitektura), podcaste, trailere i PR najave bez korisnih detalja.
+   - Ako nema novih relevantnih vijesti za naše klase, prikazuje se jasna poruka: *„Heute keine neuen relevanten Updates für Shaman und Hunter.“*
 
-Za Netlify: drag & drop folder na [netlify.com/drop](https://netlify.com/drop) — gotovo!
+2. **Interaktivni vodiči i level filter**:
+   - Odvojeni trajni vodiči od dnevnih novosti (Camping & Legacy, Leveling & Dungeons, Jäger-Pets, BiS-Items, Gold & Berufe, Addons).
+   - Ručni unos trenutnog nivoa po igraču (Faruk & Mirza) uz opciju filtriranja zona i tamnica prilagođenih trenutnom nivou.
+   - Odvojene kvačice za praćenje dungeon questova (Faruk / Mirza) sačuvane u lokalnom browser spremištu (`localStorage`).
+
+3. **CurseForge Addoni**:
+   - Pažljivo odabrani dodaci kompatibilni sa WoW Forever / Classic klijentom: Questie, TotemTimers, WeaponSwingTimer, ClassicCastbars, Leatrix Plus, Details!.
+   - Objašnjen konkretan benefit i napomena o eventualnom preklapanju.
+
+4. **Dnevno osvježavanje u 12:00 Europe/Vienna**:
+   - GitHub Actions cron je konfigurisan na `50 9,10 * * *` sa automatskom provjerom vremenske zone `Europe/Vienna` u gate poslu.
+   - Automatski se prilagođava prelasku sa ljetnog (CEST, UTC+2) na zimsko vrijeme (CET, UTC+1).
+   - Pokreće se 10 minuta prije podneva kako bi scraping, validacija i GitHub Pages deployment bili završeni tačno do 12:00.
+
+---
+
+## 🛠️ Pokretanje testova i scrapera lokalno
+
+Pokretanje svih integritetnih provjera (radi na Windows i Linux sistemima):
+```bash
+python test_dashboard.py
+```
+
+Ručno pokretanje scrapera:
+```bash
+python scraper/scrape.py
+```
 
 ---
 
@@ -63,14 +51,17 @@ Za Netlify: drag & drop folder na [netlify.com/drop](https://netlify.com/drop) �
 
 ```
 wow-forever-dashboard/
-├── index.html              ← Dashboard (glassmorphism UI)
+├── index.html                  ← Interaktivni dashboard (UI, profili, level-filter, modal)
+├── test_dashboard.py           ← Integritetni testovi i validacija filtriranja
 ├── data/
-│   └── news.json           ← Scraped vijesti (auto-update)
+│   ├── news.json               ← Filtrirane i provjerene vijesti (njemački jezik)
+│   ├── guides.json             ← Dungeon questovi, pet cheat-sheet, rute i Addoni
+│   ├── bis.json                ← BiS liste (isključivo Hunter i Shaman)
+│   └── seen_ids.json           ← Evidencija ID-eva radi sprečavanja duplikata
 ├── scraper/
-│   ├── scrape.py           ← Python scraper
-│   └── requirements.txt
+│   ├── scrape.py               ← Pametni scraper sa strogim filterima i AI sažecima
+│   └── requirements.txt        ← Python zavisnosti (feedparser, requests, bs4, google-genai)
 └── .github/
     └── workflows/
-        └── scrape.yml      ← GitHub Actions job
+        └── scrape.yml          ← GitHub Actions automatizacija (12:00 Europe/Vienna gate)
 ```
-

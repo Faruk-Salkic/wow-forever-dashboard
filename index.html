@@ -87,14 +87,12 @@
 
     .modal-body { padding:24px 28px 28px; }
 
-    /* AI Article content */
     .modal-article {
       font-size:.92rem; line-height:1.8; color:var(--text);
     }
     .modal-article p { margin-bottom:14px; }
     .modal-article strong { color:#fff; }
 
-    /* Section headers inside article */
     .modal-section {
       margin: 18px 0 10px;
       padding: 10px 14px;
@@ -151,9 +149,9 @@
     .alert-txt { font-size: 0.85rem; color: #ffcdd2; line-height: 1.4; }
     .alert-txt strong { color: #fff; }
 
-    /* PROFILES & HEUTE */
+    /* PROFILES & LEVEL BAR */
     .profile-bar {
-      display: flex; gap: 10px; justify-content: center; margin-bottom: 16px; flex-wrap: wrap;
+      display: flex; gap: 10px; justify-content: center; margin-bottom: 12px; flex-wrap: wrap;
     }
     .profile-btn {
       padding: 7px 18px; border-radius: 100px;
@@ -165,6 +163,24 @@
       background: rgba(240,192,64,0.15); border-color: var(--gold); color: var(--gold); font-weight: 600;
       box-shadow: 0 0 14px rgba(240,192,64,0.2);
     }
+
+    .level-bar {
+      display: flex; gap: 14px; justify-content: center; align-items: center; margin-bottom: 18px; flex-wrap: wrap;
+      background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 100px; padding: 6px 18px; width: fit-content; margin-left: auto; margin-right: auto;
+    }
+    .level-box { display: flex; align-items: center; gap: 6px; font-size: 0.8rem; color: var(--dim); }
+    .level-box label { font-weight: 600; }
+    .level-input {
+      width: 48px; padding: 3px 6px; background: rgba(0,0,0,0.4); border: 1px solid rgba(240,192,64,0.3); border-radius: 6px;
+      color: var(--gold); font-size: 0.82rem; font-weight: 700; text-align: center; outline: none;
+    }
+    .level-input:focus { border-color: var(--gold); box-shadow: 0 0 6px rgba(240,192,64,0.3); }
+    .level-btn {
+      padding: 4px 12px; border-radius: 100px; border: 1px solid rgba(79,195,247,0.3); background: rgba(79,195,247,0.08);
+      color: var(--blue); font-size: 0.74rem; cursor: pointer; transition: 0.15s;
+    }
+    .level-btn:hover { background: rgba(79,195,247,0.18); }
+    .level-btn.active { background: rgba(79,195,247,0.25); border-color: var(--blue); font-weight: 600; }
 
     .heute-box {
       margin-bottom: 18px; padding: 16px 20px;
@@ -190,6 +206,7 @@
     .guide-table th { padding: 9px 12px; text-align: left; color: var(--gold); font-family: 'Cinzel', serif; font-size: 0.78rem; border-bottom: 1px solid rgba(240,192,64,0.2); white-space: nowrap; }
     .guide-table td { padding: 11px 12px; border-bottom: 1px solid rgba(255,255,255,0.05); vertical-align: top; }
     .guide-table tr:hover td { background: rgba(255,255,255,0.02); }
+    .zone-active-row td { background: rgba(240,192,64,0.08) !important; font-weight: 500; }
     
     .pet-card {
       background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07);
@@ -225,6 +242,18 @@
     .dwarf-box { background: linear-gradient(135deg, rgba(240,192,64,0.08), rgba(15,30,70,0.6)); border: 1px solid rgba(240,192,64,0.25); border-radius: 16px; padding: 18px 20px; margin-bottom: 20px; }
     .intel-box { background: linear-gradient(135deg, rgba(79,195,247,0.08), rgba(15,30,70,0.5)); border: 1px solid rgba(79,195,247,0.25); border-radius: 16px; padding: 18px 20px; margin-top: 20px; }
     .local-notice { background: rgba(79,195,247,0.07); border: 1px solid rgba(79,195,247,0.22); border-radius: 10px; padding: 10px 14px; font-size: 0.78rem; color: var(--dim); margin-bottom: 16px; line-height: 1.5; }
+
+    /* ADDON CARDS */
+    .addon-card {
+      background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 18px; margin-bottom: 16px;
+      transition: 0.2s;
+    }
+    .addon-card:hover { transform: translateY(-2px); border-color: rgba(240,192,64,0.3); }
+    .addon-hdr { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; }
+    .addon-title { font-family: 'Cinzel', serif; font-size: 1.05rem; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 8px; }
+    .addon-target { font-size: 0.72rem; padding: 3px 10px; border-radius: 100px; background: rgba(240,192,64,0.12); color: var(--gold); border: 1px solid rgba(240,192,64,0.3); }
+    .addon-link { color: var(--blue); text-decoration: none; font-size: 0.82rem; display: inline-flex; align-items: center; gap: 4px; }
+    .addon-link:hover { text-decoration: underline; }
 
     /* Clickable news item cursor */
     .news-item { cursor:pointer; }
@@ -294,7 +323,6 @@
     .ni-title { font-size:.88rem;font-weight:500;color:var(--text);margin-bottom:3px;line-height:1.4; }
     .news-item.is-new .ni-title { color:#fff; }
 
-    /* AI Summary box */
     .ni-ai { margin:6px 0;padding:8px 12px;background:rgba(240,192,64,.06);border-left:2px solid rgba(240,192,64,.4);border-radius:0 8px 8px 0;font-size:.81rem;color:#d4c89a;line-height:1.5; }
     .ni-ai-label { font-size:.68rem;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin-bottom:3px;display:block; }
 
@@ -302,8 +330,6 @@
     .tag { padding:2px 7px;border-radius:100px;font-size:.68rem;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.09); }
     .t-hunter { background:rgba(171,214,86,.1); border-color:rgba(171,214,86,.3); color:#abd656; }
     .t-shaman { background:rgba(0,112,222,.12); border-color:rgba(0,112,222,.3); color:#5599ff; }
-    .t-priest { background:rgba(255,255,255,.07); border-color:rgba(255,255,255,.18); color:#fff; }
-    .t-rogue  { background:rgba(255,244,104,.1); border-color:rgba(255,244,104,.3); color:#fff468; }
     .t-exploit{ background:rgba(239,83,80,.13);  border-color:rgba(239,83,80,.3);   color:var(--red); }
     .t-hotfix { background:rgba(102,187,106,.1); border-color:rgba(102,187,106,.3); color:var(--green); }
     .t-pvp    { background:rgba(206,147,216,.1); border-color:rgba(206,147,216,.3); color:var(--purple); }
@@ -333,8 +359,6 @@
     .cls-cnt { font-size:.68rem;color:var(--dim);margin-top:3px; }
     .c-hunter { border-color:rgba(171,214,86,.28); } .c-hunter .cls-name { color:#abd656; }
     .c-shaman { border-color:rgba(0,112,222,.28); }  .c-shaman .cls-name { color:#5599ff; }
-    .c-priest { border-color:rgba(255,255,255,.2); }  .c-priest .cls-name { color:#fff; }
-    .c-rogue  { border-color:rgba(255,244,104,.28); } .c-rogue  .cls-name { color:#fff468; }
 
     /* CASTLE */
     .castle-body { padding:16px 18px; }
@@ -362,8 +386,6 @@
 
     .bis-hunter.on { background:rgba(171,214,86,.12);border-color:rgba(171,214,86,.3); }
     .bis-shaman.on { background:rgba(0,112,222,.12); border-color:rgba(0,112,222,.3); }
-    .bis-priest.on { background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.2); }
-    .bis-rogue.on  { background:rgba(255,244,104,.1); border-color:rgba(255,244,104,.3); }
 
     .bis-content { padding:18px; }
     .bis-header { display:flex;align-items:center;gap:14px;margin-bottom:18px;flex-wrap:wrap; }
@@ -408,8 +430,6 @@
     .news-item:nth-child(1){animation-delay:.03s}
     .news-item:nth-child(2){animation-delay:.06s}
     .news-item:nth-child(3){animation-delay:.09s}
-    .news-item:nth-child(4){animation-delay:.12s}
-    .news-item:nth-child(5){animation-delay:.15s}
 
     @media(max-width:640px){
       .hero{padding:20px 12px 10px}
@@ -446,8 +466,8 @@
       <div class="emblem-face">🐉</div>
     </div>
     <h1 class="hero-title">Faruk &amp; Mirza</h1>
-    <p class="hero-sub">WoW Forever — Neuigkeiten &amp; Updates</p>
-    <div class="hero-badge">⚔️ Allianz &nbsp;|&nbsp; Start: 05.11.2026 um 00:00 Uhr CET (Wien / BiH)</div>
+    <p class="hero-sub">WoW Forever — Neuigkeiten &amp; Leveling-Guide</p>
+    <div class="hero-badge">⚔️ Allianz &nbsp;|&nbsp; Start: 05.11.2026 um 00:00 Uhr CET (Wien / Sarajevo)</div>
 
     <!-- COUNTDOWN -->
     <div class="countdown-box" id="launch-countdown">
@@ -466,6 +486,7 @@
     <button class="nav-tab" data-section="pets">🐾 Jäger-Pets</button>
     <button class="nav-tab" data-section="leveling">🗺️ Leveling &amp; Dungeons</button>
     <button class="nav-tab" data-section="gold">💰 Gold &amp; Berufe</button>
+    <button class="nav-tab" data-section="addons">🔌 Addons</button>
     <button class="nav-tab" data-section="castle">🏰 Burgen &amp; PvP</button>
   </div>
 
@@ -479,18 +500,31 @@
 
   <div class="container">
 
-    <!-- SPIELER-PROFIL SWITCHER -->
+    <!-- SPIELER-PROFIL SWITCHER (FARUK / MIRZA / OBOJICA) -->
     <div class="profile-bar">
-      <button class="profile-btn active" id="pbtn-all" onclick="setProfile('all')">👥 Alle Klassen</button>
+      <button class="profile-btn active" id="pbtn-all" onclick="setProfile('all')">👥 Obojica (Beide)</button>
       <button class="profile-btn" id="pbtn-Faruk" onclick="setProfile('Faruk')">🌊 Faruk (Shaman)</button>
-      <button class="profile-btn" id="pbtn-Mirza" onclick="setProfile('Mirza')">🏹 Mirza (Jäger 100%)</button>
+      <button class="profile-btn" id="pbtn-Mirza" onclick="setProfile('Mirza')">🏹 Mirza (Hunter)</button>
+    </div>
+
+    <!-- RUČNI UNOS NIVOA PO IGRAČU & LEVEL FILTER -->
+    <div class="level-bar">
+      <div class="level-box">
+        <label for="lvl-faruk">🌊 Faruk Level:</label>
+        <input type="number" id="lvl-faruk" class="level-input" min="1" max="60" value="1" onchange="setPlayerLevel('Faruk', this.value)" />
+      </div>
+      <div class="level-box">
+        <label for="lvl-mirza">🏹 Mirza Level:</label>
+        <input type="number" id="lvl-mirza" class="level-input" min="1" max="60" value="1" onchange="setPlayerLevel('Mirza', this.value)" />
+      </div>
+      <button class="level-btn" id="btn-lvl-filter" onclick="toggleLevelFilter()">🎯 Nach aktuellem Level filtern</button>
     </div>
 
     <!-- HEUTE FÜR UNS (PRIORITÄTEN) -->
     <div class="heute-box fade" id="heute-box">
       <div class="heute-title">
         <span>⭐ Heute für uns (Fokus &amp; Vorbereitung)</span>
-        <span style="font-size:0.75rem;color:var(--gold);font-family:'Inter',sans-serif;font-weight:400" id="profile-indicator">Profil: Alle Klassen</span>
+        <span style="font-size:0.75rem;color:var(--gold);font-family:'Inter',sans-serif;font-weight:400" id="profile-indicator">Profil: Obojica / Beide (Faruk &amp; Mirza)</span>
       </div>
       <ul class="heute-list" id="heute-list">
         <li><span>1.</span> <strong>Allianz Duo-Kombi:</strong> Faruk (Schamane: Bergbau &amp; Engineering) + Mirza (Jäger 100%: Kürschnerei &amp; Kräuterkunde).</li>
@@ -534,8 +568,6 @@
               <button class="flt" data-f="cat-pvp">⚔️ PvP</button>
               <button class="flt" data-f="cls-hunter">🏹 Hunter</button>
               <button class="flt" data-f="cls-shaman">🌊 Shaman</button>
-              <button class="flt" data-f="cls-priest">✨ Priest</button>
-              <button class="flt" data-f="cls-rogue">🗡️ Rogue</button>
             </div>
             <div id="news-list"><div class="empty"><div class="empty-ico">⏳</div><div>Wird geladen...</div></div></div>
           </div>
@@ -547,8 +579,6 @@
             <div class="cls-grid">
               <div class="cls-card c-hunter"><div class="cls-ico">🏹</div><div class="cls-name">Hunter</div><div class="cls-cnt" id="cc-hunter">–</div></div>
               <div class="cls-card c-shaman"><div class="cls-ico">🌊</div><div class="cls-name">Shaman</div><div class="cls-cnt" id="cc-shaman">–</div></div>
-              <div class="cls-card c-priest"><div class="cls-ico">✨</div><div class="cls-name">Priest</div><div class="cls-cnt" id="cc-priest">–</div></div>
-              <div class="cls-card c-rogue"><div class="cls-ico">🗡️</div><div class="cls-name">Rogue</div><div class="cls-cnt" id="cc-rogue">–</div></div>
             </div>
           </div>
           <div class="card fade">
@@ -567,8 +597,9 @@
               <div class="src-row"><span>🌐</span><span style="flex:1">WoWhead Forever</span><span class="src-dot ok"></span></div>
               <div class="src-row"><span>⚔️</span><span style="flex:1">MMO-Champion</span><span class="src-dot ok"></span></div>
               <div class="src-row"><span>🔵</span><span style="flex:1">Blizzard Blue Tracker</span><span class="src-dot idle"></span></div>
-              <div class="src-row"><span>❄️</span><span style="flex:1">Icy Veins</span><span class="src-dot idle"></span></div>
-              <div class="src-row"><span>💬</span><span style="flex:1">Reddit</span><span class="src-dot idle"></span></div>
+              <div class="src-row"><span>❄️</span><span style="flex:1">Icy Veins Forever</span><span class="src-dot idle"></span></div>
+              <div class="src-row"><span>🛡️</span><span style="flex:1">Method Forever</span><span class="src-dot idle"></span></div>
+              <div class="src-row"><span>💬</span><span style="flex:1">Reddit r/wowforever</span><span class="src-dot idle"></span></div>
             </div>
           </div>
           <div class="last-upd" id="last-upd">–</div>
@@ -591,7 +622,7 @@
     </div>
 
     <!-- ══ BIS SECTION ══ -->
-    <div id="section-bis">
+    <div id="section-bis" style="display:none">
       <div class="card">
         <div class="card-hdr">
           <span class="card-ico">🏆</span>
@@ -601,8 +632,6 @@
         <div class="bis-class-tabs" id="bis-tabs">
           <button class="bis-tab bis-hunter on" data-cls="Hunter">🏹 Hunter</button>
           <button class="bis-tab bis-shaman" data-cls="Shaman">🌊 Shaman</button>
-          <button class="bis-tab bis-priest" data-cls="Priest">✨ Priest</button>
-          <button class="bis-tab bis-rogue"  data-cls="Rogue">🗡️ Rogue</button>
         </div>
         <div class="bis-content" id="bis-content">
           <div class="empty"><div class="empty-ico">⏳</div><div>BiS-Daten werden geladen...</div></div>
@@ -650,6 +679,20 @@
       </div>
     </div>
 
+    <!-- ══ ADDONS SECTION (CURSEFORGE) ══ -->
+    <div id="section-addons" style="display:none">
+      <div class="card fade">
+        <div class="card-hdr">
+          <span class="card-ico">🔌</span>
+          <span class="card-ttl">Empfohlene Addons für Faruk &amp; Mirza (CurseForge)</span>
+          <span class="badge b-gold">WoW Forever / Classic</span>
+        </div>
+        <div style="padding:20px" id="addons-container">
+          <div class="empty"><div class="empty-ico">⏳</div><div>Lade Addon-Empfehlungen...</div></div>
+        </div>
+      </div>
+    </div>
+
     <!-- ══ CASTLE SECTION ══ -->
     <div id="section-castle" style="display:none">
       <div class="card fade">
@@ -660,13 +703,13 @@
           <a class="castle-link" id="castle-link2" style="display:none;font-size:.82rem;margin-top:10px" href="#" target="_blank">→ Mehr auf Wowhead lesen</a>
           <div class="castle-ts" id="castle-ts2" style="margin-top:12px"></div>
           <div style="margin-top:20px;padding:16px;background:rgba(255,255,255,.03);border-radius:12px;border:1px solid rgba(255,255,255,.07)">
-            <div style="font-family:Cinzel,serif;color:var(--gold);font-size:.85rem;margin-bottom:10px">⚔️ Welt-PvP Tipps für Allianz</div>
+            <div style="font-family:Cinzel,serif;color:var(--gold);font-size:.85rem;margin-bottom:10px">⚔️ Welt-PvP Tipps für Shaman &amp; Hunter (Allianz)</div>
             <ul class="info-tips">
-              <li>Außenposten und Burgknoten (WoW Forever) täglich einnehmen für Bonus-Ressourcen</li>
-              <li>Hunter: Frostfalle + Concussive Shot für Flucht/Kite-Taktik</li>
-              <li>Rogue: Ausblenden für Überraschungsangriffe auf Horde-Spieler</li>
-              <li>Priester: Gedankenbeherrschung im Massen-PvP sehr effektiv</li>
-              <li>Schamane: Windfury + Steinhaut für Nahkampf-Duells</li>
+              <li>Außenposten und Burgknoten täglich einnehmen für Bonus-Erfahrung und Camping-Ressourcen</li>
+              <li>Hunter: Frostfalle + Erschütternder Schuss (Concussive Shot) für perfektes Kiting gegen feindliche Nahkämpfer</li>
+              <li>Shaman: Erdstoss-Totem aktiv halten, um Furcht-Effekte (Hexenmeister/Priester-Fear) sofort aufzuheben</li>
+              <li>Shaman: Steinhaut-Totem schützt das Jäger-Pet vor starkem physischen Fokus-Schaden</li>
+              <li>Duo-Synergie: Faruk unterbricht feindliche Heiler mit Erdschock (Earth Shock Rang 1), Mirza setzt Gezielter Schuss (Aimed Shot) für den Burst-Kill</li>
             </ul>
           </div>
         </div>
@@ -737,7 +780,7 @@ if(sessionStorage.getItem(SK)){
 
 // ── NAV TABS & STATE RESTORATION ───────────────────────────────────────────
 let currentSection = localStorage.getItem('wow_active_section') || 'news';
-const SECTIONS = ['news','camping','bis','pets','leveling','gold','castle'];
+const SECTIONS = ['news','camping','bis','pets','leveling','gold','addons','castle'];
 
 function switchSection(s) {
   currentSection = s;
@@ -789,6 +832,30 @@ function isArticleRecent(item) {
   return diffHours >= 0 && diffHours <= 48;
 }
 
+// ── PLAYER LEVEL MANAGEMENT ────────────────────────────────────────────────
+let playerLevels = {
+  Faruk: parseInt(localStorage.getItem('wow_level_Faruk') || '1', 10),
+  Mirza: parseInt(localStorage.getItem('wow_level_Mirza') || '1', 10)
+};
+let filterByLevel = localStorage.getItem('wow_filter_by_level') === '1';
+
+function setPlayerLevel(player, val) {
+  const lvl = Math.max(1, Math.min(60, parseInt(val, 10) || 1));
+  playerLevels[player] = lvl;
+  try { localStorage.setItem('wow_level_' + player, String(lvl)); } catch(e){}
+  const inp = document.getElementById('lvl-' + player.toLowerCase());
+  if (inp) inp.value = lvl;
+  renderLeveling();
+}
+
+function toggleLevelFilter() {
+  filterByLevel = !filterByLevel;
+  try { localStorage.setItem('wow_filter_by_level', filterByLevel ? '1' : '0'); } catch(e){}
+  const btn = document.getElementById('btn-lvl-filter');
+  if (btn) btn.classList.toggle('active', filterByLevel);
+  renderLeveling();
+}
+
 // ── PROFIL FILTER & COMBINING LOGIC ─────────────────────────────────────────
 let activeProfile = localStorage.getItem('wow_active_profile') || 'all';
 let activeFilter  = localStorage.getItem('wow_active_filter')  || 'all';
@@ -812,14 +879,14 @@ function setProfile(prof) {
       <li><span>3.</span> <strong>Duo-Synergie:</strong> Heile Mirzas Pet bei Elite-Pulls, nutze Windzorn/Flammentotem &amp; Geisterwolf ab Stufe 20 für schnelles Reisen!</li>
     `;
   } else if (prof === 'Mirza') {
-    if (ind) ind.textContent = 'Profil: Mirza (Jäger 100%)';
+    if (ind) ind.textContent = 'Profil: Mirza (Hunter)';
     hList.innerHTML = `
       <li><span>1.</span> <strong>Jäger-Fokus (100%):</strong> Ab Stufe 10 sofort Pet zähmen (Katze für DPS in Dun Morogh/Loch Modan oder Eber für Sofort-Charge). Begleiter skalieren in Forever mit deiner Agilität!</li>
       <li><span>2.</span> <strong>Berufe (Kürschnerei &amp; Kräuterkunde):</strong> Alle Wildtiere kürschnern (Leder/Felle für Camp) + Kräuter sammeln für die Camping-Räucherkerze (+Intelligenz für Faruks Schamanen-Mana).</li>
       <li><span>3.</span> <strong>Gruppenspiel:</strong> Aspekt des Geparden/Rudels für schnelles Duo-Vorankommen. Mirza zieht Mobs auf Distanz, Pet tankt, Faruk finished mit Totems &amp; Bomben.</li>
     `;
   } else {
-    if (ind) ind.textContent = 'Profil: Alle Klassen';
+    if (ind) ind.textContent = 'Profil: Obojica / Beide (Faruk &amp; Mirza)';
     hList.innerHTML = `
       <li><span>1.</span> <strong>Allianz Duo-Kombi:</strong> Faruk (Schamane: Bergbau &amp; Engineering) + Mirza (Jäger 100%: Kürschnerei &amp; Kräuterkunde).</li>
       <li><span>2.</span> <strong>Synergie &amp; Camping:</strong> Mirza sammelt Kräuter für Räucherkerzen (+Intelligenz/Mana für Faruk) und Tierfelle; Faruk baut Granaten, Zielattrappen &amp; setzt Totems.</li>
@@ -827,7 +894,10 @@ function setProfile(prof) {
     `;
   }
 
-  applyFilter();
+  // Preserve error state if loadNews failed!
+  if (!newsLoadError) {
+    applyFilter();
+  }
 }
 
 // ── COUNTDOWN (CET LOKALZEIT: 05.11.2026 um 00:00 Uhr CET) ─────────────────
@@ -859,9 +929,18 @@ updateCountdown();
 
 // ── DATA STATE ─────────────────────────────────────────────────────────────
 let allItems=[], bisData={}, guidesData={};
+let newsLoadError = false;
 
 async function init() {
   switchSection(currentSection);
+  // Restore level inputs
+  const inF = document.getElementById('lvl-faruk');
+  const inM = document.getElementById('lvl-mirza');
+  if (inF) inF.value = playerLevels.Faruk;
+  if (inM) inM.value = playerLevels.Mirza;
+  const btnLvl = document.getElementById('btn-lvl-filter');
+  if (btnLvl) btnLvl.classList.toggle('active', filterByLevel);
+
   await Promise.all([loadNews(), loadBis(), loadGuides()]);
   setProfile(activeProfile);
 }
@@ -876,6 +955,7 @@ async function loadGuides() {
     renderPets();
     renderLeveling();
     renderGold();
+    renderAddons();
   } catch(e) {
     console.error("Guides error:", e);
     const retryHtml = (fn) => `
@@ -884,7 +964,7 @@ async function loadGuides() {
         <div>Leitfaden konnte nicht geladen werden.</div>
         <button class="retry-btn" onclick="${fn}()">🔄 Erneut versuchen</button>
       </div>`;
-    ['camping','pets','leveling','gold'].forEach(id => {
+    ['camping','pets','leveling','gold','addons'].forEach(id => {
       const el = document.getElementById(id + '-container');
       if (el) el.innerHTML = retryHtml('loadGuides');
     });
@@ -1012,6 +1092,14 @@ function togglePlayerQuest(player, qid) {
   }
 }
 
+function parseLevelRange(rangeStr) {
+  const m = rangeStr.match(/(\d+)\s*[-–]\s*(\d+)/);
+  if (m) return { min: parseInt(m[1], 10), max: parseInt(m[2], 10) };
+  const single = rangeStr.match(/(\d+)/);
+  if (single) return { min: parseInt(single[1], 10), max: parseInt(single[1], 10) };
+  return { min: 1, max: 60 };
+}
+
 function renderLeveling() {
   const c = document.getElementById('leveling-container');
   if (!c || !guidesData.leveling_guide) return;
@@ -1019,6 +1107,10 @@ function renderLeveling() {
   const sd = guidesData.starter_guide_dwarf;
   const dq = guidesData.dungeon_quests;
   const is = guidesData.intel_sources;
+
+  const currentLevel = activeProfile === 'Faruk'
+    ? playerLevels.Faruk
+    : (activeProfile === 'Mirza' ? playerLevels.Mirza : Math.round((playerLevels.Faruk + playerLevels.Mirza) / 2));
 
   let html = '';
 
@@ -1064,19 +1156,32 @@ function renderLeveling() {
   }
 
   // 2. ZONE ROUTE (1 - 60)
-  let zoneRows = l.zones.map(z => `
-    <tr>
-      <td style="color:var(--gold);font-weight:700;white-space:nowrap">${esc(z.range)}</td>
-      <td style="color:#fff;font-weight:600">${esc(z.zone)}</td>
-      <td style="color:var(--dim);line-height:1.5">${esc(z.desc)}</td>
-    </tr>
-  `).join('');
+  let visibleZones = l.zones || [];
+  if (filterByLevel) {
+    visibleZones = visibleZones.filter(z => {
+      const rng = parseLevelRange(z.range);
+      return (currentLevel >= rng.min - 2 && currentLevel <= rng.max + 2);
+    });
+    if (!visibleZones.length) visibleZones = l.zones;
+  }
+
+  let zoneRows = visibleZones.map(z => {
+    const rng = parseLevelRange(z.range);
+    const isCurrent = (currentLevel >= rng.min && currentLevel <= rng.max);
+    return `
+      <tr class="${isCurrent ? 'zone-active-row' : ''}">
+        <td style="color:var(--gold);font-weight:700;white-space:nowrap">${esc(z.range)} ${isCurrent ? '⭐ <span style="font-size:0.72rem;color:#81c784">(Aktuell: Lvl '+currentLevel+')</span>' : ''}</td>
+        <td style="color:#fff;font-weight:600">${esc(z.zone)}</td>
+        <td style="color:var(--dim);line-height:1.5">${esc(z.desc)}</td>
+      </tr>
+    `;
+  }).join('');
 
   html += `
     <div style="margin-bottom:28px">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;flex-wrap:wrap;gap:8px">
         <div style="font-family:'Cinzel',serif;color:var(--gold);font-size:1rem;font-weight:700">🗺️ ${esc(l.title)}</div>
-        <span class="badge b-blue">Allianz Pacing</span>
+        <span class="badge b-blue">Allianz Pacing (${filterByLevel ? 'Gefiltert für Lvl ' + currentLevel : 'Alle Stufen'})</span>
       </div>
       <div class="table-responsive">
         <table class="guide-table">
@@ -1089,18 +1194,27 @@ function renderLeveling() {
 
   // 3. DUNGEON QUEST CHECKLIST (SEPARATED FOR FARUK & MIRZA)
   if (dq && dq.dungeons) {
+    let visibleDungeons = dq.dungeons;
+    if (filterByLevel) {
+      visibleDungeons = visibleDungeons.filter(d => {
+        const rng = parseLevelRange(d.level);
+        return (currentLevel >= rng.min - 3 && currentLevel <= rng.max + 4);
+      });
+      if (!visibleDungeons.length) visibleDungeons = dq.dungeons;
+    }
+
     html += `
       <div style="margin-bottom:28px">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex-wrap:wrap;gap:8px">
           <div style="font-family:'Cinzel',serif;color:var(--gold);font-size:1.05rem;font-weight:700">${esc(dq.title)}</div>
-          <span class="badge b-gold">Getrennte Checkliste</span>
+          <span class="badge b-gold">Getrennte Checkliste (${visibleDungeons.length} Instanzen)</span>
         </div>
         <div class="local-notice">
           ℹ️ <strong>Lokale Browser-Speicherung:</strong> Die Häkchen für Faruk und Mirza werden getrennt direkt in deinem Browser (localStorage) gespeichert. Es findet keine Cloud-Synchronisation zwischen getrennten Rechnern statt.
         </div>
     `;
 
-    dq.dungeons.forEach(d => {
+    visibleDungeons.forEach(d => {
       let questCards = d.quests.map((q, qidx) => {
         const qid = q.id || (d.id + '_' + qidx);
         let doneFaruk = false, doneMirza = false;
@@ -1212,14 +1326,61 @@ function renderGold() {
   `;
 }
 
-// ── NEWS LOADER & ERROR HANDLING ───────────────────────────────────────────
+// ── ADDONS RENDER (CURSEFORGE) ──────────────────────────────────────────────
+function renderAddons() {
+  const c = document.getElementById('addons-container');
+  if (!c) return;
+  const a = (guidesData && guidesData.addons) ? guidesData.addons : null;
+  if (!a || !a.items) {
+    c.innerHTML = '<div class="empty"><div class="empty-ico">⏳</div><div>Addon-Daten werden geladen...</div></div>';
+    return;
+  }
+
+  let html = `
+    <div style="margin-bottom:18px">
+      <div style="font-family:'Cinzel',serif;color:var(--gold);font-size:1.05rem;font-weight:700;margin-bottom:6px">${esc(a.title)}</div>
+      <div style="font-size:0.85rem;color:var(--dim);line-height:1.5">${esc(a.description)}</div>
+    </div>
+  `;
+
+  a.items.forEach(item => {
+    html += `
+      <div class="addon-card">
+        <div class="addon-hdr">
+          <div class="addon-title">${item.icon || '🔌'} ${esc(item.name)} <span style="font-size:0.8rem;color:var(--dim);font-family:'Inter',sans-serif;font-weight:400">(${esc(item.role)})</span></div>
+          <span class="addon-target">${esc(item.target)}</span>
+        </div>
+        <div style="font-size:0.85rem;color:var(--text);line-height:1.5;margin-bottom:8px">
+          💡 <strong>Warum für uns:</strong> ${esc(item.why)}
+        </div>
+        <div style="font-size:0.78rem;color:#81c784;margin-bottom:4px">
+          ⚡ <strong>Kompatibilität:</strong> ${esc(item.compatibility)} &nbsp;|&nbsp; <em>${esc(item.status)}</em>
+        </div>
+        <div style="font-size:0.78rem;color:var(--dim);margin-bottom:10px">
+          🔄 <strong>Überschneidung:</strong> ${esc(item.overlap)}
+        </div>
+        <div>
+          <a class="addon-link" href="${item.url}" target="_blank" rel="noopener">
+            🔗 Auf CurseForge ansehen &amp; herunterladen ↗
+          </a>
+        </div>
+      </div>
+    `;
+  });
+
+  c.innerHTML = html;
+}
+
+// ── NEWS LOADER & ERROR HANDLING (PRESERVE STATE) ───────────────────────────
 async function loadNews() {
   const list = document.getElementById('news-list');
   try {
+    newsLoadError = false;
     const r = await fetch('data/news.json?v='+Date.now());
     if (!r.ok) throw new Error("HTTP " + r.status);
     const d = await r.json();
     allItems = d.items || [];
+    newsLoadError = false;
     renderSummary(d);
     renderClassCounts(d);
     renderCastle(d.castle_status);
@@ -1229,11 +1390,13 @@ async function loadNews() {
     applyFilter();
   } catch(e) {
     console.error("News load error:", e);
+    newsLoadError = true;
     if (list) {
       list.innerHTML = `
         <div class="empty">
           <div class="empty-ico">⚠️</div>
-          <div>Fehler beim Laden von news.json.</div>
+          <div style="font-weight:600;margin-bottom:6px">Fehler beim Laden von news.json.</div>
+          <div style="font-size:0.8rem;color:var(--dim);margin-bottom:12px">Die Daten konnten vom Server nicht abgerufen werden.</div>
           <button class="retry-btn" onclick="loadNews()">🔄 Erneut versuchen</button>
         </div>`;
     }
@@ -1293,11 +1456,11 @@ function updateStatsBadges() {
 
 function renderSummary(d) {
   const el = document.getElementById('sum-txt');
-  if (el) el.textContent = d.daily_summary || 'Keine Zusammenfassung verfügbar.';
+  if (el) el.textContent = d.daily_summary || 'Heute keine neuen relevanten Updates für Shaman und Hunter.';
 }
 
 function renderClassCounts(d){
-  ['Hunter','Shaman','Priest','Rogue'].forEach(cls=>{
+  ['Hunter','Shaman'].forEach(cls=>{
     const cnt=(d.items||[]).filter(i=>(i.classes||[]).includes(cls)).length;
     const el=document.getElementById('cc-'+cls.toLowerCase());
     if(el) el.textContent=cnt+' Update'+(cnt===1?'':'s');
@@ -1334,6 +1497,9 @@ function renderSourcesStatus(ss) {
     if (src.includes('Buffed')) flag = '🇩🇪';
     else if (src.includes('MMO')) flag = '⚔️';
     else if (src.includes('Blizzard')) flag = '🔵';
+    else if (src.includes('Method')) flag = '🛡️';
+    else if (src.includes('Icy')) flag = '❄️';
+    else if (src.includes('Reddit')) flag = '💬';
 
     html += `
       <div class="src-row">
@@ -1354,7 +1520,7 @@ function renderLastUpd(ts){
 
 // ── RENDER NEWS & STABLE MODAL LOOKUP ───────────────────────────────────────
 const TAG_MAP={
-  Hunter:'t-hunter',Shaman:'t-shaman',Priest:'t-priest',Rogue:'t-rogue',
+  Hunter:'t-hunter',Shaman:'t-shaman',
   exploit:'t-exploit',hotfix:'t-hotfix',pvp:'t-pvp',bis:'t-bis',guide:'t-guide',news:'t-news'
 };
 const CAT_DE={
@@ -1366,7 +1532,7 @@ function renderNews(items){
   const list = document.getElementById('news-list');
   if (!list) return;
   if (!items || !items.length) {
-    list.innerHTML = '<div class="empty"><div class="empty-ico">📭</div><div>Keine Nachrichten für diese Kombination aus Profil und Filter.</div></div>';
+    list.innerHTML = '<div class="empty"><div class="empty-ico">📭</div><div style="font-weight:600;margin-bottom:6px">Heute keine neuen relevanten Updates für Shaman und Hunter.</div><div style="font-size:0.8rem;color:var(--dim)">Keine aktuellen Eilmeldungen für die gewählte Filter- und Profilkombination.</div></div>';
     return;
   }
   list.innerHTML = items.slice(0, 60).map((item) => {
@@ -1419,7 +1585,6 @@ function openModalById(id) {
   const item = allItems.find(i => String(i.id) === String(id));
   if (!item) return;
 
-  // Mark article as read in localStorage and update badges
   markArticleAsRead(id);
 
   // Header
@@ -1451,14 +1616,13 @@ function openModalById(id) {
   overlay.classList.add('open');
   document.body.style.overflow = 'hidden';
 
-  // Re-render current list to show read state
   applyFilter();
 }
 
 function formatArticle(text) {
   let html = esc(text)
     .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-    .replace(/(📌|🎮|💡|⚔️|🏹|🌊|✨|🗡️|🔴|✅|🏆|📖|💬|⚠️)\s*\*\*(.*?)\*\*/g,
+    .replace(/(📌|🎮|💡|⚔️|🏹|🌊|🔴|✅|🏆|📖|💬|⚠️)\s*\*\*(.*?)\*\*/g,
              '<div class="modal-section">$1 $2</div>')
     .replace(/^(📌|🎮|💡|⚔️|🏆|📖|⚠️) (.+)$/gm,
              '<div class="modal-section">$1 $2</div>')
@@ -1493,6 +1657,8 @@ document.getElementById('filter-row').addEventListener('click', e => {
 });
 
 function applyFilter() {
+  if (newsLoadError) return;
+
   let filtered = [...allItems];
 
   // 1. Orthogonal Player Profile Filter
