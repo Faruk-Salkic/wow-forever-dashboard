@@ -177,12 +177,10 @@ def merge_and_deduplicate_items(existing_items, incoming_items, sources_health=N
             old_it["classes"] = [c for c in detect_classes(old_it.get("title", "") + " " + old_it.get("article_de", "")) if c in CLASSES]
             old_it["category"] = detect_category(old_it.get("title", "") + " " + old_it.get("article_de", ""))
 
-            # Osiguraj da postoji source_content_hash za postojeću stavku ako ga nema
-            if "source_content_hash" not in old_it:
-                old_it["source_content_hash"] = compute_source_hash(
-                    old_it.get("raw_title", old_it.get("title", "")),
-                    old_it.get("raw_content", old_it.get("article_de", ""))
-                )
+            # Zadrži izvorne podatke ako postoje; ne generiši lažni hash iz nemačkog sažetka
+            if "source_content_hash" not in old_it or not old_it.get("raw_content"):
+                old_it["source_content_hash"] = old_it.get("source_content_hash", "")
+                old_it["raw_content"] = old_it.get("raw_content", "")
             items_by_url[norm_u] = old_it
 
     # 2. Spoji novo prikupljene stavke
@@ -200,19 +198,31 @@ def merge_and_deduplicate_items(existing_items, incoming_items, sources_health=N
         if norm_u in items_by_url:
             existing = items_by_url[norm_u]
             old_hash = existing.get("source_content_hash", "")
+            old_raw = existing.get("raw_content", "")
 
-            # Poređenje očišćenog sadržaja: ako je hash isti, nema stvarne promjene!
-            if old_hash and old_hash == new_hash:
+            # SLUČAJ 1: Postojeći zapis nema raw_content ili source_content_hash.
+            # Prvo uspešno preuzimanje izvora postavlja početno referentno stanje (baseline).
+            # Ne poredi se stari prevedeni AI sažetak s izvornim tekstom i ne broji kao izmjena!
+            if not old_hash or not old_raw:
+                existing["source_content_hash"] = new_hash
+                existing["raw_title"] = new_it.get("raw_title", "")
+                existing["raw_content"] = new_it.get("raw_content", "")
+                existing["last_checked_at"] = now_iso
+                # Ne povećavati updated_count, ne menjati content_version, ne označavati kao is_updated
+                continue
+
+            # SLUČAJ 2: Poređenje celog očišćenog sadržaja: ako je hash isti, nema stvarne promjene!
+            if old_hash == new_hash:
                 existing["last_checked_at"] = now_iso
                 continue
 
-            # Stvarna promjena sadržaja postojećeg vodiča/objave
+            # SLUČAJ 3: Stvarna promjena sadržaja postojećeg vodiča/objave
             updated_count += 1
             diff_note = generate_update_summary(
                 existing.get("raw_title", existing.get("title", "")),
                 new_it.get("raw_title", new_it.get("title", "")),
-                existing.get("raw_content", existing.get("article_de", "")),
-                new_it.get("raw_content", new_it.get("article_de", ""))
+                existing.get("raw_content", ""),
+                new_it.get("raw_content", "")
             )
 
             existing["title"] = new_it["title"]
@@ -514,7 +524,7 @@ def fetch_full_text(url):
             for noise in soup(["script", "style", "nav", "footer", "header", "aside", "form"]):
                 noise.decompose()
             text = soup.get_text(separator="\n", strip=True)
-            return text[:3500]
+            return text
     except Exception:
         pass
     return ""
@@ -761,7 +771,7 @@ def run_scraper():
         radar_status = detect_radar_status(title + " " + content)
         category = detect_category(title + " " + content)
 
-        article_de, teaser_de = generate_ai_summary(title, content, item["source"])
+        article_de, teaser_de = generate_ai_summary(title, content[:3500], item["source"])
 
         if not article_de:
             german_summary = translate_to_german(summary)

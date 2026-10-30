@@ -16,6 +16,7 @@ from scraper.scrape import (
     detect_classes,
     detect_category,
     normalize_url,
+    make_canonical_id,
     merge_and_deduplicate_items,
     compute_source_hash,
     clean_source_text,
@@ -297,45 +298,38 @@ def test_content_relevance_and_categorization():
 
 def test_guide_update_tracking():
     """
-    Ciljani test za praćenje izmjena postojećih vodiča:
-    - Isti URL s promijenjenim sadržajem mora ostati JEDAN zapis i pojaviti se među dnevnim ažuriranjima.
-    - Ponovno preuzimanje identičnog sadržaja ne smije stvarati obavijest.
-    - Oznaka 'is_updated' i 'update_note' se dodeljuju kod promene.
-    - Dnevni pregled uključuje ažurirane vodiče i ne tvrdi lažno 'keine neuen Updates'.
+    Ciljani testovi za praćenje izmjena postojećih vodiča:
+    1. Stari zapis bez izvornog hasha: prvo preuzimanje uspostavlja referentno stanje bez obavijesti o izmjeni.
+    2. Ponovno preuzimanje istog izvora: 0 ažuriranja.
+    3. Promjena nakon 3.500. znaka glavnog sadržaja: 1 ažuriranje, isti URL i isti ID.
     """
-    test_url = "https://www.wowhead.com/forever/guide=shaman-leveling-enhancement"
-    initial_title = "WoW Forever Schamane Leveling Guide"
-    initial_content = "Windfury Rank 1 skalira sa 20% weapon damage. Totems aufstellen ab Level 4."
-    
-    # 1. Početno stanje: vodič u bazi
-    initial_item = {
+    # ── SLUČAJ 1: Stari zapis bez izvornog hasha i raw_content-a ──────────
+    legacy_url = "https://www.wowhead.com/forever/guide=shaman-leveling-enhancement"
+    legacy_item = {
         "id": "shaman_guide_canon_id",
-        "url": test_url,
-        "normalized_url": normalize_url(test_url),
-        "title": initial_title,
-        "teaser_de": "Schamane Leveling Guide für WoW Forever.",
-        "article_de": initial_content,
-        "date": "2026-10-29",
-        "fetched_at": "2026-10-29T10:00:00Z",
+        "url": legacy_url,
+        "normalized_url": normalize_url(legacy_url),
+        "title": "Alter Schamane Guide",
+        "teaser_de": "Alter deutscher Teaser ohne Quell-Hash.",
+        "article_de": "📌 **Zusammenfassung von früher:**\nAlter deutscher Text vom AI-Übersetzer.",
+        "date": "2026-10-25",
+        "fetched_at": "2026-10-25T10:00:00Z",
         "source": "Wowhead Forever",
         "source_icon": "🌐",
         "category": "guide",
         "verified_type": "Guide / Analyse",
         "radar_status": "normal",
-        "classes": ["Shaman"],
-        "raw_title": initial_title,
-        "raw_content": initial_content,
-        "source_content_hash": compute_source_hash(initial_title, initial_content)
+        "classes": ["Shaman"]
+        # Namjerno NEMA raw_content niti source_content_hash
     }
 
-    # 2. Ponovno preuzimanje IDENTIČNOG sadržaja sa istog URL-a (npr. sutrašnji scrape)
-    # Razlika u fetched_at ili blagoj rečeničnoj promeni AI teasera ne sme izazvati ažuriranje!
-    same_scraped_item = {
-        "url": test_url,
-        "normalized_url": normalize_url(test_url),
-        "title": initial_title,
-        "teaser_de": "Schamane Leveling Guide für WoW Forever (vom KI-Modell neu formuliert).",
-        "article_de": "📌 **Zusammenfassung:**\n" + initial_content,
+    # Prvo uspešno preuzimanje izvora sa stvarnim engleskim tekstom
+    first_scrape_item = {
+        "url": legacy_url,
+        "normalized_url": normalize_url(legacy_url),
+        "title": "WoW Forever Shaman Leveling Guide",
+        "teaser_de": "Neuer Teaser vom Scraper.",
+        "article_de": "📌 Zusammenfassung: Windfury und Totems...",
         "date": "2026-10-30",
         "fetched_at": "2026-10-30T10:00:00Z",
         "source": "Wowhead Forever",
@@ -344,33 +338,88 @@ def test_guide_update_tracking():
         "verified_type": "Guide / Analyse",
         "radar_status": "normal",
         "classes": ["Shaman"],
-        "raw_title": initial_title,
-        "raw_content": initial_content,
-        "source_content_hash": compute_source_hash(initial_title, initial_content)
+        "raw_title": "WoW Forever Shaman Leveling Guide",
+        "raw_content": "Windfury weapon scaling and totems guide on Wowhead...",
+        "source_content_hash": compute_source_hash(
+            "WoW Forever Shaman Leveling Guide",
+            "Windfury weapon scaling and totems guide on Wowhead..."
+        )
     }
 
-    merged_1, new_cnt_1, upd_cnt_1, summary_1 = merge_and_deduplicate_items(
-        existing_items=[initial_item],
-        incoming_items=[same_scraped_item],
+    merged_init, new_cnt_init, upd_cnt_init, summary_init = merge_and_deduplicate_items(
+        existing_items=[legacy_item],
+        incoming_items=[first_scrape_item],
         sources_health={"WoWhead Forever": "OK"},
         now_iso="2026-10-30T11:50:00Z"
     )
 
-    # Verifikacija identičnog sadržaja:
-    assert len(merged_1) == 1, f"Očekivan tačno 1 zapis na istom URL-u, dobijeno: {len(merged_1)}"
-    assert new_cnt_1 == 0, f"Ponovno preuzimanje ne sme prijaviti novu stavku: {new_cnt_1}"
-    assert upd_cnt_1 == 0, f"Identičan sadržaj ne sme prijaviti ažuriranje: {upd_cnt_1}"
-    assert "Heute keine neuen relevanten Updates" in summary_1, f"Dnevni pregled mora glasiti da nema novih ažuriranja: {summary_1}"
-    assert merged_1[0].get("is_updated") is not True, "Identičan sadržaj ne sme dobiti is_updated: True!"
+    # Verifikacija 1: Inicijalizacija bez lažnog ažuriranja
+    assert len(merged_init) == 1, "Mora ostati tačno 1 zapis!"
+    assert new_cnt_init == 0, f"Prvo preuzimanje postojećeg URL-a ne sme biti nov zapis: {new_cnt_init}"
+    assert upd_cnt_init == 0, f"Inicijalizacija referentnog stanja ne sme prijaviti ažuriranje: {upd_cnt_init}"
+    assert merged_init[0].get("is_updated") is not True, "Inicijalizacija ne sme postaviti is_updated == True!"
+    assert merged_init[0].get("content_version", 1) == 1, "Inicijalizacija ne sme povećati content_version!"
+    assert merged_init[0].get("source_content_hash") == first_scrape_item["source_content_hash"], "Mora postaviti tačan referentni hash!"
+    assert merged_init[0].get("raw_content") == first_scrape_item["raw_content"], "Mora postaviti tačan referentni raw_content!"
+    assert "Heute keine neuen relevanten Updates" in summary_init, f"Summary mora reći da nema novosti: {summary_init}"
 
-    # 3. Preuzimanje sa STVARNO PROMIJENJENIM sadržajem na istom URL-u (promijenjene brojke/scaling)
-    updated_content = "Windfury Rank 1 wurde gebufft auf 35% weapon damage. Totems haben nun reduzierte Manakosten um 15%."
-    changed_scraped_item = {
-        "url": test_url,
-        "normalized_url": normalize_url(test_url),
-        "title": "WoW Forever Schamane Leveling Guide (Aktualisiert für Hotfix)",
-        "teaser_de": "Schamane Guide mit neuen Werten nach Hotfix.",
-        "article_de": updated_content,
+    # ── SLUČAJ 2: Ponovno preuzimanje istog izvora (identičan sadržaj) ───
+    merged_same, new_cnt_same, upd_cnt_same, summary_same = merge_and_deduplicate_items(
+        existing_items=merged_init,
+        incoming_items=[first_scrape_item],
+        sources_health={"WoWhead Forever": "OK"},
+        now_iso="2026-10-30T12:00:00Z"
+    )
+
+    # Verifikacija 2: 0 ažuriranja za identičan sadržaj
+    assert len(merged_same) == 1, "Mora ostati tačno 1 zapis!"
+    assert new_cnt_same == 0, "Identičan sadržaj ne sme prijaviti novu stavku!"
+    assert upd_cnt_same == 0, f"Ponovno preuzimanje istog izvora mora imati 0 ažuriranja, dobijeno: {upd_cnt_same}"
+    assert merged_same[0].get("is_updated") is not True, "Identičan sadržaj ne sme imati is_updated == True!"
+    assert "Heute keine neuen relevanten Updates" in summary_same, "Summary mora prijaviti da nema novih ažuriranja!"
+
+    # ── SLUČAJ 3: Promjena nakon 3.500. znaka glavnog sadržaja ────────────
+    # Kreiramo tekst od preko 4.000 znakova gdje je prvih 3.500 identično
+    long_prefix = "Hunter leveling guide with animal companions and pet training tactics. " * 55  # ~3850 znakova
+    assert len(long_prefix) > 3500, f"Prefix mora biti duži od 3500 znakova! Dužina: {len(long_prefix)}"
+
+    long_url = "https://www.wowhead.com/forever/guide=long-beastmastery-guide"
+    initial_long_content = long_prefix + "\n[LEVEL 60 ENDGAME TALENTS] Beast Mastery version 1.0 with Aimed Shot."
+    changed_long_content = long_prefix + "\n[LEVEL 60 ENDGAME TALENTS] Beast Mastery version 2.0 with Lightning Reflexes buffed by 15%."
+
+    # Prvih 3500 znakova je 100% identično
+    assert initial_long_content[:3500] == changed_long_content[:3500], "Prvih 3500 znakova mora biti identično!"
+    # Promena se nalazi isključivo nakon 3500. znaka
+    assert initial_long_content != changed_long_content, "Tekstovi se moraju razlikovati!"
+
+    long_id = make_canonical_id(normalize_url(long_url))
+    long_item_initial = {
+        "id": long_id,
+        "url": long_url,
+        "normalized_url": normalize_url(long_url),
+        "title": "WoW Forever Beast Mastery Guide",
+        "teaser_de": "Umfassender Beast Mastery Guide.",
+        "article_de": "Deutscher Artikeltext...",
+        "date": "2026-10-29",
+        "fetched_at": "2026-10-29T10:00:00Z",
+        "source": "Wowhead Forever",
+        "source_icon": "🌐",
+        "category": "guide",
+        "verified_type": "Guide / Analyse",
+        "radar_status": "normal",
+        "classes": ["Hunter"],
+        "raw_title": "WoW Forever Beast Mastery Guide",
+        "raw_content": initial_long_content,
+        "source_content_hash": compute_source_hash("WoW Forever Beast Mastery Guide", initial_long_content)
+    }
+
+    # Novo preuzimanje sa promenom poslije 3500. znaka
+    long_item_changed = {
+        "url": long_url,
+        "normalized_url": normalize_url(long_url),
+        "title": "WoW Forever Beast Mastery Guide",
+        "teaser_de": "Umfassender Beast Mastery Guide mit neuen Talenten.",
+        "article_de": "Deutscher Artikeltext mit aktualisierten Werten...",
         "date": "2026-10-30",
         "fetched_at": "2026-10-30T12:00:00Z",
         "source": "Wowhead Forever",
@@ -378,32 +427,38 @@ def test_guide_update_tracking():
         "category": "guide",
         "verified_type": "Guide / Analyse",
         "radar_status": "normal",
-        "classes": ["Shaman"],
-        "raw_title": "WoW Forever Schamane Leveling Guide (Aktualisiert für Hotfix)",
-        "raw_content": updated_content,
-        "source_content_hash": compute_source_hash("WoW Forever Schamane Leveling Guide (Aktualisiert für Hotfix)", updated_content)
+        "classes": ["Hunter"],
+        "raw_title": "WoW Forever Beast Mastery Guide",
+        "raw_content": changed_long_content,
+        "source_content_hash": compute_source_hash("WoW Forever Beast Mastery Guide", changed_long_content)
     }
 
-    merged_2, new_cnt_2, upd_cnt_2, summary_2 = merge_and_deduplicate_items(
-        existing_items=merged_1,
-        incoming_items=[changed_scraped_item],
+    # Provera da se hash punog teksta razlikuje čak i ako je prvih 3500 znakova isto:
+    assert long_item_initial["source_content_hash"] != long_item_changed["source_content_hash"], \
+        "Hash punog teksta mora detektovati promenu nakon 3500. znaka!"
+
+    merged_long, new_cnt_long, upd_cnt_long, summary_long = merge_and_deduplicate_items(
+        existing_items=[long_item_initial],
+        incoming_items=[long_item_changed],
         sources_health={"WoWhead Forever": "OK"},
         now_iso="2026-10-30T12:00:00Z"
     )
 
-    # Verifikacija promjene sadržaja:
-    assert len(merged_2) == 1, f"Mora ostati tačno 1 zapis na istom URL-u, dobijeno: {len(merged_2)}"
-    assert new_cnt_2 == 0, f"Ažurirani vodič na istom URL-u nije nova stavka (new_cnt mora biti 0): {new_cnt_2}"
-    assert upd_cnt_2 == 1, f"Ažurirani vodič mora biti prepoznat kao aktualisiert (upd_cnt == 1): {upd_cnt_2}"
+    # Verifikacija 3: 1 ažuriranje, isti URL i isti ID
+    assert len(merged_long) == 1, f"Mora ostati tačno 1 zapis na istom URL-u, dobijeno: {len(merged_long)}"
+    assert new_cnt_long == 0, f"Ažurirani vodič na postojećem URL-u nije nova stavka (new_cnt == 0): {new_cnt_long}"
+    assert upd_cnt_long == 1, f"Promena nakon 3500. znaka mora biti detektovana kao 1 ažuriranje: {upd_cnt_long}"
     
-    updated_rec = merged_2[0]
-    assert updated_rec.get("is_updated") is True, "Ažurirani zapis mora imati is_updated == True!"
-    assert updated_rec.get("update_note"), "Ažurirani zapis mora imati kratak opis izmjene (update_note)!"
-    assert updated_rec.get("content_version", 1) >= 2, "Ažurirani zapis mora imati uvećan content_version!"
-    assert "Heute keine neuen relevanten Updates" not in summary_2, f"Dnevni pregled ne sme reći da nema novosti kada postoji ažuriranje: {summary_2}"
-    assert "aktualisiert" in summary_2.lower(), f"Dnevni pregled mora spomenuti ažurirane vodiče: {summary_2}"
+    updated_rec = merged_long[0]
+    assert updated_rec["id"] == long_id, f"ID mora ostati identičan ({long_id}): {updated_rec['id']}"
+    assert updated_rec["normalized_url"] == normalize_url(long_url), "URL mora ostati identičan!"
+    assert updated_rec.get("is_updated") is True, "Mora imati oznaku is_updated == True!"
+    assert updated_rec.get("content_version", 1) >= 2, "content_version mora biti uvećan!"
+    assert updated_rec.get("update_note"), "Mora imati generisan update_note!"
+    assert "Heute keine neuen relevanten Updates" not in summary_long, "Summary ne sme reći da nema novosti kada postoji izmena!"
+    assert "aktualisiert" in summary_long.lower(), f"Summary mora navesti ažurirane vodiče: {summary_long}"
 
-    print("✅ test_guide_update_tracking prošao: isti URL ostaje 1 zapis, razlikuje novu obavijest od identičnog preuzimanja.")
+    print("✅ test_guide_update_tracking prošao sva 3 ciljana scenarija (baseline inicijalizacija, 0 ažuriranja za isti izvor, detekcija promene nakon 3500. znaka).")
 
 if __name__ == "__main__":
     test_news_json()
