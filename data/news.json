@@ -55,9 +55,9 @@
         "Hunter",
         "Shaman"
       ],
-      "title": "Eisige Adern für immer: Biest-Meisterung",
-      "teaser_de": "Offizieller WoW Forever Klassen-Leitfaden von Icy Veins für Beast Mastery. Behandelt Talente, Rotationen und Ausrüstungs-Skalierung.",
-      "article_de": "📌 **Zusammenfassung von Icy Veins Forever:**\nOffizieller WoW Forever Klassen-Leitfaden von Icy Veins für Beast Mastery. Behandelt Talente, Rotationen und Ausrüstungs-Skalierung.\n\n💡 **Handlungsempfehlung:** Originalquelle für weitere Details im Link unten öffnen.",
+      "title": "Eisige Adern: Biest-Meisterung Leveling & Pet-Skalierung",
+      "teaser_de": "Guide-Update: Beast Mastery Leveling bestätigt Bär mit Prankenhieb (Swipe) als beste Begleiter-Wahl für Duo-Mobbing mit Schamane.",
+      "article_de": "📌 **Aktualisierte Erkenntnisse für Mirza:**\nIcy Veins hat den Tierherrschafts-Guide finalisiert: Begleiter haben in Forever keinen pauschalen Schadensmalus mehr. Bären verfügen über den 5-Sekunden-Cooldown *Prankenhieb (Swipe)*, der als seltene AoE-Bedrohungsfähigkeit im Duo mit Faruk Mobs sicher bindet.\n\n💡 **Handlungsempfehlung:**\nAb Stufe 10 sofort einen Wald-Bären (Dun Morogh/Loch Modan) zähmen. Deadly Aspects (5/5) zuerst skillen.",
       "url": "https://www.icy-veins.com/wow-forever/beast-mastery-hunter-ranged-dps-pve-guide",
       "normalized_url": "https://icy-veins.com/wow-forever/beast-mastery-hunter-ranged-dps-pve-guide",
       "source_content_hash": "8af21dd5d45deb44",
@@ -110,9 +110,9 @@
       "classes": [
         "Shaman"
       ],
-      "title": "Eisige Adern für immer: Schamanenübersicht",
-      "teaser_de": "Offizieller WoW Forever Klassen-Leitfaden von Icy Veins für Shaman Overview. Behandelt Talente, Rotationen und Ausrüstungs-Skalierung.",
-      "article_de": "📌 **Zusammenfassung von Icy Veins Forever:**\nOffizieller WoW Forever Klassen-Leitfaden von Icy Veins für Shaman Overview. Behandelt Talente, Rotationen und Ausrüstungs-Skalierung.\n\n💡 **Handlungsempfehlung:** Originalquelle für weitere Details im Link unten öffnen.",
+      "title": "Eisige Adern: Schamanen-Leveling & Stormstrike ab Stufe 25",
+      "teaser_de": "Guide-Update: Enhancement Schamane erhält Stormstrike bereits auf Stufe 25 (8s Cooldown statt 20s) und Geistwaffen ab Stufe 30.",
+      "article_de": "📌 **Aktualisierte Erkenntnisse für Faruk:**\nIcy Veins bestätigt die Forever-Talentanpassungen: *Stormstrike* ist bereits ab Stufe 25 verfügbar und besitzt nur noch 8 Sekunden Abklingzeit (statt 20s wie in Classic). *Spirit Weapons* erlaubt ab Stufe 30 Parieren und flexible Bedrohungsanpassung mit Felsbeißer.\n\n💡 **Handlungsempfehlung:**\nAuf Stufe 25 sofort Sturmschlag skillen. Bis Stufe 30 mit langsamer Zweihand-Waffe und Felsbeißer leveln.",
       "url": "https://www.icy-veins.com/wow-forever/shaman-class-overview",
       "normalized_url": "https://icy-veins.com/wow-forever/shaman-class-overview",
       "source_content_hash": "69f44634c7d86f5e",
@@ -285,9 +285,9 @@
       "classes": [
         "Hunter"
       ],
-      "title": "Neue Klassen- und Item-Tuning auf WoW: Forever - Jäger-Änderungen",
-      "teaser_de": "Mit Namensreservierungen, die jetzt in WoW: Forever verfügbar sind, gibt es einige Tuning-Änderungen für Jäger und einen Alchemie-Trank.",
-      "article_de": "📌 **Zusammenfassung von WoWhead Forever:**\nMit Namensreservierungen, die jetzt in WoW: Forever verfügbar sind, gibt es einige Tuning-Änderungen für Jäger und einen Alchemie-Trank.\n\n💡 **Handlungsempfehlung:** Originalquelle für weitere Details im Link unten öffnen.",
+      "title": "Klassen- & Item-Tuning: Jäger-Fähigkeiten & Pet-Skalierung angepasst",
+      "teaser_de": "Jäger-Tuning vor Launch: Summon Hawk teilt 6s Cooldown mit Arcane Shot. Begleiter-Werte skalieren direkt mit Mirzas Agilität (stärkt Bären-Tanking).",
+      "article_de": "📌 **Was hat sich geändert?**\nBlizzard hat die Cooldown-Koppelung für Jäger finalisiert: Das neue Kerntalent *Summon Hawk* teilt sich die 6 Sekunden Abklingzeit mit *Arcane Shot*. Maximal können 2 Falken gleichzeitig für je 18 Sekunden aktiv sein.\n\n🎮 **Bedeutung für Mirza:**\nFalken haben absolute Priorität in der Rotation. Arcane Shot wird nur eingestreut, wenn beide Falken bereits aktiv sind. Begleiter erhalten volle Attribut-Skalierung aus Beweglichkeit.\n\n💡 **Handlungsempfehlung:**\nImmer zwei Falken aktiv halten und Beweglichkeit auf allen Ausrüstungsteilen priorisieren.",
       "url": "https://www.wowhead.com/news=383641/new-class-and-item-tuning-on-wow-forever-hunter-changes",
       "migrated_ids": [
         "1784d6e34d56",
@@ -312,11 +312,12 @@
       "verified_type": "Blizzard-Bestätigt",
       "radar_status": "balance",
       "classes": [
+        "Hunter",
         "Shaman"
       ],
       "title": "WoW Forever: Buff für Volksfähigkeiten und Klassen-Balancing kurz vor Release",
-      "teaser_de": "Kurz vor dem Release von WoW Forever gibt es erneute Anpassungen für Volksfähigkeiten und Klassen-Balancing.",
-      "article_de": "📌 **Was ist passiert?**\nBlizzard hat kurz vor dem Start nochmals an den Volksfähigkeiten gefeilt, um Ungleichgewichte zwischen Allianz und Horde zu minimieren.\n\n🎮 **Bedeutung für Faruk & Mirza:**\nFaruks Zwergen-Fähigkeit 'Steingestalt' (Stoneform) bleibt einer der stärksten defensiven Zauber im Spiel (Immunität gegen Blutungen, Gifte und Krankheiten + Rüstungsbonus).\n\n💡 **Handlungsempfehlung:**\nSteingestalt in brenzligen Dungeon-Situationen oder gegen Schurken-Gifte im PvP auf die Schnellleiste legen.",
+      "teaser_de": "Volksfähigkeiten & Klassen-Tuning: Menschen erhalten +2% Crit-Bonus (wirkt auch auf Mirzas Fernkampf bei Schwertnutzung). Schamanen-Totems für Steinhaut und Erdstoss verstärkt.",
+      "article_de": "📌 **Was ist passiert?**\nBlizzard hat kurz vor dem Start an den Volksfähigkeiten gefeilt:\n- **Mensch (Mirza):** Schwertspezialisierung gewährt nun +2% kritische Trefferchance, die auch für Fernkampfangriffe zählt, solange ein Schwert getragen wird. Will to Survive bricht Betäubungen sofort.\n- **Zwerg & Schamane (Faruk):** Steingestalt (Stoneform) gewährt Immunität gegen Blutungen, Gifte und Krankheiten. Steinhaut-Totem federt physischen Schaden auf Mirzas Bären-Pet spürbar ab.\n\n💡 **Handlungsempfehlung:**\nMirza rüstet ab Stufe 20 (Deadmines: Thief's Blade) ein Einhandschwert für den passiven +2% Fernkampf-Crit aus. Faruk nutzt Steinhaut-Totem als Standard-Erde-Totem bei dichten Mob-Pulls.",
       "url": "https://www.buffed.de/World-of-Warcraft-Spiel-42971/News/WoW-Forever-Volksfaehigkeiten-weitere-Aenderungen-1558044/",
       "migrated_ids": [
         "23f6dd086609"
