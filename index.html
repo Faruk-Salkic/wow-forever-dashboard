@@ -475,6 +475,7 @@
     .empty { padding: 36px 20px; text-align: center; color: var(--dim); }
     .empty-ico { font-size: 2.4rem; margin-bottom: 8px; }
   </style>
+  <link rel="stylesheet" href="assets/planner.css">
 </head>
 <body>
 <div class="bg"></div>
@@ -543,7 +544,7 @@
 
         <!-- MIRZA KARTICA -->
         <div class="player-card mirza-card" onclick="showView('mirza')">
-          <div class="pc-badge">🏹 Mensch Jäger (Allianz)</div>
+          <div class="pc-badge">🏹 Jäger (Allianz) · Rasse offen</div>
           <div class="pc-name">
             <span>Mirza</span>
             <span style="font-size:1.1rem;color:var(--hunter)">🐾</span>
@@ -572,8 +573,9 @@
           <h2>📰 Spielrelevante Neuigkeiten</h2>
           <span class="badge b-gold" id="home-news-badge">Gefiltert: Max 4</span>
         </div>
-        <p class="section-subtitle">Nur konkrete Hotfixes, Klassen-Balancing und Spielmechanik-Änderungen (keine allgemeinen Ankündigungen).</p>
+        <p class="section-subtitle">Neue Quests, Ausrüstung und wichtige Änderungen für uns · letzte 7 Tage · höchstens 4 Meldungen.</p>
         
+        <p id="home-source-note" class="planner-note" role="status"></p>
         <div id="home-news-list" class="home-news-grid">
           <div class="empty"><div class="empty-ico">⏳</div><div>Suche spielrelevante Neuigkeiten...</div></div>
         </div>
@@ -622,7 +624,7 @@
         <div class="now-title">⚡ Was ist jetzt für Faruk wichtig? (Stufe <span id="now-lvl-disp-faruk">1</span>)</div>
         <div class="now-grid">
           <div class="now-item">
-            <div class="now-label">🎯 Nächster Talent-Punkt</div>
+            <div class="now-label">🎯 Talent für deine Stufe</div>
             <div class="now-value" id="now-talent-faruk">Lade Talent-Empfehlung...</div>
             <div class="now-desc" id="now-talent-desc-faruk">Begründung für die Wahl.</div>
           </div>
@@ -634,99 +636,23 @@
         </div>
       </div>
 
-      <!-- SEKTION: TALENTE (Enhancement Leveling) -->
       <div class="guide-section">
         <div class="guide-hdr" onclick="toggleSection('f-talents')">
-          <div class="guide-ttl">🌲 Talente: Enhancement Leveling &amp; Stufenplan</div>
-          <span class="guide-toggle-icon open" id="icon-f-talents">▼</span>
+          <div class="guide-ttl">🌲 Talente · Enhancement</div>
+          <span class="guide-toggle-icon" id="icon-f-talents">▼</span>
         </div>
-        <div class="guide-content open" id="content-f-talents">
-          <p style="font-size:0.83rem;color:var(--dim);margin-bottom:14px">
-            Verifizierter Leveling-Pfad für <strong>Enhancement Schamane</strong> in WoW Forever (Stand: 27.10.2026, Quelle: Method &amp; Icy Veins). Fokus auf Nahkampf-Burst mit <strong>Rockbiter Weapon</strong> (frühe Level) und <strong>Stormstrike</strong> ab Stufe 25.
-          </p>
-
-          <ul class="talent-priority-list" id="f-talent-milestones">
-            <!-- Dynamisch oder statisch gerendert -->
-          </ul>
-
-          <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">
-            <button class="pc-btn" style="width:auto;padding:8px 16px;background:rgba(240,192,64,0.15);border:1px solid rgba(240,192,64,0.35);color:var(--gold)" onclick="toggleTalentTree('faruk')">
-              🌲 Forever Talentbaum ein-/ausblenden (Interaktiv)
-            </button>
-            <button class="pc-btn" style="width:auto;padding:8px 16px;background:rgba(79,195,247,0.15);border:1px solid rgba(79,195,247,0.35);color:var(--blue)" onclick="toggleLvl60Build('faruk')">
-              📖 Level 60 Raid-Build &amp; Respec-Begründung
-            </button>
-          </div>
-
-          <!-- INTERAKTIVNI TALENTBAUM -->
-          <div id="tree-faruk" style="display:none;margin-top:16px">
-            <div style="font-family:'Cinzel',serif;font-size:0.9rem;color:var(--gold);margin-bottom:8px">Enhancement Talentbaum (WoW Forever): Klicke auf ein Talent für Details</div>
-            <div class="talent-tree-grid" id="tree-nodes-faruk"></div>
-            <div id="tree-detail-faruk" style="padding:10px 14px;background:rgba(0,0,0,0.5);border-radius:8px;font-size:0.8rem;color:var(--text);display:none"></div>
-          </div>
-
-          <!-- LVL 60 RESPEC INFO -->
-          <div id="respec-faruk" style="display:none;margin-top:16px;padding:16px;background:rgba(0,112,222,0.08);border:1px solid rgba(79,195,247,0.3);border-radius:12px">
-            <h4 style="font-family:'Cinzel',serif;color:var(--blue);font-size:0.95rem;margin-bottom:6px">Stufe 60 Respec: Warum &amp; Wann?</h4>
-            <p style="font-size:0.82rem;color:var(--text);line-height:1.5;margin-bottom:8px">
-              Während des Levelns sind <strong>Improved Ghost Wolf</strong> und <strong>Anticipation</strong> unverzichtbar für Reisetempo und Überleben bei Mob-Pulls. Auf Stufe 60 im Raid wird Geisterwolf drinnen selten gebraucht.
-            </p>
-            <div style="font-size:0.8rem;color:var(--dim);line-height:1.5">
-              <strong>Empfohlener Lvl 60 Raid-Build:</strong> 0 / 41 / 10 oder 19 / 32 / 0 (abhängig von Gruppen-Komposition). Volles <strong>Maelstrom Weapon (5/5)</strong> + <strong>Rage of the Farseer</strong> (Capstone-Burst) für maximalen Kettenblitz/Blitzschlag-Ausstoß im Nahkampf.
-            </div>
-          </div>
+        <div class="guide-content" id="content-f-talents">
+          <ul class="talent-priority-list" id="f-talent-milestones"></ul>
+          <div id="planner-class-faruk"><p>Talentdaten werden geladen…</p></div>
         </div>
       </div>
-
-      <!-- SEKTION: LEGACY PREPORUKE -->
       <div class="guide-section">
         <div class="guide-hdr" onclick="toggleSection('f-legacy')">
-          <div class="guide-ttl">🏛️ Legacy-System: Empfohlener Weg für Faruk</div>
+          <div class="guide-ttl">🏛️ Legacy · planen und bewusst entscheiden</div>
           <span class="guide-toggle-icon" id="icon-f-legacy">▼</span>
         </div>
         <div class="guide-content" id="content-f-legacy">
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px">
-            <span style="font-size:0.82rem;color:var(--dim)">Duo-fokussierte Punkteverteilung für Leveling &amp; Bergbau:</span>
-            <div style="display:flex;align-items:center;gap:6px">
-              <label for="legacy-pts-faruk" style="font-size:0.75rem;color:var(--dim)">Verfügbare Legacy-Punkte:</label>
-              <select id="legacy-pts-faruk" class="prof-select" onchange="setLegacyPoints('Faruk', this.value)">
-                <option value="0">0 (Neuer Charakter)</option>
-                <option value="1">1 Punkt</option>
-                <option value="2">2 Punkte</option>
-                <option value="3">3 Punkte</option>
-                <option value="4">4 Punkte</option>
-                <option value="5" selected>5 Punkte (Beta-Cap)</option>
-                <option value="16">16 Punkte (Maximal)</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="legacy-box">
-            <div class="legacy-row">
-              <span class="lr-pt">Punkt 1-3</span>
-              <div style="flex:1">
-                <div class="lr-name">Thrill of Adventure (Adventure Tree — Ränge 1–3)</div>
-                <div class="lr-desc"><strong>Was wir bekommen:</strong> Jeder Kill eines XP-relevanten Gegners regeneriert 1% bis 3% Gesundheit und Mana über 10 Sekunden. <strong>Wie oft genutzt:</strong> Bei JEDEM einzelnen Mob beim Duo-Grind mit Mirza in der offenen Welt! Praktisch keine Trinkpausen mehr nötig.</div>
-                <div class="lr-miss">⚠️ <strong>Was wir verpassen:</strong> Sofortige Bergbau-Zusatzerträge (Bountiful Harvest). Doch Tempo beim Questen schlägt Rohstoff-Boni im frühen Spiel.</div>
-              </div>
-            </div>
-            <div class="legacy-row">
-              <span class="lr-pt">Punkt 4</span>
-              <div style="flex:1">
-                <div class="lr-name">Talented (Adventure Tree)</div>
-                <div class="lr-desc"><strong>Was wir bekommen:</strong> Talentpunkte werden bereits vor Stufe 10 freigeschaltet (beschleunigter Power-Spike).</div>
-                <div class="lr-miss">⚠️ <strong>Einschränkung:</strong> Wirkt nur während der Levelphase. Auf Stufe 60 für Raid-QoL umskillen.</div>
-              </div>
-            </div>
-            <div class="legacy-row">
-              <span class="lr-pt">Punkt 5</span>
-              <div style="flex:1">
-                <div class="lr-name">Bountiful Harvest (Professions Tree — Bergbau) ODER Well Rested</div>
-                <div class="lr-desc"><strong>Was wir bekommen:</strong> Erhöhte Chance auf seltene Erze/Steine für Faruks Ingenieurskunst (Granaten &amp; Zielattrappen für die Gruppe) ODER schnellerer Aufbau von Erholt-XP (Rested).</div>
-                <div class="lr-miss">ℹ️ <strong>Reset-Regeln:</strong> Legacy-Punkte können beim Klassentrainer in jeder Hauptstadt zurückgesetzt werden (Quelle: Method Legacy Guide). Keine bestätigten exorbitanten Kosten in der Beta.</div>
-              </div>
-            </div>
-          </div>
+          <div id="planner-legacy-faruk"><p>Legacy-Daten werden geladen…</p></div>
         </div>
       </div>
 
@@ -740,6 +666,8 @@
           <div class="local-notice" style="margin-bottom:12px">
             ℹ️ <strong>Lokale Browser-Speicherung:</strong> Die Quest-Häkchen für Faruk werden getrennt direkt in deinem Browser (localStorage) gespeichert.
           </div>
+          <div id="discoveries-faruk" class="profile-discoveries"></div>
+          <label style="font-size:.8rem;color:var(--dim)"><input type="checkbox" id="all-quests-faruk" onchange="renderPlayerItems('Faruk')"> Alle Dungeon-Quests zeigen</label>
           <div id="f-items-list">
             <!-- Dynamisch generiert -->
           </div>
@@ -769,7 +697,7 @@
     <section id="view-mirza" class="view">
       <div class="profile-nav-bar">
         <button class="back-home-btn" onclick="showView('home')">← Zurück zur Übersicht</button>
-        <div class="profile-header-title">🏹 Mirza — Mensch Jäger</div>
+        <div class="profile-header-title">🏹 Mirza — Jäger</div>
         <div class="profile-controls">
           <div class="pc-level-row" style="margin:0;padding:4px 10px">
             <label for="prof-lvl-mirza">Stufe:</label>
@@ -798,7 +726,7 @@
         <div class="now-title" style="color:#abd656">⚡ Was ist jetzt für Mirza wichtig? (Stufe <span id="now-lvl-disp-mirza">1</span>)</div>
         <div class="now-grid">
           <div class="now-item">
-            <div class="now-label" style="color:#abd656">🎯 Nächster Talent-Punkt</div>
+            <div class="now-label" style="color:#abd656">🎯 Talent für deine Stufe</div>
             <div class="now-value" id="now-talent-mirza">Lade Talent-Empfehlung...</div>
             <div class="now-desc" id="now-talent-desc-mirza">Begründung für die Wahl.</div>
           </div>
@@ -810,189 +738,39 @@
         </div>
       </div>
 
-      <!-- SEKTION: PETS (BEGLEITER) - PRIKAZANO ZADANO ZA MIRZU -->
       <div class="guide-section">
         <div class="guide-hdr" onclick="toggleSection('m-pets')">
-          <div class="guide-ttl">🐾 Begleiter-Guide: Leveling, PvP &amp; Dungeons</div>
-          <span class="guide-toggle-icon open" id="icon-m-pets">▼</span>
+          <div class="guide-ttl">🐾 Begleiter · welches Pet und warum?</div>
+          <span class="guide-toggle-icon" id="icon-m-pets">▼</span>
         </div>
-        <div class="guide-content open" id="content-m-pets">
-          <div style="font-size:0.83rem;color:var(--dim);margin-bottom:14px;line-height:1.5">
-            <strong>Forever-Mechanik geprüft:</strong> Begleiter haben 3 Klassen (Ferocity, Tenacity, Cunning), aber <em>keinen pauschalen Grundschaden-Abzug</em> mehr wie in Vanilla! Begleiter skalieren mit Mirzas Agilität. <strong>Kein automatischer Wolf-Zwang!</strong>
+        <div class="guide-content" id="content-m-pets">
+          <div class="profile-discoveries">
+            <article class="discovery-card"><strong>Leveln im Duo: Bär als Startvorschlag</strong><p>Swipe trifft mehrere Ziele und hilft bei Gruppen von Gegnern. Katze oder Raptor mit gelerntem Claw sind Alternativen, wenn ihr überwiegend einzelne Ziele bekämpft. Ein Bär ist keine Garantie für sichere Mehrfach-Pulls.</p><small>Grundlage: Icy Veins BM- und Survival-Leveling, Beta-Stand.</small></article>
+            <article class="discovery-card"><strong>BG: Kontrolle passend zu eurem Plan</strong><p>Spinne mit Web zum Festhalten auf Distanz; Eber mit Charge zum Ansetzen am Gegner. Katze mit Prowl für verdeckte Annäherung. Welche Wahl besser passt, hängt vom Gegner und eurer Rolle ab; kein pauschaler BG-Sieger.</p><small>Familienfähigkeiten: Classic WoW Forever, Client-Daten.</small></article>
+            <article class="discovery-card"><strong>Dungeon: erst die Rolle klären</strong><p>Mit normalem Tank: Growl-Autocast aus und AoE neben kontrollierten Gegnern vermeiden. Wolf mit Furious Howl unterstützt Nahkampfangriffe, etwa Faruks. Bär, wenn ihr bewusst Pet-Tanking vereinbart; vor Sprüngen Pet wegpacken.</p></article>
+            <article class="discovery-card"><strong>Lernen, füttern, Wege kontrollieren</strong><p>Neue Fähigkeitsränge durch das Zähmen eines passenden Tiers lernen, dann einem geeigneten Pet beibringen. Nicht jede Familie kann alles. Futter mitnehmen. Frühe Tiere und Klassenfreischaltung nach Startgebiet prüfen.</p><a href="https://www.icy-veins.com/wow-forever/hunter-class-quests" target="_blank" rel="noopener">Erstes Pet und Klassenquest ↗</a></article>
           </div>
-
-          <!-- LEVELING PETS -->
-          <div style="margin-bottom:16px">
-            <div style="font-family:'Cinzel',serif;font-size:0.9rem;color:var(--gold);margin-bottom:6px">1. Für das Leveling (Duo &amp; Solo)</div>
-            <div class="pet-duo-grid">
-              <div class="pet-box primary-pet">
-                <div class="pb-tag rec">⭐ 1. Empfehlung: Bär (Tenacity)</div>
-                <div class="pb-name">🐻 Bär / Bear (Zähigkeit)</div>
-                <div class="pb-reason">
-                  <strong>Warum Bär:</strong> Verfügt über die einzigartige Fähigkeit <em>Prankenhieb (Swipe)</em> auf 5s Cooldown. Dies ist eine der ganz wenigen echten AoE-Bedrohungsfähigkeiten für Pets. Hält im Zusammenspiel mit Faruk mehrere Mobs sicher an sich, während ihr Flächenschaden austeilt.
-                </div>
-                <div class="pb-details">
-                  📍 <strong>Fundort:</strong> Wald-Bär in Dun Morogh (Stufe 10–11) oder Loch Modan (Stufe 11–12). Frisst alles (Fleisch, Brot, Obst, Pilze).
-                </div>
-              </div>
-              <div class="pet-box">
-                <div class="pb-tag alt">Alternative: Katze (Ferocity)</div>
-                <div class="pb-name">🐱 Katze / Cat (Wildheit)</div>
-                <div class="pb-reason">
-                  <strong>Wann besser:</strong> Wenn ihr strikt einzelne Mobs nacheinander fokussiert. Höchster Einzelziel-Schaden und schnelleres Grinding einzelner Ziele. Kann aber keine Gruppen-Aggro halten.
-                </div>
-                <div class="pb-details">
-                  📍 <strong>Fundort:</strong> Berglöwe in Dun Morogh (Stufe 10–11) oder Dunkelpirscher (Loch Modan, Stufe 10–11).
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- BATTLEGROUNDS PETS -->
-          <div style="margin-bottom:16px">
-            <div style="font-family:'Cinzel',serif;font-size:0.9rem;color:var(--purple);margin-bottom:6px">2. Für Battlegrounds (PvP)</div>
-            <div class="pet-duo-grid">
-              <div class="pet-box primary-pet" style="border-color:rgba(206,147,216,0.4)">
-                <div class="pb-tag rec">⭐ 1. Empfehlung: Katze (Ferocity)</div>
-                <div class="pb-name">🐱 Katze / Cat (Wildheit)</div>
-                <div class="pb-reason">
-                  <strong>Warum Katze:</strong> Schnelle Angriffe verzögern Zauber feindlicher Heiler und Magier (Pushback). Verfügt über <em>Schleichen (Prowl)</em> für Überraschungsangriffe bei Basen.
-                </div>
-                <div class="pb-details">
-                  📍 <strong>Tipp:</strong> Kombiniert mit Mirzas Menschen-Fähigkeit <em>Will to Survive</em> (Stun-Brecher) für exzellente PvP-Kontrolle.
-                </div>
-              </div>
-              <div class="pet-box">
-                <div class="pb-tag alt">Alternative: Eber (Boar)</div>
-                <div class="pb-name">🐗 Eber / Wildschwein</div>
-                <div class="pb-reason">
-                  <strong>Wann besser:</strong> <em>Sturmangriff (Charge)</em> wurzelt den Gegner sofort für 1 Sekunde fest. Perfekt, um fliehende Feinde oder Heiler sofort zu stoppen.
-                </div>
-                <div class="pb-details">
-                  📍 <strong>Fundort:</strong> Loch Modan / Westfall. Frisst alles.
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- DUNGEONS PETS -->
-          <div>
-            <div style="font-family:'Cinzel',serif;font-size:0.9rem;color:var(--blue);margin-bottom:6px">3. Für Dungeons &amp; Instanzen</div>
-            <div class="pet-duo-grid">
-              <div class="pet-box primary-pet" style="border-color:rgba(79,195,247,0.4)">
-                <div class="pb-tag rec">⭐ 1. Empfehlung: Bär (Tenacity)</div>
-                <div class="pb-name">🐻 Bär / Bear (Zähigkeit)</div>
-                <div class="pb-reason">
-                  <strong>Warum Bär:</strong> Kann ausbrechende Adds mit Prankenhieb an sich binden und schützt den Heiler bei unsauberen Pulls vor Wipes. Hohe Rüstung und Überlebenschance.
-                </div>
-                <div class="pb-details">
-                  ⚠️ <strong>Wichtig:</strong> Vor Sprüngen an Kanten das Pet stets wegpacken (Dismiss), um versehentliche Dungeon-Pulls zu verhindern!
-                </div>
-              </div>
-              <div class="pet-box">
-                <div class="pb-tag alt">Alternative: Katze (Ferocity)</div>
-                <div class="pb-name">🐱 Katze / Cat (Wildheit)</div>
-                <div class="pb-reason">
-                  <strong>Wann besser:</strong> Wenn der Tank der Gruppe 100% verlässlich alle Adds hält und reiner Boss-Burst gefragt ist.
-                </div>
-                <div class="pb-details">
-                  ℹ️ <strong>Wolf-Hinweis:</strong> Furioses Heulen (Furious Howl) bufft zwar den nächsten physischen Angriff, bietet beim Leveln und in 5er-Dungeons aber deutlich weniger Nutzen als ein stabiler Bär.
-                </div>
-              </div>
-            </div>
-          </div>
+          <p class="planner-source">Quellen: <a href="https://www.icy-veins.com/wow-forever/beast-mastery-hunter-leveling" target="_blank" rel="noopener">Icy Veins: BM-Leveln</a> · <a href="https://www.icy-veins.com/wow-forever/survival-hunter-leveling" target="_blank" rel="noopener">Alternative fürs Leveln</a> · <a href="https://classicwowforever.com/hunter-pets/" target="_blank" rel="noopener">Familien und Zähmorte</a>. Geprüft am 01.11.2026, vor Launch.</p>
         </div>
       </div>
 
-      <!-- SEKTION: TALENTE (Beast Mastery Leveling) -->
       <div class="guide-section">
         <div class="guide-hdr" onclick="toggleSection('m-talents')">
-          <div class="guide-ttl">🌲 Talente: Beast Mastery Leveling &amp; Stufenplan</div>
+          <div class="guide-ttl">🌲 Talente · Beast Mastery</div>
           <span class="guide-toggle-icon" id="icon-m-talents">▼</span>
         </div>
         <div class="guide-content" id="content-m-talents">
-          <p style="font-size:0.83rem;color:var(--dim);margin-bottom:14px">
-            Verifizierter Leveling-Pfad für <strong>Beast Mastery Jäger</strong> in WoW Forever (Stand: 26.10.2026, Quelle: Method &amp; Icy Veins). Kerntalent ist das neue <strong>Summon Hawk</strong> ab Stufe 25 (bis zu 2 aktive Falken).
-          </p>
-
           <ul class="talent-priority-list" id="m-talent-milestones"></ul>
-
-          <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">
-            <button class="pc-btn" style="width:auto;padding:8px 16px;background:rgba(240,192,64,0.15);border:1px solid rgba(240,192,64,0.35);color:var(--gold)" onclick="toggleTalentTree('mirza')">
-              🌲 Forever Talentbaum ein-/ausblenden (Interaktiv)
-            </button>
-            <button class="pc-btn" style="width:auto;padding:8px 16px;background:rgba(171,214,86,0.15);border:1px solid rgba(171,214,86,0.35);color:#abd656" onclick="toggleLvl60Build('mirza')">
-              📖 Level 60 Endgame &amp; Respec-Begründung
-            </button>
-          </div>
-
-          <div id="tree-mirza" style="display:none;margin-top:16px">
-            <div style="font-family:'Cinzel',serif;font-size:0.9rem;color:var(--gold);margin-bottom:8px">Beast Mastery Talentbaum (WoW Forever): Klicke auf ein Talent für Details</div>
-            <div class="talent-tree-grid" id="tree-nodes-mirza"></div>
-            <div id="tree-detail-mirza" style="padding:10px 14px;background:rgba(0,0,0,0.5);border-radius:8px;font-size:0.8rem;color:var(--text);display:none"></div>
-          </div>
-
-          <div id="respec-mirza" style="display:none;margin-top:16px;padding:16px;background:rgba(171,214,86,0.08);border:1px solid rgba(171,214,86,0.3);border-radius:12px">
-            <h4 style="font-family:'Cinzel',serif;color:#abd656;font-size:0.95rem;margin-bottom:6px">Stufe 60 Respec: Warum &amp; Wann?</h4>
-            <p style="font-size:0.82rem;color:var(--text);line-height:1.5;margin-bottom:8px">
-              Beim Leveln sorgt <strong>Beast Mastery</strong> mit <strong>Pathfinding (+6% Lauftempo)</strong> und <strong>Improved Revive Pet</strong> für maximale Bequemlichkeit. Im Endgame auf Stufe 60 wird häufig auf <strong>Marksmanship (Trueshot Aura)</strong> umgeskillt, um die gesamte Raidgruppe mit +100 Angriffskraft zu buffen.
-            </p>
-            <div style="font-size:0.8rem;color:var(--dim);line-height:1.5">
-              <strong>Entscheidung auf 60:</strong> Wenn du weiterhin als BM spielst, wird auf <strong>Bestial Wrath (31 Punkte)</strong> geskillt. Für Raids ist Marksmanship oft die bevorzugte Gruppen-Rolle.
-            </div>
-          </div>
+          <div id="planner-class-mirza"><p>Talentdaten werden geladen…</p></div>
         </div>
       </div>
-
-      <!-- SEKTION: LEGACY PREPORUKE -->
       <div class="guide-section">
         <div class="guide-hdr" onclick="toggleSection('m-legacy')">
-          <div class="guide-ttl">🏛️ Legacy-System: Empfohlener Weg für Mirza</div>
+          <div class="guide-ttl">🏛️ Legacy · planen und bewusst entscheiden</div>
           <span class="guide-toggle-icon" id="icon-m-legacy">▼</span>
         </div>
         <div class="guide-content" id="content-m-legacy">
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px">
-            <span style="font-size:0.82rem;color:var(--dim)">Duo-fokussierte Punkteverteilung für Jäger &amp; Kürschnerei:</span>
-            <div style="display:flex;align-items:center;gap:6px">
-              <label for="legacy-pts-mirza" style="font-size:0.75rem;color:var(--dim)">Verfügbare Legacy-Punkte:</label>
-              <select id="legacy-pts-mirza" class="prof-select" onchange="setLegacyPoints('Mirza', this.value)">
-                <option value="0">0 (Neuer Charakter)</option>
-                <option value="1">1 Punkt</option>
-                <option value="2">2 Punkte</option>
-                <option value="3">3 Punkte</option>
-                <option value="4">4 Punkte</option>
-                <option value="5" selected>5 Punkte (Beta-Cap)</option>
-                <option value="16">16 Punkte (Maximal)</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="legacy-box">
-            <div class="legacy-row">
-              <span class="lr-pt">Punkt 1-3</span>
-              <div style="flex:1">
-                <div class="lr-name">Thrill of Adventure (Adventure Tree — Ränge 1–3)</div>
-                <div class="lr-desc"><strong>Was wir bekommen:</strong> 1% bis 3% Gesundheit und Mana pro Mob-Kill über 10 Sekunden. <strong>Wie oft genutzt:</strong> Jäger verbrauchen bei kontinuierlichem Schießen Mana. Mit diesem Talent kann Mirza durchgehend mobben und kürschnern, ohne hinsetzen zu müssen!</div>
-                <div class="lr-miss">⚠️ <strong>Was wir verpassen:</strong> Schnelleres Kürschner-Leveln (Working Overtime). Da Mirza jedoch jedes getötete Tier kürschnern kann, steigt der Skill ohnehin zügig.</div>
-              </div>
-            </div>
-            <div class="legacy-row">
-              <span class="lr-pt">Punkt 4</span>
-              <div style="flex:1">
-                <div class="lr-name">Talented (Adventure Tree)</div>
-                <div class="lr-desc"><strong>Was wir bekommen:</strong> Früherer Zugriff auf <em>Deadly Aspects</em> (30% Angriffs-Haste) für schnelles Schießen.</div>
-                <div class="lr-miss">⚠️ <strong>Einschränkung:</strong> Reiner Leveling-Beschleuniger.</div>
-              </div>
-            </div>
-            <div class="legacy-row">
-              <span class="lr-pt">Punkt 5</span>
-              <div style="flex:1">
-                <div class="lr-name">Bountiful Harvest (Professions Tree — Kräuter &amp; Leder)</div>
-                <div class="lr-desc"><strong>Was wir bekommen:</strong> Höhere Ausbeute an Fellen und Kräutern. Mirza benötigt Kräuter für die Räucherkerzen im Zeltlager (+Mana für Faruk).</div>
-                <div class="lr-miss">ℹ️ <strong>Reset-Regeln:</strong> Zurücksetzen beim Klassentrainer in Sturmwind jederzeit möglich.</div>
-              </div>
-            </div>
-          </div>
+          <div id="planner-legacy-mirza"><p>Legacy-Daten werden geladen…</p></div>
         </div>
       </div>
 
@@ -1006,6 +784,8 @@
           <div class="local-notice" style="margin-bottom:12px">
             ℹ️ <strong>Lokale Browser-Speicherung:</strong> Die Quest-Häkchen für Mirza werden getrennt direkt in deinem Browser (localStorage) gespeichert.
           </div>
+          <div id="discoveries-mirza" class="profile-discoveries"></div>
+          <label style="font-size:.8rem;color:var(--dim)"><input type="checkbox" id="all-quests-mirza" onchange="renderPlayerItems('Mirza')"> Alle Dungeon-Quests zeigen</label>
           <div id="m-items-list"></div>
         </div>
       </div>
@@ -1118,7 +898,19 @@
   </div>
 </div>
 
+<script src="assets/planner-core.js"></script>
+<script src="assets/news-core.js"></script>
+<script src="assets/planner-ui.js"></script>
 <script>
+const safeStorage = {
+  getItem(key) { try { return localStorage.getItem(key); } catch { return null; } },
+  setItem(key, value) { try { localStorage.setItem(key, value); } catch {} }
+};
+const safeSession = {
+  getItem(key) { try { return sessionStorage.getItem(key); } catch { return null; } },
+  setItem(key, value) { try { sessionStorage.setItem(key, value); } catch {} }
+};
+
 // ── PASSWORDS & SESSION ───────────────────────────────────────────────────
 const PWDS = ["wowforever","farukimirza","wow2026"];
 const SK   = "wow_auth_v2";
@@ -1126,7 +918,7 @@ const SK   = "wow_auth_v2";
 function checkPwd() {
   const v = document.getElementById('pwd').value;
   if (PWDS.includes(v.toLowerCase())) {
-    sessionStorage.setItem(SK,'1');
+    safeSession.setItem(SK,'1');
     document.getElementById('lock').style.display='none';
     document.getElementById('app').style.display='block';
     init();
@@ -1140,18 +932,15 @@ function checkPwd() {
 document.getElementById('pwd').addEventListener('keydown', e => { if (e.key === 'Enter') checkPwd(); });
 const urlParams = new URLSearchParams(window.location.search);
 const isAuthParam = urlParams.get('auth') === '1';
-if (sessionStorage.getItem(SK) || isAuthParam) {
+if (safeSession.getItem(SK) || isAuthParam) {
   document.getElementById('lock').style.display='none';
   document.getElementById('app').style.display='block';
-  if (urlParams.get('view') && ['home', 'faruk', 'mirza', 'news'].includes(urlParams.get('view'))) {
-    currentView = urlParams.get('view');
-  }
 }
 
 // ── STARS ANIMATION ────────────────────────────────────────────────────────
 (function(){
   const c = document.getElementById('stars');
-  for(let i=0; i<80; i++){
+  for(let i=0; i<24; i++){
     const s = document.createElement('div'); s.className='star';
     const sz = Math.random()*2 + .4;
     s.style.cssText = `width:${sz}px;height:${sz}px;left:${Math.random()*100}%;top:${Math.random()*100}%;--o:${Math.random()*.55+.08};--d:${Math.random()*4+2}s;animation-delay:${Math.random()*6}s`;
@@ -1161,12 +950,14 @@ if (sessionStorage.getItem(SK) || isAuthParam) {
 
 // ── VIEW SWITCHER ──────────────────────────────────────────────────────────
 const VIEWS = ['home', 'faruk', 'mirza', 'news'];
-let currentView = localStorage.getItem('wow_active_section') || 'home';
+let currentView = safeStorage.getItem('wow_active_section') || 'home';
 if (!VIEWS.includes(currentView)) currentView = 'home';
+if (VIEWS.includes(urlParams.get('view'))) currentView = urlParams.get('view');
 
 function showView(v) {
+  if (!VIEWS.includes(v)) return;
   currentView = v;
-  try { localStorage.setItem('wow_active_section', v); } catch(e){}
+  try { safeStorage.setItem('wow_active_section', v); } catch(e){}
   VIEWS.forEach(id => {
     const el = document.getElementById('view-' + id);
     if (el) el.classList.toggle('active', id === v);
@@ -1178,14 +969,14 @@ function showView(v) {
 
 // ── PLAYER STATE & LEVELS ──────────────────────────────────────────────────
 let playerLevels = {
-  Faruk: parseInt(localStorage.getItem('wow_level_Faruk') || '1', 10),
-  Mirza: parseInt(localStorage.getItem('wow_level_Mirza') || '1', 10)
+  Faruk: parseInt(safeStorage.getItem('wow_level_Faruk') || '1', 10),
+  Mirza: parseInt(safeStorage.getItem('wow_level_Mirza') || '1', 10)
 };
 
 function setPlayerLevel(player, val) {
   const lvl = Math.max(1, Math.min(60, parseInt(val, 10) || 1));
   playerLevels[player] = lvl;
-  try { localStorage.setItem('wow_level_' + player, String(lvl)); } catch(e){}
+  try { safeStorage.setItem('wow_level_' + player, String(lvl)); } catch(e){}
 
   // Sync inputs across home & profile
   const homeInp = document.getElementById('home-lvl-' + player.toLowerCase());
@@ -1199,44 +990,47 @@ function setPlayerLevel(player, val) {
   renderHomeCards();
   renderMilestones(player);
   renderPlayerItems(player);
+  if (plannerData) PlannerUI.refresh(player);
+  renderDiscoveries();
 }
 
 // ── PROFESSIONS & LEGACY SETTINGS ──────────────────────────────────────────
 let playerProfs = {
   Faruk: [
-    localStorage.getItem('wow_prof_Faruk_1') || 'Bergbau',
-    localStorage.getItem('wow_prof_Faruk_2') || 'Ingenieurskunst'
+    safeStorage.getItem('wow_prof_Faruk_1') || 'Bergbau',
+    safeStorage.getItem('wow_prof_Faruk_2') || 'Ingenieurskunst'
   ],
   Mirza: [
-    localStorage.getItem('wow_prof_Mirza_1') || 'Kürschnerei',
-    localStorage.getItem('wow_prof_Mirza_2') || 'Kräuterkunde'
+    safeStorage.getItem('wow_prof_Mirza_1') || 'Kürschnerei',
+    safeStorage.getItem('wow_prof_Mirza_2') || 'Kräuterkunde'
   ]
 };
 
 function updatePlayerProf(player, slot, val) {
   playerProfs[player][slot - 1] = val;
-  try { localStorage.setItem(`wow_prof_${player}_${slot}`, val); } catch(e){}
+  try { safeStorage.setItem(`wow_prof_${player}_${slot}`, val); } catch(e){}
   const el = document.getElementById(`home-profs-${player.toLowerCase()}`);
   if (el) el.textContent = `${playerProfs[player][0]} & ${playerProfs[player][1]}`;
+  if (plannerData) PlannerUI.refresh(player);
 }
 
 let playerLegacy = {
-  Faruk: parseInt(localStorage.getItem('wow_legacy_Faruk') || '5', 10),
-  Mirza: parseInt(localStorage.getItem('wow_legacy_Mirza') || '5', 10)
+  Faruk: parseInt(safeStorage.getItem('wow_legacy_Faruk') || '0', 10),
+  Mirza: parseInt(safeStorage.getItem('wow_legacy_Mirza') || '0', 10)
 };
 
 function setLegacyPoints(player, val) {
-  const pts = parseInt(val, 10) || 0;
+  const pts = Math.max(0, Math.min(16, parseInt(val, 10) || 0));
   playerLegacy[player] = pts;
-  try { localStorage.setItem(`wow_legacy_${player}`, String(pts)); } catch(e){}
+  try { safeStorage.setItem(`wow_legacy_${player}`, String(pts)); } catch(e){}
 }
 
 // ── ARTICLE READ TRACKING (LOCALSTORAGE) ───────────────────────────────────
 function getReadArticles() {
-  try { return JSON.parse(localStorage.getItem('wow_read_articles') || '[]'); } catch(e) { return []; }
+  try { return JSON.parse(safeStorage.getItem('wow_read_articles') || '[]'); } catch(e) { return []; }
 }
 function getReadVersions() {
-  try { return JSON.parse(localStorage.getItem('wow_read_versions') || '{}'); } catch(e) { return {}; }
+  try { return JSON.parse(safeStorage.getItem('wow_read_versions') || '{}'); } catch(e) { return {}; }
 }
 function hasPendingUpdate(item) {
   if (!item || !item.is_updated) return false;
@@ -1276,14 +1070,14 @@ function markArticleAsRead(itemOrId) {
     if (id && !reads.includes(id)) { reads.push(id); changed = true; }
   });
   if (changed) {
-    try { localStorage.setItem('wow_read_articles', JSON.stringify(reads)); } catch(e){}
+    try { safeStorage.setItem('wow_read_articles', JSON.stringify(reads)); } catch(e){}
   }
   if (currentItem) {
     const versions = getReadVersions();
     const currentVer = currentItem.source_content_hash || currentItem.updated_at || (currentItem.content_version ? String(currentItem.content_version) : 'updated');
     if (versions[String(currentItem.id)] !== currentVer) {
       versions[String(currentItem.id)] = currentVer;
-      try { localStorage.setItem('wow_read_versions', JSON.stringify(versions)); } catch(e){}
+      try { safeStorage.setItem('wow_read_versions', JSON.stringify(versions)); } catch(e){}
     }
   }
   renderHomeNews();
@@ -1294,7 +1088,8 @@ function isArticleRecent(item) {
   if (!dateStr) return false;
   const ts = new Date(dateStr).getTime();
   if (isNaN(ts)) return false;
-  return ((Date.now() - ts) / (1000 * 60 * 60)) <= 48;
+  const hours = (Date.now() - ts) / (1000 * 60 * 60);
+  return hours >= 0 && hours <= 48;
 }
 
 // ── DUAL QUEST CHECKLIST ───────────────────────────────────────────────────
@@ -1304,18 +1099,23 @@ function togglePlayerQuest(player, qid) {
   const isChecked = chk.checked;
   const storageKey = (player === 'Faruk') ? ('wow_quest_Faruk_' + qid) : ('wow_quest_Mirza_' + qid);
   try {
-    localStorage.setItem(storageKey, isChecked ? '1' : '0');
+    safeStorage.setItem(storageKey, isChecked ? '1' : '0');
   } catch(e){}
   renderPlayerItems(player);
 }
 
 // ── DATA SOURCES & INITIALIZATION ──────────────────────────────────────────
-let allItems = [], bisData = {}, guidesData = {};
+let allItems = [], bisData = {}, guidesData = {}, plannerData = null, discoveriesData = [];
+let sourceHealth = {};
 let newsLoadError = false;
-let activeProfile = localStorage.getItem('wow_active_profile') || 'all';
-let activeFilter  = localStorage.getItem('wow_active_filter')  || 'all';
+let activeProfile = safeStorage.getItem('wow_active_profile') || 'all';
+let activeFilter  = safeStorage.getItem('wow_active_filter')  || 'all';
 
 async function init() {
+  document.querySelectorAll('.guide-hdr').forEach(header=>{
+    header.setAttribute('role','button'); header.tabIndex=0;
+    header.onkeydown=e=>{ if(e.key==='Enter'||e.key===' ') {e.preventDefault();header.click();} };
+  });
   // Restore level inputs
   ['Faruk', 'Mirza'].forEach(p => {
     const lvl = playerLevels[p];
@@ -1329,7 +1129,11 @@ async function init() {
     if (lSel) lSel.value = playerLegacy[p];
   });
 
-  await Promise.all([loadNews(), loadBis(), loadGuides()]);
+  await Promise.all([loadNews(), loadBis(), loadGuides(), loadPlanner(), loadDiscoveries()]);
+  ['Faruk','Mirza'].forEach(p => {
+    [1,2].forEach(slot => { const el=document.getElementById(`prof${slot}-${p.toLowerCase()}`); if (el) el.value=playerProfs[p][slot-1]; });
+    const el=document.getElementById(`home-profs-${p.toLowerCase()}`); if(el) el.textContent=playerProfs[p].join(' & ');
+  });
   showView(currentView);
   renderHomeCards();
 }
@@ -1337,20 +1141,22 @@ async function init() {
 async function loadNews() {
   try {
     newsLoadError = false;
-    const r = await fetch('data/news.json?v=' + Date.now());
+    const r = await fetch('data/feed.json?v=' + Date.now());
     if (!r.ok) throw new Error("HTTP " + r.status);
     const d = await r.json();
     allItems = d.items || [];
+    sourceHealth = d.sources_status || {};
     renderCastle(d.castle_status);
     renderSourcesStatus(d.sources_status);
     renderDataProcTime(d.data_processed_at || d.last_updated);
     renderHomeNews();
+    renderDiscoveries();
     applyFilter();
   } catch(e) {
     console.error("News load error:", e);
     newsLoadError = true;
     const nl = document.getElementById('news-list');
-    if (nl) nl.innerHTML = '<div class="empty"><div class="empty-ico">⚠️</div><div>Fehler beim Laden von news.json.</div><button class="retry-btn" onclick="loadNews()">🔄 Erneut versuchen</button></div>';
+    if (nl) nl.innerHTML = '<div class="empty"><div class="empty-ico">⚠️</div><div>Neuigkeiten konnten nicht geladen werden.</div><button class="retry-btn" onclick="loadNews()">🔄 Erneut versuchen</button></div>';
     const hn = document.getElementById('home-news-list');
     if (hn) hn.innerHTML = '<div class="empty"><div class="empty-ico">⚠️</div><div>Neuigkeiten konnten nicht geladen werden.</div><button class="retry-btn" onclick="loadNews()">🔄 Erneut versuchen</button></div>';
   }
@@ -1376,7 +1182,7 @@ async function loadGuides() {
 }
 
 function renderDataProcTime(ts) {
-  const tStr = ts ? new Date(ts).toLocaleString('de-DE') : '01.11.2026, 17:34';
+  const tStr = ts ? new Date(ts).toLocaleString('de-DE', {timeZone:'Europe/Vienna'}) + ' (Wien)' : 'Zeitpunkt unbekannt';
   const hEl = document.getElementById('data-proc-header');
   const fEl = document.getElementById('last-upd');
   if (hEl) hEl.textContent = '⚙️ Daten verarbeitet: ' + tStr;
@@ -1387,43 +1193,16 @@ function renderDataProcTime(ts) {
 function renderHomeNews() {
   const container = document.getElementById('home-news-list');
   if (!container) return;
-
-  // Filter out generic overview guide spam (Requirement 7)
-  // "Na slikama se i dalje prikazuju opšte najave poput „1.000 novih questova“, Weekly Recap i „Return to Azeroth“. Takve objave ukloni iz početnog pregleda."
-  const genericTitles = ['weekly recap', 'return to azeroth', 'kehre in world of warcraft', 'starter-leitfaden', '1.000 neuen quests'];
-
-  let actionable = allItems.filter(item => {
-    const t = (item.title || '').toLowerCase();
-    const raw = (item.raw_title || '').toLowerCase();
-    const isGenericTitle = genericTitles.some(g => t.includes(g) || raw.includes(g));
-    if (isGenericTitle) return false;
-
-    // Filter out standard non-updated guide overviews with generic teaser
-    if (item.category === 'guide' && !item.is_updated) {
-      const teaser = (item.teaser_de || '').toLowerCase();
-      if (teaser.includes('offizieller wow forever klassen-leitfaden')) return false;
-      if (t.includes('übersicht')) return false;
-    }
-    return true;
-  });
-
-  // Deduplicate stories covering identical topics
-  const seenStories = new Set();
-  const deduped = [];
-  actionable.forEach(item => {
-    const key = (item.radar_status || '') + '_' + (item.category || '') + '_' + (item.classes || []).join('_');
-    if (!seenStories.has(key) || item.is_updated) {
-      seenStories.add(key);
-      deduped.push(item);
-    }
-  });
-
-  const displayList = deduped.slice(0, 4);
+  const failedSources=Object.values(sourceHealth).filter(s=>/Fehler|HTTP [45]|fehlgeschlagen/i.test(s)).length;
+  const note=document.getElementById('home-source-note');
+  if(note) note.textContent=failedSources?`Hinweis: ${failedSources} Quelle(n) konnten nicht vollständig geprüft werden. Details im Quellen-Archiv.`:'';
+  if (newsLoadError) return;
+  const displayList = WowNews.selectHome(allItems);
   const badge = document.getElementById('home-news-badge');
   if (badge) badge.textContent = `${displayList.length} Meldungen`;
 
   if (!displayList.length) {
-    container.innerHTML = '<div class="empty" style="grid-column:1/-1"><div class="empty-ico">📭</div><div style="font-weight:600">Keine neuen spielrelevanten Neuigkeiten.</div><div style="font-size:0.8rem;color:var(--dim);margin-top:4px">Alle bestehenden Klassen- und Hotfix-Daten sind auf aktuellem Stand.</div></div>';
+    container.innerHTML = '<div class="empty" style="grid-column:1/-1"><div class="empty-ico">📭</div><div style="font-weight:600">Keine neuen spielrelevanten Neuigkeiten.</div><div style="font-size:0.8rem;color:var(--dim);margin-top:4px">Derzeit keine passenden Meldungen der letzten sieben Tage. Quellenstatus im Archiv beachten.</div></div>';
     return;
   }
 
@@ -1439,10 +1218,10 @@ function renderHomeNews() {
           <span class="hn-icon">${item.source_icon || '📰'}</span>
           <div class="hn-title">${badgeHtml}${esc(item.title || '')}</div>
         </div>
-        <div class="hn-teaser">${esc(item.teaser_de || item.summary_de || '')}</div>
+        <div class="hn-teaser">${item.summary_mode==='original'?'<small>Originaltext · Übersetzung derzeit nicht verfügbar</small><br>':''}${esc(item.teaser_de || item.summary_de || '')}</div>
         <div class="hn-meta">
           <span class="hn-source">${esc(item.source || 'Quelle')}</span>
-          <span>${item.date ? esc(item.date) : ''} →</span>
+          <span>${esc(new Date(WowNews.timestamp(item)).toLocaleDateString('de-DE', {timeZone:'Europe/Vienna'}))} →</span>
         </div>
       </div>
     `;
@@ -1450,103 +1229,21 @@ function renderHomeNews() {
 }
 
 // ── TALENT & QUEST LOGIC PER LEVEL ─────────────────────────────────────────
-const SHAMAN_TALENTS = [
-  { lvl: 10, pts: "1/5", talent: "Thundering Strikes (Rang 1/5)", why: "Erhöht kritische Trefferchance aller Zauber & Nahkampfangriffe um 1%. Gilt für Spells & Melee!" },
-  { lvl: 11, pts: "2/5", talent: "Thundering Strikes (Rang 2/5)", why: "+2% Crit für alle Attacken." },
-  { lvl: 12, pts: "3/5", talent: "Thundering Strikes (Rang 3/5)", why: "+3% Crit für alle Attacken." },
-  { lvl: 13, pts: "4/5", talent: "Thundering Strikes (Rang 4/5)", why: "+4% Crit. Wichtiger Synergie-Schritt für Flurry." },
-  { lvl: 14, pts: "5/5", talent: "Thundering Strikes (Rang 5/5)", why: "Maximaler Rang (+5% Crit). Schaltet nächste Stufe frei." },
-  { lvl: 15, pts: "1/3", talent: "Mental Dexterity (Rang 1/3)", why: "Erhöht Angriffskraft um 33% der Intelligenz. Erlaubt Caster-Gear im Nahkampf." },
-  { lvl: 16, pts: "2/3", talent: "Mental Dexterity (Rang 2/3)", why: "+66% Int zu Angriffskraft." },
-  { lvl: 17, pts: "3/3", talent: "Mental Dexterity (Rang 3/3)", why: "+100% Int zu Angriffskraft! Starker Melee-Schadensschub." },
-  { lvl: 18, pts: "1/2", talent: "Improved Ghost Wolf (Rang 1/2)", why: "Verkürzt Zauberzeit von Geisterwolf um 1 Sekunde." },
-  { lvl: 19, pts: "2/2", talent: "Improved Ghost Wolf (Rang 2/2)", why: "Sofortiger Geisterwolf (Instant Cast)! Enormer Reiseschub vor dem Mount." },
-  { lvl: 20, pts: "1/1", talent: "Shamanistic Focus (Rang 1/1)", why: "Reduziert Manakosten nach Nahkampf-Crits drastisch (entlastet Mana)." },
-  { lvl: 21, pts: "1/3", talent: "Elemental Weapons (Rang 1/3)", why: "+Attack Power Bonus für Rockbiter und Windfury." },
-  { lvl: 22, pts: "2/3", talent: "Elemental Weapons (Rang 2/3)", why: "Mehr Waffenschaden." },
-  { lvl: 23, pts: "3/3", talent: "Elemental Weapons (Rang 3/3)", why: "Maximaler Waffen-Imbue-Schaden." },
-  { lvl: 24, pts: "1/5", talent: "Ancestral Knowledge (Rang 1/5)", why: "+2% Gesamt-Intelligenz." },
-  { lvl: 25, pts: "1/1", talent: "⚡ Stormstrike (Sturmschlag Rang 1/1)", why: "⭐ KERNTALENT! 8s Cooldown, extra Nahkampf-Schwung und Nature-Debuff!" },
-  { lvl: 26, pts: "1/4", talent: "Flurry (Rang 1/4)", why: "+10% Angriffsgeschwindigkeit nach Crits." },
-  { lvl: 27, pts: "2/4", talent: "Flurry (Rang 2/4)", why: "+15% Tempo." },
-  { lvl: 28, pts: "3/4", talent: "Flurry (Rang 3/4)", why: "+20% Tempo." },
-  { lvl: 29, pts: "4/4", talent: "Flurry (Rang 4/4)", why: "+25% Tempo. Schneller Maelstrom-Aufbau." },
-  { lvl: 30, pts: "1/1", talent: "🛡️ Spirit Weapons (Rang 1/1)", why: "⭐ Ermöglicht Parieren (Parry) & senkt Bedrohung um 30% (oder Off-Tank mit Rockbiter)!" }
-];
-
-const HUNTER_TALENTS = [
-  { lvl: 10, pts: "1/5", talent: "Deadly Aspects (Rang 1/5)", why: "Chance auf 30% Angriffs-Haste für 12 Sekunden bei Aspekt-Nutzung." },
-  { lvl: 11, pts: "2/5", talent: "Deadly Aspects (Rang 2/5)", why: "Höhere Auslösechance für 30% Haste." },
-  { lvl: 12, pts: "3/5", talent: "Deadly Aspects (Rang 3/5)", why: "Stabile Haste-Uptime im Fernkampf." },
-  { lvl: 13, pts: "4/5", talent: "Deadly Aspects (Rang 4/5)", why: "Sehr starker DPS-Zuwachs." },
-  { lvl: 14, pts: "5/5", talent: "Deadly Aspects (Rang 5/5)", why: "Maximaler Rang (5/5). Schaltet Tier 2 frei." },
-  { lvl: 15, pts: "1/2", talent: "Pathfinding (Rang 1/2)", why: "+3% Lauftempo für Aspekt des Geparden/Rudels." },
-  { lvl: 16, pts: "2/2", talent: "Pathfinding (Rang 2/2)", why: "+6% Lauftempo! Enormer Reisevorteil vor Stufe 40." },
-  { lvl: 17, pts: "1/2", talent: "Improved Revive Pet (Rang 1/2)", why: "Verkürzt Zauberzeit & Kosten von Tier wiederbeleben." },
-  { lvl: 18, pts: "2/2", talent: "Improved Revive Pet (Rang 2/2)", why: "Erlaubt sicheres Wiederbeleben selbst während Elite-Kämpfen." },
-  { lvl: 19, pts: "1/5", talent: "Unleashed Fury (Rang 1/5)", why: "+4% Begleiterschaden." },
-  { lvl: 20, pts: "2/5", talent: "Unleashed Fury (Rang 2/5)", why: "+8% Begleiterschaden." },
-  { lvl: 21, pts: "3/5", talent: "Unleashed Fury (Rang 3/5)", why: "+12% Begleiterschaden." },
-  { lvl: 22, pts: "4/5", talent: "Unleashed Fury (Rang 4/5)", why: "+16% Begleiterschaden." },
-  { lvl: 23, pts: "5/5", talent: "Unleashed Fury (Rang 5/5)", why: "+20% Begleiterschaden! Bären-Swipe trifft massiv härter." },
-  { lvl: 24, pts: "1/1", talent: "Bestial Swiftness (Rang 1/1)", why: "+30% Begleiter-Lauftempo im Freien (schnelleres Anstürmen)." },
-  { lvl: 25, pts: "1/1", talent: "🦅 Summon Hawk (Falke beschwören Rang 1/1)", why: "⭐ KERNTALENT! Beschwört bis zu 2 Falken für 18s (teilt 6s CD mit Arcane Shot)!" },
-  { lvl: 26, pts: "1/5", talent: "Ferocity (Rang 1/5)", why: "+3% Begleiter-Critchance." },
-  { lvl: 27, pts: "2/5", talent: "Ferocity (Rang 2/5)", why: "+6% Begleiter-Critchance." },
-  { lvl: 28, pts: "3/5", talent: "Ferocity (Rang 3/5)", why: "+9% Begleiter-Critchance." },
-  { lvl: 29, pts: "1/1", talent: "🐾 Intimidation (Einschüchterung Rang 1/1)", why: "⭐ KERNTALENT! 3-Sekunden-Betäubung & massive Pet-Bedrohung auf Abruf!" },
-  { lvl: 30, pts: "4/5", talent: "Ferocity (Rang 4/5)", why: "+12% Begleiter-Critchance (Vorbereitung auf Bestial Wrath)." }
-];
-
-const SHAMAN_QUESTS = [
-  { minLvl: 1, maxLvl: 9, title: "Ruf der Erde (Erdtotem)", desc: "Quest bei Yarr Hammerstone (Ambosstal). Schaltet Steinhauttotem (Schadensminderung für Mirzas Pet) & Erdstosstotem frei.", item: "Erdtotem" },
-  { minLvl: 10, maxLvl: 17, title: "Ruf des Feuers (Feuertotem)", desc: "Quest bei Kranor Frostschreiter (Kharanos/Eisenschmiede). Schaltet Verbrennungstotem & Feuernova frei.", item: "Feuertotem" },
-  { minLvl: 18, maxLvl: 22, title: "Deadmines: Taskmaster Axe / Smite's Hammer", desc: "Zweihand-Waffen-Drop bei Taskmaster Fizzule & Mr. Smite. Unglaublicher Rockbiter-Schadensboost!", item: "Taskmaster Axe / Smite's Hammer" },
-  { minLvl: 20, maxLvl: 24, title: "Ruf des Wassers (Wassertotem)", desc: "Questkette in Dun Morogh & Sümpfe des Elends. Schaltet Manaflut & Heilquell-Totem frei.", item: "Wassertotem" },
-  { minLvl: 20, maxLvl: 25, title: "Wailing Caverns: Crescent Staff", desc: "Quest 'Leaders of the Fang'. Herausragender Stab für Faruk bis Stufe 30.", item: "Crescent Staff" },
-  { minLvl: 25, maxLvl: 32, title: "Razorfen Kraul: Corpsemaker", desc: "Drop von Overlord Ramtusk. Beste 2H-Axt für Schamanen im gesamten 20-35 Bereich!", item: "Corpsemaker" },
-  { minLvl: 30, maxLvl: 40, title: "Ruf der Luft (Lufttotem) & Windfury", desc: "Schaltet Windzorn-Totem frei — stärkster Melee-Buff für Faruk und Mirzas Angriffe!", item: "Windfury Totem" }
-];
-
-const HUNTER_QUESTS = [
-  { minLvl: 1, maxLvl: 9, title: "Vorbereitung auf Stufe 10", desc: "Halte Ausschau nach Fleisch & Nahrung in Elwynn/Dun Morogh für dein erstes Pet ab Stufe 10.", item: "Pet-Futter Vorrat" },
-  { minLvl: 10, maxLvl: 17, title: "Jäger-Klassenquest: Tier zähmen", desc: "Klassenquest in Wald von Elwynn oder Eisenschmiede. Schaltet Tier zähmen, füttern & heilen frei! Zähme sofort einen Bären in Dun Morogh/Loch Modan.", item: "Tier zähmen & Bär (Swipe)" },
-  { minLvl: 18, maxLvl: 22, title: "Deadmines: Thief's Blade & Chausses", desc: "Thief's Blade von Mr. Smite aktiviert Menschen-Schwertspezialisierung (+2% Crit auf Fernkampf!). Chausses of Westfall Questbelohnung.", item: "Thief's Blade (Schwert) & Chausses" },
-  { minLvl: 20, maxLvl: 25, title: "Wailing Caverns: Venomstrike & Fang-Set", desc: "Lord Cobrahn droppt Venomstrike (BiS Level 20 Bogen mit Gift-Proc) & Leggings of the Fang (+Agilität).", item: "Venomstrike Bogen" },
-  { minLvl: 25, maxLvl: 30, title: "Truthseeker's Bow (Quest)", desc: "Exzellente Fernkampfwaffe mit hohem Grundschaden für automatisches Schießen.", item: "Truthseeker's Bow" },
-  { minLvl: 30, maxLvl: 35, title: "Gnomeregan: Triprunner Dungarees", desc: "Quest 'The Grand Betrayal'. +18 Agilität Lederhose — hält locker bis Stufe 42+!", item: "Triprunner Dungarees" },
-  { minLvl: 30, maxLvl: 40, title: "Razorfen Kraul: Armor Piercer", desc: "Bossdrop von Overlord Ramtusk mit extrem hoher Agilität für Jäger.", item: "Armor Piercer" }
-];
-
 function getNextTalent(player, level) {
-  const list = player === 'Faruk' ? SHAMAN_TALENTS : HUNTER_TALENTS;
-  if (level < 10) {
-    return {
-      title: `Noch kein Talent (Erster Punkt mit Stufe 10)`,
-      desc: `Verbleibend: Noch ${10 - level} Level bis zum ersten Talentpunkt!`
-    };
-  }
-  const match = list.find(t => t.lvl === level);
-  if (match) {
-    return { title: `${match.talent}`, desc: `${match.why}` };
-  }
-  if (level > 30) {
-    return {
-      title: `Punkt ${level - 9} in ${player === 'Faruk' ? 'Enhancement' : 'Beast Mastery'}`,
-      desc: `Folge dem Weg zu Capstone: ${player === 'Faruk' ? 'Rage of the Farseer' : 'Bestial Wrath'}.`
-    };
-  }
-  const next = list.find(t => t.lvl > level) || list[list.length - 1];
-  return { title: `${next.talent} (ab Stufe ${next.lvl})`, desc: `${next.why}` };
+  if (!plannerData) return {title:'Talentdaten werden geladen',desc:'Den Rechner im Profil öffnen.'};
+  const def=plannerData.classes[player==='Faruk'?'Shaman':'Hunter'];
+  const talented=PlannerUI.talented(player), count=WowPlanner.classBudget(level,talented);
+  if (!count) return {title:`Erster Talentpunkt ab Stufe ${10-talented}`,desc:'Normaler Start mit Stufe 10. Frühere Klassenpunkte gibt es nur mit bereits freigeschaltetem Talented.'};
+  try {
+    const order=WowPlanner.classPlan(def,player), id=order[count-1], n=WowPlanner.nodes(def).find(n=>n.id===id);
+    return {title:`${n.name} (${order.slice(0,count).filter(x=>x===id).length}/${n.max})`,desc:PlannerUI.reason(n.name,player)};
+  } catch(e) { return {title:'Vorschlag muss geprüft werden',desc:e.message}; }
 }
-
 function getNextQuest(player, level) {
-  const list = player === 'Faruk' ? SHAMAN_QUESTS : HUNTER_QUESTS;
-  const match = list.find(q => level >= q.minLvl && level <= q.maxLvl) || list[list.length - 1];
-  return {
-    title: match.title,
-    desc: `${match.desc} (Ziel: ${match.item})`
-  };
+  const candidates=discoveriesData.filter(d=>(!d.players || d.players.includes(player)) && level>=d.min_level && level<=d.max_level);
+  const pick=candidates[0];
+  if (pick) return {title:pick.title,desc:pick.action};
+  return {title:'Quests und Upgrades im Profil',desc:'Passende Dungeon-Quests und neue Funde nach Stufe ansehen.'};
 }
 
 function renderNowSection(player) {
@@ -1573,98 +1270,59 @@ function renderHomeCards() {
     const tInfo = getNextTalent(player, lvl);
     const hintEl = document.getElementById(`home-hint-${player.toLowerCase()}`);
     if (hintEl) {
-      hintEl.innerHTML = `<strong>Nächster Talentpunkt:</strong> ${esc(tInfo.title)}`;
+      hintEl.innerHTML = `<strong>Talent für deine Stufe:</strong> ${esc(tInfo.title)}`;
     }
   });
 }
 
 function renderMilestones(player) {
-  const list = player === 'Faruk' ? SHAMAN_TALENTS : HUNTER_TALENTS;
-  const container = document.getElementById(`${player === 'Faruk' ? 'f' : 'm'}-talent-milestones`);
-  if (!container) return;
-  const currLvl = playerLevels[player];
-
-  container.innerHTML = list.map(t => {
-    const isCurrent = t.lvl === currLvl;
-    const isPast = currLvl > t.lvl;
-    return `
-      <li class="talent-step${isCurrent ? ' active-step' : ''}">
-        <span class="ts-lvl">Stufe ${t.lvl}</span>
-        <div class="ts-details">
-          <div class="ts-talent">${esc(t.talent)} ${isCurrent ? '⭐ (Jetzt fällig!)' : (isPast ? '✓' : '')}</div>
-          <div class="ts-why">${esc(t.why)}</div>
-        </div>
-      </li>
-    `;
-  }).join('');
+  const el=document.getElementById(`${player==='Faruk'?'f':'m'}-talent-milestones`);
+  if (el) el.innerHTML=''; // The complete validated order lives inside the calculator.
 }
 
-// ── TALENT TREE DATA & INTERACTIVE RENDERING ───────────────────────────────
-const SHAMAN_TREE_NODES = [
-  { id: "ts", name: "Thundering Strikes", ranks: "5/5", tier: 1, req: "Keine", desc: "+1% bis +5% Critchance für alle Nahkampfangriffe & Zauber." },
-  { id: "md", name: "Mental Dexterity", ranks: "3/3", tier: 2, req: "Tier 1", desc: "Erhöht Angriffskraft um 33% bis 100% deiner Intelligenz." },
-  { id: "igw", name: "Improved Ghost Wolf", ranks: "2/2", tier: 2, req: "Tier 1", desc: "Macht Geisterwolf zum Spontanzauber (Instant)." },
-  { id: "sf", name: "Shamanistic Focus", ranks: "1/1", tier: 3, req: "Tier 2", desc: "Nahkampf-Crits reduzieren Manakosten des nächsten Zaubers um 60%." },
-  { id: "ew", name: "Elemental Weapons", ranks: "3/3", tier: 3, req: "Tier 2", desc: "Erhöht den Schaden von Felsbeißer und Windzorn um bis zu 20%." },
-  { id: "sw", name: "Spirit Weapons", ranks: "1/1", tier: 3, req: "Tier 2", desc: "Erlaubt Parieren. Senkt Bedrohung um 30% (oder erhöht um 30% mit Rockbiter)." },
-  { id: "ss", name: "Stormstrike", ranks: "1/1", tier: 5, req: "Tier 4", desc: "8s Cooldown. Sofortiger Extra-Nahkampfschlag, erhöht Naturschaden um 20%." },
-  { id: "mw", name: "Maelstrom Weapon", ranks: "5/5", tier: 7, req: "Capstone", desc: "Nahkampftreffer stapeln Buff: Reduziert Zauberzeit & Manakosten von Blitzschlag um 20% pro Stapel." }
-];
-
-const HUNTER_TREE_NODES = [
-  { id: "da", name: "Deadly Aspects", ranks: "5/5", tier: 1, req: "Keine", desc: "Chance auf 30% Angriffs-Haste für 12 Sekunden bei Aspekt-Nutzung." },
-  { id: "pf", name: "Pathfinding", ranks: "2/2", tier: 2, req: "Tier 1", desc: "+3% bis +6% Bewegungstempo für Aspekte des Geparden/Rudels." },
-  { id: "irp", name: "Improved Revive Pet", ranks: "2/2", tier: 2, req: "Tier 1", desc: "Schnelleres Wiederbeleben mit 100% Gesundheit & Mana für den Begleiter." },
-  { id: "uf", name: "Unleashed Fury", ranks: "5/5", tier: 3, req: "Tier 2", desc: "Erhöht den Schaden deines Begleiters um bis zu 20%." },
-  { id: "bs", name: "Bestial Swiftness", ranks: "1/1", tier: 3, req: "Tier 2", desc: "Erhöht Begleiter-Bewegungstempo im Freien um 30%." },
-  { id: "sh", name: "Summon Hawk", ranks: "1/1", tier: 4, req: "Tier 3", desc: "Ruft einen Falken herbei (max 2), der 18s lang das Ziel angreift. Teilt 6s CD mit Arcane Shot." },
-  { id: "f", name: "Ferocity", ranks: "5/5", tier: 4, req: "Tier 3", desc: "Erhöht kritische Trefferchance deines Begleiters um bis zu 15%." },
-  { id: "int", name: "Intimidation", ranks: "1/1", tier: 5, req: "Tier 4", desc: "Befiehlt dem Begleiter, das Ziel für 3 Sekunden zu betäuben & hohe Bedrohung aufzubauen." },
-  { id: "bw", name: "Bestial Wrath", ranks: "1/1", tier: 7, req: "Capstone", desc: "Versetzt den Begleiter 18s in Rage (+50% Schaden, immun gegen Furcht/CC)." }
-];
-
-function toggleTalentTree(player) {
-  const tEl = document.getElementById('tree-' + player.toLowerCase());
-  if (!tEl) return;
-  const isHidden = tEl.style.display === 'none';
-  tEl.style.display = isHidden ? 'block' : 'none';
-  if (isHidden) renderTalentNodes(player);
+async function loadPlanner() {
+  try {
+    const r=await fetch('data/planner.json');
+    if(!r.ok) throw new Error('HTTP '+r.status);
+    const data=await r.json();
+    if(data.schema!==1 || !data.classes?.Shaman || !data.classes?.Hunter || !data.legacy) throw new Error('Ungültige Talentdaten');
+    plannerData=data;
+    for(const player of ['Faruk','Mirza']) {
+      const shared={player,data,level:()=>playerLevels[player],professions:()=>playerProfs[player],changed:()=>{renderNowSection(player);renderHomeCards();}};
+      PlannerUI.mount({...shared,kind:'legacy',points:Math.max(0,Math.min(16,playerLegacy[player]||0)),setPoints:n=>setLegacyPoints(player,n),el:document.getElementById('planner-legacy-'+player.toLowerCase())});
+      PlannerUI.mount({...shared,kind:'class',el:document.getElementById('planner-class-'+player.toLowerCase())});
+    }
+    renderHomeCards();
+  } catch(e) {
+    for (const el of document.querySelectorAll('[id^="planner-class-"],[id^="planner-legacy-"]')) {
+      el.innerHTML='<p>Talentdaten konnten nicht geladen werden.</p><button class="retry-btn" onclick="location.reload()">Erneut versuchen</button>';
+    }
+    console.error('Planner:',e);
+  }
 }
-
-function renderTalentNodes(player) {
-  const container = document.getElementById(`tree-nodes-${player.toLowerCase()}`);
-  if (!container) return;
-  const nodes = player === 'Faruk' ? SHAMAN_TREE_NODES : HUNTER_TREE_NODES;
-
-  container.innerHTML = nodes.map(n => `
-    <div class="tree-node recommended" onclick="showNodeDetail('${player}', '${n.id}')">
-      <div class="tn-top">
-        <span class="tn-name">${esc(n.name)}</span>
-        <span class="tn-rank">${esc(n.ranks)}</span>
-      </div>
-      <div class="tn-desc">${esc(n.desc.slice(0, 50))}...</div>
-    </div>
-  `).join('');
+async function loadDiscoveries() {
+  try {
+    const r=await fetch('data/discoveries.json'); if(!r.ok) throw new Error('HTTP '+r.status);
+    const d=await r.json(); discoveriesData=d.items||[];
+    renderDiscoveries();
+    ['Faruk','Mirza'].forEach(renderNowSection);
+  } catch(e) {
+    for(const el of document.querySelectorAll('[id^="discoveries-"]')) el.innerHTML='<p>Neue Funde konnten nicht geladen werden. Bitte Seite neu laden.</p>';
+  }
 }
-
-function showNodeDetail(player, id) {
-  const nodes = player === 'Faruk' ? SHAMAN_TREE_NODES : HUNTER_TREE_NODES;
-  const node = nodes.find(n => n.id === id);
-  const detailEl = document.getElementById(`tree-detail-${player.toLowerCase()}`);
-  if (!node || !detailEl) return;
-  detailEl.style.display = 'block';
-  detailEl.innerHTML = `
-    <div style="font-weight:700;color:var(--gold);margin-bottom:2px">⭐ ${esc(node.name)} (${esc(node.ranks)})</div>
-    <div style="font-size:0.75rem;color:var(--dim);margin-bottom:4px">Stufe: Tier ${node.tier} • Voraussetzung: ${esc(node.req)}</div>
-    <div style="color:#fff;line-height:1.4">${esc(node.desc)}</div>
-    <div style="color:#81c784;font-size:0.75rem;margin-top:4px">✓ Teil des empfohlenen Forever Leveling-Builds</div>
-  `;
+function renderDiscoveries() {
+  for (const player of ['Faruk','Mirza']) {
+    const el=document.getElementById('discoveries-'+player.toLowerCase());
+    if(!el || !discoveriesData.length) continue;
+    const cls=player==='Faruk'?'Shaman':'Hunter', lvl=playerLevels[player];
+    const fresh=allItems.filter(i=>WowNews.eligible(i) && (!i.classes?.length || i.classes.includes(cls))).sort((a,b)=>WowNews.timestamp(b)-WowNews.timestamp(a));
+    const hints=discoveriesData.filter(x=>(!x.players||x.players.includes(player)) && lvl>=x.min_level && lvl<=x.max_level).sort((a,b)=>(b.priority||0)-(a.priority||0));
+    const merged=[...hints.map(x=>({title:x.title,text:x.action,url:x.url,meta:`Stufe ${x.min_level}–${x.max_level} · ${x.source} · geprüft ${x.checked_at} (vor Launch)`})),...fresh.filter(x=>!hints.some(h=>WowNews.canonical(h.url)===WowNews.canonical(x.url))).slice(0,2).map(x=>({title:x.title,text:x.teaser_de,url:x.url,meta:`${x.source} · ${x.date_basis==='first_seen'?'entdeckt':'veröffentlicht'} ${x.date}`}))];
+    el.innerHTML=merged.slice(0,6).map(x=>`<article class="discovery-card"><strong>${esc(x.title)}</strong><p>${esc(x.text)}</p><small>${esc(x.meta)}</small><p><a href="${safeURL(x.url)}" target="_blank" rel="noopener">Quelle und Details ↗</a></p></article>`).join('');
+  }
 }
-
-function toggleLvl60Build(player) {
-  const el = document.getElementById('respec-' + player.toLowerCase());
-  if (!el) return;
-  el.style.display = el.style.display === 'none' ? 'block' : 'none';
+function safeURL(value) {
+  try { const u=new URL(value); return ['http:','https:'].includes(u.protocol)?esc(u.href):'#'; } catch { return '#'; }
 }
 
 function toggleSection(id) {
@@ -1684,14 +1342,16 @@ function renderPlayerItems(player) {
   const dungeons = guidesData.dungeon_quests.dungeons || [];
 
   let html = '';
+  const showAll = document.getElementById('all-quests-'+player.toLowerCase())?.checked;
   dungeons.forEach(d => {
-    // Show dungeons in range of player
-    const quests = (d.quests || []).map(q => {
+    const nearby=(d.quests||[]).filter(q=>showAll || (Number(q.min_lvl)<=currLvl+7 && Number(q.min_lvl)>=currLvl-10));
+    if (!nearby.length) return;
+    const quests = nearby.map(q => {
       const qid = q.id;
       let isDone = false;
       try {
         const sKey = (player === 'Faruk') ? ('wow_quest_Faruk_' + qid) : ('wow_quest_Mirza_' + qid);
-        isDone = localStorage.getItem(sKey) === '1';
+        isDone = safeStorage.getItem(sKey) === '1';
       } catch(e){}
 
       return `
@@ -1720,7 +1380,7 @@ function renderPlayerItems(player) {
     `;
   });
 
-  container.innerHTML = html;
+  container.innerHTML = html || '<p style="font-size:.82rem;color:var(--dim);margin-top:12px">Noch keine Dungeon-Quests in deiner Nähe. Mit höherer Stufe erneut prüfen oder alle anzeigen.</p>';
 }
 
 function renderAllProfileGuides() {
@@ -1794,7 +1454,7 @@ function renderNews(items) {
           <div class="hn-title">${badgeHtml}${esc(item.title || '')}</div>
         </div>
         ${item.update_note ? `<div style="font-size:0.75rem;color:#ffca28;margin-bottom:4px">🔄 <strong>Aktualisiert:</strong> ${esc(item.update_note)}</div>` : ''}
-        <div class="hn-teaser">${esc(item.teaser_de || item.summary_de || '')}</div>
+        <div class="hn-teaser">${item.summary_mode==='original'?'<small>Originaltext · Übersetzung derzeit nicht verfügbar</small><br>':''}${esc(item.teaser_de || item.summary_de || '')}</div>
         <div class="hn-meta" style="flex-wrap:wrap;gap:6px">
           <div>${tags}</div>
           <span style="color:var(--gold);cursor:pointer">Bericht lesen →</span>
@@ -1811,7 +1471,7 @@ document.getElementById('filter-row').addEventListener('click', e => {
   b.classList.add('on');
   b.style.color = 'var(--gold)';
   activeFilter = b.dataset.f;
-  try { localStorage.setItem('wow_active_filter', activeFilter); } catch(e){}
+  try { safeStorage.setItem('wow_active_filter', activeFilter); } catch(e){}
   applyFilter();
 });
 
@@ -1843,7 +1503,7 @@ function applyFilter() {
 
 function setProfile(p) {
   activeProfile = p;
-  try { localStorage.setItem('wow_active_profile', p); } catch(e){}
+  try { safeStorage.setItem('wow_active_profile', p); } catch(e){}
   applyFilter();
 }
 
@@ -1860,7 +1520,7 @@ function openModalById(id) {
     item.is_updated ? `<span class="tag tag-updated">Aktualisiert</span>` : '',
     ...(item.classes || []).map(c => `<span class="tag ${TAG_MAP[c]||''}">${c}</span>`),
     item.category && TAG_MAP[item.category] ? `<span class="tag ${TAG_MAP[item.category]}">${CAT_DE[item.category] || item.category}</span>` : '',
-    `<span class="tag">${item.source_icon || ''} ${item.source || ''}</span>`,
+    `<span class="tag">${esc(item.source_icon || '')} ${esc(item.source || '')}</span>`,
     `<span class="tag tag-read">Gelesen</span>`
   ].filter(Boolean).join('');
   document.getElementById('m-meta').innerHTML = metaHtml;
@@ -1869,13 +1529,13 @@ function openModalById(id) {
   if (item.is_updated && item.update_note) {
     updateNotice = `<div style="background:rgba(255,179,0,0.12);border-left:3px solid #ffb300;padding:8px 12px;margin-bottom:12px;border-radius:4px;font-size:0.85rem">🔄 <strong>Aktualisierung:</strong> ${esc(item.update_note)}</div>`;
   }
-  const raw = item.article_de || item.summary_de || item.teaser_de || 'Kein Inhalt verfügbar.';
+  const raw = (item.summary_mode==='original'?'Originaltext · Übersetzung derzeit nicht verfügbar.\n\n':'') + (item.article_de || item.summary_de || item.teaser_de || 'Kein Inhalt verfügbar.');
   document.getElementById('m-article').innerHTML = updateNotice + formatArticle(raw);
 
   const link = document.getElementById('m-src-link');
-  link.href = item.url || '#';
+  try { const u=new URL(item.url); link.href=['http:','https:'].includes(u.protocol)?u.href:'#'; } catch { link.href='#'; }
   link.textContent = `🔗 Originalartikel auf ${item.source || 'Quelle'} lesen`;
-  document.getElementById('m-date').textContent = item.date ? `📅 Veröffentlicht: ${item.date}` : '';
+  document.getElementById('m-date').textContent = item.date ? `📅 ${item.date_basis==='first_seen'?'Entdeckt':'Veröffentlicht'}: ${item.date}` : '';
 
   const overlay = document.getElementById('modal-overlay');
   overlay.classList.add('open');
@@ -1921,7 +1581,8 @@ function renderSourcesStatus(ss) {
   let html = '';
   for (const [src, status] of Object.entries(ss)) {
     let dot = '🟢';
-    if (status.includes('Fehler') || status.includes('404')) dot = '🔴';
+    if (/Fehler|HTTP [45]/i.test(status)) dot = '🔴';
+    else if (/fehlgeschlagen/i.test(status)) dot = '🟡';
     else if (status.includes('Keine') || status.includes('Unbekannt')) dot = '🟡';
     html += `<div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid rgba(255,255,255,0.04)"><span>${dot} ${esc(src)}</span><span style="color:var(--dim);font-size:0.72rem">${esc(status)}</span></div>`;
   }
@@ -1929,7 +1590,7 @@ function renderSourcesStatus(ss) {
 }
 
 // ── AUTO INIT ──────────────────────────────────────────────────────────────
-if (sessionStorage.getItem(SK) || (typeof isAuthParam !== 'undefined' && isAuthParam)) init();
+if (safeSession.getItem(SK) || (typeof isAuthParam !== 'undefined' && isAuthParam)) init();
 </script>
 </body>
 </html>

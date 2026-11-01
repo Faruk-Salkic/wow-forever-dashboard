@@ -1,0 +1,121 @@
+{
+  "schema": 1,
+  "items": [
+    {
+      "id": "dwarf-first-bag",
+      "players": [
+        "Faruk",
+        "Mirza"
+      ],
+      "min_level": 4,
+      "max_level": 15,
+      "title": "Frühe Quest-Tasche: Canvas Latchbag",
+      "action": "In Dun Morogh: Grund And Gozwin bei Grund Drokda (28.6, 67.4), ab Stufe 4. Der Weg beginnt bei 25.5, 70. Praktisch, wenn ihr dort gemeinsam startet; Mirzas Startgebiet hängt von seiner Rasse ab.",
+      "priority": 10,
+      "source": "Method",
+      "url": "https://www.method.gg/wow-forever/best-early-bags-in-wow-forever-crafted-bags-quest-bags-vendor-bags-and-more",
+      "checked_at": "2026-11-01"
+    },
+    {
+      "id": "early-vendor-bags",
+      "players": [
+        "Faruk",
+        "Mirza"
+      ],
+      "min_level": 5,
+      "max_level": 25,
+      "title": "Taschen kaufen: erst günstig auffüllen",
+      "action": "Small Brown Pouch: 6 Plätze für 5 Silber bei General Goods/Supplies. Brown Leather Satchel: 8 Plätze für 25 Silber. Fraktionsrabatte können gelten. Nicht das ganze Trainingsgeld in eine große Tasche stecken.",
+      "priority": 5,
+      "source": "Method",
+      "url": "https://www.method.gg/wow-forever/best-early-bags-in-wow-forever-crafted-bags-quest-bags-vendor-bags-and-more",
+      "checked_at": "2026-11-01"
+    },
+    {
+      "id": "shaman-first-weapon",
+      "players": [
+        "Faruk"
+      ],
+      "min_level": 1,
+      "max_level": 29,
+      "title": "Faruk: Waffe und Imbue zuerst prüfen",
+      "action": "Für die frühe Levelphase empfiehlt Method Rockbiter Weapon mit Zweihandwaffe oder Einhand + Schild. Im Duo Earth Shock als Unterbrechung bereithalten; Earthbind hilft gegen fliehende Gegner.",
+      "priority": 4,
+      "source": "Method",
+      "url": "https://www.method.gg/wow-forever/wow-forever-shaman-leveling-guide-and-talents",
+      "checked_at": "2026-11-01"
+    },
+    {
+      "id": "shaman-windfury",
+      "players": [
+        "Faruk"
+      ],
+      "min_level": 30,
+      "max_level": 60,
+      "title": "Ab 30: Windfury Weapon, ab 32 das Totem",
+      "action": "Method nennt Windfury Weapon ab 30 und Windfury Totem ab 32. Waffen-Imbue und Gruppen-Totem sind unterschiedliche Fähigkeiten. Das Totem ist ein Nahkampf-Buff, kein pauschaler Fernkampf-Bonus für Mirza.",
+      "priority": 7,
+      "source": "Method",
+      "url": "https://www.method.gg/wow-forever/wow-forever-shaman-leveling-guide-and-talents",
+      "checked_at": "2026-11-01"
+    },
+    {
+      "id": "hunter-first-pet",
+      "players": [
+        "Mirza"
+      ],
+      "min_level": 1,
+      "max_level": 29,
+      "title": "Ab 10: erstes Pet und seine Fähigkeiten",
+      "action": "Bis zum ersten Pet vorsichtig kiten. Ab Stufe 10 die Klassenfreischaltung erledigen, Growl und defensive Pet-Fähigkeiten lernen. Im Freien dem Pet kurz Zeit für Bedrohung geben, bevor du voll schießt; Mend Pet kommt laut Guide ab 12.",
+      "priority": 6,
+      "source": "Method",
+      "url": "https://www.method.gg/wow-forever/wow-forever-hunter-leveling-guide-and-talents",
+      "checked_at": "2026-11-01"
+    },
+    {
+      "id": "hunter-dash",
+      "players": [
+        "Mirza"
+      ],
+      "min_level": 30,
+      "max_level": 60,
+      "title": "Ab 30: Dash lernen und Pet-Wege beachten",
+      "action": "Method führt Dash ab 30 auf: passendes wildes Tier zähmen und die Fähigkeit einsetzen, bis die Lernmeldung erscheint. Danach einem geeigneten Begleiter beibringen. Im Dungeon vor Sprüngen Pet wegpacken, damit es keinen Umweg durch Gegner nimmt.",
+      "priority": 4,
+      "source": "Method",
+      "url": "https://www.method.gg/wow-forever/wow-forever-hunter-leveling-guide-and-talents",
+      "checked_at": "2026-11-01"
+    },
+    {
+      "id": "boots-minor-speed",
+      "players": [
+        "Faruk",
+        "Mirza"
+      ],
+      "min_level": 10,
+      "max_level": 60,
+      "title": "Nützlicher Komfort-Enchant: Minor Speed",
+      "action": "Enchant Boots - Minor Speed erhöht laut Forever-Liste das Lauftempo leicht. Preis und Verfügbarkeit beim Verzauberer prüfen; der Guide nennt keinen garantierten Frühspiel-Händler. Vor teuren Waffen-Verzauberungen bedenken, wie bald die Waffe ersetzt wird.",
+      "priority": 2,
+      "source": "Method",
+      "url": "https://www.method.gg/wow-forever/list-of-all-consumables-and-enchants-in-wow-forever",
+      "checked_at": "2026-11-01"
+    },
+    {
+      "id": "duo-quest-loot",
+      "players": [
+        "Faruk",
+        "Mirza"
+      ],
+      "min_level": 1,
+      "max_level": 60,
+      "title": "Duo-Quests: Fortschritt bei beiden kontrollieren",
+      "action": "Sammelgegenstände sind laut Method nicht pauschal für beide gleichzeitig lootbar. Der Rückstand eines Gruppenmitglieds kann durch bessere Drop-Chancen aufgeholt werden. Vor dem Weiterlaufen bei beiden den Questfortschritt kontrollieren.",
+      "priority": 1,
+      "source": "Method",
+      "url": "https://www.method.gg/wow-forever/leveling-as-a-party-in-wow-forever-whats-changed-and-what-you-need-to-know",
+      "checked_at": "2026-11-01"
+    }
+  ]
+}

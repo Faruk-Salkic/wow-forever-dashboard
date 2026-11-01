@@ -3,14 +3,17 @@ name: 🗡️ WoW Forever Daily News Scraper
 on:
   schedule:
     # Daily scrape at 11:50 Europe/Vienna timezone.
-    # Running at 11:50 accounts for GitHub Actions runner start queue latency and execution time,
-    # ensuring data is verified and published to GitHub Pages by 12:00 Europe/Vienna.
+    # Targets availability around noon; GitHub queue/deploy delays are possible.
     - cron: "50 11 * * *"
       timezone: "Europe/Vienna"
   workflow_dispatch:
 
 permissions:
   contents: write
+
+concurrency:
+  group: daily-data-update
+  cancel-in-progress: false
 
 jobs:
   scrape:
@@ -36,8 +39,15 @@ jobs:
         with:
           python-version: "3.11"
 
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
       - name: 📦 Install dependencies
         run: pip install -r scraper/requirements.txt
+
+      - name: Refresh validated talent data
+        run: python scripts/update_planner_data.py --keep-on-error
 
       - name: 🔍 Run scraper & AI validator
         env:
@@ -45,12 +55,17 @@ jobs:
         run: python scraper/scrape.py
 
       - name: 🧪 Verify data integrity
-        run: python test_dashboard.py
+        run: |
+          python test_dashboard.py
+          python test_new_structure.py
+          python -m unittest discover -s tests -p 'test_*.py'
+          node scripts/check_frontend.js
+          node --test tests/*.test.js
 
       - name: 💾 Commit & push
         run: |
           git config --global user.name  "WoW-Bot 🤖"
           git config --global user.email "wow-bot@faruk-mirza.github.io"
-          git add data/news.json data/seen_ids.json data/guides.json data/bis.json || true
+          git add data/feed.json data/news.json data/seen_ids.json data/guides.json data/bis.json data/planner.json || true
           git diff --cached --quiet || git commit -m "🗞️ Daily verified update $(date -u '+%Y-%m-%d %H:%M UTC')"
           git push
