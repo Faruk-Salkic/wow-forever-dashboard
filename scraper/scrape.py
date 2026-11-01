@@ -124,6 +124,8 @@ def compute_source_hash(title, content):
     return hashlib.sha256(combined.encode("utf-8")).hexdigest()[:16]
 
 def generate_update_summary(old_title, new_title, old_content, new_content):
+    if not old_content:
+        return "Der Haupttext der Quelle wurde geändert. Den aktuellen Kurzbericht und die Quelle prüfen."
     clean_ot = clean_source_text(old_title).lower()
     clean_nt = clean_source_text(new_title).lower()
 
@@ -211,7 +213,7 @@ def merge_and_deduplicate_items(existing_items, incoming_items, sources_health=N
             # Prvo uspešno preuzimanje izvora postavlja početno referentno stanje (baseline).
             # Ne poredi se stari prevedeni AI sažetak s izvornim tekstom i ne broji kao izmjena!
             extraction_migration = new_it.get("content_extractor") == 2 and existing.get("content_extractor") != 2
-            if not old_hash or not old_raw or extraction_migration:
+            if not old_hash or (not old_raw and not existing.get("has_source_baseline")) or extraction_migration:
                 existing["source_content_hash"] = new_hash
                 existing["raw_title"] = new_it.get("raw_title", "")
                 existing["raw_content"] = new_it.get("raw_content", "")
@@ -316,6 +318,7 @@ def load_json(path, default):
     return default
 
 def save_json(path, data):
+    data = without_source_copies(data)
     if "news.json" in path:
         if not isinstance(data, dict) or "items" not in data or not isinstance(data["items"], list):
             raise ValueError("Neispravna struktura podataka za news.json pre snimanja!")
@@ -325,6 +328,20 @@ def save_json(path, data):
     with open(tmp_path, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
     os.replace(tmp_path, path)
+
+
+def without_source_copies(data):
+    """Publish briefs and fingerprints, not copies of full copyrighted articles."""
+    if not isinstance(data,dict) or not isinstance(data.get("items"),list): return data
+    items=[]
+    for original in data["items"]:
+        item=dict(original)
+        raw=item.pop("raw_content",None)
+        if raw:
+            item["source_text_length"]=len(raw)
+            if item.get("source_content_hash"): item["has_source_baseline"]=True
+        items.append(item)
+    return {**data,"items":items}
 
 
 def make_client_payload(data):
@@ -786,11 +803,9 @@ def run_scraper(skip_reddit=False):
             article=(brief["summary_de"]+"\n\nWas tun? "+brief["action_de"]) if brief else None
             teaser=brief["summary_de"] if brief else None
             if not article:
-                summary=item["summary"] or content[:430]
-                german=translate_to_german(summary)
-                summary_mode="translated" if german!=summary else "original"
-                teaser=german[:260]
-                article=german+"\n\nQuelle und Detailwerte im Original prüfen."
+                summary_mode="untranslated"
+                teaser="Für diesen Beitrag ist derzeit kein geprüfter deutscher Kurzbericht verfügbar."
+                article=teaser+" Die Originalquelle enthält die Details; fehlende Angaben werden nicht ergänzt."
             german_title=brief["title_de"] if brief else translate_title(title)
         date=doc.get("date") or item["pub_date"] or (old or {}).get("date") or today
         processed.append({

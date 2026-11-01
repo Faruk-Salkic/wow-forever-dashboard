@@ -24,7 +24,7 @@ Kanonski URL sprečava duplikate. Početna dodatno grupiše identične naslove/d
 
 Hash koristi glavni sadržaj članka. Prva migracija na novi način ekstrakcije postavlja referentno stanje bez lažne obavijesti. Neuspješno čitanje članka čuva prethodni dobar sadržaj. Promjena prevoda sama po sebi ne stvara novu verziju.
 
-Sažeci koriste postojeći `GEMINI_API_KEY` u GitHub Secrets. `GEMINI_MODEL` može se promijeniti kroz environment; podrazumijevano je `gemini-3.5-flash-lite`. Stari `gemini-2.0-flash` je ugašen. Ako sažimanje ili prijevod nisu dostupni, ostaju ručno provjerene njemačke napomene ili jasno označen originalni tekst. Reddit ostaje nepotvrđen community izvor. Ne izmišljaju se NPC-evi, nagrade ili drop šanse.
+Sažeci koriste postojeći `GEMINI_API_KEY` u GitHub Secrets. `GEMINI_MODEL` može se promijeniti kroz environment; podrazumijevano je `gemini-3.5-flash-lite`. Stari `gemini-2.0-flash` je ugašen. Ako sažimanje ili prijevod nisu dostupni, ostaju ručno provjerene njemačke napomene ili jasna napomena da kratki izvještaj nije dostupan. Reddit ostaje nepotvrđen community izvor. Ne izmišljaju se NPC-evi, nagrade ili drop šanse.
 
 ## Provjera i pokretanje
 
@@ -46,4 +46,4 @@ python scripts/update_planner_data.py
 
 Dnevni workflow provjerava i novi izvoz talent podataka. Ako izvor promijeni format ili preporuke više nisu valjane na novim stablima, zadržava se posljednji dobar snapshot. Promjene tada treba pregledati uz prikazani datum izvora. `Verify dashboard` dodatno provjerava push i pull requestove.
 
-`data/discoveries.json` sadrži kratke provjerene praktične napomene i izvore. `data/guides.json` zadržava stabilne ID-eve postojećih dungeon questova; prije puta treba provjeriti konkretne zahtjeve u igri. `data/news.json` je puna dnevna baza; browser dobija manji `data/feed.json` bez kopije punog izvornog teksta, a vrijeme obrade nije isto što i vrijeme Pages objave.
+`data/discoveries.json` sadrži kratke provjerene praktične napomene i izvore. `data/guides.json` zadržava stabilne ID-eve postojećih dungeon questova; prije puta treba provjeriti konkretne zahtjeve u igri. `data/news.json` čuva sažetke i hashove; puni izvorni članci obrađuju se samo u memoriji i ne objavljuju se u bazi. Browser dobija `data/feed.json`, a vrijeme obrade nije isto što i vrijeme Pages objave.

@@ -1218,7 +1218,7 @@ function renderHomeNews() {
           <span class="hn-icon">${item.source_icon || '📰'}</span>
           <div class="hn-title">${badgeHtml}${esc(item.title || '')}</div>
         </div>
-        <div class="hn-teaser">${item.summary_mode==='original'?'<small>Originaltext · Übersetzung derzeit nicht verfügbar</small><br>':''}${esc(item.teaser_de || item.summary_de || '')}</div>
+        <div class="hn-teaser">${['original','untranslated'].includes(item.summary_mode)?'<small>Kurzbericht derzeit nicht verfügbar</small><br>':''}${esc(item.teaser_de || item.summary_de || '')}</div>
         <div class="hn-meta">
           <span class="hn-source">${esc(item.source || 'Quelle')}</span>
           <span>${esc(new Date(WowNews.timestamp(item)).toLocaleDateString('de-DE', {timeZone:'Europe/Vienna'}))} →</span>
@@ -1454,7 +1454,7 @@ function renderNews(items) {
           <div class="hn-title">${badgeHtml}${esc(item.title || '')}</div>
         </div>
         ${item.update_note ? `<div style="font-size:0.75rem;color:#ffca28;margin-bottom:4px">🔄 <strong>Aktualisiert:</strong> ${esc(item.update_note)}</div>` : ''}
-        <div class="hn-teaser">${item.summary_mode==='original'?'<small>Originaltext · Übersetzung derzeit nicht verfügbar</small><br>':''}${esc(item.teaser_de || item.summary_de || '')}</div>
+        <div class="hn-teaser">${['original','untranslated'].includes(item.summary_mode)?'<small>Kurzbericht derzeit nicht verfügbar</small><br>':''}${esc(item.teaser_de || item.summary_de || '')}</div>
         <div class="hn-meta" style="flex-wrap:wrap;gap:6px">
           <div>${tags}</div>
           <span style="color:var(--gold);cursor:pointer">Bericht lesen →</span>
@@ -1529,7 +1529,7 @@ function openModalById(id) {
   if (item.is_updated && item.update_note) {
     updateNotice = `<div style="background:rgba(255,179,0,0.12);border-left:3px solid #ffb300;padding:8px 12px;margin-bottom:12px;border-radius:4px;font-size:0.85rem">🔄 <strong>Aktualisierung:</strong> ${esc(item.update_note)}</div>`;
   }
-  const raw = (item.summary_mode==='original'?'Originaltext · Übersetzung derzeit nicht verfügbar.\n\n':'') + (item.article_de || item.summary_de || item.teaser_de || 'Kein Inhalt verfügbar.');
+  const raw = (['original','untranslated'].includes(item.summary_mode)?'Kurzbericht derzeit nicht verfügbar.\n\n':'') + (item.article_de || item.summary_de || item.teaser_de || 'Kein Inhalt verfügbar.');
   document.getElementById('m-article').innerHTML = updateNotice + formatArticle(raw);
 
   const link = document.getElementById('m-src-link');

@@ -37,7 +37,9 @@
       "updated_at": "2026-11-01T16:56:51.834076+00:00",
       "content_version": 4,
       "last_checked_at": "2026-11-01T16:56:51.834076+00:00",
-      "summary_mode": "curated"
+      "summary_mode": "curated",
+      "source_text_length": 8537,
+      "has_source_baseline": true
     },
     {
       "id": "9820f3b938eb",
@@ -54,8 +56,8 @@
         "Hunter"
       ],
       "title": "Jägerfallen teilen sich jetzt einen Cooldown? Was sind Ihre Gedanken zu dieser (nicht bestätigten) Data-Mining-Änderung?",
-      "teaser_de": "In the client data, Freezing Trap and Frost Trap now share a cooldown with Immolation Trap and Explosive Trap : placing any trap puts all four on a 30-second cooldown. Before, the Frost traps and the Fire traps had separate cooldowns. To me, this really mostly",
-      "article_de": "In the client data, Freezing Trap and Frost Trap now share a cooldown with Immolation Trap and Explosive Trap : placing any trap puts all four on a 30-second cooldown. Before, the Frost traps and the Fire traps had separate cooldowns. To me, this really mostly hurts Survival hunter's ability to use the DPS (fire) traps in PvP, but it's a pretty big adjustment to all hunters. Perhaps an opportunity to make the Survival capstone be better, by having the 31pt capstone for Survival be about splitting Fire and Cold trap cooldowns? What are your thoughts? submitted by /u/TarOskin [link] [comments]\n\nQuelle und Detailwerte im Original prüfen.",
+      "teaser_de": "Community-Hinweis: Laut einem Post könnten Hunter-Fallen einen gemeinsamen 30-Sekunden-Cooldown bekommen. Das ist keine bestätigte Live-Änderung.",
+      "article_de": "Ein Community-Post berichtet über einen gemeinsamen 30-Sekunden-Cooldown für Freezing Trap, Frost Trap, Immolation Trap und Explosive Trap. Der Bericht bezieht sich auf Client-Daten und ist keine Blizzard-Bestätigung. Vor einer Änderung eurer Spielweise im aktuellen Client prüfen.",
       "url": "https://www.reddit.com/r/wowforever/comments/1xlasg7/hunter_traps_now_share_a_cooldown_what_are_your/",
       "normalized_url": "https://reddit.com/r/wowforever/comments/1xlasg7/hunter_traps_now_share_a_cooldown_what_are_your",
       "raw_title": "Hunter traps now share a cooldown? What are your thoughts on this (non confirmed) data mined change?",
@@ -64,7 +66,9 @@
       "is_updated": false,
       "content_version": 1,
       "last_checked_at": "2026-11-01T18:52:11.118498+00:00",
-      "summary_mode": "original"
+      "summary_mode": "curated",
+      "source_text_length": 598,
+      "has_source_baseline": true
     },
     {
       "id": "3458556a45df",
@@ -81,8 +85,8 @@
         "Hunter"
       ],
       "title": "Einsamer Wolf, ist das gut?",
-      "teaser_de": "I am interested in playing like a Ranger fantasy, but not really interested in the pet aspect of playing Hunter. Is Lone Wolf any good? Is it viable with both Marksmanship and Survival? Or only Marksmanship? Not looking to top parse, just wondering if anyone e",
-      "article_de": "I am interested in playing like a Ranger fantasy, but not really interested in the pet aspect of playing Hunter. Is Lone Wolf any good? Is it viable with both Marksmanship and Survival? Or only Marksmanship? Not looking to top parse, just wondering if anyone else sees interesting builds with it. submitted by /u/Xefjord [link] [comments]\n\nQuelle und Detailwerte im Original prüfen.",
+      "teaser_de": "Für diesen Beitrag ist derzeit kein geprüfter deutscher Kurzbericht verfügbar.",
+      "article_de": "Für diesen Beitrag ist derzeit kein geprüfter deutscher Kurzbericht verfügbar. Die Originalquelle enthält die Details; fehlende Angaben werden nicht ergänzt.",
       "url": "https://www.reddit.com/r/classicwow/comments/1xl8a5w/lone_wolf_is_it_any_good/",
       "normalized_url": "https://reddit.com/r/classicwow/comments/1xl8a5w/lone_wolf_is_it_any_good",
       "raw_title": "Lone Wolf, is it any good?",
@@ -91,7 +95,9 @@
       "is_updated": false,
       "content_version": 1,
       "last_checked_at": "2026-11-01T18:52:11.118498+00:00",
-      "summary_mode": "original"
+      "summary_mode": "untranslated",
+      "source_text_length": 338,
+      "has_source_baseline": true
     },
     {
       "id": "b96fa70ee86d",
@@ -106,8 +112,8 @@
       "radar_status": "balance",
       "classes": [],
       "title": "World of Warcraft: Forever Enchanting Guide",
-      "teaser_de": "Home\n/\nWoW Forever\n/\nEnchanting\nWorld of Warcraft: Forever Enchanting Guide\nLast Updated:\nSep 29, 2026 - 10:00 AM\n(1mo ago)\nAbide\nSupport Our Writers\nNEW! Icy Veins News Webhook for Discord\nIcy Veins news articles directly into a channel on your server!\nGet Di",
-      "article_de": "Home\n/\nWoW Forever\n/\nEnchanting\nWorld of Warcraft: Forever Enchanting Guide\nLast Updated:\nSep 29, 2026 - 10:00 AM\n(1mo ago)\nAbide\nSupport Our Writers\nNEW! Icy Veins News Webhook for Discord\nIcy Veins news articles directly into a channel on your server!\nGet Di\n\nQuelle und Detailwerte im Original prüfen.",
+      "teaser_de": "Für diesen Beitrag ist derzeit kein geprüfter deutscher Kurzbericht verfügbar.",
+      "article_de": "Für diesen Beitrag ist derzeit kein geprüfter deutscher Kurzbericht verfügbar. Die Originalquelle enthält die Details; fehlende Angaben werden nicht ergänzt.",
       "url": "https://www.icy-veins.com/wow-forever/enchanting",
       "normalized_url": "https://icy-veins.com/wow-forever/enchanting",
       "raw_title": "World of Warcraft: Forever Enchanting Guide",
@@ -116,7 +122,9 @@
       "is_updated": false,
       "content_version": 1,
       "last_checked_at": "2026-11-01T19:01:38.748347+00:00",
-      "summary_mode": "original"
+      "summary_mode": "untranslated",
+      "source_text_length": 6766,
+      "has_source_baseline": true
     },
     {
       "id": "01c1c7dd0e7b",
@@ -131,8 +139,8 @@
       "radar_status": "balance",
       "classes": [],
       "title": "World of Warcraft: Forever Engineering Guide",
-      "teaser_de": "Home\n/\nWoW Forever\n/\nEngineering\nWorld of Warcraft: Forever Engineering Guide\nLast Updated:\nSep 29, 2026 - 10:00 AM\n(1mo ago)\nAbide\nSupport Our Writers\nNEW! Icy Veins News Webhook for Discord\nIcy Veins news articles directly into a channel on your server!\nGet",
-      "article_de": "Home\n/\nWoW Forever\n/\nEngineering\nWorld of Warcraft: Forever Engineering Guide\nLast Updated:\nSep 29, 2026 - 10:00 AM\n(1mo ago)\nAbide\nSupport Our Writers\nNEW! Icy Veins News Webhook for Discord\nIcy Veins news articles directly into a channel on your server!\nGet\n\nQuelle und Detailwerte im Original prüfen.",
+      "teaser_de": "Für diesen Beitrag ist derzeit kein geprüfter deutscher Kurzbericht verfügbar.",
+      "article_de": "Für diesen Beitrag ist derzeit kein geprüfter deutscher Kurzbericht verfügbar. Die Originalquelle enthält die Details; fehlende Angaben werden nicht ergänzt.",
       "url": "https://www.icy-veins.com/wow-forever/engineering",
       "normalized_url": "https://icy-veins.com/wow-forever/engineering",
       "raw_title": "World of Warcraft: Forever Engineering Guide",
@@ -141,7 +149,9 @@
       "is_updated": false,
       "content_version": 1,
       "last_checked_at": "2026-11-01T19:01:38.748347+00:00",
-      "summary_mode": "translated"
+      "summary_mode": "untranslated",
+      "source_text_length": 7109,
+      "has_source_baseline": true
     },
     {
       "id": "bb2f917f715a",
@@ -156,8 +166,8 @@
       "radar_status": "balance",
       "classes": [],
       "title": "World of Warcraft: Forever Herbalism Guide",
-      "teaser_de": "Home\n/\nWoW Forever\n/\nHerbalism\nWorld of Warcraft: Forever Herbalism Guide\nLast Updated:\nOct 11, 2026 - 10:00 AM\n(21d ago)\nAbide\nSupport Our Writers\nNEW! Icy Veins News Webhook for Discord\nIcy Veins news articles directly into a channel on your server!\nGet Disc",
-      "article_de": "Home\n/\nWoW Forever\n/\nHerbalism\nWorld of Warcraft: Forever Herbalism Guide\nLast Updated:\nOct 11, 2026 - 10:00 AM\n(21d ago)\nAbide\nSupport Our Writers\nNEW! Icy Veins News Webhook for Discord\nIcy Veins news articles directly into a channel on your server!\nGet Disc\n\nQuelle und Detailwerte im Original prüfen.",
+      "teaser_de": "Für diesen Beitrag ist derzeit kein geprüfter deutscher Kurzbericht verfügbar.",
+      "article_de": "Für diesen Beitrag ist derzeit kein geprüfter deutscher Kurzbericht verfügbar. Die Originalquelle enthält die Details; fehlende Angaben werden nicht ergänzt.",
       "url": "https://www.icy-veins.com/wow-forever/herbalism",
       "normalized_url": "https://icy-veins.com/wow-forever/herbalism",
       "raw_title": "World of Warcraft: Forever Herbalism Guide",
@@ -166,7 +176,9 @@
       "is_updated": false,
       "content_version": 1,
       "last_checked_at": "2026-11-01T19:01:38.748347+00:00",
-      "summary_mode": "original"
+      "summary_mode": "untranslated",
+      "source_text_length": 18873,
+      "has_source_baseline": true
     },
     {
       "id": "25e8971c38f6",
@@ -181,8 +193,8 @@
       "radar_status": "balance",
       "classes": [],
       "title": "World of Warcraft: Forever Mining Guide",
-      "teaser_de": "Home\n/\nWoW Forever\n/\nMining\nWorld of Warcraft: Forever Mining Guide\nLast Updated:\nOct 11, 2026 - 10:00 AM\n(21d ago)\nAbide\nSupport Our Writers\nNEW! Icy Veins News Webhook for Discord\nIcy Veins news articles directly into a channel on your server!\nGet Discord We",
-      "article_de": "Home\n/\nWoW Forever\n/\nMining\nWorld of Warcraft: Forever Mining Guide\nLast Updated:\nOct 11, 2026 - 10:00 AM\n(21d ago)\nAbide\nSupport Our Writers\nNEW! Icy Veins News Webhook for Discord\nIcy Veins news articles directly into a channel on your server!\nGet Discord We\n\nQuelle und Detailwerte im Original prüfen.",
+      "teaser_de": "Für diesen Beitrag ist derzeit kein geprüfter deutscher Kurzbericht verfügbar.",
+      "article_de": "Für diesen Beitrag ist derzeit kein geprüfter deutscher Kurzbericht verfügbar. Die Originalquelle enthält die Details; fehlende Angaben werden nicht ergänzt.",
       "url": "https://www.icy-veins.com/wow-forever/mining",
       "normalized_url": "https://icy-veins.com/wow-forever/mining",
       "raw_title": "World of Warcraft: Forever Mining Guide",
@@ -191,7 +203,9 @@
       "is_updated": false,
       "content_version": 1,
       "last_checked_at": "2026-11-01T19:01:38.748347+00:00",
-      "summary_mode": "original"
+      "summary_mode": "untranslated",
+      "source_text_length": 17553,
+      "has_source_baseline": true
     },
     {
       "id": "aec0f4e3d343",
@@ -206,8 +220,8 @@
       "radar_status": "balance",
       "classes": [],
       "title": "World of Warcraft: Forever Skinning Guide",
-      "teaser_de": "Home\n/\nWoW Forever\n/\nSkinning\nWorld of Warcraft: Forever Skinning Guide\nLast Updated:\nOct 11, 2026 - 10:00 AM\n(21d ago)\nAbide\nSupport Our Writers\nNEW! Icy Veins News Webhook for Discord\nIcy Veins news articles directly into a channel on your server!\nGet Discor",
-      "article_de": "Home\n/\nWoW Forever\n/\nSkinning\nWorld of Warcraft: Forever Skinning Guide\nLast Updated:\nOct 11, 2026 - 10:00 AM\n(21d ago)\nAbide\nSupport Our Writers\nNEW! Icy Veins News Webhook for Discord\nIcy Veins news articles directly into a channel on your server!\nGet Discor\n\nQuelle und Detailwerte im Original prüfen.",
+      "teaser_de": "Für diesen Beitrag ist derzeit kein geprüfter deutscher Kurzbericht verfügbar.",
+      "article_de": "Für diesen Beitrag ist derzeit kein geprüfter deutscher Kurzbericht verfügbar. Die Originalquelle enthält die Details; fehlende Angaben werden nicht ergänzt.",
       "url": "https://www.icy-veins.com/wow-forever/skinning",
       "normalized_url": "https://icy-veins.com/wow-forever/skinning",
       "raw_title": "World of Warcraft: Forever Skinning Guide",
@@ -216,7 +230,9 @@
       "is_updated": false,
       "content_version": 1,
       "last_checked_at": "2026-11-01T19:01:38.748347+00:00",
-      "summary_mode": "original"
+      "summary_mode": "untranslated",
+      "source_text_length": 15985,
+      "has_source_baseline": true
     },
     {
       "id": "e10570780168",
@@ -231,8 +247,8 @@
       "radar_status": "balance",
       "classes": [],
       "title": "Warcraft Forever Camping System Guide",
-      "teaser_de": "Home\n/\nWoW Forever\n/\nCamping\nWarcraft Forever Camping System Guide\nLast Updated:\nOct 19, 2026 - 2:15 AM\n(13d ago)\nNeryssa\nSupport Our Writers\nNEW! Icy Veins News Webhook for Discord\nIcy Veins news articles directly into a channel on your server!\nGet Discord We",
-      "article_de": "Home\n/\nWoW Forever\n/\nCamping\nWarcraft Forever Camping System Guide\nLast Updated:\nOct 19, 2026 - 2:15 AM\n(13d ago)\nNeryssa\nSupport Our Writers\nNEW! Icy Veins News Webhook for Discord\nIcy Veins news articles directly into a channel on your server!\nGet Discord We\n\nQuelle und Detailwerte im Original prüfen.",
+      "teaser_de": "Für diesen Beitrag ist derzeit kein geprüfter deutscher Kurzbericht verfügbar.",
+      "article_de": "Für diesen Beitrag ist derzeit kein geprüfter deutscher Kurzbericht verfügbar. Die Originalquelle enthält die Details; fehlende Angaben werden nicht ergänzt.",
       "url": "https://www.icy-veins.com/wow-forever/camping",
       "normalized_url": "https://icy-veins.com/wow-forever/camping",
       "raw_title": "Warcraft Forever Camping System Guide",
@@ -241,7 +257,9 @@
       "is_updated": false,
       "content_version": 1,
       "last_checked_at": "2026-11-01T19:01:38.748347+00:00",
-      "summary_mode": "original"
+      "summary_mode": "untranslated",
+      "source_text_length": 15352,
+      "has_source_baseline": true
     },
     {
       "id": "e64f166a1d43",
@@ -256,8 +274,8 @@
       "radar_status": "normal",
       "classes": [],
       "title": "WoW Forever Legacy System Guide",
-      "teaser_de": "Home\n/\nWoW Forever\n/\nLegacy System\nWoW Forever Legacy System Guide\nLast Updated:\nOct 8, 2026 - 12:58 PM\n(24d ago)\nNeryssa\nSupport Our Writers\nNEW! Icy Veins News Webhook for Discord\nIcy Veins news articles directly into a channel on your server!\nGet Discord We",
-      "article_de": "Home\n/\nWoW Forever\n/\nLegacy System\nWoW Forever Legacy System Guide\nLast Updated:\nOct 8, 2026 - 12:58 PM\n(24d ago)\nNeryssa\nSupport Our Writers\nNEW! Icy Veins News Webhook for Discord\nIcy Veins news articles directly into a channel on your server!\nGet Discord We\n\nQuelle und Detailwerte im Original prüfen.",
+      "teaser_de": "Für diesen Beitrag ist derzeit kein geprüfter deutscher Kurzbericht verfügbar.",
+      "article_de": "Für diesen Beitrag ist derzeit kein geprüfter deutscher Kurzbericht verfügbar. Die Originalquelle enthält die Details; fehlende Angaben werden nicht ergänzt.",
       "url": "https://www.icy-veins.com/wow-forever/legacy-system",
       "normalized_url": "https://icy-veins.com/wow-forever/legacy-system",
       "raw_title": "WoW Forever Legacy System Guide",
@@ -266,7 +284,9 @@
       "is_updated": false,
       "content_version": 1,
       "last_checked_at": "2026-11-01T19:01:38.748347+00:00",
-      "summary_mode": "original"
+      "summary_mode": "untranslated",
+      "source_text_length": 16474,
+      "has_source_baseline": true
     },
     {
       "id": "152eeaabb9de",
@@ -281,8 +301,8 @@
       "radar_status": "normal",
       "classes": [],
       "title": "The Deadmines WoW Forever Dungeon Guide",
-      "teaser_de": "Introduction\nWelcome to Method's Dungeon Guide for The Deadmines in World of Warcraft: Forever. In this guide, we’ll be going over all trash, bosses, loot, and quests for The Deadmines Dungeon. The Deadmines is located in Westfall and is a linear dungeon with ",
-      "article_de": "Introduction\nWelcome to Method's Dungeon Guide for The Deadmines in World of Warcraft: Forever. In this guide, we’ll be going over all trash, bosses, loot, and quests for The Deadmines Dungeon. The Deadmines is located in Westfall and is a linear dungeon with 7 bosses and a potential additional rare spawn.\nLevel Range\n17-26\nRecommended Level\nClear Time\n20-30 mins\nEstimated Full Run\nBoss Count\n8\nBoss Encounters\nLocation\nWestfal\n\nQuelle und Detailwerte im Original prüfen.",
+      "teaser_de": "Für diesen Beitrag ist derzeit kein geprüfter deutscher Kurzbericht verfügbar.",
+      "article_de": "Für diesen Beitrag ist derzeit kein geprüfter deutscher Kurzbericht verfügbar. Die Originalquelle enthält die Details; fehlende Angaben werden nicht ergänzt.",
       "url": "https://www.method.gg/wow-forever/dungeons/the-deadmines",
       "normalized_url": "https://method.gg/wow-forever/dungeons/the-deadmines",
       "raw_title": "The Deadmines WoW Forever Dungeon Guide",
@@ -291,7 +311,9 @@
       "is_updated": false,
       "content_version": 1,
       "last_checked_at": "2026-11-01T19:01:38.748347+00:00",
-      "summary_mode": "original"
+      "summary_mode": "untranslated",
+      "source_text_length": 9024,
+      "has_source_baseline": true
     },
     {
       "id": "e0b317f8230d",
@@ -316,7 +338,9 @@
       "content_extractor": 2,
       "is_updated": false,
       "content_version": 1,
-      "last_checked_at": "2026-11-01T19:01:38.748347+00:00"
+      "last_checked_at": "2026-11-01T19:01:38.748347+00:00",
+      "source_text_length": 5658,
+      "has_source_baseline": true
     },
     {
       "id": "3a4ab9c1f523",
@@ -341,7 +365,9 @@
       "is_updated": false,
       "content_version": 1,
       "last_checked_at": "2026-11-01T19:01:38.748347+00:00",
-      "summary_mode": "curated"
+      "summary_mode": "curated",
+      "source_text_length": 19671,
+      "has_source_baseline": true
     },
     {
       "id": "e5ca01ebbdbb",
@@ -366,7 +392,9 @@
       "content_extractor": 0,
       "is_updated": false,
       "content_version": 1,
-      "last_checked_at": "2026-11-01T18:57:31.022385+00:00"
+      "last_checked_at": "2026-11-01T18:57:31.022385+00:00",
+      "source_text_length": 182,
+      "has_source_baseline": true
     },
     {
       "id": "9e068e89dcde",
@@ -382,8 +410,8 @@
         "Hunter"
       ],
       "title": "Hunter Class Guide",
-      "teaser_de": "Offizieller WoW Forever Klassen-Leitfaden von Icy Veins für Hunter Overview. Behandelt Talente, Rotationen und Ausrüstungs-Skalierung.",
-      "article_de": "Offizieller WoW Forever Klassen-Leitfaden von Icy Veins für Hunter Overview. Behandelt Talente, Rotationen und Ausrüstungs-Skalierung.\n\nQuelle und Detailwerte im Original prüfen.",
+      "teaser_de": "Für diesen Beitrag ist derzeit kein geprüfter deutscher Kurzbericht verfügbar.",
+      "article_de": "Für diesen Beitrag ist derzeit kein geprüfter deutscher Kurzbericht verfügbar. Die Originalquelle enthält die Details; fehlende Angaben werden nicht ergänzt.",
       "url": "https://www.icy-veins.com/wow-forever/hunter-class-overview",
       "normalized_url": "https://icy-veins.com/wow-forever/hunter-class-overview",
       "source_content_hash": "a01779a8d45d25cc",
@@ -394,7 +422,9 @@
       "last_checked_at": "2026-11-01T19:01:38.748347+00:00",
       "content_extractor": 2,
       "date_basis": "published",
-      "summary_mode": "original"
+      "summary_mode": "untranslated",
+      "source_text_length": 5485,
+      "has_source_baseline": true
     },
     {
       "id": "8b995f16a50b",
@@ -410,8 +440,8 @@
         "Hunter"
       ],
       "title": "World of Warcraft: Forever Beast Mastery Hunter Guide",
-      "teaser_de": "Guide-Update: Beast Mastery Leveling bestätigt Bär mit Prankenhieb (Swipe) als beste Begleiter-Wahl für Duo-Mobbing mit Schamane.",
-      "article_de": "Guide-Update: Beast Mastery Leveling bestätigt Bär mit Prankenhieb (Swipe) als beste Begleiter-Wahl für Duo-Mobbing mit Schamane.\n\nQuelle und Detailwerte im Original prüfen.",
+      "teaser_de": "Für diesen Beitrag ist derzeit kein geprüfter deutscher Kurzbericht verfügbar.",
+      "article_de": "Für diesen Beitrag ist derzeit kein geprüfter deutscher Kurzbericht verfügbar. Die Originalquelle enthält die Details; fehlende Angaben werden nicht ergänzt.",
       "url": "https://www.icy-veins.com/wow-forever/beast-mastery-hunter-ranged-dps-pve-guide",
       "normalized_url": "https://icy-veins.com/wow-forever/beast-mastery-hunter-ranged-dps-pve-guide",
       "source_content_hash": "d03a28f311621b2d",
@@ -422,7 +452,9 @@
       "last_checked_at": "2026-11-01T19:01:38.748347+00:00",
       "content_extractor": 2,
       "date_basis": "published",
-      "summary_mode": "original"
+      "summary_mode": "untranslated",
+      "source_text_length": 20260,
+      "has_source_baseline": true
     },
     {
       "id": "4b280562b22e",
@@ -438,8 +470,8 @@
         "Hunter"
       ],
       "title": "World of Warcraft: Forever Marksmanship Hunter Guide",
-      "teaser_de": "Offizieller WoW Forever Klassen-Leitfaden von Icy Veins für Marksmanship. Behandelt Talente, Rotationen und Ausrüstungs-Skalierung.",
-      "article_de": "Offizieller WoW Forever Klassen-Leitfaden von Icy Veins für Marksmanship. Behandelt Talente, Rotationen und Ausrüstungs-Skalierung.\n\nQuelle und Detailwerte im Original prüfen.",
+      "teaser_de": "Für diesen Beitrag ist derzeit kein geprüfter deutscher Kurzbericht verfügbar.",
+      "article_de": "Für diesen Beitrag ist derzeit kein geprüfter deutscher Kurzbericht verfügbar. Die Originalquelle enthält die Details; fehlende Angaben werden nicht ergänzt.",
       "url": "https://www.icy-veins.com/wow-forever/marksmanship-hunter-ranged-dps-pve-guide",
       "normalized_url": "https://icy-veins.com/wow-forever/marksmanship-hunter-ranged-dps-pve-guide",
       "source_content_hash": "f1f32a74bc14cd94",
@@ -450,7 +482,9 @@
       "last_checked_at": "2026-11-01T19:01:38.748347+00:00",
       "content_extractor": 2,
       "date_basis": "published",
-      "summary_mode": "original"
+      "summary_mode": "untranslated",
+      "source_text_length": 18981,
+      "has_source_baseline": true
     },
     {
       "id": "edb04e992e47",
@@ -478,7 +512,9 @@
       "last_checked_at": "2026-11-01T19:01:38.748347+00:00",
       "content_extractor": 2,
       "date_basis": "first_seen",
-      "summary_mode": "curated"
+      "summary_mode": "curated",
+      "source_text_length": 13216,
+      "has_source_baseline": true
     },
     {
       "id": "9121376df2fc",
@@ -506,7 +542,9 @@
       "last_checked_at": "2026-11-01T19:01:38.748347+00:00",
       "content_extractor": 2,
       "date_basis": "first_seen",
-      "summary_mode": "curated"
+      "summary_mode": "curated",
+      "source_text_length": 5608,
+      "has_source_baseline": true
     },
     {
       "id": "cb1178c4aaa8",
@@ -535,7 +573,9 @@
       "updated_at": "2026-10-30T17:16:53.671512+00:00",
       "content_version": 1,
       "last_checked_at": "2026-10-30T17:16:53.671512+00:00",
-      "summary_mode": "source_unavailable"
+      "summary_mode": "source_unavailable",
+      "source_text_length": 131,
+      "has_source_baseline": true
     },
     {
       "id": "89795a937bbd",
@@ -585,7 +625,9 @@
       "content_extractor": 2,
       "is_updated": false,
       "content_version": 1,
-      "last_checked_at": "2026-11-01T19:01:38.748347+00:00"
+      "last_checked_at": "2026-11-01T19:01:38.748347+00:00",
+      "source_text_length": 8643,
+      "has_source_baseline": true
     },
     {
       "id": "8c79ee78e146",
@@ -600,8 +642,8 @@
       "radar_status": "normal",
       "classes": [],
       "title": "All Travel Routes in WoW Forever (Boats, Zeppelins, Trams & Portals)",
-      "teaser_de": "There are a number of new travel routes in WoW Forever which make traversing Azeroth much easier; the Alliance in particular have been given some serious attention. Not only are there new travel routes, but we also have the introduction of\nStormwind Harbour\n!\n",
-      "article_de": "There are a number of new travel routes in WoW Forever which make traversing Azeroth much easier; the Alliance in particular have been given some serious attention. Not only are there new travel routes, but we also have the introduction of\nStormwind Harbour\n!\nWoW Forever does not contain any flying at all (outside of Flight Points) so travel routes are essential to cross large distances quickly.\nIn this guide, we've mapped out\n\nQuelle und Detailwerte im Original prüfen.",
+      "teaser_de": "Für diesen Beitrag ist derzeit kein geprüfter deutscher Kurzbericht verfügbar.",
+      "article_de": "Für diesen Beitrag ist derzeit kein geprüfter deutscher Kurzbericht verfügbar. Die Originalquelle enthält die Details; fehlende Angaben werden nicht ergänzt.",
       "url": "https://www.method.gg/wow-forever/all-travel-routes-in-wow-forever-boats-zeppelins",
       "normalized_url": "https://method.gg/wow-forever/all-travel-routes-in-wow-forever-boats-zeppelins",
       "raw_title": "All Travel Routes in WoW Forever (Boats, Zeppelins, Trams & Portals)",
@@ -610,7 +652,9 @@
       "is_updated": false,
       "content_version": 1,
       "last_checked_at": "2026-11-01T19:01:38.748347+00:00",
-      "summary_mode": "original"
+      "summary_mode": "untranslated",
+      "source_text_length": 3743,
+      "has_source_baseline": true
     },
     {
       "id": "e3e17fe9239d",
@@ -625,8 +669,8 @@
       "radar_status": "balance",
       "classes": [],
       "title": "How To Get Free Buffs with Blood Shards In WoW Forever",
-      "teaser_de": "If you have been questing in the Barrens while adventuring in WoW Forever then you might have noticed that killing the Quillboar awards you with some looted\nBlood Shards\n.\nThese\nBlood Shards\ncan be exchanged for some buffs at Mangletooth in Camp Tourajo.\nIn th",
-      "article_de": "If you have been questing in the Barrens while adventuring in WoW Forever then you might have noticed that killing the Quillboar awards you with some looted\nBlood Shards\n.\nThese\nBlood Shards\ncan be exchanged for some buffs at Mangletooth in Camp Tourajo.\nIn this guide we go over:\nHow To Obtain Blood Shards\nWhere To Exchange Blood Shards For Buffs\nWhat Buffs You Can Obtain From Blood Shards\nHow to Obtain Blood Shards In WoW For\n\nQuelle und Detailwerte im Original prüfen.",
+      "teaser_de": "Für diesen Beitrag ist derzeit kein geprüfter deutscher Kurzbericht verfügbar.",
+      "article_de": "Für diesen Beitrag ist derzeit kein geprüfter deutscher Kurzbericht verfügbar. Die Originalquelle enthält die Details; fehlende Angaben werden nicht ergänzt.",
       "url": "https://www.method.gg/wow-forever/how-to-get-free-buffs-with-blood-shards-in-wow-forever",
       "normalized_url": "https://method.gg/wow-forever/how-to-get-free-buffs-with-blood-shards-in-wow-forever",
       "raw_title": "How To Get Free Buffs with Blood Shards In WoW Forever",
@@ -635,7 +679,9 @@
       "is_updated": false,
       "content_version": 1,
       "last_checked_at": "2026-11-01T19:01:38.748347+00:00",
-      "summary_mode": "original"
+      "summary_mode": "untranslated",
+      "source_text_length": 2286,
+      "has_source_baseline": true
     },
     {
       "id": "d55e49e80a02",
@@ -650,8 +696,8 @@
       "radar_status": "normal",
       "classes": [],
       "title": "WoW Forever: Alle Bibliotheksbücher Standorte und Belohnungen",
-      "teaser_de": "In World of Warcraft Forever, players can collect library books scattered around the world in order to unlock powerful item rewards.\nWoW Forever is full of collectable items, new mysteries to uncover, and just new stuff to play around with. Early in the game y",
-      "article_de": "In World of Warcraft Forever, players can collect library books scattered around the world in order to unlock powerful item rewards.\nWoW Forever is full of collectable items, new mysteries to uncover, and just new stuff to play around with. Early in the game you will begin to find books located around the world and this guide will show you where to find them, and what to do with them.\nTable of Content\nRewards\nAlliance and Hord\n\nQuelle und Detailwerte im Original prüfen.",
+      "teaser_de": "Für diesen Beitrag ist derzeit kein geprüfter deutscher Kurzbericht verfügbar.",
+      "article_de": "Für diesen Beitrag ist derzeit kein geprüfter deutscher Kurzbericht verfügbar. Die Originalquelle enthält die Details; fehlende Angaben werden nicht ergänzt.",
       "url": "https://www.method.gg/wow-forever/wow-forever-all-library-books-locations-and-rewards",
       "normalized_url": "https://method.gg/wow-forever/wow-forever-all-library-books-locations-and-rewards",
       "raw_title": "WoW Forever: All Library Books Locations and Rewards",
@@ -660,7 +706,9 @@
       "is_updated": false,
       "content_version": 1,
       "last_checked_at": "2026-11-01T19:01:38.748347+00:00",
-      "summary_mode": "original"
+      "summary_mode": "untranslated",
+      "source_text_length": 14313,
+      "has_source_baseline": true
     },
     {
       "id": "6d1ece8f948f",
@@ -675,8 +723,8 @@
       "radar_status": "normal",
       "classes": [],
       "title": "The Best Way to Spend Your Legacy Points in WoW Forever (Best Legacy Talent Builds)",
-      "teaser_de": "Legacy points provide account-wide progression that gives all your characters access to Legacy talents. Each character can spend the Legacy points you have earned on your account separately, and you can also reset the Legacy talents you have selected at your c",
-      "article_de": "Legacy points provide account-wide progression that gives all your characters access to Legacy talents. Each character can spend the Legacy points you have earned on your account separately, and you can also reset the Legacy talents you have selected at your class trainer in a major city for a fee, which is 10 Gold in the beta. The final fee and whether it increases for further resets has not yet been confirmed.\nLegacy Points\n\nQuelle und Detailwerte im Original prüfen.",
+      "teaser_de": "Für diesen Beitrag ist derzeit kein geprüfter deutscher Kurzbericht verfügbar.",
+      "article_de": "Für diesen Beitrag ist derzeit kein geprüfter deutscher Kurzbericht verfügbar. Die Originalquelle enthält die Details; fehlende Angaben werden nicht ergänzt.",
       "url": "https://www.method.gg/wow-forever/the-best-way-to-spend-your-legacy-points-in-wow-forever-best-legacy-talent-builds",
       "normalized_url": "https://method.gg/wow-forever/the-best-way-to-spend-your-legacy-points-in-wow-forever-best-legacy-talent-builds",
       "raw_title": "The Best Way to Spend Your Legacy Points in WoW Forever (Best Legacy Talent Builds)",
@@ -685,7 +733,9 @@
       "is_updated": false,
       "content_version": 1,
       "last_checked_at": "2026-11-01T19:01:38.748347+00:00",
-      "summary_mode": "translated"
+      "summary_mode": "untranslated",
+      "source_text_length": 9114,
+      "has_source_baseline": true
     },
     {
       "id": "6a2f2264908a",
@@ -700,8 +750,8 @@
       "radar_status": "normal",
       "classes": [],
       "title": "The Fastest Way to Get Legacy Points in WoW Forever",
-      "teaser_de": "Legacy points are a new form of horizontal progression in World of Warcraft Forever. Completing various Legacy Challenges, which are like Achievements, gives your account Legacy points. You can then spend these points on Legacy talents on each of your characte",
-      "article_de": "Legacy points are a new form of horizontal progression in World of Warcraft Forever. Completing various Legacy Challenges, which are like Achievements, gives your account Legacy points. You can then spend these points on Legacy talents on each of your characters to gain special perks for leveling, professions, PvP progression, and progression raiding.\nSpending Legacy Points\n: Check out our\nBest Legacy Talent Builds Guide\nif yo\n\nQuelle und Detailwerte im Original prüfen.",
+      "teaser_de": "Für diesen Beitrag ist derzeit kein geprüfter deutscher Kurzbericht verfügbar.",
+      "article_de": "Für diesen Beitrag ist derzeit kein geprüfter deutscher Kurzbericht verfügbar. Die Originalquelle enthält die Details; fehlende Angaben werden nicht ergänzt.",
       "url": "https://www.method.gg/wow-forever/the-fastest-way-to-get-legacy-points-in-wow-forever",
       "normalized_url": "https://method.gg/wow-forever/the-fastest-way-to-get-legacy-points-in-wow-forever",
       "raw_title": "The Fastest Way to Get Legacy Points in WoW Forever",
@@ -710,7 +760,9 @@
       "is_updated": false,
       "content_version": 1,
       "last_checked_at": "2026-11-01T19:01:38.748347+00:00",
-      "summary_mode": "original"
+      "summary_mode": "untranslated",
+      "source_text_length": 11448,
+      "has_source_baseline": true
     },
     {
       "id": "405da51dfb22",
@@ -725,8 +777,8 @@
       "radar_status": "balance",
       "classes": [],
       "title": "Camping In WoW Forever: How It All Works & All Profession Buffs",
-      "teaser_de": "Camping is a new system that has been added in WoW Forever. It takes the old Cooking Fire from the Cooking Profession and turns it into a whole new social system, where you and other players can sit by the campfire and use items from different professions to g",
-      "article_de": "Camping is a new system that has been added in WoW Forever. It takes the old Cooking Fire from the Cooking Profession and turns it into a whole new social system, where you and other players can sit by the campfire and use items from different professions to gain a variety of different buffs.\nAs you and other players progress deeper into the Camping system and Professions you will also gain access to different vendors, repair\n\nQuelle und Detailwerte im Original prüfen.",
+      "teaser_de": "Für diesen Beitrag ist derzeit kein geprüfter deutscher Kurzbericht verfügbar.",
+      "article_de": "Für diesen Beitrag ist derzeit kein geprüfter deutscher Kurzbericht verfügbar. Die Originalquelle enthält die Details; fehlende Angaben werden nicht ergänzt.",
       "url": "https://www.method.gg/wow-forever/camping-in-wow-forever-how-it-all-works-all-profession-buffs",
       "normalized_url": "https://method.gg/wow-forever/camping-in-wow-forever-how-it-all-works-all-profession-buffs",
       "raw_title": "Camping In WoW Forever: How It All Works & All Profession Buffs",
@@ -735,7 +787,9 @@
       "is_updated": false,
       "content_version": 1,
       "last_checked_at": "2026-11-01T19:01:38.748347+00:00",
-      "summary_mode": "translated"
+      "summary_mode": "untranslated",
+      "source_text_length": 6991,
+      "has_source_baseline": true
     },
     {
       "id": "5612ad74364a",
@@ -750,8 +804,8 @@
       "radar_status": "normal",
       "classes": [],
       "title": "How To Get the Cozy Sleeping Bag In WoW Forever",
-      "teaser_de": "The\nCozy Sleeping Bag\nis a powerful leveling item in WoW Forever that also provides some great quality of life benefits.\nObtaining this item can be a bit of a challenge however, especially for Horde characters, because it takes you deep into Alliance zones.\nAn",
-      "article_de": "The\nCozy Sleeping Bag\nis a powerful leveling item in WoW Forever that also provides some great quality of life benefits.\nObtaining this item can be a bit of a challenge however, especially for Horde characters, because it takes you deep into Alliance zones.\nAn additional reward that you will get while completing the quest line is\nStudent Fodder\n. Unlike Season of Discovery these don’t give rested experience. However, they are\n\nQuelle und Detailwerte im Original prüfen.",
+      "teaser_de": "Für diesen Beitrag ist derzeit kein geprüfter deutscher Kurzbericht verfügbar.",
+      "article_de": "Für diesen Beitrag ist derzeit kein geprüfter deutscher Kurzbericht verfügbar. Die Originalquelle enthält die Details; fehlende Angaben werden nicht ergänzt.",
       "url": "https://www.method.gg/wow-forever/how-to-unlock-the-cozy-sleeping-bag-in-wow-forever",
       "normalized_url": "https://method.gg/wow-forever/how-to-unlock-the-cozy-sleeping-bag-in-wow-forever",
       "raw_title": "How To Get the Cozy Sleeping Bag In WoW Forever",
@@ -760,7 +814,9 @@
       "is_updated": false,
       "content_version": 1,
       "last_checked_at": "2026-11-01T19:01:38.748347+00:00",
-      "summary_mode": "translated"
+      "summary_mode": "untranslated",
+      "source_text_length": 9940,
+      "has_source_baseline": true
     }
   ],
   "sources_status": {

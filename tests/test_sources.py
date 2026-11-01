@@ -64,5 +64,15 @@ class SourceTests(unittest.TestCase):
         self.assertEqual(feed['items'][0]['source_content_hash'],'abc')
         self.assertEqual(feed['items'][0]['migrated_ids'],['old'])
 
+    def test_hash_only_baseline_still_detects_real_changes(self):
+        old={'id':'old','url':'https://example.org/hunter','title':'WoW Forever Hunter Pet Guide','raw_title':'WoW Forever Hunter Pet Guide','teaser_de':'Hunter pet guide','article_de':'Hunter pet guide','source_content_hash':'before','has_source_baseline':True,'content_extractor':2,'content_version':1,'date':'2026-10-01'}
+        new={**old,'normalized_url':S.normalize_url(old['url']),'source_content_hash':'after','raw_content':'Updated pet guide with changed ability','title':'WoW Forever Hunter Pet Guide','radar_status':'normal','category':'guide','classes':['Hunter'],'verified_type':'Guide / Analyse'}
+        merged,added,updated,_=S.merge_and_deduplicate_items([copy.deepcopy(old)],[new],{},'2026-11-01T10:00:00+00:00')
+        self.assertEqual((added,updated),(0,1))
+        self.assertEqual(merged[0]['content_version'],2)
+        public=S.without_source_copies({'items':merged})
+        self.assertNotIn('raw_content',public['items'][0])
+        self.assertTrue(public['items'][0]['has_source_baseline'])
+
 
 if __name__=='__main__': unittest.main()
