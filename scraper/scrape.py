@@ -66,7 +66,20 @@ RSS_FEEDS = [
     {"name": "Warcraft Tavern",        "icon": "🍺", "url": "https://www.warcrafttavern.com/feed/",                                          "lang": "en", "official": False},
 ]
 
-REDDIT_SUBREDDITS = ["wowforever", "classicwow"]
+REDDIT_FEEDS = [
+    {"subreddit": "wowforever", "url": "https://www.reddit.com/r/wowforever/new/.rss?limit=100"},
+    {"subreddit": "classicwow", "url": "https://www.reddit.com/r/classicwow/search.rss?q=forever&restrict_sr=on&sort=new&t=week&limit=100"},
+    {"subreddit": "woweconomy", "url": "https://www.reddit.com/r/woweconomy/search.rss?q=forever&restrict_sr=on&sort=new&t=month&limit=50"},
+]
+REDDIT_SUBREDDITS = [feed["subreddit"] for feed in REDDIT_FEEDS]
+
+
+def relevant_feed_item(item, title=None, content=""):
+    summary = item.get("summary", "")
+    # Posts in the dedicated subreddit need not repeat the game's name in their title.
+    if item.get("source") == "Reddit r/wowforever" or item.get("forever_link"):
+        summary = "WoW Forever. " + summary
+    return is_relevant_context(title or item.get("title", ""), summary, content)
 
 # ─── POMOĆNE FUNKCIJE & DEDUPLIKACIJA ─────────────────────────────────────────
 def normalize_url(url):
@@ -564,7 +577,7 @@ def is_relevant_context(title, summary, full_text=""):
         "todesminen", "deadmines", "verlies", "stockades", "gnomeregan",
         "bergbau", "mining", "engineering", "ingenieur", "kürschnerei", "skinning", "kräuterkunde", "herbalism",
         "bag", "recipe", "rezept", "enchant", "verzauber", "consumable", "travel route", "party", "gruppe", "seed", "library book", "reward",
-        "addon", "add-on", "item", "weapon", "loot", "beute", "drop", "rare mob"
+        "addon", "add-on", "item", "weapon", "loot", "beute", "drop", "rare mob", "reward", "rifle", "shield", "trinket"
     ]
     if has_forever and any(g in combined for g in common_practical_words):
         return True
@@ -720,7 +733,7 @@ def run_scraper(skip_reddit=False):
     collected_raw, sources_health, metrics = [], {}, {}
 
     # Every returned feed entry is considered, not only the first fifteen.
-    configs = RSS_FEEDS + [{"name":f"Reddit r/{sub}","icon":"💬","url":f"https://www.reddit.com/r/{sub}/new/.rss?limit=25","official":False} for sub in REDDIT_SUBREDDITS]
+    configs = RSS_FEEDS + [{"name":f"Reddit r/{feed['subreddit']}","icon":"💬","url":feed["url"],"official":False} for feed in REDDIT_FEEDS]
     for cfg in configs:
         name=cfg["name"]
         metrics[name]={"fetched":0,"relevant":0,"processed":0,"accepted":0,"full_text_failures":0,"checked_at":datetime.now(timezone.utc).isoformat(),"fetch_ok":False}
@@ -737,10 +750,12 @@ def run_scraper(skip_reddit=False):
             sources_health[name]=f"OK ({len(feed.entries)} Eingänge)"
             for entry in feed.entries:
                 title=entry.get("title","").strip()
-                summary=BeautifulSoup(entry.get("summary","") or "","html.parser").get_text(" ",strip=True)[:1200]
+                summary_html=BeautifulSoup(entry.get("summary","") or "","html.parser")
+                summary=summary_html.get_text(" ",strip=True)[:1200]
+                forever_link=any(re.search(r"https://(?:www\.)?(?:wowhead\.com/forever/|icy-veins\.com/wow-forever/|method\.gg/wow-forever/)",a.get("href","")) for a in summary_html.find_all("a",href=True))
                 pub=entry.get("published_parsed") or entry.get("updated_parsed")
                 date=time.strftime("%Y-%m-%d",pub) if pub else ""
-                collected_raw.append({"title":title,"summary":summary,"url":entry.get("link",""),"pub_date":date,"source":name,"source_icon":cfg["icon"],"official":cfg.get("official",False)})
+                collected_raw.append({"title":title,"summary":summary,"forever_link":forever_link,"url":entry.get("link",""),"pub_date":date,"source":name,"source_icon":cfg["icon"],"official":cfg.get("official",False)})
         except requests.HTTPError as e: sources_health[name]=f"HTTP {e.response.status_code}"
         except Exception as e: sources_health[name]=f"Fehler: {type(e).__name__}"
         print(f"📡 {name}: {sources_health[name]}",flush=True)
@@ -765,10 +780,10 @@ def run_scraper(skip_reddit=False):
     for item in collected_raw:
         if urllib.parse.urlparse(item["url"]).scheme not in {"http","https"}: continue
         context=(item["title"]+" "+item["summary"]).lower()
-        scoped=("forever" in context or re.search(r"/(?:wow-forever|forever)/", item["url"]) or item["source"]=="Reddit r/wowforever")
+        scoped=("forever" in context or item.get("forever_link") or re.search(r"/(?:wow-forever|forever)/", item["url"]) or item["source"]=="Reddit r/wowforever")
         if not scoped: continue
-        if item["source"].startswith("Reddit") and not re.search(r"addon|add-on|quest|pet|tame|spell|talent|totem|weapon|item|drop|vendor|bag|enchant|recipe|beruf|gather|herb|mining|skinn|camp|legacy|hotfix|buff|nerf|level|dungeon|mob|guide", item["title"], re.I): continue
-        if not item["url"] or not is_relevant_context(item["title"],item["summary"]): continue
+        if item["source"].startswith("Reddit") and not re.search(r"addon|add-on|quest|pet|tame|spell|talent|totem|weapon|item|reward|loot|drop|vendor|bag|enchant|recipe|beruf|gather|herb|mining|skinn|camp|legacy|hotfix|buff|nerf|level|dungeon|mob|guide|bow|rifle|shield|trinket", item["title"], re.I): continue
+        if not item["url"] or not relevant_feed_item(item): continue
         norm=normalize_url(item["url"])
         if norm in candidates: continue
         candidates[norm]=item; metrics[item["source"]]["relevant"]+=1
@@ -789,7 +804,7 @@ def run_scraper(skip_reddit=False):
             if norm in previous or len(item["summary"])<100: continue
             content=item["summary"]
         title=doc.get("title") or item["title"]
-        if not is_relevant_context(title,item["summary"],content): continue
+        if not relevant_feed_item(item,title,content): continue
         classes=detect_classes(title) or detect_classes(item["summary"])
         category=detect_category(title+" "+content[:1200])
         src_hash=compute_source_hash(title,content)

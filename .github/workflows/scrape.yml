@@ -61,6 +61,9 @@ jobs:
       - name: 📚 Check current leveling & talent guides
         run: python scraper/check_guides.py
 
+      - name: 🎁 Check new quests and changed item rewards
+        run: python scraper/check_quest_rewards.py
+
       - name: 🧪 Verify data integrity
         run: |
           python test_dashboard.py
@@ -73,7 +76,7 @@ jobs:
         run: |
           git config --global user.name  "WoW-Bot 🤖"
           git config --global user.email "wow-bot@faruk-mirza.github.io"
-          git add data/feed.json data/news.json data/seen_ids.json data/guides.json data/bis.json data/recommendations.json
+          git add data/feed.json data/news.json data/seen_ids.json data/guides.json data/bis.json data/recommendations.json data/quest_rewards.json data/quest_reward_state.json
           git diff --cached --quiet || git commit -m "🗞️ Daily verified update $(date -u '+%Y-%m-%d %H:%M UTC')"
           git push
 

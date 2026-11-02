@@ -1,0 +1,1910 @@
+{
+  "source": "Wowhead Forever",
+  "source_url": "https://www.wowhead.com/forever/quests",
+  "status": "ok",
+  "error": "",
+  "checked_at": "2026-11-02T14:45:16.625326+00:00",
+  "last_success_at": "2026-11-02T14:45:16.625326+00:00",
+  "checked_count": 1000,
+  "coverage": "Auswahl aus der geladenen Wowhead-Liste, keine vollständige Quest-Erfassung.",
+  "discovered_count": 0,
+  "updated_count": 0,
+  "items": [
+    {
+      "id": 91775,
+      "name": "Book Return",
+      "level": 6,
+      "min_level": 1,
+      "classes": [],
+      "dungeon": false,
+      "rewards": [
+        {
+          "id": 279936,
+          "name": "Book Bag",
+          "count": 1,
+          "choice": false,
+          "quality": 1,
+          "stats": {
+            "slotbak": 18
+          },
+          "url": "https://www.wowhead.com/forever/item=279936"
+        }
+      ],
+      "source_change": "new",
+      "url": "https://www.wowhead.com/forever/quest=91775",
+      "changed_at": null,
+      "change_kind": "baseline"
+    },
+    {
+      "id": 91777,
+      "name": "Rare Books",
+      "level": 7,
+      "min_level": 1,
+      "classes": [],
+      "dungeon": false,
+      "rewards": [
+        {
+          "id": 248008,
+          "name": "Apprentice's Spellstaff",
+          "count": 1,
+          "choice": true,
+          "quality": 2,
+          "stats": {
+            "dps": 6.36,
+            "int": 2,
+            "slotbak": 17
+          },
+          "url": "https://www.wowhead.com/forever/item=248008"
+        },
+        {
+          "id": 248007,
+          "name": "Militia Shortblade",
+          "count": 1,
+          "choice": true,
+          "quality": 2,
+          "stats": {
+            "dps": 6.5,
+            "agi": 1,
+            "slotbak": 13
+          },
+          "url": "https://www.wowhead.com/forever/item=248007"
+        },
+        {
+          "id": 248006,
+          "name": "Militia Sword",
+          "count": 1,
+          "choice": true,
+          "quality": 2,
+          "stats": {
+            "dps": 6.4,
+            "sta": 1,
+            "slotbak": 21
+          },
+          "url": "https://www.wowhead.com/forever/item=248006"
+        },
+        {
+          "id": 248005,
+          "name": "Northshire Hammer",
+          "count": 1,
+          "choice": true,
+          "quality": 2,
+          "stats": {
+            "dps": 8.33,
+            "str": 2,
+            "slotbak": 17
+          },
+          "url": "https://www.wowhead.com/forever/item=248005"
+        },
+        {
+          "id": 276685,
+          "name": "Militia Bow",
+          "count": 1,
+          "choice": true,
+          "quality": 2,
+          "stats": {
+            "dps": 5.71,
+            "agi": 1,
+            "slotbak": 15
+          },
+          "url": "https://www.wowhead.com/forever/item=276685"
+        }
+      ],
+      "source_change": "new",
+      "url": "https://www.wowhead.com/forever/quest=91777",
+      "changed_at": null,
+      "change_kind": "baseline"
+    },
+    {
+      "id": 87288,
+      "name": "Soft Saber Pelts",
+      "level": 7,
+      "min_level": 4,
+      "classes": [],
+      "dungeon": false,
+      "rewards": [
+        {
+          "id": 280088,
+          "name": "Soft Saber Sack",
+          "count": 1,
+          "choice": false,
+          "quality": 1,
+          "stats": {
+            "slotbak": 18
+          },
+          "url": "https://www.wowhead.com/forever/item=280088"
+        }
+      ],
+      "source_change": "new",
+      "url": "https://www.wowhead.com/forever/quest=87288",
+      "changed_at": null,
+      "change_kind": "baseline"
+    },
+    {
+      "id": 92515,
+      "name": "The Problem With Prideclaws",
+      "level": 6,
+      "min_level": 4,
+      "classes": [],
+      "dungeon": false,
+      "rewards": [
+        {
+          "id": 256935,
+          "name": "Simple Leather Satchel",
+          "count": 1,
+          "choice": false,
+          "quality": 1,
+          "stats": {
+            "slotbak": 18
+          },
+          "url": "https://www.wowhead.com/forever/item=256935"
+        }
+      ],
+      "source_change": "new",
+      "url": "https://www.wowhead.com/forever/quest=92515",
+      "changed_at": null,
+      "change_kind": "baseline"
+    },
+    {
+      "id": 93318,
+      "name": "WANTED: Vulgara the Insatiable",
+      "level": 9,
+      "min_level": 4,
+      "classes": [],
+      "dungeon": false,
+      "rewards": [
+        {
+          "id": 257943,
+          "name": "Hunter's Simple Cloak",
+          "count": 1,
+          "choice": true,
+          "quality": 2,
+          "stats": {
+            "sta": 1,
+            "slotbak": 16
+          },
+          "url": "https://www.wowhead.com/forever/item=257943"
+        },
+        {
+          "id": 257255,
+          "name": "Highlands Defender's Shield",
+          "count": 1,
+          "choice": true,
+          "quality": 2,
+          "stats": {
+            "str": 1,
+            "slotbak": 14
+          },
+          "url": "https://www.wowhead.com/forever/item=257255"
+        }
+      ],
+      "source_change": "new",
+      "url": "https://www.wowhead.com/forever/quest=93318",
+      "changed_at": null,
+      "change_kind": "baseline"
+    },
+    {
+      "id": 97277,
+      "name": "Grund and Gozwin",
+      "level": 6,
+      "min_level": 4,
+      "classes": [],
+      "dungeon": false,
+      "rewards": [
+        {
+          "id": 277977,
+          "name": "Canvas Latchbag",
+          "count": 1,
+          "choice": false,
+          "quality": 1,
+          "stats": {
+            "slotbak": 18
+          },
+          "url": "https://www.wowhead.com/forever/item=277977"
+        }
+      ],
+      "source_change": "new",
+      "url": "https://www.wowhead.com/forever/quest=97277",
+      "changed_at": null,
+      "change_kind": "baseline"
+    },
+    {
+      "id": 99053,
+      "name": "Escaping Ban'ethil",
+      "level": 9,
+      "min_level": 4,
+      "classes": [],
+      "dungeon": false,
+      "rewards": [
+        {
+          "id": 286734,
+          "name": "Ban'ethil Quiver",
+          "count": 1,
+          "choice": true,
+          "quality": 1,
+          "stats": {
+            "slotbak": 18
+          },
+          "url": "https://www.wowhead.com/forever/item=286734"
+        },
+        {
+          "id": 286735,
+          "name": "Sentinel's Slasher",
+          "count": 1,
+          "choice": true,
+          "quality": 1,
+          "stats": {
+            "dps": 4.38,
+            "slotbak": 13
+          },
+          "url": "https://www.wowhead.com/forever/item=286735"
+        }
+      ],
+      "source_change": "new",
+      "url": "https://www.wowhead.com/forever/quest=99053",
+      "changed_at": null,
+      "change_kind": "baseline"
+    },
+    {
+      "id": 92703,
+      "name": "Deliver the News",
+      "level": 9,
+      "min_level": 5,
+      "classes": [],
+      "dungeon": false,
+      "rewards": [
+        {
+          "id": 263312,
+          "name": "Planting Shovel",
+          "count": 1,
+          "choice": true,
+          "quality": 2,
+          "stats": {
+            "dps": 7,
+            "str": 1,
+            "slotbak": 17
+          },
+          "url": "https://www.wowhead.com/forever/item=263312"
+        },
+        {
+          "id": 263314,
+          "name": "Roofing Hammer",
+          "count": 1,
+          "choice": true,
+          "quality": 2,
+          "stats": {
+            "dps": 5.42,
+            "spi": 1,
+            "slotbak": 13
+          },
+          "url": "https://www.wowhead.com/forever/item=263314"
+        },
+        {
+          "id": 263313,
+          "name": "Trusty Wrench",
+          "count": 1,
+          "choice": true,
+          "quality": 2,
+          "stats": {
+            "dps": 5.28,
+            "agi": 1,
+            "slotbak": 13
+          },
+          "url": "https://www.wowhead.com/forever/item=263313"
+        }
+      ],
+      "source_change": "new",
+      "url": "https://www.wowhead.com/forever/quest=92703",
+      "changed_at": null,
+      "change_kind": "baseline"
+    },
+    {
+      "id": 94468,
+      "name": "Call of Fire",
+      "level": 14,
+      "min_level": 10,
+      "classes": [
+        "Shaman"
+      ],
+      "dungeon": false,
+      "rewards": [
+        {
+          "id": 5176,
+          "name": "Fire Totem",
+          "count": 1,
+          "choice": false,
+          "quality": 1,
+          "stats": {},
+          "url": "https://www.wowhead.com/forever/item=5176"
+        },
+        {
+          "id": 263412,
+          "name": "Totem of Charged Flames",
+          "count": 1,
+          "choice": false,
+          "quality": 2,
+          "stats": {
+            "slotbak": 28
+          },
+          "url": "https://www.wowhead.com/forever/item=263412"
+        }
+      ],
+      "source_change": "new",
+      "url": "https://www.wowhead.com/forever/quest=94468",
+      "changed_at": null,
+      "change_kind": "baseline"
+    },
+    {
+      "id": 78150,
+      "name": "Friend of the Library",
+      "level": 20,
+      "min_level": 1,
+      "classes": [],
+      "dungeon": false,
+      "rewards": [
+        {
+          "id": 277203,
+          "name": "Scholarly Pendant",
+          "count": 1,
+          "choice": true,
+          "quality": 2,
+          "stats": {
+            "sta": 3,
+            "spi": 2,
+            "slotbak": 2
+          },
+          "url": "https://www.wowhead.com/forever/item=277203"
+        },
+        {
+          "id": 277204,
+          "name": "Erudite's Amulet",
+          "count": 1,
+          "choice": true,
+          "quality": 2,
+          "stats": {
+            "agi": 2,
+            "sta": 3,
+            "slotbak": 2
+          },
+          "url": "https://www.wowhead.com/forever/item=277204"
+        }
+      ],
+      "source_change": "updated",
+      "url": "https://www.wowhead.com/forever/quest=78150",
+      "changed_at": null,
+      "change_kind": "baseline"
+    },
+    {
+      "id": 98403,
+      "name": "Twisted Hatred",
+      "level": 12,
+      "min_level": 4,
+      "classes": [],
+      "dungeon": false,
+      "rewards": [
+        {
+          "id": 282284,
+          "name": "Webwood Slicer",
+          "count": 1,
+          "choice": false,
+          "quality": 2,
+          "stats": {
+            "dps": 5.29,
+            "agi": 1,
+            "reqlevel": 1,
+            "slotbak": 13
+          },
+          "url": "https://www.wowhead.com/forever/item=282284"
+        }
+      ],
+      "source_change": "new",
+      "url": "https://www.wowhead.com/forever/quest=98403",
+      "changed_at": null,
+      "change_kind": "baseline"
+    },
+    {
+      "id": 176,
+      "name": "WANTED: \"Hogger\"",
+      "level": 11,
+      "min_level": 5,
+      "classes": [],
+      "dungeon": false,
+      "rewards": [
+        {
+          "id": 6085,
+          "name": "Footman Tunic",
+          "count": 1,
+          "choice": true,
+          "quality": 2,
+          "stats": {
+            "agi": 1,
+            "sta": 2,
+            "slotbak": 5
+          },
+          "url": "https://www.wowhead.com/forever/item=6085"
+        },
+        {
+          "id": 6084,
+          "name": "Stormwind Guard Leggings",
+          "count": 1,
+          "choice": true,
+          "quality": 2,
+          "stats": {
+            "str": 3,
+            "slotbak": 7
+          },
+          "url": "https://www.wowhead.com/forever/item=6084"
+        },
+        {
+          "id": 6215,
+          "name": "Balanced Fighting Stick",
+          "count": 1,
+          "choice": true,
+          "quality": 2,
+          "stats": {
+            "dps": 8.86,
+            "agi": 2,
+            "sta": 2,
+            "slotbak": 17
+          },
+          "url": "https://www.wowhead.com/forever/item=6215"
+        },
+        {
+          "id": 270000,
+          "name": "Apprentice Wizard's Gown",
+          "count": 1,
+          "choice": true,
+          "quality": 2,
+          "stats": {
+            "int": 2,
+            "slotbak": 5
+          },
+          "url": "https://www.wowhead.com/forever/item=270000"
+        }
+      ],
+      "source_change": "updated",
+      "url": "https://www.wowhead.com/forever/quest=176",
+      "changed_at": null,
+      "change_kind": "baseline"
+    },
+    {
+      "id": 92840,
+      "name": "Catching Wind",
+      "level": 11,
+      "min_level": 5,
+      "classes": [],
+      "dungeon": false,
+      "rewards": [
+        {
+          "id": 263404,
+          "name": "Bow of Hours",
+          "count": 1,
+          "choice": false,
+          "quality": 2,
+          "stats": {
+            "dps": 5.22,
+            "agi": 1,
+            "slotbak": 15
+          },
+          "url": "https://www.wowhead.com/forever/item=263404"
+        },
+        {
+          "id": 3382,
+          "name": "Minor Troll's Blood Elixir",
+          "count": 5,
+          "choice": false,
+          "quality": 1,
+          "stats": {
+            "reqlevel": 1
+          },
+          "url": "https://www.wowhead.com/forever/item=3382"
+        }
+      ],
+      "source_change": "new",
+      "url": "https://www.wowhead.com/forever/quest=92840",
+      "changed_at": null,
+      "change_kind": "baseline"
+    },
+    {
+      "id": 940,
+      "name": "Teldrassil",
+      "level": 11,
+      "min_level": 6,
+      "classes": [],
+      "dungeon": false,
+      "rewards": [
+        {
+          "id": 281250,
+          "name": "Forest Oracle's Cloak",
+          "count": 1,
+          "choice": false,
+          "quality": 2,
+          "stats": {
+            "sta": 1,
+            "slotbak": 16
+          },
+          "url": "https://www.wowhead.com/forever/item=281250"
+        }
+      ],
+      "source_change": "updated",
+      "url": "https://www.wowhead.com/forever/quest=940",
+      "changed_at": null,
+      "change_kind": "baseline"
+    },
+    {
+      "id": 92880,
+      "name": "Return to Valanaar",
+      "level": 11,
+      "min_level": 6,
+      "classes": [],
+      "dungeon": false,
+      "rewards": [
+        {
+          "id": 257345,
+          "name": "Honed Greathammer",
+          "count": 1,
+          "choice": true,
+          "quality": 2,
+          "stats": {
+            "dps": 9.06,
+            "str": 2,
+            "spi": 2,
+            "slotbak": 17
+          },
+          "url": "https://www.wowhead.com/forever/item=257345"
+        },
+        {
+          "id": 257346,
+          "name": "Quickblade's Dagger",
+          "count": 1,
+          "choice": true,
+          "quality": 2,
+          "stats": {
+            "dps": 6.76,
+            "agi": 1,
+            "slotbak": 13
+          },
+          "url": "https://www.wowhead.com/forever/item=257346"
+        },
+        {
+          "id": 257343,
+          "name": "Balanced Quarterstaff",
+          "count": 1,
+          "choice": true,
+          "quality": 2,
+          "stats": {
+            "dps": 8.86,
+            "sta": 2,
+            "spi": 2,
+            "slotbak": 17
+          },
+          "url": "https://www.wowhead.com/forever/item=257343"
+        }
+      ],
+      "source_change": "new",
+      "url": "https://www.wowhead.com/forever/quest=92880",
+      "changed_at": null,
+      "change_kind": "baseline"
+    },
+    {
+      "id": 93835,
+      "name": "Confront Lorthuna",
+      "level": 12,
+      "min_level": 7,
+      "classes": [],
+      "dungeon": false,
+      "rewards": [
+        {
+          "id": 263405,
+          "name": "Belt of Blades",
+          "count": 1,
+          "choice": true,
+          "quality": 2,
+          "stats": {
+            "agi": 2,
+            "str": 2,
+            "slotbak": 6
+          },
+          "url": "https://www.wowhead.com/forever/item=263405"
+        },
+        {
+          "id": 263406,
+          "name": "Empyrean Shoes",
+          "count": 1,
+          "choice": true,
+          "quality": 2,
+          "stats": {
+            "spi": 2,
+            "slotbak": 8
+          },
+          "url": "https://www.wowhead.com/forever/item=263406"
+        },
+        {
+          "id": 263407,
+          "name": "Empyrean Greatsword",
+          "count": 1,
+          "choice": true,
+          "quality": 2,
+          "stats": {
+            "dps": 10.17,
+            "str": 4,
+            "slotbak": 17
+          },
+          "url": "https://www.wowhead.com/forever/item=263407"
+        },
+        {
+          "id": 273875,
+          "name": "Empyrean Treads",
+          "count": 1,
+          "choice": true,
+          "quality": 2,
+          "stats": {
+            "int": 3,
+            "slotbak": 8
+          },
+          "url": "https://www.wowhead.com/forever/item=273875"
+        }
+      ],
+      "source_change": "new",
+      "url": "https://www.wowhead.com/forever/quest=93835",
+      "changed_at": null,
+      "change_kind": "baseline"
+    },
+    {
+      "id": 79192,
+      "name": "Stepping Stones",
+      "level": 24,
+      "min_level": 14,
+      "classes": [],
+      "dungeon": false,
+      "rewards": [
+        {
+          "id": 2901,
+          "name": "Mining Pick",
+          "count": 1,
+          "choice": true,
+          "quality": 1,
+          "stats": {
+            "dps": 1.5,
+            "reqlevel": 1,
+            "slotbak": 21
+          },
+          "url": "https://www.wowhead.com/forever/item=2901"
+        },
+        {
+          "id": 3334,
+          "name": "Farmer's Shovel",
+          "count": 1,
+          "choice": true,
+          "quality": 2,
+          "stats": {
+            "dps": 7.16,
+            "str": 1,
+            "reqlevel": 5,
+            "slotbak": 17
+          },
+          "url": "https://www.wowhead.com/forever/item=3334"
+        },
+        {
+          "id": 1652,
+          "name": "Sturdy Lunchbox",
+          "count": 1,
+          "choice": false,
+          "quality": 1,
+          "stats": {
+            "slotbak": 18
+          },
+          "url": "https://www.wowhead.com/forever/item=1652"
+        },
+        {
+          "id": 4470,
+          "name": "Simple Wood",
+          "count": 1,
+          "choice": false,
+          "quality": 1,
+          "stats": {},
+          "url": "https://www.wowhead.com/forever/item=4470"
+        },
+        {
+          "id": 4471,
+          "name": "Flint and Tinder",
+          "count": 1,
+          "choice": false,
+          "quality": 1,
+          "stats": {},
+          "url": "https://www.wowhead.com/forever/item=4471"
+        },
+        {
+          "id": 221498,
+          "name": "Old Toolbox",
+          "count": 1,
+          "choice": false,
+          "quality": 1,
+          "stats": {
+            "slotbak": 18
+          },
+          "url": "https://www.wowhead.com/forever/item=221498"
+        }
+      ],
+      "source_change": "updated",
+      "url": "https://www.wowhead.com/forever/quest=79192",
+      "changed_at": null,
+      "change_kind": "baseline"
+    },
+    {
+      "id": 79980,
+      "name": "Scramble",
+      "level": 24,
+      "min_level": 14,
+      "classes": [],
+      "dungeon": false,
+      "rewards": [
+        {
+          "id": 3463,
+          "name": "Silver Star",
+          "count": 1,
+          "choice": true,
+          "quality": 2,
+          "stats": {
+            "dps": 16.3,
+            "agi": 4,
+            "slotbak": 25
+          },
+          "url": "https://www.wowhead.com/forever/item=3463"
+        },
+        {
+          "id": 217314,
+          "name": "Moonsight Rifle",
+          "count": 1,
+          "choice": true,
+          "quality": 2,
+          "stats": {
+            "dps": 10.88,
+            "reqlevel": 23,
+            "slotbak": 26
+          },
+          "url": "https://www.wowhead.com/forever/item=217314"
+        },
+        {
+          "id": 217315,
+          "name": "Precision Bow",
+          "count": 1,
+          "choice": true,
+          "quality": 2,
+          "stats": {
+            "dps": 10.96,
+            "reqlevel": 23,
+            "slotbak": 15
+          },
+          "url": "https://www.wowhead.com/forever/item=217315"
+        },
+        {
+          "id": 3464,
+          "name": "Feathered Arrow",
+          "count": 1,
+          "choice": false,
+          "quality": 2,
+          "stats": {
+            "dps": 9.5,
+            "slotbak": 24
+          },
+          "url": "https://www.wowhead.com/forever/item=3464"
+        },
+        {
+          "id": 3465,
+          "name": "Exploding Shot",
+          "count": 1,
+          "choice": false,
+          "quality": 2,
+          "stats": {
+            "dps": 9.5,
+            "slotbak": 24
+          },
+          "url": "https://www.wowhead.com/forever/item=3465"
+        },
+        {
+          "id": 216619,
+          "name": "Student Fodder",
+          "count": 1,
+          "choice": false,
+          "quality": 2,
+          "stats": {},
+          "url": "https://www.wowhead.com/forever/item=216619"
+        }
+      ],
+      "source_change": "updated",
+      "url": "https://www.wowhead.com/forever/quest=79980",
+      "changed_at": null,
+      "change_kind": "baseline"
+    },
+    {
+      "id": 943,
+      "name": "The Absent Minded Prospector",
+      "level": 24,
+      "min_level": 15,
+      "classes": [],
+      "dungeon": false,
+      "rewards": [
+        {
+          "id": 5627,
+          "name": "Relic Blade",
+          "count": 1,
+          "choice": true,
+          "quality": 2,
+          "stats": {
+            "dps": 10,
+            "sta": 3,
+            "slotbak": 13
+          },
+          "url": "https://www.wowhead.com/forever/item=5627"
+        },
+        {
+          "id": 5626,
+          "name": "Skullchipper",
+          "count": 1,
+          "choice": true,
+          "quality": 2,
+          "stats": {
+            "dps": 13,
+            "str": 6,
+            "sta": 1,
+            "slotbak": 17
+          },
+          "url": "https://www.wowhead.com/forever/item=5626"
+        },
+        {
+          "id": 270022,
+          "name": "Archaeologist's Gown",
+          "count": 1,
+          "choice": true,
+          "quality": 2,
+          "stats": {
+            "spi": 5,
+            "slotbak": 5
+          },
+          "url": "https://www.wowhead.com/forever/item=270022"
+        }
+      ],
+      "source_change": "updated",
+      "url": "https://www.wowhead.com/forever/quest=943",
+      "changed_at": null,
+      "change_kind": "baseline"
+    },
+    {
+      "id": 95161,
+      "name": "Remember That I Love You",
+      "level": 22,
+      "min_level": 15,
+      "classes": [],
+      "dungeon": false,
+      "rewards": [
+        {
+          "id": 279870,
+          "name": "Tarnished Locket",
+          "count": 1,
+          "choice": true,
+          "quality": 2,
+          "stats": {
+            "sta": 6,
+            "reqlevel": 1,
+            "slotbak": 2
+          },
+          "url": "https://www.wowhead.com/forever/item=279870"
+        }
+      ],
+      "source_change": "new",
+      "url": "https://www.wowhead.com/forever/quest=95161",
+      "changed_at": null,
+      "change_kind": "baseline"
+    },
+    {
+      "id": 97005,
+      "name": "Chol'aruk the Ravener",
+      "level": 21,
+      "min_level": 15,
+      "classes": [],
+      "dungeon": false,
+      "rewards": [
+        {
+          "id": 276886,
+          "name": "Chol'aruk's Trophy Sword",
+          "count": 1,
+          "choice": true,
+          "quality": 2,
+          "stats": {
+            "dps": 12.29,
+            "sta": 2,
+            "reqlevel": 1,
+            "slotbak": 21
+          },
+          "url": "https://www.wowhead.com/forever/item=276886"
+        },
+        {
+          "id": 276887,
+          "name": "Big Bad Basher",
+          "count": 1,
+          "choice": true,
+          "quality": 2,
+          "stats": {
+            "dps": 15.97,
+            "str": 4,
+            "sta": 6,
+            "reqlevel": 1,
+            "slotbak": 17
+          },
+          "url": "https://www.wowhead.com/forever/item=276887"
+        },
+        {
+          "id": 276888,
+          "name": "Quilboar Toothpick",
+          "count": 1,
+          "choice": true,
+          "quality": 2,
+          "stats": {
+            "dps": 8.06,
+            "int": 2,
+            "spi": 2,
+            "reqlevel": 1,
+            "slotbak": 21
+          },
+          "url": "https://www.wowhead.com/forever/item=276888"
+        },
+        {
+          "id": 276889,
+          "name": "Thornwoven Shield",
+          "count": 1,
+          "choice": true,
+          "quality": 2,
+          "stats": {
+            "sta": 4,
+            "spi": 2,
+            "reqlevel": 1,
+            "slotbak": 14
+          },
+          "url": "https://www.wowhead.com/forever/item=276889"
+        }
+      ],
+      "source_change": "new",
+      "url": "https://www.wowhead.com/forever/quest=97005",
+      "changed_at": null,
+      "change_kind": "baseline"
+    },
+    {
+      "id": 95195,
+      "name": "Bloodied Insignia",
+      "level": 22,
+      "min_level": 16,
+      "classes": [],
+      "dungeon": true,
+      "rewards": [
+        {
+          "id": 279868,
+          "name": "Duty Bound Leggings",
+          "count": 1,
+          "choice": true,
+          "quality": 2,
+          "stats": {
+            "agi": 6,
+            "int": 4,
+            "reqlevel": 1,
+            "slotbak": 7
+          },
+          "url": "https://www.wowhead.com/forever/item=279868"
+        },
+        {
+          "id": 279869,
+          "name": "Remembrance Armor",
+          "count": 1,
+          "choice": true,
+          "quality": 2,
+          "stats": {
+            "str": 3,
+            "int": 3,
+            "sta": 5,
+            "reqlevel": 1,
+            "slotbak": 5
+          },
+          "url": "https://www.wowhead.com/forever/item=279869"
+        }
+      ],
+      "source_change": "new",
+      "url": "https://www.wowhead.com/forever/quest=95195",
+      "changed_at": null,
+      "change_kind": "baseline"
+    },
+    {
+      "id": 95250,
+      "name": "Abominable Creatures",
+      "level": 21,
+      "min_level": 16,
+      "classes": [],
+      "dungeon": true,
+      "rewards": [
+        {
+          "id": 279864,
+          "name": "Monstrous Cleaver",
+          "count": 1,
+          "choice": true,
+          "quality": 2,
+          "stats": {
+            "dps": 15.15,
+            "sta": 6,
+            "reqlevel": 1,
+            "slotbak": 17
+          },
+          "url": "https://www.wowhead.com/forever/item=279864"
+        },
+        {
+          "id": 279865,
+          "name": "Grave Shroud",
+          "count": 1,
+          "choice": true,
+          "quality": 2,
+          "stats": {
+            "str": 3,
+            "sta": 3,
+            "reqlevel": 1,
+            "slotbak": 16
+          },
+          "url": "https://www.wowhead.com/forever/item=279865"
+        },
+        {
+          "id": 279867,
+          "name": "Slain Baron's Signet",
+          "count": 1,
+          "choice": true,
+          "quality": 2,
+          "stats": {
+            "sta": 3,
+            "reqlevel": 1,
+            "slotbak": 11
+          },
+          "url": "https://www.wowhead.com/forever/item=279867"
+        }
+      ],
+      "source_change": "new",
+      "url": "https://www.wowhead.com/forever/quest=95250",
+      "changed_at": null,
+      "change_kind": "baseline"
+    },
+    {
+      "id": 95999,
+      "name": "WANTED: Incinerator Gar'im",
+      "level": 25,
+      "min_level": 16,
+      "classes": [],
+      "dungeon": false,
+      "rewards": [
+        {
+          "id": 277218,
+          "name": "Incinerator's Boots",
+          "count": 1,
+          "choice": true,
+          "quality": 2,
+          "stats": {
+            "int": 6,
+            "sta": 3,
+            "slotbak": 8
+          },
+          "url": "https://www.wowhead.com/forever/item=277218"
+        },
+        {
+          "id": 277234,
+          "name": "Alacritous Treads",
+          "count": 1,
+          "choice": true,
+          "quality": 2,
+          "stats": {
+            "agi": 5,
+            "str": 5,
+            "slotbak": 8
+          },
+          "url": "https://www.wowhead.com/forever/item=277234"
+        },
+        {
+          "id": 277226,
+          "name": "Disjointed Shoes",
+          "count": 1,
+          "choice": true,
+          "quality": 2,
+          "stats": {
+            "slotbak": 8
+          },
+          "url": "https://www.wowhead.com/forever/item=277226"
+        }
+      ],
+      "source_change": "new",
+      "url": "https://www.wowhead.com/forever/quest=95999",
+      "changed_at": null,
+      "change_kind": "baseline"
+    },
+    {
+      "id": 96016,
+      "name": "The Tempest's Weapons",
+      "level": 40,
+      "min_level": 30,
+      "classes": [
+        "Shaman"
+      ],
+      "dungeon": false,
+      "rewards": [
+        {
+          "id": 280607,
+          "name": "Lightning's Grasp",
+          "count": 1,
+          "choice": true,
+          "quality": 3,
+          "stats": {
+            "dps": 18.18,
+            "int": 6,
+            "reqlevel": 1,
+            "slotbak": 21
+          },
+          "url": "https://www.wowhead.com/forever/item=280607"
+        },
+        {
+          "id": 280605,
+          "name": "Tidebringer's Claw",
+          "count": 1,
+          "choice": true,
+          "quality": 3,
+          "stats": {
+            "dps": 18.13,
+            "sta": 5,
+            "reqlevel": 1,
+            "slotbak": 21
+          },
+          "url": "https://www.wowhead.com/forever/item=280605"
+        },
+        {
+          "id": 280604,
+          "name": "Rage of the Storm",
+          "count": 1,
+          "choice": true,
+          "quality": 3,
+          "stats": {
+            "dps": 35.63,
+            "int": 12,
+            "sta": 15,
+            "reqlevel": 1,
+            "slotbak": 17
+          },
+          "url": "https://www.wowhead.com/forever/item=280604"
+        },
+        {
+          "id": 280696,
+          "name": "Elementalist's Guard",
+          "count": 1,
+          "choice": false,
+          "quality": 3,
+          "stats": {
+            "int": 6,
+            "sta": 9,
+            "reqlevel": 1,
+            "slotbak": 14
+          },
+          "url": "https://www.wowhead.com/forever/item=280696"
+        }
+      ],
+      "source_change": "new",
+      "url": "https://www.wowhead.com/forever/quest=96016",
+      "changed_at": null,
+      "change_kind": "baseline"
+    },
+    {
+      "id": 79976,
+      "name": "This Must Be The Place",
+      "level": 32,
+      "min_level": 14,
+      "classes": [],
+      "dungeon": false,
+      "rewards": [
+        {
+          "id": 211527,
+          "name": "Cozy Sleeping Bag",
+          "count": 1,
+          "choice": false,
+          "quality": 3,
+          "stats": {
+            "reqlevel": 1
+          },
+          "url": "https://www.wowhead.com/forever/item=211527"
+        },
+        {
+          "id": 216619,
+          "name": "Student Fodder",
+          "count": 1,
+          "choice": false,
+          "quality": 2,
+          "stats": {},
+          "url": "https://www.wowhead.com/forever/item=216619"
+        }
+      ],
+      "source_change": "updated",
+      "url": "https://www.wowhead.com/forever/quest=79976",
+      "changed_at": null,
+      "change_kind": "baseline"
+    },
+    {
+      "id": 79536,
+      "name": "Greater Friend of the Library",
+      "level": 35,
+      "min_level": 20,
+      "classes": [],
+      "dungeon": false,
+      "rewards": [
+        {
+          "id": 281634,
+          "name": "Field Researcher's Loop",
+          "count": 1,
+          "choice": true,
+          "quality": 3,
+          "stats": {
+            "agi": 7,
+            "sta": 7,
+            "slotbak": 11
+          },
+          "url": "https://www.wowhead.com/forever/item=281634"
+        },
+        {
+          "id": 281635,
+          "name": "Philanthropist's Ring",
+          "count": 1,
+          "choice": true,
+          "quality": 3,
+          "stats": {
+            "int": 5,
+            "slotbak": 11
+          },
+          "url": "https://www.wowhead.com/forever/item=281635"
+        }
+      ],
+      "source_change": "updated",
+      "url": "https://www.wowhead.com/forever/quest=79536",
+      "changed_at": null,
+      "change_kind": "baseline"
+    },
+    {
+      "id": 98,
+      "name": "The Legend of Stalvan",
+      "level": 35,
+      "min_level": 22,
+      "classes": [],
+      "dungeon": false,
+      "rewards": [
+        {
+          "id": 2044,
+          "name": "Crescent of Forlorn Spirits",
+          "count": 1,
+          "choice": true,
+          "quality": 2,
+          "stats": {
+            "dps": 18.13,
+            "spi": 6,
+            "slotbak": 21
+          },
+          "url": "https://www.wowhead.com/forever/item=2044"
+        },
+        {
+          "id": 2043,
+          "name": "Ring of Forlorn Spirits",
+          "count": 1,
+          "choice": true,
+          "quality": 2,
+          "stats": {
+            "sta": 2,
+            "slotbak": 11
+          },
+          "url": "https://www.wowhead.com/forever/item=2043"
+        },
+        {
+          "id": 270053,
+          "name": "Ring of Ruin",
+          "count": 1,
+          "choice": true,
+          "quality": 2,
+          "stats": {
+            "agi": 6,
+            "str": 4,
+            "slotbak": 11
+          },
+          "url": "https://www.wowhead.com/forever/item=270053"
+        }
+      ],
+      "source_change": "updated",
+      "url": "https://www.wowhead.com/forever/quest=98",
+      "changed_at": null,
+      "change_kind": "baseline"
+    },
+    {
+      "id": 474,
+      "name": "Defeat Nek'rosh",
+      "level": 32,
+      "min_level": 23,
+      "classes": [],
+      "dungeon": false,
+      "rewards": [
+        {
+          "id": 3209,
+          "name": "Ancient War Sword",
+          "count": 1,
+          "choice": true,
+          "quality": 2,
+          "stats": {
+            "dps": 21.67,
+            "str": 9,
+            "sta": 6,
+            "slotbak": 17
+          },
+          "url": "https://www.wowhead.com/forever/item=3209"
+        },
+        {
+          "id": 6194,
+          "name": "Barreling Reaper",
+          "count": 1,
+          "choice": true,
+          "quality": 2,
+          "stats": {
+            "dps": 16.58,
+            "sta": 5,
+            "slotbak": 21
+          },
+          "url": "https://www.wowhead.com/forever/item=6194"
+        },
+        {
+          "id": 287067,
+          "name": "Dragonmaw Skinflayer",
+          "count": 1,
+          "choice": true,
+          "quality": 2,
+          "stats": {
+            "dps": 15,
+            "str": 3,
+            "spi": 3,
+            "reqlevel": 1,
+            "slotbak": 25
+          },
+          "url": "https://www.wowhead.com/forever/item=287067"
+        }
+      ],
+      "source_change": "updated",
+      "url": "https://www.wowhead.com/forever/quest=474",
+      "changed_at": null,
+      "change_kind": "baseline"
+    },
+    {
+      "id": 98216,
+      "name": "Understanding Our Present",
+      "level": 31,
+      "min_level": 23,
+      "classes": [],
+      "dungeon": false,
+      "rewards": [
+        {
+          "id": 281304,
+          "name": "Prospector's Signet",
+          "count": 1,
+          "choice": true,
+          "quality": 2,
+          "stats": {
+            "int": 4,
+            "sta": 4,
+            "slotbak": 11
+          },
+          "url": "https://www.wowhead.com/forever/item=281304"
+        },
+        {
+          "id": 281305,
+          "name": "Excavation Cloak",
+          "count": 1,
+          "choice": true,
+          "quality": 2,
+          "stats": {
+            "str": 4,
+            "sta": 4,
+            "slotbak": 16
+          },
+          "url": "https://www.wowhead.com/forever/item=281305"
+        }
+      ],
+      "source_change": "new",
+      "url": "https://www.wowhead.com/forever/quest=98216",
+      "changed_at": null,
+      "change_kind": "baseline"
+    },
+    {
+      "id": 98223,
+      "name": "Old Habits",
+      "level": 31,
+      "min_level": 23,
+      "classes": [],
+      "dungeon": false,
+      "rewards": [
+        {
+          "id": 281306,
+          "name": "Flamescarred Spellbook",
+          "count": 1,
+          "choice": true,
+          "quality": 2,
+          "stats": {
+            "sta": 2,
+            "spi": 5,
+            "slotbak": 23
+          },
+          "url": "https://www.wowhead.com/forever/item=281306"
+        },
+        {
+          "id": 281307,
+          "name": "Dragonmaw Buckler",
+          "count": 1,
+          "choice": true,
+          "quality": 2,
+          "stats": {
+            "str": 3,
+            "sta": 5,
+            "slotbak": 14
+          },
+          "url": "https://www.wowhead.com/forever/item=281307"
+        }
+      ],
+      "source_change": "new",
+      "url": "https://www.wowhead.com/forever/quest=98223",
+      "changed_at": null,
+      "change_kind": "baseline"
+    },
+    {
+      "id": 92456,
+      "name": "A Green Sample",
+      "level": 33,
+      "min_level": 24,
+      "classes": [],
+      "dungeon": true,
+      "rewards": [
+        {
+          "id": 279835,
+          "name": "Vine Pruner's Cloak",
+          "count": 1,
+          "choice": true,
+          "quality": 2,
+          "stats": {
+            "sta": 6,
+            "reqlevel": 1,
+            "slotbak": 16
+          },
+          "url": "https://www.wowhead.com/forever/item=279835"
+        },
+        {
+          "id": 279836,
+          "name": "Thorn Protecting Girdle",
+          "count": 1,
+          "choice": true,
+          "quality": 2,
+          "stats": {
+            "sta": 8,
+            "reqlevel": 1,
+            "slotbak": 6
+          },
+          "url": "https://www.wowhead.com/forever/item=279836"
+        }
+      ],
+      "source_change": "new",
+      "url": "https://www.wowhead.com/forever/quest=92456",
+      "changed_at": null,
+      "change_kind": "baseline"
+    },
+    {
+      "id": 208,
+      "name": "Big Game Hunter",
+      "level": 43,
+      "min_level": 28,
+      "classes": [],
+      "dungeon": false,
+      "rewards": [
+        {
+          "id": 17686,
+          "name": "Master Hunter's Bow",
+          "count": 1,
+          "choice": true,
+          "quality": 2,
+          "stats": {
+            "dps": 19.38,
+            "agi": 6,
+            "slotbak": 15
+          },
+          "url": "https://www.wowhead.com/forever/item=17686"
+        },
+        {
+          "id": 17687,
+          "name": "Master Hunter's Rifle",
+          "count": 1,
+          "choice": true,
+          "quality": 2,
+          "stats": {
+            "dps": 19.42,
+            "agi": 4,
+            "str": 4,
+            "slotbak": 26
+          },
+          "url": "https://www.wowhead.com/forever/item=17687"
+        },
+        {
+          "id": 270084,
+          "name": "Master Hunter's Wand",
+          "count": 1,
+          "choice": true,
+          "quality": 2,
+          "stats": {
+            "dps": 34.67,
+            "slotbak": 26
+          },
+          "url": "https://www.wowhead.com/forever/item=270084"
+        },
+        {
+          "id": 270085,
+          "name": "Master Hunter's Spellsword",
+          "count": 1,
+          "choice": true,
+          "quality": 2,
+          "stats": {
+            "dps": 32.5,
+            "str": 12,
+            "slotbak": 17
+          },
+          "url": "https://www.wowhead.com/forever/item=270085"
+        }
+      ],
+      "source_change": "updated",
+      "url": "https://www.wowhead.com/forever/quest=208",
+      "changed_at": null,
+      "change_kind": "baseline"
+    },
+    {
+      "id": 613,
+      "name": "Cracking Maury's Foot",
+      "level": 44,
+      "min_level": 30,
+      "classes": [],
+      "dungeon": false,
+      "rewards": [
+        {
+          "id": 4129,
+          "name": "Collection Plate",
+          "count": 1,
+          "choice": true,
+          "quality": 2,
+          "stats": {
+            "str": 2,
+            "sta": 9,
+            "slotbak": 14
+          },
+          "url": "https://www.wowhead.com/forever/item=4129"
+        },
+        {
+          "id": 270090,
+          "name": "Beggar's Leggings",
+          "count": 1,
+          "choice": true,
+          "quality": 2,
+          "stats": {
+            "spi": 12,
+            "slotbak": 7
+          },
+          "url": "https://www.wowhead.com/forever/item=270090"
+        },
+        {
+          "id": 270091,
+          "name": "Seadog's Battered Cuffs",
+          "count": 1,
+          "choice": true,
+          "quality": 2,
+          "stats": {
+            "agi": 8,
+            "sta": 5,
+            "slotbak": 9
+          },
+          "url": "https://www.wowhead.com/forever/item=270091"
+        }
+      ],
+      "source_change": "updated",
+      "url": "https://www.wowhead.com/forever/quest=613",
+      "changed_at": null,
+      "change_kind": "baseline"
+    },
+    {
+      "id": 82208,
+      "name": "Greater Friend of the Library",
+      "level": 45,
+      "min_level": 35,
+      "classes": [],
+      "dungeon": false,
+      "rewards": [
+        {
+          "id": 277254,
+          "name": "Truthseeker's Bow",
+          "count": 1,
+          "choice": true,
+          "quality": 3,
+          "stats": {
+            "dps": 23.75,
+            "agi": 7,
+            "sta": 3,
+            "reqlevel": 40,
+            "slotbak": 15
+          },
+          "url": "https://www.wowhead.com/forever/item=277254"
+        },
+        {
+          "id": 277258,
+          "name": "Crest of Elucidation",
+          "count": 1,
+          "choice": true,
+          "quality": 3,
+          "stats": {
+            "spi": 12,
+            "reqlevel": 40,
+            "slotbak": 14
+          },
+          "url": "https://www.wowhead.com/forever/item=277258"
+        },
+        {
+          "id": 277260,
+          "name": "Researcher's Night Light",
+          "count": 1,
+          "choice": true,
+          "quality": 3,
+          "stats": {
+            "sta": 12,
+            "reqlevel": 40,
+            "slotbak": 23
+          },
+          "url": "https://www.wowhead.com/forever/item=277260"
+        }
+      ],
+      "source_change": "updated",
+      "url": "https://www.wowhead.com/forever/quest=82208",
+      "changed_at": null,
+      "change_kind": "baseline"
+    },
+    {
+      "id": 92873,
+      "name": "Proof of Concept",
+      "level": 41,
+      "min_level": 35,
+      "classes": [],
+      "dungeon": false,
+      "rewards": [
+        {
+          "id": 271796,
+          "name": "Blade of the Magram Clan",
+          "count": 1,
+          "choice": true,
+          "quality": 2,
+          "stats": {
+            "dps": 20.45,
+            "sta": 3,
+            "reqlevel": 35,
+            "slotbak": 13
+          },
+          "url": "https://www.wowhead.com/forever/item=271796"
+        },
+        {
+          "id": 271797,
+          "name": "Staff of Revelations",
+          "count": 1,
+          "choice": true,
+          "quality": 2,
+          "stats": {
+            "dps": 19.83,
+            "int": 8,
+            "spi": 11,
+            "reqlevel": 35,
+            "slotbak": 17
+          },
+          "url": "https://www.wowhead.com/forever/item=271797"
+        },
+        {
+          "id": 271798,
+          "name": "Desperate Barrier",
+          "count": 1,
+          "choice": true,
+          "quality": 2,
+          "stats": {
+            "str": 4,
+            "sta": 6,
+            "reqlevel": 35,
+            "slotbak": 14
+          },
+          "url": "https://www.wowhead.com/forever/item=271798"
+        }
+      ],
+      "source_change": "new",
+      "url": "https://www.wowhead.com/forever/quest=92873",
+      "changed_at": null,
+      "change_kind": "baseline"
+    },
+    {
+      "id": 96222,
+      "name": "Khan Hratha",
+      "level": 42,
+      "min_level": 35,
+      "classes": [],
+      "dungeon": false,
+      "rewards": [
+        {
+          "id": 6773,
+          "name": "Kolkar Marauder Chain",
+          "count": 1,
+          "choice": true,
+          "quality": 2,
+          "stats": {
+            "agi": 7,
+            "str": 14,
+            "reqlevel": 35,
+            "slotbak": 5
+          },
+          "url": "https://www.wowhead.com/forever/item=6773"
+        },
+        {
+          "id": 6774,
+          "name": "Traitor's Finger",
+          "count": 1,
+          "choice": true,
+          "quality": 2,
+          "stats": {
+            "int": 5,
+            "sta": 5,
+            "spi": 5,
+            "reqlevel": 35,
+            "slotbak": 23
+          },
+          "url": "https://www.wowhead.com/forever/item=6774"
+        },
+        {
+          "id": 6788,
+          "name": "Kolkar Hunter's Belt",
+          "count": 1,
+          "choice": true,
+          "quality": 2,
+          "stats": {
+            "agi": 8,
+            "sta": 9,
+            "reqlevel": 35,
+            "slotbak": 6
+          },
+          "url": "https://www.wowhead.com/forever/item=6788"
+        },
+        {
+          "id": 6789,
+          "name": "Ceremonial Centaur Blanket",
+          "count": 1,
+          "choice": true,
+          "quality": 2,
+          "stats": {
+            "int": 2,
+            "spi": 9,
+            "reqlevel": 35,
+            "slotbak": 16
+          },
+          "url": "https://www.wowhead.com/forever/item=6789"
+        },
+        {
+          "id": 254432,
+          "name": "Carved Centaur Totem",
+          "count": 10,
+          "choice": false,
+          "quality": 2,
+          "stats": {
+            "reqlevel": 1
+          },
+          "url": "https://www.wowhead.com/forever/item=254432"
+        }
+      ],
+      "source_change": "new",
+      "url": "https://www.wowhead.com/forever/quest=96222",
+      "changed_at": null,
+      "change_kind": "baseline"
+    },
+    {
+      "id": 8193,
+      "name": "Master Angler",
+      "level": 60,
+      "min_level": 1,
+      "classes": [],
+      "dungeon": false,
+      "rewards": [
+        {
+          "id": 19970,
+          "name": "Arcanite Fishing Pole",
+          "count": 1,
+          "choice": true,
+          "quality": 3,
+          "stats": {
+            "dps": 17.5,
+            "slotbak": 17
+          },
+          "url": "https://www.wowhead.com/forever/item=19970"
+        },
+        {
+          "id": 19979,
+          "name": "Hook of the Master Angler",
+          "count": 1,
+          "choice": true,
+          "quality": 3,
+          "stats": {
+            "slotbak": 12
+          },
+          "url": "https://www.wowhead.com/forever/item=19979"
+        }
+      ],
+      "source_change": "updated",
+      "url": "https://www.wowhead.com/forever/quest=8193",
+      "changed_at": null,
+      "change_kind": "baseline"
+    },
+    {
+      "id": 98372,
+      "name": "An Unfortunate End",
+      "level": 60,
+      "min_level": 1,
+      "classes": [],
+      "dungeon": false,
+      "rewards": [
+        {
+          "id": 280612,
+          "name": "Night Watchman's Torch",
+          "count": 1,
+          "choice": false,
+          "quality": 2,
+          "stats": {},
+          "url": "https://www.wowhead.com/forever/item=280612"
+        }
+      ],
+      "source_change": "new",
+      "url": "https://www.wowhead.com/forever/quest=98372",
+      "changed_at": null,
+      "change_kind": "baseline"
+    },
+    {
+      "id": 99267,
+      "name": "An Unfortunate End",
+      "level": 60,
+      "min_level": 1,
+      "classes": [],
+      "dungeon": false,
+      "rewards": [
+        {
+          "id": 280612,
+          "name": "Night Watchman's Torch",
+          "count": 1,
+          "choice": false,
+          "quality": 2,
+          "stats": {},
+          "url": "https://www.wowhead.com/forever/item=280612"
+        }
+      ],
+      "source_change": "new",
+      "url": "https://www.wowhead.com/forever/quest=99267",
+      "changed_at": null,
+      "change_kind": "baseline"
+    }
+  ]
+}

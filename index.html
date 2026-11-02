@@ -521,7 +521,7 @@
           <div class="last-upd" id="last-upd">⚙️ Daten verarbeitet: Lädt...</div>
         </div>
       </div>
-      <details class="shared-section" id="shared-hints"><summary>🎁 Quests, interessante Items &amp; praktische Tipps</summary><div id="discoveries-home" class="profile-discoveries"></div></details>
+      <details class="shared-section" id="shared-hints"><summary>🎁 Quests, interessante Items &amp; praktische Tipps <span id="quest-rewards-badge" class="badge b-gold"></span></summary><p id="quest-source-note" class="guide-note"></p><div id="quest-rewards-home" class="profile-discoveries"></div><div id="discoveries-home" class="profile-discoveries"></div></details>
       <details class="shared-section" id="section-addons"><summary>🔌 Addons für uns</summary><p class="guide-note">Unsere vorbereitete Auswahl. Vor der Installation die passende Forever-Version prüfen.</p><div id="shared-addons" class="profile-discoveries"></div></details>
       <details class="shared-section"><summary>🏰 Dungeon-Quests · Fortschritt</summary>
         <p class="local-notice">Lokale Browser-Speicherung: Häkchen bleiben getrennt für Faruk und Mirza auf diesem Gerät erhalten.</p>
@@ -553,7 +553,7 @@
         <div id="class-news-faruk" class="home-news-grid"><p>Klassenmeldungen werden geladen…</p></div>
         <button class="more-news-btn" onclick="openClassArchive('Faruk')">Alle Shaman-Meldungen im Archiv →</button>
       </div>
-      <details class="shared-section"><summary>📌 Nützliche Shaman-Hinweise</summary><div id="discoveries-faruk" class="profile-discoveries"></div></details>
+      <details class="shared-section"><summary>📌 Shaman-Quests &amp; nützliche Hinweise</summary><div id="quest-rewards-faruk" class="profile-discoveries"></div><div id="discoveries-faruk" class="profile-discoveries"></div></details>
 
       <details class="shared-section"><summary>Stufe &amp; Berufe</summary><div class="profile-controls">
           <div class="pc-level-row" style="margin:0;padding:4px 10px">
@@ -599,7 +599,7 @@
         <div id="class-news-mirza" class="home-news-grid"><p>Klassenmeldungen werden geladen…</p></div>
         <button class="more-news-btn" onclick="openClassArchive('Mirza')">Alle Hunter-Meldungen im Archiv →</button>
       </div>
-      <details class="shared-section"><summary>📌 Nützliche Hunter-Hinweise</summary><div id="discoveries-mirza" class="profile-discoveries"></div></details>
+      <details class="shared-section"><summary>📌 Hunter-Quests &amp; nützliche Hinweise</summary><div id="quest-rewards-mirza" class="profile-discoveries"></div><div id="discoveries-mirza" class="profile-discoveries"></div></details>
             <div class="guide-section">
         <div class="guide-hdr" onclick="toggleSection('m-pets')">
           <div class="guide-ttl">🐾 Begleiter · welches Pet und warum?</div>
@@ -716,6 +716,7 @@
 
 <script src="assets/news-core.js"></script>
 <script src="assets/guides-core.js"></script>
+<script src="assets/quests-core.js"></script>
 <script>
 const safeStorage = {
   getItem(key) { try { return localStorage.getItem(key); } catch { return null; } },
@@ -902,7 +903,7 @@ function togglePlayerQuest(player, qid) {
 }
 
 // ── DATA SOURCES & INITIALIZATION ──────────────────────────────────────────
-let allItems = [], guidesData = {}, discoveriesData = [];
+let allItems = [], guidesData = {}, discoveriesData = [], questRewardsData = null;
 let sourceHealth = {};
 let newsLoadError = false;
 let activeProfile = safeStorage.getItem('wow_active_profile') || 'all';
@@ -922,7 +923,7 @@ async function init() {
     if (pf) pf.value = lvl;
   });
 
-  await Promise.all([loadNews(), loadGuides(), loadDiscoveries(), loadRecommendations()]);
+  await Promise.all([loadNews(), loadGuides(), loadDiscoveries(), loadRecommendations(), loadQuestRewards()]);
   ['Faruk','Mirza'].forEach(p => {
     [1,2].forEach(slot => { const el=document.getElementById(`prof${slot}-${p.toLowerCase()}`); if (el) el.value=playerProfs[p][slot-1]; });
     const el=document.getElementById(`home-profs-${p.toLowerCase()}`); if(el) el.textContent=playerProfs[p].join(' & ');
@@ -1051,8 +1052,10 @@ async function loadDiscoveries() {
   }
 }
 function renderDiscoveries() {
+  renderQuestRewards();
   const card=x=>`<article class="discovery-card"><strong>${esc(x.title)}</strong><p>${esc(x.action)}</p><small>Stufe ${x.min_level}–${x.max_level} · ${esc(x.source)} · geprüft ${esc(x.checked_at)}</small><p><a href="${safeURL(x.url)}" target="_blank" rel="noopener">Quelle und Details ↗</a></p></article>`;
-  const shared=discoveriesData.filter(x=>!x.players || x.players.length!==1).filter(x=>Object.values(playerLevels).some(lvl=>lvl+7>=x.min_level && lvl<=x.max_level)).sort((a,b)=>(b.priority||0)-(a.priority||0));
+  const rewardNames=WowQuests.select(questRewardsData?.items||[],playerLevels).flatMap(q=>q.rewards.map(i=>i.name.toLowerCase()));
+  const shared=discoveriesData.filter(x=>!x.players || x.players.length!==1).filter(x=>!rewardNames.some(name=>(x.title+' '+x.action).toLowerCase().includes(name))).filter(x=>Object.values(playerLevels).some(lvl=>lvl+7>=x.min_level && lvl<=x.max_level)).sort((a,b)=>(b.priority||0)-(a.priority||0));
   const home=document.getElementById('discoveries-home');
   if(home) home.innerHTML=shared.slice(0,6).map(card).join('') || '<p>Derzeit keine zusätzlichen Hinweise für euren Levelbereich.</p>';
   for(const player of ['Faruk','Mirza']) {
@@ -1063,6 +1066,36 @@ function renderDiscoveries() {
 }
 function safeURL(value) {
   try { const u=new URL(value); return ['http:','https:'].includes(u.protocol)?esc(u.href):'#'; } catch { return '#'; }
+}
+
+async function loadQuestRewards(){
+  try{
+    const r=await fetch('data/quest_rewards.json?v='+Date.now());
+    if(!r.ok)throw new Error('HTTP '+r.status);
+    const data=await r.json();if(!Array.isArray(data.items))throw new Error('Invalid quest list');
+    questRewardsData=data;renderDiscoveries();
+  }catch(e){
+    document.getElementById('quest-source-note').innerHTML='Quest-Belohnungen konnten nicht geladen werden. <button class="retry-btn" onclick="loadQuestRewards()">Erneut versuchen</button>';
+  }
+}
+function renderQuestRewards(){
+  const data=questRewardsData;if(!data)return;
+  const when=data.last_success_at?new Date(data.last_success_at).toLocaleString('de-DE',{timeZone:'Europe/Vienna',dateStyle:'short',timeStyle:'short'}):'noch nicht erfolgreich';
+  const stale=!data.last_success_at||Date.now()-Date.parse(data.last_success_at)>26*3600000;
+  document.getElementById('quest-source-note').textContent=`Wowhead Forever · zuletzt geprüft: ${when} (Wien). ${data.status==='error'?'Abruf fehlgeschlagen; letzter erfolgreicher Stand bleibt sichtbar. ':stale?'Prüfung überfällig. ':''}Auswahl aus ${data.checked_count||0} geladenen Quests. Datenbankstand; Annahmebedingungen und Belohnungen im Spiel prüfen.`;
+  const changed=data.items.filter(q=>WowQuests.recent(q)).length;
+  document.getElementById('quest-rewards-badge').textContent=changed?`${changed} neue/geänderte Funde`:'Quest-Belohnungen';
+  const card=q=>{
+    const badge=WowQuests.recent(q)?(q.change_kind==='discovered'?'Neu entdeckt':'Daten geändert'):(q.source_change==='new'?'Neu in Forever':'Belohnung geändert gegenüber Classic');
+    const hint=discoveriesData.find(x=>q.rewards.some(item=>(x.title+' '+x.action).toLowerCase().includes(item.name.toLowerCase())));
+    const rewards=q.rewards.slice(0,4).map(item=>`<li><a href="${safeURL(item.url)}" target="_blank" rel="noopener">${esc(item.name)}</a>${item.choice?' · zur Auswahl':' · zusätzlich'}${item.stats.dps?' · '+esc(item.stats.dps)+' DPS':''}</li>`).join('');
+    return `<article class="discovery-card quest-reward-card"><small>${esc(badge)}</small><p><strong>${esc(q.name)}</strong></p><small>Quest-Stufe ${esc(q.level)} · Annahme ab ${esc(Math.max(1,q.min_level))}${q.dungeon?' · Dungeon':''}</small><ul>${rewards}</ul>${q.rewards.length>4?'<small>Weitere Belohnungen im Quest-Link.</small>':''}${hint?`<p>${esc(hint.action)}</p><small>Hinweis: <a href="${safeURL(hint.url)}" target="_blank" rel="noopener">${esc(hint.source)}</a></small>`:''}<p><a href="${safeURL(q.url)}" target="_blank" rel="noopener">Quest, Start-NPC &amp; Voraussetzungen ↗</a></p><small>Wowhead · ${esc(when)}${data.status==='error'?' · letzter erfolgreicher Stand':''}</small></article>`;
+  };
+  for(const target of ['home','faruk','mirza']){
+    const player=target==='home'?null:target==='faruk'?'Faruk':'Mirza';
+    const list=WowQuests.select(data.items,playerLevels,player);
+    document.getElementById('quest-rewards-'+target).innerHTML=list.map(card).join('')||(target==='home'?'<p class="guide-note">Im geladenen Datenbank-Ausschnitt keine passenden Quest-Belohnungen für euren Levelbereich.</p>':'');
+  }
 }
 
 function toggleSection(id) {

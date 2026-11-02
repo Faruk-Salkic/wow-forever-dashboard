@@ -23,6 +23,12 @@ Linkovi otvaraju aktuelne preporuke autora, bez lokalnog kalkulatora. Noviji čl
 
 Scraper pregledava sve vraćene RSS stavke, Method i Icy Veins Forever indeks te Reddit RSS. Prati konkretne questove, predmete, petove, spellove, profesije i korisne zajedničke mehanike. Marketing, PTR/tehničke teme, podcasti i nepovezane verzije igre se odbacuju. Izvori imaju odvojene brojače ulaznih, relevantnih i obrađenih stavki te neuspjelih čitanja članaka.
 
+Reddit: r/wowforever do 100 najnovijih stavki; r/classicwow pretraga za Forever; dodatno r/woweconomy samo za Forever teme o profesijama i ekonomiji. Namjenski Forever post ne mora ponavljati ime igre u naslovu. RSS ograničenja i greške ostaju vidljivi u statusu izvora; Reddit savjeti su nepotvrđeni.
+
+`scraper/check_quest_rewards.py` svakog dana čita Wowhead Forever quest listu i objavljene item podatke. Izdvaja Alliance/Both questove za Huntera, Shamana i zajedničke nagrade, uključujući postojeće questove s promijenjenim nagradama. Pregled ispod „Quests, interessante Items” pokazuje malu listu prema vašem levelu, konkretne nazive itema i linkove. Quest-stufe i minimalni level za prihvatanje prikazani su odvojeno. Nema tvrdnje da je predmet automatski BiS niti poređenja s opremom koju nosite.
+
+Wowheadov učitani katalog je ograničen, obično na 1.000 redova; ovo nije garancija da su obuhvaćeni svi novi questovi. `data/quest_reward_state.json` drži hashove za poređenje, a `data/quest_rewards.json` samo mali izbor nagrada. Prvi prolaz ne stvara dnevne obavijesti. „Neu in Forever” označava razliku prema Classicu; „Neu entdeckt” označava kasniji prvi nalaz u praćenom katalogu. Promjena popularnosti ne stvara novu obavijest; promjena nagrade ili statova stvara. Nedostajući podaci se ne izmišljaju, a pad izvora zadržava posljednji ispravan pregled.
+
 Kanonski URL sprečava duplikate. Početna dodatno grupiše identične naslove/događaje, bez spajanja različitih questova samo zato što imaju istu klasu i kategoriju. Stalni pregledi klasa i vodiči bez poznatog datuma ne zauzimaju dnevni pregled.
 
 Hash koristi glavni sadržaj članka. Prva migracija na novi način ekstrakcije postavlja referentno stanje bez lažne obavijesti. Neuspješno čitanje članka čuva prethodni dobar sadržaj. Promjena prevoda sama po sebi ne stvara novu verziju.
@@ -45,6 +51,7 @@ node --test tests/*.test.js
 ```bash
 python scraper/scrape.py
 python scraper/check_guides.py
+python scraper/check_quest_rewards.py
 ```
 
 `Verify dashboard` provjerava push i pull requestove, uključujući odvajanje zajedničkih i klasnih vijesti. Dnevni posao više ne preuzima podatke za kalkulatore.

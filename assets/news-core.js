@@ -15,7 +15,7 @@
     if (item.category === 'guide' && item.date_basis === 'first_seen' && !item.specific_change) return false;
     // Permanent class guides live inside the profile, even after a generic content hash update.
     if (permanent.test((item.url || '').split('?')[0]) && !item.specific_change) return false;
-    return /hotfix|exploit|bis/.test(item.category || '') || /quest|bag|tasch|vendor|händler|rezept|recipe|enchant|verzauber|pet|begleiter|tame|zähm|dungeon|loot|drop|weapon|waffe|tuning|spell|trap|cooldown|talent|fähigkeit|totem|legacy|beruf|herb|skinn|mining|party|gruppe|camp|addon/i.test(text) || (audience(item).length>0 && /change|änder|shock|nerf|buff/i.test(text));
+    return /hotfix|exploit|bis/.test(item.category || '') || /quest|reward|rifle|shield|trinket|bag|tasch|vendor|händler|rezept|recipe|enchant|verzauber|pet|begleiter|tame|zähm|dungeon|loot|drop|weapon|waffe|tuning|spell|trap|cooldown|talent|fähigkeit|totem|legacy|beruf|herb|skinn|mining|party|gruppe|camp|addon/i.test(text) || (audience(item).length>0 && /change|änder|shock|nerf|buff/i.test(text));
   }
   function canonical(url) {
     try {
