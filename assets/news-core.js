@@ -11,7 +11,9 @@
   function eligible(item) {
     const text = `${item.raw_title || ''} ${item.title || ''}`;
     if (generic.test(text)) return false;
-    if (item.summary_mode === 'source_unavailable') return false;
+    if (['source_unavailable','untranslated'].includes(item.summary_mode)) return false;
+    const headline=(item.raw_title||item.title||'').trim();
+    if (/^(?:add-?on|question|help|advice)$/i.test(headline) || /^(?:we need better|i wish|what are your thoughts|wir brauchen bessere)\b/i.test(headline)) return false;
     if (item.category === 'guide' && item.date_basis === 'first_seen' && !item.specific_change) return false;
     // Permanent class guides live inside the profile, even after a generic content hash update.
     if (permanent.test((item.url || '').split('?')[0]) && !item.specific_change) return false;

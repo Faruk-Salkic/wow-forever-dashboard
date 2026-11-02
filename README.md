@@ -23,7 +23,7 @@ Linkovi otvaraju aktuelne preporuke autora, bez lokalnog kalkulatora. Noviji čl
 
 Scraper pregledava sve vraćene RSS stavke, Method i Icy Veins Forever indeks te Reddit RSS. Prati konkretne questove, predmete, petove, spellove, profesije i korisne zajedničke mehanike. Marketing, PTR/tehničke teme, podcasti i nepovezane verzije igre se odbacuju. Izvori imaju odvojene brojače ulaznih, relevantnih i obrađenih stavki te neuspjelih čitanja članaka.
 
-Reddit: r/wowforever do 100 najnovijih stavki; r/classicwow pretraga za Forever; dodatno r/woweconomy samo za Forever teme o profesijama i ekonomiji. Namjenski Forever post ne mora ponavljati ime igre u naslovu. RSS ograničenja i greške ostaju vidljivi u statusu izvora; Reddit savjeti su nepotvrđeni.
+Reddit: r/wowforever do 100 najnovijih stavki; r/classicwow pretraga za Forever; dodatno r/woweconomy samo za Forever teme o profesijama i ekonomiji. Namjenski Forever post ne mora ponavljati ime igre u naslovu. RSS ograničenja i greške ostaju vidljivi u statusu izvora; Reddit savjeti su nepotvrđeni. Generička pitanja i kartice bez korisnog njemačkog sažetka ostaju u arhivi umjesto da potiskuju korisne objave s početne.
 
 `scraper/check_quest_rewards.py` svakog dana čita Wowhead Forever quest listu i objavljene item podatke. Izdvaja Alliance/Both questove za Huntera, Shamana i zajedničke nagrade, uključujući postojeće questove s promijenjenim nagradama. Pregled ispod „Quests, interessante Items” pokazuje malu listu prema vašem levelu, konkretne nazive itema i linkove. Quest-stufe i minimalni level za prihvatanje prikazani su odvojeno. Nema tvrdnje da je predmet automatski BiS niti poređenja s opremom koju nosite.
 
