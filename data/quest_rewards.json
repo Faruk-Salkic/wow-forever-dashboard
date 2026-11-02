@@ -1,9 +1,9 @@
 {
   "source": "Wowhead Forever",
   "source_url": "https://www.wowhead.com/forever/quests",
-  "status": "ok",
-  "error": "",
-  "checked_at": "2026-11-02T14:45:16.625326+00:00",
+  "status": "error",
+  "error": "403 Client Error: Forbidden for url: https://www.wowhead.com/forever/quests",
+  "checked_at": "2026-11-02T14:54:46.937231+00:00",
   "last_success_at": "2026-11-02T14:45:16.625326+00:00",
   "checked_count": 1000,
   "coverage": "Auswahl aus der geladenen Wowhead-Liste, keine vollständige Quest-Erfassung.",
