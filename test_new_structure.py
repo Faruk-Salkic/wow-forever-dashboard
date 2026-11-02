@@ -10,12 +10,20 @@ def test_new_dashboard_structure():
     for view in ['home','faruk','mirza','news']:
         assert soup.find(id='view-'+view), view
     for player in ['faruk','mirza']:
-        for kind in ['class','legacy']:
-            assert soup.find(id=f'planner-{kind}-{player}')
+        assert soup.find(id='class-news-'+player)
         assert soup.find(id='discoveries-'+player)
-    assert soup.find(id='home-news-list')
-    for script in ['planner-core.js','planner-ui.js','news-core.js']:
-        assert soup.find('script',src='assets/'+script)
-    print('Dashboard views, calculator mounts and unique DOM IDs OK')
+        assert soup.find(id='all-quests-'+player)
+    for element in ['home-news-list','discoveries-home','shared-addons','f-items-list','m-items-list']:
+        assert soup.find(id=element)
+    assert soup.find('script',src='assets/news-core.js')
+    assert not soup.select('[id^="planner-"], [id*="talent-milestones"]')
+    assert not soup.find('script',src='assets/planner-core.js')
+    assert not soup.find('script',src='assets/planner-ui.js')
+    assert not (root/'data/planner.json').exists()
+    links=soup.select('a.resource-link')
+    assert {a['href'] for a in links}=={
+        'https://www.wowhead.com/forever/talent-calc/hunter',
+        'https://www.wowhead.com/forever/talent-calc/shaman'}
+    print('Separate news feeds, shared guidance and no bundled calculators OK')
 
 if __name__=='__main__': test_new_dashboard_structure()

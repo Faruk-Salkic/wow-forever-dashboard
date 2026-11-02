@@ -1,0 +1,17 @@
+.guide-note,.guide-source{color:var(--dim);font-size:.76rem;line-height:1.6;margin:12px 0}
+.guide-source a,.discovery-card a{color:var(--blue);text-decoration:underline}
+.resource-link{color:var(--gold);font-size:.8rem;padding:8px 12px;border:1px solid var(--glass-b);border-radius:8px;text-decoration:none}
+.profile-discoveries,.quest-players-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:14px 0}
+.discovery-card{min-width:0;padding:14px;border:1px solid #354251;border-radius:10px;background:#17202c;font-size:.82rem;line-height:1.6}
+.discovery-card strong{color:#e8ce87}.discovery-card p{margin:6px 0;color:#bec6cd}.discovery-card small{color:var(--dim)}
+.shared-section{margin:16px 0;padding:16px 20px;border:1px solid var(--glass-b);border-radius:14px;background:var(--glass)}
+.shared-section summary{cursor:pointer;color:var(--gold);font-weight:600;line-height:1.5}
+.shared-section>.profile-controls{margin-top:14px}.quest-players-grid h3{margin:0 0 10px;font-size:1rem;color:var(--gold)}
+.news-card{width:100%;font-family:inherit;text-align:left;color:var(--text);cursor:pointer}
+.news-card .hn-meta{width:100%;flex-wrap:wrap;gap:8px}.news-card .hn-teaser,.news-card .hn-meta{display:block}.news-card .hn-meta{display:flex}
+.news-card:focus-visible,.resource-link:focus-visible,.shared-section summary:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+.archive-profiles{display:flex!important;flex-wrap:wrap;gap:8px;margin-bottom:12px}.archive-profiles button{font:inherit;font-size:.8rem;color:var(--dim);border:1px solid var(--glass-b);border-radius:100px;background:var(--glass);padding:8px 12px;cursor:pointer}.archive-profiles button.active{color:var(--gold);border-color:var(--gold)}
+@media(max-width:740px){.profile-discoveries,.quest-players-grid{grid-template-columns:1fr}.app-header{flex-direction:column;align-items:flex-start;gap:4px;padding:10px 16px}.header-logo{font-size:1rem;white-space:nowrap}.header-logo span{font-size:.7rem}.header-status .live-pill{display:none}.data-proc-text{font-size:.65rem}.profile-controls,.prof-select-group{flex-wrap:wrap;max-width:100%}.prof-select-group{width:100%}.prof-select-group label{flex-basis:100%}.prof-select-group select{max-width:calc(50% - 4px);min-width:0}.shared-section{padding:14px}.item-quest-row{padding:10px}.iq-title-line{flex-wrap:wrap}.grid{grid-template-columns:1fr!important}.profile-nav-bar{gap:10px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.star,.view{animation:none!important}}
+
+.section-title-row{flex-wrap:wrap;gap:8px}

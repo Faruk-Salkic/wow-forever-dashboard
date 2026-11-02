@@ -15,7 +15,7 @@
     if (item.category === 'guide' && item.date_basis === 'first_seen' && !item.specific_change) return false;
     // Permanent class guides live inside the profile, even after a generic content hash update.
     if (permanent.test((item.url || '').split('?')[0]) && !item.specific_change) return false;
-    return /hotfix|exploit|bis/.test(item.category || '') || /quest|bag|tasch|vendor|händler|rezept|recipe|enchant|verzauber|pet|begleiter|tame|zähm|dungeon|loot|drop|weapon|waffe|tuning|spell|trap|cooldown|talent|fähigkeit|totem|legacy|beruf|herb|skinn|mining|party|gruppe|camp/i.test(text);
+    return /hotfix|exploit|bis/.test(item.category || '') || /quest|bag|tasch|vendor|händler|rezept|recipe|enchant|verzauber|pet|begleiter|tame|zähm|dungeon|loot|drop|weapon|waffe|tuning|spell|trap|cooldown|talent|fähigkeit|totem|legacy|beruf|herb|skinn|mining|party|gruppe|camp|addon/i.test(text) || (audience(item).length>0 && /change|änder|shock|nerf|buff/i.test(text));
   }
   function canonical(url) {
     try {
@@ -37,12 +37,25 @@
     const intersection = [...x].filter(w=>y.has(w)).length;
     return intersection / (x.size + y.size - intersection) >= .84;
   }
-  function selectHome(items, now = Date.now()) {
+  function audience(item) {
+    const title=`${item.raw_title || ''} ${item.title || ''} ${(item.url || '').split('?')[0]}`.toLowerCase();
+    const explicit=[];
+    if (/\b(?:hunter|jäger|jaeger|beast.mastery|marksmanship)\b/.test(title)) explicit.push('Hunter');
+    if (/\b(?:shaman|schamane|schamanen|windfury|totem)\b/.test(title)) explicit.push('Shaman');
+    if (explicit.length) return explicit;
+    // Practical shared guides must not inherit a class from an incidental body mention.
+    if (/bag|tasch|vendor|händler|enchant|verzauber|recipe|rezept|addon|profession|beruf|dungeon|party|gruppe|camp/.test(title)) return [];
+    return (item.classes || []).filter(c=>c==='Hunter'||c==='Shaman');
+  }
+  function selectRecent(items, now = Date.now(), scope = 'all', limit = 4) {
     const candidates = items.filter(i=>eligible(i) && timestamp(i)<=now && now-timestamp(i)<=7*864e5)
+      .filter(i=>scope==='all' || (scope==='general' ? audience(i).length===0 : audience(i).includes(scope)))
       .sort((a,b)=>timestamp(b)-timestamp(a) || Number(b.category==='hotfix')-Number(a.category==='hotfix') || String(a.id).localeCompare(String(b.id)));
     const result=[];
     for (const item of candidates) if (!result.some(older=>sameStory(item,older))) result.push(item);
-    return result.slice(0, 4);
+    return result.slice(0, limit);
   }
-  return {timestamp,eligible,canonical,sameStory,selectHome};
+  const selectHome=(items,now=Date.now())=>selectRecent(items,now,'general',4);
+  const selectClass=(items,cls,now=Date.now())=>selectRecent(items,now,cls,12);
+  return {timestamp,eligible,canonical,sameStory,audience,selectRecent,selectHome,selectClass};
 });

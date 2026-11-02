@@ -4,15 +4,14 @@ Jednostavan duo vodič: početna s dva profila i najviše četiri korisne novost
 
 [Otvori dashboard](https://faruk-salkic.github.io/wow-forever-dashboard/)
 
-## Profili i kalkulatori
+## Raspored
 
-- Kompletna tri talent stabla za svaku klasu, uz rankove, preduslove, ograničenje po levelu i ukupno 51 bod.
-- Odvojeni prijedlozi za duo levelanje, tačan redoslijed bodova i puni build do 60. To su praktični prijedlozi, ne izmjereni najbolji raid buildovi.
-- Legacy kalkulator: tri stabla, zajednički limit od 16, početno 0 otključanih bodova. Ciljevi: mješovito, skupljanje, proizvodnja ili brzo levelanje. Talented utiče na računanje ranijih klasnih bodova.
-- Planovi, profesije, leveli i quest kvačice ostaju lokalno u browseru. Izvoz/uvoz buildova služi za ručni prijenos; nema automatske sinhronizacije dva računara.
-- Stalni vodiči su u sklopivim sekcijama. Quest lista podrazumijevano prikazuje bliži raspon levela.
-
-Podaci kalkulatora preuzeti su iz [Talents Forever](https://talentsforever.com/about), pod licencom [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Adaptacija: samo Shaman, Hunter i objavljeni Legacy talenti, stabilni identifikatori i prilagođen interfejs. Izvorni tekstovi rankova ostaju na engleskom. Autor izvora: Chris Baldwin. Nazivi, ikone i tekst igre pripadaju Blizzard Entertainmentu. Datum i beta build prikazani su uz kalkulator; podaci nisu obećanje da je svaka vrijednost potvrđena na live serveru.
+- Početna: zajedničke novosti, novi questovi, korisni itemi i Addons. Detalji i postojeće dungeon checkliste ostaju sklopljeni dok ih ne otvorite.
+- Faruk: Shaman vijesti i kratke klasne napomene.
+- Mirza: Hunter vijesti, pet promjene i kratke klasne napomene.
+- Klase se usmjeravaju prema naslovu/linku i oznakama izvora. Opći vodiči ne dobijaju klasnu oznaku samo zbog usputnog spominjanja klase.
+- Na stranici se ne učitavaju lokalni talent ni Legacy kalkulatori. Svaki profil ima direktan link na Wowhead za planiranje talenata.
+- Leveli, profesije, pročitane vijesti i odvojene quest kvačice ostaju sačuvani u istim lokalnim browser ključevima. Nema automatske sinhronizacije između uređaja.
 
 ## Novosti i dnevni raspored
 
@@ -41,9 +40,8 @@ node --test tests/*.test.js
 
 ```bash
 python scraper/scrape.py
-python scripts/update_planner_data.py
 ```
 
-Dnevni workflow provjerava i novi izvoz talent podataka. Ako izvor promijeni format ili preporuke više nisu valjane na novim stablima, zadržava se posljednji dobar snapshot. Promjene tada treba pregledati uz prikazani datum izvora. `Verify dashboard` dodatno provjerava push i pull requestove.
+`Verify dashboard` provjerava push i pull requestove, uključujući odvajanje zajedničkih i klasnih vijesti. Dnevni posao više ne preuzima podatke za kalkulatore.
 
 `data/discoveries.json` sadrži kratke provjerene praktične napomene i izvore. `data/guides.json` zadržava stabilne ID-eve postojećih dungeon questova; prije puta treba provjeriti konkretne zahtjeve u igri. `data/news.json` čuva sažetke i hashove; puni izvorni članci obrađuju se samo u memoriji i ne objavljuju se u bazi. Browser dobija `data/feed.json`, a vrijeme obrade nije isto što i vrijeme Pages objave.

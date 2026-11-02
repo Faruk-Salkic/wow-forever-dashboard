@@ -46,9 +46,6 @@ jobs:
       - name: 📦 Install dependencies
         run: pip install -r scraper/requirements.txt
 
-      - name: Refresh validated talent data
-        run: python scripts/update_planner_data.py --keep-on-error
-
       - name: 🔍 Run scraper & AI validator
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
@@ -66,6 +63,6 @@ jobs:
         run: |
           git config --global user.name  "WoW-Bot 🤖"
           git config --global user.email "wow-bot@faruk-mirza.github.io"
-          git add data/feed.json data/news.json data/seen_ids.json data/guides.json data/bis.json data/planner.json || true
+          git add data/feed.json data/news.json data/seen_ids.json data/guides.json data/bis.json || true
           git diff --cached --quiet || git commit -m "🗞️ Daily verified update $(date -u '+%Y-%m-%d %H:%M UTC')"
           git push

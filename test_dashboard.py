@@ -176,11 +176,11 @@ def test_index_html():
     assert 'id="cc-rogue"' not in content, "Rogue class card mora biti uklonjen!"
 
     # 6. Compact hero, level bar & addons section
-    assert "table-responsive" in content, "Nedostaje .table-responsive klasa!"
-    assert "bis-pending-card" in content, "Nedostaje bis-pending-card zamena za praznu tabelu!"
+    assert 'id="shared-addons"' in content, "Nedostaju zajednički addoni!"
+    assert 'id="class-news-faruk"' in content and 'id="class-news-mirza"' in content, "Nedostaju odvojene klasne vijesti!"
     assert "retry-btn" in content, "Nedostaje retry dugme za greške u učitavanju!"
     assert "section-addons" in content, "Nedostaje section-addons sekcija!"
-    assert "level-bar" in content, "Nedostaje level-bar kontrola za ručni unos nivoa!"
+    assert 'id="home-lvl-faruk"' in content and 'id="home-lvl-mirza"' in content, "Nedostaju odvojeni nivoi!"
     assert "setPlayerLevel" in content, "Nedostaje funkcija setPlayerLevel!"
 
     # 7. Tracking izmena i oznake ažuriranja

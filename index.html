@@ -304,72 +304,6 @@
     .guide-content.open { display: block; padding-top: 18px; }
 
     /* TALENT PLAN & TREE */
-    .talent-priority-list {
-      list-style: none; padding: 0; margin-bottom: 18px;
-    }
-    .talent-step {
-      padding: 10px 14px; background: rgba(255,255,255,0.025);
-      border: 1px solid rgba(255,255,255,0.06); border-radius: 10px;
-      margin-bottom: 8px; display: flex; align-items: flex-start; gap: 12px;
-      transition: 0.2s;
-    }
-    .talent-step.active-step {
-      background: rgba(240,192,64,0.08); border-color: rgba(240,192,64,0.3);
-    }
-    .ts-lvl {
-      font-size: 0.75rem; font-weight: 700; color: var(--gold);
-      background: rgba(240,192,64,0.12); padding: 3px 8px; border-radius: 6px;
-      white-space: nowrap; margin-top: 2px;
-    }
-    .ts-details { flex: 1; }
-    .ts-talent { font-size: 0.88rem; font-weight: 600; color: #fff; margin-bottom: 2px; }
-    .ts-why { font-size: 0.78rem; color: var(--dim); line-height: 1.4; }
-
-    .talent-tree-grid {
-      display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;
-      padding: 16px; background: rgba(0,0,0,0.4); border-radius: 14px;
-      border: 1px solid rgba(255,255,255,0.07); margin: 14px 0;
-    }
-    @media(max-width: 640px) { .talent-tree-grid { grid-template-columns: repeat(2, 1fr); } }
-
-    .tree-node {
-      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 10px; padding: 10px; cursor: pointer; transition: 0.2s;
-      position: relative;
-    }
-    .tree-node:hover {
-      background: rgba(255,255,255,0.09); border-color: var(--gold);
-    }
-    .tree-node.recommended {
-      border-color: rgba(240,192,64,0.5); background: rgba(240,192,64,0.07);
-    }
-    .tn-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
-    .tn-name { font-size: 0.82rem; font-weight: 600; color: #fff; }
-    .tn-rank {
-      font-size: 0.68rem; padding: 1px 6px; border-radius: 100px;
-      background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.15); color: var(--gold);
-    }
-    .tn-desc { font-size: 0.72rem; color: var(--dim); line-height: 1.3; }
-
-    /* LEGACY TREE */
-    .legacy-box {
-      background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.06);
-      border-radius: 14px; padding: 16px; margin-bottom: 14px;
-    }
-    .legacy-row {
-      display: flex; align-items: flex-start; gap: 12px; padding: 10px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.04);
-    }
-    .legacy-row:last-child { border-bottom: none; }
-    .lr-pt {
-      font-size: 0.74rem; font-weight: 700; color: var(--blue);
-      background: rgba(79,195,247,0.12); border: 1px solid rgba(79,195,247,0.3);
-      padding: 3px 8px; border-radius: 6px; white-space: nowrap; margin-top: 2px;
-    }
-    .lr-name { font-weight: 600; color: #fff; font-size: 0.88rem; margin-bottom: 2px; }
-    .lr-desc { font-size: 0.78rem; color: var(--dim); line-height: 1.45; }
-    .lr-miss { font-size: 0.73rem; color: #ffb74d; margin-top: 3px; }
-
     /* PET SECTIONS */
     .pet-duo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 8px; }
     @media(max-width: 640px) { .pet-duo-grid { grid-template-columns: 1fr; } }
@@ -475,7 +409,7 @@
     .empty { padding: 36px 20px; text-align: center; color: var(--dim); }
     .empty-ico { font-size: 2.4rem; margin-bottom: 8px; }
   </style>
-  <link rel="stylesheet" href="assets/planner.css">
+  <link rel="stylesheet" href="assets/dashboard.css">
 </head>
 <body>
 <div class="bg"></div>
@@ -512,8 +446,8 @@
     <!-- ═══════════════════════════════════════════════════════════════════ -->
     <section id="view-home" class="view active">
       <div class="hero-card">
-        <h1>WoW Forever — Unser Duo-Leitfaden</h1>
-        <p class="hero-subtitle">Direkte Antworten auf Talente, Quests, Begleiter und spielrelevante Neuigkeiten für Faruk und Mirza.</p>
+        <h1>WoW Forever · Faruk &amp; Mirza</h1>
+        <p class="hero-subtitle">Gemeinsame Neuigkeiten hier. Shaman- und Hunter-News findet ihr im jeweiligen Profil.</p>
       </div>
 
       <!-- DVIJE VELIKE KARTICE ZA FARUKA I MIRZU -->
@@ -527,18 +461,18 @@
           </div>
           <div class="pc-spec">Enhancement (Verstärkung) • Nahkampf-Hybrid</div>
           <div class="pc-profs" id="home-profs-faruk">⛏️ Bergbau &amp; ⚙️ Ingenieurskunst</div>
-          
+
           <div class="pc-level-row" onclick="event.stopPropagation()">
             <label for="home-lvl-faruk">Aktuelle Stufe:</label>
             <input type="number" id="home-lvl-faruk" class="level-input" min="1" max="60" value="1" onchange="setPlayerLevel('Faruk', this.value)" />
           </div>
 
           <div class="pc-next-hint" id="home-hint-faruk">
-            Lade nächsten Talentpunkt...
+            Klassenmeldungen werden geladen…
           </div>
 
           <button class="pc-btn" onclick="showView('faruk'); event.stopPropagation();">
-            Faruks Profil &amp; Guide öffnen →
+            🌊 Shaman-News für Faruk →
           </button>
         </div>
 
@@ -551,18 +485,18 @@
           </div>
           <div class="pc-spec">Beast Mastery (Tierherrschaft) • Ranged DPS</div>
           <div class="pc-profs" id="home-profs-mirza">🔪 Kürschnerei &amp; 🌿 Kräuterkunde</div>
-          
+
           <div class="pc-level-row" onclick="event.stopPropagation()">
             <label for="home-lvl-mirza">Aktuelle Stufe:</label>
             <input type="number" id="home-lvl-mirza" class="level-input" min="1" max="60" value="1" onchange="setPlayerLevel('Mirza', this.value)" />
           </div>
 
           <div class="pc-next-hint" id="home-hint-mirza">
-            Lade nächsten Talentpunkt...
+            Klassenmeldungen werden geladen…
           </div>
 
           <button class="pc-btn" onclick="showView('mirza'); event.stopPropagation();">
-            Mirzas Profil &amp; Guide öffnen →
+            🏹 Hunter-News für Mirza →
           </button>
         </div>
       </div>
@@ -570,12 +504,12 @@
       <!-- NAJVIŠE ČETIRI SAŽETE KARTICE STVARNIH NOVOSTI -->
       <div class="home-news-section">
         <div class="section-title-row">
-          <h2>📰 Spielrelevante Neuigkeiten</h2>
+          <h2>📰 Allgemeines für uns</h2>
           <span class="badge b-gold" id="home-news-badge">Gefiltert: Max 4</span>
         </div>
-        <p class="section-subtitle">Neue Quests, Ausrüstung und wichtige Änderungen für uns · letzte 7 Tage · höchstens 4 Meldungen.</p>
-        
-        <p id="home-source-note" class="planner-note" role="status"></p>
+        <p class="section-subtitle">Neue Quests, interessante Items, Addons und gemeinsame Spielinfos · letzte 7 Tage · höchstens 4 Meldungen.</p>
+
+        <p id="home-source-note" class="guide-note" role="status"></p>
         <div id="home-news-list" class="home-news-grid">
           <div class="empty"><div class="empty-ico">⏳</div><div>Suche spielrelevante Neuigkeiten...</div></div>
         </div>
@@ -587,6 +521,15 @@
           <div class="last-upd" id="last-upd">⚙️ Daten verarbeitet: Lädt...</div>
         </div>
       </div>
+      <details class="shared-section" id="shared-hints"><summary>🎁 Quests, interessante Items &amp; praktische Tipps</summary><div id="discoveries-home" class="profile-discoveries"></div></details>
+      <details class="shared-section" id="section-addons"><summary>🔌 Addons für uns</summary><p class="guide-note">Unsere vorbereitete Auswahl. Vor der Installation die passende Forever-Version prüfen.</p><div id="shared-addons" class="profile-discoveries"></div></details>
+      <details class="shared-section"><summary>🏰 Dungeon-Quests · Fortschritt</summary>
+        <p class="local-notice">Lokale Browser-Speicherung: Häkchen bleiben getrennt für Faruk und Mirza auf diesem Gerät erhalten.</p>
+        <div class="quest-players-grid">
+          <div><h3>Faruk</h3><label class="guide-note"><input type="checkbox" id="all-quests-faruk" onchange="renderPlayerItems('Faruk')"> Alle Dungeon-Quests zeigen</label><div id="f-items-list"></div></div>
+          <div><h3>Mirza</h3><label class="guide-note"><input type="checkbox" id="all-quests-mirza" onchange="renderPlayerItems('Mirza')"> Alle Dungeon-Quests zeigen</label><div id="m-items-list"></div></div>
+        </div>
+      </details>
     </section>
 
     <!-- ═══════════════════════════════════════════════════════════════════ -->
@@ -595,8 +538,19 @@
     <section id="view-faruk" class="view">
       <div class="profile-nav-bar">
         <button class="back-home-btn" onclick="showView('home')">← Zurück zur Übersicht</button>
-        <div class="profile-header-title">🌊 Faruk — Zwerg Schamane</div>
-        <div class="profile-controls">
+        <div class="profile-header-title">🌊 Faruk · Shaman-News</div>
+        <a class="resource-link" href="https://www.wowhead.com/forever/talent-calc/shaman" target="_blank" rel="noopener">Talente auf Wowhead ↗</a>
+      </div>
+      <div class="home-news-section">
+        <div class="section-title-row"><h2>🌊 Neu für Shaman</h2><span class="badge b-gold" id="class-news-badge-faruk">Lädt…</span></div>
+        <p class="section-subtitle">Spells, Klassenänderungen, passende Quests und Items · letzte 7 Tage.</p>
+        <p id="class-source-note-faruk" class="guide-note"></p>
+        <div id="class-news-faruk" class="home-news-grid"><p>Klassenmeldungen werden geladen…</p></div>
+        <button class="more-news-btn" onclick="openClassArchive('Faruk')">Alle Shaman-Meldungen im Archiv →</button>
+      </div>
+      <details class="shared-section"><summary>📌 Nützliche Shaman-Hinweise</summary><div id="discoveries-faruk" class="profile-discoveries"></div></details>
+
+      <details class="shared-section"><summary>Stufe &amp; Berufe</summary><div class="profile-controls">
           <div class="pc-level-row" style="margin:0;padding:4px 10px">
             <label for="prof-lvl-faruk">Stufe:</label>
             <input type="number" id="prof-lvl-faruk" class="level-input" min="1" max="60" value="1" onchange="setPlayerLevel('Faruk', this.value)" />
@@ -616,79 +570,7 @@
               <option value="Lederverarbeitung">🥋 Lederverarbeitung</option>
             </select>
           </div>
-        </div>
-      </div>
-
-      <!-- PRVI PRIKAZ: WAS IST JETZT WICHTIG -->
-      <div class="now-card">
-        <div class="now-title">⚡ Was ist jetzt für Faruk wichtig? (Stufe <span id="now-lvl-disp-faruk">1</span>)</div>
-        <div class="now-grid">
-          <div class="now-item">
-            <div class="now-label">🎯 Talent für deine Stufe</div>
-            <div class="now-value" id="now-talent-faruk">Lade Talent-Empfehlung...</div>
-            <div class="now-desc" id="now-talent-desc-faruk">Begründung für die Wahl.</div>
-          </div>
-          <div class="now-item">
-            <div class="now-label">🎁 Wichtiger Quest / Upgrade</div>
-            <div class="now-value" id="now-quest-faruk">Lade Quest-Empfehlung...</div>
-            <div class="now-desc" id="now-quest-desc-faruk">Wichtige Beute oder Klassen-Fähigkeit.</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="guide-section">
-        <div class="guide-hdr" onclick="toggleSection('f-talents')">
-          <div class="guide-ttl">🌲 Talente · Enhancement</div>
-          <span class="guide-toggle-icon" id="icon-f-talents">▼</span>
-        </div>
-        <div class="guide-content" id="content-f-talents">
-          <ul class="talent-priority-list" id="f-talent-milestones"></ul>
-          <div id="planner-class-faruk"><p>Talentdaten werden geladen…</p></div>
-        </div>
-      </div>
-      <div class="guide-section">
-        <div class="guide-hdr" onclick="toggleSection('f-legacy')">
-          <div class="guide-ttl">🏛️ Legacy · planen und bewusst entscheiden</div>
-          <span class="guide-toggle-icon" id="icon-f-legacy">▼</span>
-        </div>
-        <div class="guide-content" id="content-f-legacy">
-          <div id="planner-legacy-faruk"><p>Legacy-Daten werden geladen…</p></div>
-        </div>
-      </div>
-
-      <!-- SEKTION: ITEMS & QUESTE -->
-      <div class="guide-section">
-        <div class="guide-hdr" onclick="toggleSection('f-items')">
-          <div class="guide-ttl">⚔️ Nützliche Items &amp; Wichtige Quests (nach Level)</div>
-          <span class="guide-toggle-icon" id="icon-f-items">▼</span>
-        </div>
-        <div class="guide-content" id="content-f-items">
-          <div class="local-notice" style="margin-bottom:12px">
-            ℹ️ <strong>Lokale Browser-Speicherung:</strong> Die Quest-Häkchen für Faruk werden getrennt direkt in deinem Browser (localStorage) gespeichert.
-          </div>
-          <div id="discoveries-faruk" class="profile-discoveries"></div>
-          <label style="font-size:.8rem;color:var(--dim)"><input type="checkbox" id="all-quests-faruk" onchange="renderPlayerItems('Faruk')"> Alle Dungeon-Quests zeigen</label>
-          <div id="f-items-list">
-            <!-- Dynamisch generiert -->
-          </div>
-        </div>
-      </div>
-
-      <!-- SEKTION: BERUFE, SYNERGIE & ADDONS -->
-      <div class="guide-section">
-        <div class="guide-hdr" onclick="toggleSection('f-addons')">
-          <div class="guide-ttl">🛠️ Berufe, Duo-Synergie &amp; Addons</div>
-          <span class="guide-toggle-icon" id="icon-f-addons">▼</span>
-        </div>
-        <div class="guide-content" id="content-f-addons">
-          <div style="margin-bottom:16px;padding:12px 14px;background:rgba(240,192,64,0.06);border-left:3px solid var(--gold);border-radius:0 8px 8px 0;font-size:0.83rem">
-            <strong>🤝 Synergie mit Mirza:</strong> Faruk verarbeitet Erze zu <em>Zielattrappen (Target Dummies)</em>, um gefährliche Elite-Pulls zu retten, und baut Munition für Mirzas Fernkampfwaffen. Mirza stellt im Camp Räucherkerzen auf (+Intelligenz/Mana für Faruk).
-          </div>
-          <div id="f-addons-container">
-            <!-- Render Addons -->
-          </div>
-        </div>
-      </div>
+        </div></details>
     </section>
 
     <!-- ═══════════════════════════════════════════════════════════════════ -->
@@ -697,8 +579,35 @@
     <section id="view-mirza" class="view">
       <div class="profile-nav-bar">
         <button class="back-home-btn" onclick="showView('home')">← Zurück zur Übersicht</button>
-        <div class="profile-header-title">🏹 Mirza — Jäger</div>
-        <div class="profile-controls">
+        <div class="profile-header-title">🏹 Mirza · Hunter-News</div>
+        <a class="resource-link" href="https://www.wowhead.com/forever/talent-calc/hunter" target="_blank" rel="noopener">Talente auf Wowhead ↗</a>
+      </div>
+      <div class="home-news-section">
+        <div class="section-title-row"><h2>🏹 Neu für Hunter</h2><span class="badge b-gold" id="class-news-badge-mirza">Lädt…</span></div>
+        <p class="section-subtitle">Spells, Klassenänderungen, passende Quests und Items · letzte 7 Tage.</p>
+        <p id="class-source-note-mirza" class="guide-note"></p>
+        <div id="class-news-mirza" class="home-news-grid"><p>Klassenmeldungen werden geladen…</p></div>
+        <button class="more-news-btn" onclick="openClassArchive('Mirza')">Alle Hunter-Meldungen im Archiv →</button>
+      </div>
+      <details class="shared-section"><summary>📌 Nützliche Hunter-Hinweise</summary><div id="discoveries-mirza" class="profile-discoveries"></div></details>
+            <div class="guide-section">
+        <div class="guide-hdr" onclick="toggleSection('m-pets')">
+          <div class="guide-ttl">🐾 Begleiter · welches Pet und warum?</div>
+          <span class="guide-toggle-icon" id="icon-m-pets">▼</span>
+        </div>
+        <div class="guide-content" id="content-m-pets">
+          <div class="profile-discoveries">
+            <article class="discovery-card"><strong>Leveln im Duo: Bär als Startvorschlag</strong><p>Swipe trifft mehrere Ziele und hilft bei Gruppen von Gegnern. Katze oder Raptor mit gelerntem Claw sind Alternativen, wenn ihr überwiegend einzelne Ziele bekämpft. Ein Bär ist keine Garantie für sichere Mehrfach-Pulls.</p><small>Grundlage: Icy Veins BM- und Survival-Leveling, Beta-Stand.</small></article>
+            <article class="discovery-card"><strong>BG: Kontrolle passend zu eurem Plan</strong><p>Spinne mit Web zum Festhalten auf Distanz; Eber mit Charge zum Ansetzen am Gegner. Katze mit Prowl für verdeckte Annäherung. Welche Wahl besser passt, hängt vom Gegner und eurer Rolle ab; kein pauschaler BG-Sieger.</p><small>Familienfähigkeiten: Classic WoW Forever, Client-Daten.</small></article>
+            <article class="discovery-card"><strong>Dungeon: erst die Rolle klären</strong><p>Mit normalem Tank: Growl-Autocast aus und AoE neben kontrollierten Gegnern vermeiden. Wolf mit Furious Howl unterstützt Nahkampfangriffe, etwa Faruks. Bär, wenn ihr bewusst Pet-Tanking vereinbart; vor Sprüngen Pet wegpacken.</p></article>
+            <article class="discovery-card"><strong>Lernen, füttern, Wege kontrollieren</strong><p>Neue Fähigkeitsränge durch das Zähmen eines passenden Tiers lernen, dann einem geeigneten Pet beibringen. Nicht jede Familie kann alles. Futter mitnehmen. Frühe Tiere und Klassenfreischaltung nach Startgebiet prüfen.</p><a href="https://www.icy-veins.com/wow-forever/hunter-class-quests" target="_blank" rel="noopener">Erstes Pet und Klassenquest ↗</a></article>
+          </div>
+          <p class="guide-source">Quellen: <a href="https://www.icy-veins.com/wow-forever/beast-mastery-hunter-leveling" target="_blank" rel="noopener">Icy Veins: BM-Leveln</a> · <a href="https://www.icy-veins.com/wow-forever/survival-hunter-leveling" target="_blank" rel="noopener">Alternative fürs Leveln</a> · <a href="https://classicwowforever.com/hunter-pets/" target="_blank" rel="noopener">Familien und Zähmorte</a>. Geprüft am 01.11.2026, vor Launch.</p>
+        </div>
+      </div>
+
+
+      <details class="shared-section"><summary>Stufe &amp; Berufe</summary><div class="profile-controls">
           <div class="pc-level-row" style="margin:0;padding:4px 10px">
             <label for="prof-lvl-mirza">Stufe:</label>
             <input type="number" id="prof-lvl-mirza" class="level-input" min="1" max="60" value="1" onchange="setPlayerLevel('Mirza', this.value)" />
@@ -718,91 +627,7 @@
               <option value="Ingenieurskunst">⚙️ Ingenieurskunst</option>
             </select>
           </div>
-        </div>
-      </div>
-
-      <!-- PRVI PRIKAZ: WAS IST JETZT WICHTIG -->
-      <div class="now-card" style="border-color:rgba(171,214,86,0.35);background:linear-gradient(135deg,rgba(171,214,86,0.08),rgba(15,30,70,0.6))">
-        <div class="now-title" style="color:#abd656">⚡ Was ist jetzt für Mirza wichtig? (Stufe <span id="now-lvl-disp-mirza">1</span>)</div>
-        <div class="now-grid">
-          <div class="now-item">
-            <div class="now-label" style="color:#abd656">🎯 Talent für deine Stufe</div>
-            <div class="now-value" id="now-talent-mirza">Lade Talent-Empfehlung...</div>
-            <div class="now-desc" id="now-talent-desc-mirza">Begründung für die Wahl.</div>
-          </div>
-          <div class="now-item">
-            <div class="now-label" style="color:#abd656">🎁 Wichtiger Quest / Begleiter</div>
-            <div class="now-value" id="now-quest-mirza">Lade Quest-Empfehlung...</div>
-            <div class="now-desc" id="now-quest-desc-mirza">Wichtige Beute oder Pet-Zähmung.</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="guide-section">
-        <div class="guide-hdr" onclick="toggleSection('m-pets')">
-          <div class="guide-ttl">🐾 Begleiter · welches Pet und warum?</div>
-          <span class="guide-toggle-icon" id="icon-m-pets">▼</span>
-        </div>
-        <div class="guide-content" id="content-m-pets">
-          <div class="profile-discoveries">
-            <article class="discovery-card"><strong>Leveln im Duo: Bär als Startvorschlag</strong><p>Swipe trifft mehrere Ziele und hilft bei Gruppen von Gegnern. Katze oder Raptor mit gelerntem Claw sind Alternativen, wenn ihr überwiegend einzelne Ziele bekämpft. Ein Bär ist keine Garantie für sichere Mehrfach-Pulls.</p><small>Grundlage: Icy Veins BM- und Survival-Leveling, Beta-Stand.</small></article>
-            <article class="discovery-card"><strong>BG: Kontrolle passend zu eurem Plan</strong><p>Spinne mit Web zum Festhalten auf Distanz; Eber mit Charge zum Ansetzen am Gegner. Katze mit Prowl für verdeckte Annäherung. Welche Wahl besser passt, hängt vom Gegner und eurer Rolle ab; kein pauschaler BG-Sieger.</p><small>Familienfähigkeiten: Classic WoW Forever, Client-Daten.</small></article>
-            <article class="discovery-card"><strong>Dungeon: erst die Rolle klären</strong><p>Mit normalem Tank: Growl-Autocast aus und AoE neben kontrollierten Gegnern vermeiden. Wolf mit Furious Howl unterstützt Nahkampfangriffe, etwa Faruks. Bär, wenn ihr bewusst Pet-Tanking vereinbart; vor Sprüngen Pet wegpacken.</p></article>
-            <article class="discovery-card"><strong>Lernen, füttern, Wege kontrollieren</strong><p>Neue Fähigkeitsränge durch das Zähmen eines passenden Tiers lernen, dann einem geeigneten Pet beibringen. Nicht jede Familie kann alles. Futter mitnehmen. Frühe Tiere und Klassenfreischaltung nach Startgebiet prüfen.</p><a href="https://www.icy-veins.com/wow-forever/hunter-class-quests" target="_blank" rel="noopener">Erstes Pet und Klassenquest ↗</a></article>
-          </div>
-          <p class="planner-source">Quellen: <a href="https://www.icy-veins.com/wow-forever/beast-mastery-hunter-leveling" target="_blank" rel="noopener">Icy Veins: BM-Leveln</a> · <a href="https://www.icy-veins.com/wow-forever/survival-hunter-leveling" target="_blank" rel="noopener">Alternative fürs Leveln</a> · <a href="https://classicwowforever.com/hunter-pets/" target="_blank" rel="noopener">Familien und Zähmorte</a>. Geprüft am 01.11.2026, vor Launch.</p>
-        </div>
-      </div>
-
-      <div class="guide-section">
-        <div class="guide-hdr" onclick="toggleSection('m-talents')">
-          <div class="guide-ttl">🌲 Talente · Beast Mastery</div>
-          <span class="guide-toggle-icon" id="icon-m-talents">▼</span>
-        </div>
-        <div class="guide-content" id="content-m-talents">
-          <ul class="talent-priority-list" id="m-talent-milestones"></ul>
-          <div id="planner-class-mirza"><p>Talentdaten werden geladen…</p></div>
-        </div>
-      </div>
-      <div class="guide-section">
-        <div class="guide-hdr" onclick="toggleSection('m-legacy')">
-          <div class="guide-ttl">🏛️ Legacy · planen und bewusst entscheiden</div>
-          <span class="guide-toggle-icon" id="icon-m-legacy">▼</span>
-        </div>
-        <div class="guide-content" id="content-m-legacy">
-          <div id="planner-legacy-mirza"><p>Legacy-Daten werden geladen…</p></div>
-        </div>
-      </div>
-
-      <!-- SEKTION: ITEMS & QUESTE -->
-      <div class="guide-section">
-        <div class="guide-hdr" onclick="toggleSection('m-items')">
-          <div class="guide-ttl">⚔️ Nützliche Items &amp; Wichtige Quests (nach Level)</div>
-          <span class="guide-toggle-icon" id="icon-m-items">▼</span>
-        </div>
-        <div class="guide-content" id="content-m-items">
-          <div class="local-notice" style="margin-bottom:12px">
-            ℹ️ <strong>Lokale Browser-Speicherung:</strong> Die Quest-Häkchen für Mirza werden getrennt direkt in deinem Browser (localStorage) gespeichert.
-          </div>
-          <div id="discoveries-mirza" class="profile-discoveries"></div>
-          <label style="font-size:.8rem;color:var(--dim)"><input type="checkbox" id="all-quests-mirza" onchange="renderPlayerItems('Mirza')"> Alle Dungeon-Quests zeigen</label>
-          <div id="m-items-list"></div>
-        </div>
-      </div>
-
-      <!-- SEKTION: BERUFE, SYNERGIE & ADDONS -->
-      <div class="guide-section">
-        <div class="guide-hdr" onclick="toggleSection('m-addons')">
-          <div class="guide-ttl">🛠️ Berufe, Duo-Synergie &amp; Addons</div>
-          <span class="guide-toggle-icon" id="icon-m-addons">▼</span>
-        </div>
-        <div class="guide-content" id="content-m-addons">
-          <div style="margin-bottom:16px;padding:12px 14px;background:rgba(171,214,86,0.06);border-left:3px solid #abd656;border-radius:0 8px 8px 0;font-size:0.83rem">
-            <strong>🤝 Synergie mit Faruk:</strong> Mirza liefert Felle für das Zeltlager und sammelt Kräuter für die <em>Räucherkerze</em> (+Intelligenz und Mana-Regeneration für Faruk). Faruk revanchiert sich mit Granaten, Zielattrappen und Totems für Mirzas Bären-Pet!
-          </div>
-          <div id="m-addons-container"></div>
-        </div>
-      </div>
+        </div></details>
     </section>
 
     <!-- ═══════════════════════════════════════════════════════════════════ -->
@@ -815,11 +640,7 @@
       </div>
 
       <!-- KOMPATIBILITÄT MIT TEST-DASHBOARD (Filter, Stats, etc.) -->
-      <div class="level-bar" style="display:none">
-        <input type="number" id="lvl-faruk" value="1" onchange="setPlayerLevel('Faruk', this.value)" />
-        <input type="number" id="lvl-mirza" value="1" onchange="setPlayerLevel('Mirza', this.value)" />
-      </div>
-      <div class="profile-bar" style="display:none">
+            <div class="profile-bar archive-profiles">
         <button class="profile-btn active" id="pbtn-all" onclick="setProfile('all')">Beide</button>
         <button class="profile-btn" id="pbtn-Faruk" onclick="setProfile('Faruk')">Faruk</button>
         <button class="profile-btn" id="pbtn-Mirza" onclick="setProfile('Mirza')">Mirza</button>
@@ -846,15 +667,6 @@
           </div>
         </div>
         <div>
-          <!-- BURGEN TELEMETRIE -->
-          <div class="guide-section" style="padding:16px;margin-bottom:14px">
-            <div style="font-family:'Cinzel',serif;font-size:0.95rem;color:var(--gold);margin-bottom:8px">🏰 Burgen &amp; PvP Status</div>
-            <div id="castle-state" style="font-size:0.88rem;font-weight:600;margin-bottom:4px">Wird geprüft...</div>
-            <div id="castle-detail" style="font-size:0.78rem;color:var(--dim);line-height:1.4">Daten werden geladen.</div>
-            <a id="castle-link" href="#" target="_blank" style="display:none;font-size:0.75rem;color:var(--blue);margin-top:6px">Details ↗</a>
-            <div id="castle-ts" style="font-size:0.7rem;color:var(--dim);margin-top:6px"></div>
-          </div>
-
           <!-- QUELLEN STATUS -->
           <div class="guide-section" style="padding:16px">
             <div style="font-family:'Cinzel',serif;font-size:0.95rem;color:var(--gold);margin-bottom:10px">📡 Überwachte Quellen</div>
@@ -865,12 +677,6 @@
         </div>
       </div>
 
-      <!-- VERSTECKTE ABSCHNITTE FÜR TEST-KOMPATIBILITÄT -->
-      <div id="section-addons" style="display:none"></div>
-      <div id="section-bis" style="display:none">
-        <div class="bis-pending-card"></div>
-        <div class="table-responsive"></div>
-      </div>
     </section>
   </main>
 </div>
@@ -898,9 +704,7 @@
   </div>
 </div>
 
-<script src="assets/planner-core.js"></script>
 <script src="assets/news-core.js"></script>
-<script src="assets/planner-ui.js"></script>
 <script>
 const safeStorage = {
   getItem(key) { try { return localStorage.getItem(key); } catch { return null; } },
@@ -963,8 +767,7 @@ function showView(v) {
     if (el) el.classList.toggle('active', id === v);
   });
   window.scrollTo({ top: 0, behavior: 'smooth' });
-  if (v === 'faruk') renderNowSection('Faruk');
-  if (v === 'mirza') renderNowSection('Mirza');
+
 }
 
 // ── PLAYER STATE & LEVELS ──────────────────────────────────────────────────
@@ -981,16 +784,11 @@ function setPlayerLevel(player, val) {
   // Sync inputs across home & profile
   const homeInp = document.getElementById('home-lvl-' + player.toLowerCase());
   const profInp = document.getElementById('prof-lvl-' + player.toLowerCase());
-  const legacyInp = document.getElementById('lvl-' + player.toLowerCase());
   if (homeInp) homeInp.value = lvl;
   if (profInp) profInp.value = lvl;
-  if (legacyInp) legacyInp.value = lvl;
 
-  renderNowSection(player);
   renderHomeCards();
-  renderMilestones(player);
   renderPlayerItems(player);
-  if (plannerData) PlannerUI.refresh(player);
   renderDiscoveries();
 }
 
@@ -1011,18 +809,6 @@ function updatePlayerProf(player, slot, val) {
   try { safeStorage.setItem(`wow_prof_${player}_${slot}`, val); } catch(e){}
   const el = document.getElementById(`home-profs-${player.toLowerCase()}`);
   if (el) el.textContent = `${playerProfs[player][0]} & ${playerProfs[player][1]}`;
-  if (plannerData) PlannerUI.refresh(player);
-}
-
-let playerLegacy = {
-  Faruk: parseInt(safeStorage.getItem('wow_legacy_Faruk') || '0', 10),
-  Mirza: parseInt(safeStorage.getItem('wow_legacy_Mirza') || '0', 10)
-};
-
-function setLegacyPoints(player, val) {
-  const pts = Math.max(0, Math.min(16, parseInt(val, 10) || 0));
-  playerLegacy[player] = pts;
-  try { safeStorage.setItem(`wow_legacy_${player}`, String(pts)); } catch(e){}
 }
 
 // ── ARTICLE READ TRACKING (LOCALSTORAGE) ───────────────────────────────────
@@ -1080,7 +866,7 @@ function markArticleAsRead(itemOrId) {
       try { safeStorage.setItem('wow_read_versions', JSON.stringify(versions)); } catch(e){}
     }
   }
-  renderHomeNews();
+  renderNewsHub();
   applyFilter();
 }
 function isArticleRecent(item) {
@@ -1105,7 +891,7 @@ function togglePlayerQuest(player, qid) {
 }
 
 // ── DATA SOURCES & INITIALIZATION ──────────────────────────────────────────
-let allItems = [], bisData = {}, guidesData = {}, plannerData = null, discoveriesData = [];
+let allItems = [], guidesData = {}, discoveriesData = [];
 let sourceHealth = {};
 let newsLoadError = false;
 let activeProfile = safeStorage.getItem('wow_active_profile') || 'all';
@@ -1121,15 +907,11 @@ async function init() {
     const lvl = playerLevels[p];
     const h = document.getElementById('home-lvl-' + p.toLowerCase());
     const pf = document.getElementById('prof-lvl-' + p.toLowerCase());
-    const leg = document.getElementById('lvl-' + p.toLowerCase());
     if (h) h.value = lvl;
     if (pf) pf.value = lvl;
-    if (leg) leg.value = lvl;
-    const lSel = document.getElementById('legacy-pts-' + p.toLowerCase());
-    if (lSel) lSel.value = playerLegacy[p];
   });
 
-  await Promise.all([loadNews(), loadBis(), loadGuides(), loadPlanner(), loadDiscoveries()]);
+  await Promise.all([loadNews(), loadGuides(), loadDiscoveries()]);
   ['Faruk','Mirza'].forEach(p => {
     [1,2].forEach(slot => { const el=document.getElementById(`prof${slot}-${p.toLowerCase()}`); if (el) el.value=playerProfs[p][slot-1]; });
     const el=document.getElementById(`home-profs-${p.toLowerCase()}`); if(el) el.textContent=playerProfs[p].join(' & ');
@@ -1146,15 +928,15 @@ async function loadNews() {
     const d = await r.json();
     allItems = d.items || [];
     sourceHealth = d.sources_status || {};
-    renderCastle(d.castle_status);
     renderSourcesStatus(d.sources_status);
     renderDataProcTime(d.data_processed_at || d.last_updated);
-    renderHomeNews();
+    renderNewsHub();
     renderDiscoveries();
     applyFilter();
   } catch(e) {
     console.error("News load error:", e);
     newsLoadError = true;
+    renderNewsHub();
     const nl = document.getElementById('news-list');
     if (nl) nl.innerHTML = '<div class="empty"><div class="empty-ico">⚠️</div><div>Neuigkeiten konnten nicht geladen werden.</div><button class="retry-btn" onclick="loadNews()">🔄 Erneut versuchen</button></div>';
     const hn = document.getElementById('home-news-list');
@@ -1162,21 +944,17 @@ async function loadNews() {
   }
 }
 
-async function loadBis() {
-  try {
-    const r = await fetch('data/bis.json?v=' + Date.now());
-    if (r.ok) bisData = await r.json();
-  } catch(e){}
-}
-
 async function loadGuides() {
   try {
     const r = await fetch('data/guides.json?v=' + Date.now());
-    if (r.ok) {
-      guidesData = await r.json();
-      renderAllProfileGuides();
-    }
+    if (!r.ok) throw new Error('HTTP '+r.status);
+    guidesData = await r.json();
+    renderAllProfileGuides();
   } catch(e){
+    for(const id of ['shared-addons','f-items-list','m-items-list']) {
+      const el=document.getElementById(id);
+      if(el) el.innerHTML='<p>Hinweise konnten nicht geladen werden.</p><button class="retry-btn" onclick="loadGuides()">Erneut versuchen</button>';
+    }
     console.error("Guides error:", e);
   }
 }
@@ -1190,135 +968,61 @@ function renderDataProcTime(ts) {
 }
 
 // ── HOME NEWS: MAX 4 CONCRETE/ACTIONABLE UPDATES ───────────────────────────
-function renderHomeNews() {
-  const container = document.getElementById('home-news-list');
-  if (!container) return;
-  const failedSources=Object.values(sourceHealth).filter(s=>/Fehler|HTTP [45]|fehlgeschlagen/i.test(s)).length;
-  const note=document.getElementById('home-source-note');
-  if(note) note.textContent=failedSources?`Hinweis: ${failedSources} Quelle(n) konnten nicht vollständig geprüft werden. Details im Quellen-Archiv.`:'';
-  if (newsLoadError) return;
-  const displayList = WowNews.selectHome(allItems);
-  const badge = document.getElementById('home-news-badge');
-  if (badge) badge.textContent = `${displayList.length} Meldungen`;
-
-  if (!displayList.length) {
-    container.innerHTML = '<div class="empty" style="grid-column:1/-1"><div class="empty-ico">📭</div><div style="font-weight:600">Keine neuen spielrelevanten Neuigkeiten.</div><div style="font-size:0.8rem;color:var(--dim);margin-top:4px">Derzeit keine passenden Meldungen der letzten sieben Tage. Quellenstatus im Archiv beachten.</div></div>';
-    return;
-  }
-
-  container.innerHTML = displayList.map(item => {
-    const isRecent = isArticleRecent(item);
-    let badgeHtml = '';
-    if (item.is_updated) badgeHtml = '<span class="update-badge">AKTUALISIERT</span>';
-    else if (isRecent) badgeHtml = '<span class="new-badge">NEU</span>';
-
-    return `
-      <div class="hn-card" onclick="openModalById('${esc(item.id)}')">
-        <div class="hn-top">
-          <span class="hn-icon">${item.source_icon || '📰'}</span>
-          <div class="hn-title">${badgeHtml}${esc(item.title || '')}</div>
-        </div>
-        <div class="hn-teaser">${['original','untranslated'].includes(item.summary_mode)?'<small>Kurzbericht derzeit nicht verfügbar</small><br>':''}${esc(item.teaser_de || item.summary_de || '')}</div>
-        <div class="hn-meta">
-          <span class="hn-source">${esc(item.source || 'Quelle')}</span>
-          <span>${esc(new Date(WowNews.timestamp(item)).toLocaleDateString('de-DE', {timeZone:'Europe/Vienna'}))} →</span>
-        </div>
-      </div>
-    `;
+function briefCards(items) {
+  return items.map(item=>{
+    const badge=item.is_updated&&isArticleRecent(item)?'<span class="update-badge">AKTUALISIERT</span>':isArticleRecent(item)?'<span class="new-badge">NEU</span>':'';
+    const unread=hasPendingUpdate(item)||!isArticleRead(item);
+    return `<button type="button" class="hn-card news-card" onclick="openModalById('${esc(item.id)}')"><span class="hn-top"><span class="hn-icon">${esc(item.source_icon||'📰')}</span><span class="hn-title">${badge}${esc(item.title||'')}</span></span><span class="hn-teaser">${esc(item.teaser_de||item.summary_de||'')}</span><span class="hn-meta"><span class="hn-source">${esc(item.source||'Quelle')}${(item.source||'').startsWith('Reddit')?' · Community, ungeprüft':''}</span><span>${unread?'Ungelesen · ':''}${esc(new Date(WowNews.timestamp(item)).toLocaleDateString('de-DE',{timeZone:'Europe/Vienna'}))} →</span></span></button>`;
   }).join('');
 }
-
-// ── TALENT & QUEST LOGIC PER LEVEL ─────────────────────────────────────────
-function getNextTalent(player, level) {
-  if (!plannerData) return {title:'Talentdaten werden geladen',desc:'Den Rechner im Profil öffnen.'};
-  const def=plannerData.classes[player==='Faruk'?'Shaman':'Hunter'];
-  const talented=PlannerUI.talented(player), count=WowPlanner.classBudget(level,talented);
-  if (!count) return {title:`Erster Talentpunkt ab Stufe ${10-talented}`,desc:'Normaler Start mit Stufe 10. Frühere Klassenpunkte gibt es nur mit bereits freigeschaltetem Talented.'};
-  try {
-    const order=WowPlanner.classPlan(def,player), id=order[count-1], n=WowPlanner.nodes(def).find(n=>n.id===id);
-    return {title:`${n.name} (${order.slice(0,count).filter(x=>x===id).length}/${n.max})`,desc:PlannerUI.reason(n.name,player)};
-  } catch(e) { return {title:'Vorschlag muss geprüft werden',desc:e.message}; }
+function renderNewsHub() {
+  const failed=Object.values(sourceHealth).filter(s=>/Fehler|HTTP [45]|fehlgeschlagen/i.test(s)).length;
+  const note=document.getElementById('home-source-note');
+  if(note) note.textContent=failed?`${failed} Quelle(n) konnten nicht vollständig geprüft werden. Details im Quellen-Archiv.`:'';
+  const render=(id,items,empty)=>{
+    const el=document.getElementById(id); if(!el)return;
+    el.innerHTML=newsLoadError?'<div class="empty"><p>Neuigkeiten konnten nicht geladen werden.</p><button class="retry-btn" onclick="loadNews()">Erneut versuchen</button></div>':items.length?briefCards(items):`<div class="empty"><div class="empty-ico">📭</div><p>${empty}</p></div>`;
+  };
+  const general=WowNews.selectHome(allItems);
+  render('home-news-list',general,'Keine neuen allgemeinen Meldungen der letzten sieben Tage. Klassen-News findet ihr bei Faruk und Mirza.');
+  document.getElementById('home-news-badge').textContent=newsLoadError?'Nicht verfügbar':`${general.length} Meldung${general.length===1?'':'en'}`;
+  for(const player of ['Faruk','Mirza']) {
+    const cls=player==='Faruk'?'Shaman':'Hunter',low=player.toLowerCase(),items=WowNews.selectClass(allItems,cls);
+    document.getElementById('class-source-note-'+low).textContent=failed?`Hinweis: ${failed} Quelle(n) konnten nicht vollständig geprüft werden.`:'';
+    render('class-news-'+low,items,`Keine neuen ${cls}-Meldungen der letzten sieben Tage. Ältere Beiträge findet ihr im Archiv.`);
+    document.getElementById('class-news-badge-'+low).textContent=newsLoadError?'Nicht verfügbar':`${items.length} Meldung${items.length===1?'':'en'}`;
+  }
+  renderHomeCards();
 }
-function getNextQuest(player, level) {
-  const candidates=discoveriesData.filter(d=>(!d.players || d.players.includes(player)) && level>=d.min_level && level<=d.max_level);
-  const pick=candidates[0];
-  if (pick) return {title:pick.title,desc:pick.action};
-  return {title:'Quests und Upgrades im Profil',desc:'Passende Dungeon-Quests und neue Funde nach Stufe ansehen.'};
-}
-
-function renderNowSection(player) {
-  const lvl = playerLevels[player];
-  const tInfo = getNextTalent(player, lvl);
-  const qInfo = getNextQuest(player, lvl);
-
-  const tEl = document.getElementById(`now-talent-${player.toLowerCase()}`);
-  const tdEl = document.getElementById(`now-talent-desc-${player.toLowerCase()}`);
-  const qEl = document.getElementById(`now-quest-${player.toLowerCase()}`);
-  const qdEl = document.getElementById(`now-quest-desc-${player.toLowerCase()}`);
-  const lDisp = document.getElementById(`now-lvl-disp-${player.toLowerCase()}`);
-
-  if (lDisp) lDisp.textContent = lvl;
-  if (tEl) tEl.textContent = tInfo.title;
-  if (tdEl) tdEl.textContent = tInfo.desc;
-  if (qEl) qEl.textContent = qInfo.title;
-  if (qdEl) qdEl.textContent = qInfo.desc;
-}
-
 function renderHomeCards() {
-  ['Faruk', 'Mirza'].forEach(player => {
-    const lvl = playerLevels[player];
-    const tInfo = getNextTalent(player, lvl);
-    const hintEl = document.getElementById(`home-hint-${player.toLowerCase()}`);
-    if (hintEl) {
-      hintEl.innerHTML = `<strong>Talent für deine Stufe:</strong> ${esc(tInfo.title)}`;
-    }
-  });
-}
-
-function renderMilestones(player) {
-  const el=document.getElementById(`${player==='Faruk'?'f':'m'}-talent-milestones`);
-  if (el) el.innerHTML=''; // The complete validated order lives inside the calculator.
-}
-
-async function loadPlanner() {
-  try {
-    const r=await fetch('data/planner.json');
-    if(!r.ok) throw new Error('HTTP '+r.status);
-    const data=await r.json();
-    if(data.schema!==1 || !data.classes?.Shaman || !data.classes?.Hunter || !data.legacy) throw new Error('Ungültige Talentdaten');
-    plannerData=data;
-    for(const player of ['Faruk','Mirza']) {
-      const shared={player,data,level:()=>playerLevels[player],professions:()=>playerProfs[player],changed:()=>{renderNowSection(player);renderHomeCards();}};
-      PlannerUI.mount({...shared,kind:'legacy',points:Math.max(0,Math.min(16,playerLegacy[player]||0)),setPoints:n=>setLegacyPoints(player,n),el:document.getElementById('planner-legacy-'+player.toLowerCase())});
-      PlannerUI.mount({...shared,kind:'class',el:document.getElementById('planner-class-'+player.toLowerCase())});
-    }
-    renderHomeCards();
-  } catch(e) {
-    for (const el of document.querySelectorAll('[id^="planner-class-"],[id^="planner-legacy-"]')) {
-      el.innerHTML='<p>Talentdaten konnten nicht geladen werden.</p><button class="retry-btn" onclick="location.reload()">Erneut versuchen</button>';
-    }
-    console.error('Planner:',e);
+  for(const player of ['Faruk','Mirza']) {
+    const cls=player==='Faruk'?'Shaman':'Hunter',el=document.getElementById('home-hint-'+player.toLowerCase());
+    const count=WowNews.selectClass(allItems,cls).length;
+    if(el) el.textContent=newsLoadError?'Klassenmeldungen derzeit nicht verfügbar':`${count} ${cls}-Meldung${count===1?'':'en'} in den letzten 7 Tagen`;
   }
 }
+function openClassArchive(player) {
+  setProfile(player); applyFilter('all'); showView('news');
+}
+
 async function loadDiscoveries() {
   try {
     const r=await fetch('data/discoveries.json'); if(!r.ok) throw new Error('HTTP '+r.status);
     const d=await r.json(); discoveriesData=d.items||[];
     renderDiscoveries();
-    ['Faruk','Mirza'].forEach(renderNowSection);
   } catch(e) {
     for(const el of document.querySelectorAll('[id^="discoveries-"]')) el.innerHTML='<p>Neue Funde konnten nicht geladen werden. Bitte Seite neu laden.</p>';
   }
 }
 function renderDiscoveries() {
-  for (const player of ['Faruk','Mirza']) {
+  const card=x=>`<article class="discovery-card"><strong>${esc(x.title)}</strong><p>${esc(x.action)}</p><small>Stufe ${x.min_level}–${x.max_level} · ${esc(x.source)} · geprüft ${esc(x.checked_at)}</small><p><a href="${safeURL(x.url)}" target="_blank" rel="noopener">Quelle und Details ↗</a></p></article>`;
+  const shared=discoveriesData.filter(x=>!x.players || x.players.length!==1).filter(x=>Object.values(playerLevels).some(lvl=>lvl+7>=x.min_level && lvl<=x.max_level)).sort((a,b)=>(b.priority||0)-(a.priority||0));
+  const home=document.getElementById('discoveries-home');
+  if(home) home.innerHTML=shared.slice(0,6).map(card).join('') || '<p>Derzeit keine zusätzlichen Hinweise für euren Levelbereich.</p>';
+  for(const player of ['Faruk','Mirza']) {
     const el=document.getElementById('discoveries-'+player.toLowerCase());
-    if(!el || !discoveriesData.length) continue;
-    const cls=player==='Faruk'?'Shaman':'Hunter', lvl=playerLevels[player];
-    const fresh=allItems.filter(i=>WowNews.eligible(i) && (!i.classes?.length || i.classes.includes(cls))).sort((a,b)=>WowNews.timestamp(b)-WowNews.timestamp(a));
-    const hints=discoveriesData.filter(x=>(!x.players||x.players.includes(player)) && lvl>=x.min_level && lvl<=x.max_level).sort((a,b)=>(b.priority||0)-(a.priority||0));
-    const merged=[...hints.map(x=>({title:x.title,text:x.action,url:x.url,meta:`Stufe ${x.min_level}–${x.max_level} · ${x.source} · geprüft ${x.checked_at} (vor Launch)`})),...fresh.filter(x=>!hints.some(h=>WowNews.canonical(h.url)===WowNews.canonical(x.url))).slice(0,2).map(x=>({title:x.title,text:x.teaser_de,url:x.url,meta:`${x.source} · ${x.date_basis==='first_seen'?'entdeckt':'veröffentlicht'} ${x.date}`}))];
-    el.innerHTML=merged.slice(0,6).map(x=>`<article class="discovery-card"><strong>${esc(x.title)}</strong><p>${esc(x.text)}</p><small>${esc(x.meta)}</small><p><a href="${safeURL(x.url)}" target="_blank" rel="noopener">Quelle und Details ↗</a></p></article>`).join('');
+    const own=discoveriesData.filter(x=>x.players?.length===1 && x.players[0]===player).filter(x=>playerLevels[player]+7>=x.min_level && playerLevels[player]<=x.max_level);
+    if(el) el.innerHTML=own.map(card).join('') || '<p>Derzeit keine zusätzlichen Klassenhinweise für deine Stufe.</p>';
   }
 }
 function safeURL(value) {
@@ -1356,7 +1060,7 @@ function renderPlayerItems(player) {
 
       return `
         <div class="item-quest-row">
-          <input type="checkbox" class="iq-check" id="qchk-${player.toLowerCase()}-${qid}" ${isDone ? 'checked' : ''} onchange="togglePlayerQuest('${player}', '${qid}')" />
+          <input type="checkbox" class="iq-check" aria-label="${esc(player + ': ' + q.title)}" id="qchk-${player.toLowerCase()}-${qid}" ${isDone ? 'checked' : ''} onchange="togglePlayerQuest('${player}', '${qid}')" />
           <div class="iq-body">
             <div class="iq-title-line">
               <span class="iq-item">${esc(q.title)}</span>
@@ -1384,30 +1088,13 @@ function renderPlayerItems(player) {
 }
 
 function renderAllProfileGuides() {
-  ['Faruk', 'Mirza'].forEach(p => {
-    renderNowSection(p);
-    renderMilestones(p);
-    renderPlayerItems(p);
-  });
-  renderProfileAddons();
+  ['Faruk','Mirza'].forEach(renderPlayerItems);
+  renderSharedAddons();
 }
-
-function renderProfileAddons() {
-  const addons = (guidesData && guidesData.addons && guidesData.addons.items) ? guidesData.addons.items : [];
-  ['f', 'm'].forEach(prefix => {
-    const c = document.getElementById(`${prefix}-addons-container`);
-    if (!c) return;
-    c.innerHTML = addons.map(a => `
-      <div style="padding:10px 14px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:10px;margin-bottom:8px">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:3px">
-          <span style="font-weight:700;color:#fff">${a.icon || '🔌'} ${esc(a.name)}</span>
-          <span style="font-size:0.7rem;color:var(--gold)">${esc(a.target)}</span>
-        </div>
-        <div style="font-size:0.78rem;color:var(--dim);margin-bottom:4px">${esc(a.why)}</div>
-        <a href="${a.url}" target="_blank" rel="noopener" style="font-size:0.72rem;color:var(--blue);text-decoration:none">🔗 Auf CurseForge ansehen ↗</a>
-      </div>
-    `).join('');
-  });
+function renderSharedAddons() {
+  const el=document.getElementById('shared-addons');
+  const addons=guidesData.addons?.items||[];
+  if(el) el.innerHTML=addons.map(a=>`<article class="discovery-card"><strong>${esc(a.icon||'🔌')} ${esc(a.name)}</strong><p>${esc(a.why)}</p><small>${esc(a.target)} · ${esc(a.status||'Kompatibilität prüfen')}</small><p><a href="${safeURL(a.url)}" target="_blank" rel="noopener">Auf CurseForge ansehen ↗</a></p></article>`).join('') || '<p>Keine Addon-Hinweise verfügbar.</p>';
 }
 
 // ── FULL NEWS & ARCHIVE (view-news) ────────────────────────────────────────
@@ -1475,14 +1162,17 @@ document.getElementById('filter-row').addEventListener('click', e => {
   applyFilter();
 });
 
-function applyFilter() {
+function applyFilter(filter) {
+  if (typeof filter === 'string') { activeFilter=filter; safeStorage.setItem('wow_active_filter',activeFilter); }
+  for(const p of ['all','Faruk','Mirza']) document.getElementById('pbtn-'+p)?.classList.toggle('active',activeProfile===p);
+  for(const button of document.querySelectorAll('.flt')) {const on=button.dataset.f===activeFilter;button.classList.toggle('on',on);button.style.color=on?'var(--gold)':'var(--dim)';}
   if (newsLoadError) return;
   let filtered = [...allItems];
 
   if (activeProfile === 'Faruk') {
-    filtered = filtered.filter(i => (i.classes || []).includes('Shaman') || (i.classes || []).length === 0);
+    filtered = filtered.filter(i => WowNews.audience(i).includes('Shaman'));
   } else if (activeProfile === 'Mirza') {
-    filtered = filtered.filter(i => (i.classes || []).includes('Hunter') || (i.classes || []).length === 0);
+    filtered = filtered.filter(i => WowNews.audience(i).includes('Hunter'));
   }
 
   if (activeFilter === 'is-new') {
@@ -1492,7 +1182,7 @@ function applyFilter() {
   } else if (activeFilter.startsWith('cls-')) {
     const c = activeFilter.slice(4);
     const n = c[0].toUpperCase() + c.slice(1);
-    filtered = filtered.filter(i => (i.classes || []).includes(n));
+    filtered = filtered.filter(i => WowNews.audience(i).includes(n));
   } else if (activeFilter.startsWith('cat-')) {
     const cat = activeFilter.slice(4);
     filtered = filtered.filter(i => i.category === cat);
@@ -1562,18 +1252,6 @@ function closeModalDirect() {
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModalDirect(); });
 
 function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
-
-function renderCastle(c) {
-  if (!c) return;
-  const s = document.getElementById('castle-state');
-  const d = document.getElementById('castle-detail');
-  const l = document.getElementById('castle-link');
-  const t = document.getElementById('castle-ts');
-  if (s) s.innerHTML = c.verified ? `<span style="color:#81c784">🏰 ${esc(c.status)}</span>` : `<span style="color:#ffb74d">🛡️ ${esc(c.status)} (Unbestätigt)</span>`;
-  if (d) d.textContent = c.details || '–';
-  if (l && c.url) { l.href = c.url; l.style.display = 'inline-block'; }
-  if (t && c.last_checked) t.textContent = 'Geprüft: ' + new Date(c.last_checked).toLocaleString('de-DE');
-}
 
 function renderSourcesStatus(ss) {
   const box = document.getElementById('src-list-box');
