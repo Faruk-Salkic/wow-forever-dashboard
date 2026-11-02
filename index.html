@@ -539,8 +539,13 @@
       <div class="profile-nav-bar">
         <button class="back-home-btn" onclick="showView('home')">← Zurück zur Übersicht</button>
         <div class="profile-header-title">🌊 Faruk · Shaman-News</div>
-        <a class="resource-link" href="https://www.wowhead.com/forever/talent-calc/shaman" target="_blank" rel="noopener">Talente auf Wowhead ↗</a>
+        <a class="resource-link" href="https://www.wowhead.com/forever/talent-calc/shaman" target="_blank" rel="noopener">Wowhead-Kalkulator ↗</a>
       </div>
+      <section class="guide-links-section" aria-labelledby="guide-title-faruk">
+        <h2 id="guide-title-faruk">Leveling &amp; Talente</h2>
+        <p class="guide-note">Empfohlene Guides direkt öffnen. Quellenprüfung täglich um 11:50 (Wien).</p>
+        <div id="profile-guides-faruk" class="profile-guide-links" aria-live="polite"><p>Guides werden geprüft…</p></div>
+      </section>
       <div class="home-news-section">
         <div class="section-title-row"><h2>🌊 Neu für Shaman</h2><span class="badge b-gold" id="class-news-badge-faruk">Lädt…</span></div>
         <p class="section-subtitle">Spells, Klassenänderungen, passende Quests und Items · letzte 7 Tage.</p>
@@ -580,8 +585,13 @@
       <div class="profile-nav-bar">
         <button class="back-home-btn" onclick="showView('home')">← Zurück zur Übersicht</button>
         <div class="profile-header-title">🏹 Mirza · Hunter-News</div>
-        <a class="resource-link" href="https://www.wowhead.com/forever/talent-calc/hunter" target="_blank" rel="noopener">Talente auf Wowhead ↗</a>
+        <a class="resource-link" href="https://www.wowhead.com/forever/talent-calc/hunter" target="_blank" rel="noopener">Wowhead-Kalkulator ↗</a>
       </div>
+      <section class="guide-links-section" aria-labelledby="guide-title-mirza">
+        <h2 id="guide-title-mirza">Leveling &amp; Talente</h2>
+        <p class="guide-note">Empfohlene Guides direkt öffnen. Quellenprüfung täglich um 11:50 (Wien).</p>
+        <div id="profile-guides-mirza" class="profile-guide-links" aria-live="polite"><p>Guides werden geprüft…</p></div>
+      </section>
       <div class="home-news-section">
         <div class="section-title-row"><h2>🏹 Neu für Hunter</h2><span class="badge b-gold" id="class-news-badge-mirza">Lädt…</span></div>
         <p class="section-subtitle">Spells, Klassenänderungen, passende Quests und Items · letzte 7 Tage.</p>
@@ -705,6 +715,7 @@
 </div>
 
 <script src="assets/news-core.js"></script>
+<script src="assets/guides-core.js"></script>
 <script>
 const safeStorage = {
   getItem(key) { try { return localStorage.getItem(key); } catch { return null; } },
@@ -911,7 +922,7 @@ async function init() {
     if (pf) pf.value = lvl;
   });
 
-  await Promise.all([loadNews(), loadGuides(), loadDiscoveries()]);
+  await Promise.all([loadNews(), loadGuides(), loadDiscoveries(), loadRecommendations()]);
   ['Faruk','Mirza'].forEach(p => {
     [1,2].forEach(slot => { const el=document.getElementById(`prof${slot}-${p.toLowerCase()}`); if (el) el.value=playerProfs[p][slot-1]; });
     const el=document.getElementById(`home-profs-${p.toLowerCase()}`); if(el) el.textContent=playerProfs[p].join(' & ');
@@ -967,6 +978,31 @@ function renderDataProcTime(ts) {
   if (fEl) fEl.textContent = '⚙️ Daten verarbeitet: ' + tStr;
 }
 
+async function loadRecommendations() {
+  const targets=['Faruk','Mirza'];
+  try {
+    const response=await fetch('data/recommendations.json?v='+Date.now());
+    if(!response.ok) throw new Error('HTTP '+response.status);
+    const data=await response.json();
+    const when=ts=>new Date(ts).toLocaleString('de-DE',{timeZone:'Europe/Vienna',dateStyle:'short',timeStyle:'short'});
+    for(const player of targets) {
+      const items=WowGuides.forPlayer(data,player);
+      if(!items.length) throw new Error('No guide links for '+player);
+      document.getElementById('profile-guides-'+player.toLowerCase()).innerHTML=items.map(item=>{
+        const state=WowGuides.state(item);
+        const status=state==='ok'?'Geprüft: '+when(item.last_success_at)+' (Wien)':
+          state==='stale'?'Prüfung überfällig · zuletzt erfolgreich: '+when(item.last_success_at):
+          state==='failed'?'Prüfung fehlgeschlagen · zuletzt erfolgreich: '+when(item.last_success_at):'Quelle noch nicht erfolgreich geprüft';
+        const changed=WowGuides.changedRecently(item)?`<span class="guide-changed">Inhalt geändert · ${esc(when(item.changed_at))}</span>`:'';
+        return `<article class="profile-guide"><a href="${safeURL(item.url)}" target="_blank" rel="noopener"><strong>${esc(item.title)}</strong><span>${esc(item.source)} · Build im Guide öffnen ↗</span></a><p>${esc(item.description)}</p>${changed}<small class="guide-check ${state==='ok'?'':'guide-warning'}">${esc(status)}</small>${item.notice?`<small class="guide-warning">${esc(item.notice)}</small>`:''}</article>`;
+      }).join('');
+    }
+  } catch(e) {
+    for(const player of targets) document.getElementById('profile-guides-'+player.toLowerCase()).innerHTML='<p>Guide-Prüfung derzeit nicht verfügbar.</p><button class="retry-btn" onclick="loadRecommendations()">Erneut versuchen</button>';
+    console.error('Guide links error:',e);
+  }
+}
+
 // ── HOME NEWS: MAX 4 CONCRETE/ACTIONABLE UPDATES ───────────────────────────
 function briefCards(items) {
   return items.map(item=>{
@@ -981,7 +1017,7 @@ function renderNewsHub() {
   if(note) note.textContent=failed?`${failed} Quelle(n) konnten nicht vollständig geprüft werden. Details im Quellen-Archiv.`:'';
   const render=(id,items,empty)=>{
     const el=document.getElementById(id); if(!el)return;
-    el.innerHTML=newsLoadError?'<div class="empty"><p>Neuigkeiten konnten nicht geladen werden.</p><button class="retry-btn" onclick="loadNews()">Erneut versuchen</button></div>':items.length?briefCards(items):`<div class="empty"><div class="empty-ico">📭</div><p>${empty}</p></div>`;
+    el.innerHTML=newsLoadError?'<div class="empty"><p>Neuigkeiten konnten nicht geladen werden.</p><button class="retry-btn" onclick="loadNews()">Erneut versuchen</button></div>':items.length?briefCards(items):`<p class="news-empty">${empty}</p>`;
   };
   const general=WowNews.selectHome(allItems);
   render('home-news-list',general,'Keine neuen allgemeinen Meldungen der letzten sieben Tage. Klassen-News findet ihr bei Faruk und Mirza.');

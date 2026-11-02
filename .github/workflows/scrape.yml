@@ -7,9 +7,16 @@ on:
     - cron: "50 11 * * *"
       timezone: "Europe/Vienna"
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/scrape.yml'
+      - 'scraper/**'
+      - 'data/guide_sources.json'
 
 permissions:
   contents: write
+  pages: write
 
 concurrency:
   group: daily-data-update
@@ -51,6 +58,9 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: python scraper/scrape.py
 
+      - name: 📚 Check current leveling & talent guides
+        run: python scraper/check_guides.py
+
       - name: 🧪 Verify data integrity
         run: |
           python test_dashboard.py
@@ -63,6 +73,24 @@ jobs:
         run: |
           git config --global user.name  "WoW-Bot 🤖"
           git config --global user.email "wow-bot@faruk-mirza.github.io"
-          git add data/feed.json data/news.json data/seen_ids.json data/guides.json data/bis.json || true
+          git add data/feed.json data/news.json data/seen_ids.json data/guides.json data/bis.json data/recommendations.json
           git diff --cached --quiet || git commit -m "🗞️ Daily verified update $(date -u '+%Y-%m-%d %H:%M UTC')"
           git push
+
+      # GITHUB_TOKEN commits do not trigger a branch-based Pages build on their own.
+      - name: 🌐 Publish daily data on GitHub Pages
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          BUILD_URL=$(gh api --method POST "repos/$GITHUB_REPOSITORY/pages/builds" --jq '.url')
+          for attempt in $(seq 1 36); do
+            STATUS=$(gh api "$BUILD_URL" --jq '.status')
+            echo "Pages build: $STATUS"
+            case "$STATUS" in
+              built) exit 0 ;;
+              errored) echo "Pages publication failed"; exit 1 ;;
+            esac
+            sleep 10
+          done
+          echo "Pages publication did not finish within six minutes"
+          exit 1

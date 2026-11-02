@@ -603,7 +603,14 @@ def fetch_document(url):
         text = extract_main_content(r.text)
         if len(text) < 100: return {"text":"", "error":"Kein verlässlicher Artikelinhalt"}
         title = soup.find("h1")
-        return {"text":text, "title":title.get_text(" ", strip=True) if title else "", "date":source_date(soup)}
+        # Guide builds may live in data attributes rather than visible article text.
+        # Fingerprint only the actual point allocations, never script versions or ad code.
+        talent_builds = sorted(set(
+            str(el.get("data-talent") or el.get("data-talentcalculator-pointsurl"))
+            for el in soup.select("[data-talent], [data-talentcalculator-pointsurl]")
+        ))
+        return {"text":text, "title":title.get_text(" ", strip=True) if title else "",
+                "date":source_date(soup), "talent_builds":talent_builds}
     except Exception as e:
         return {"text":"", "error":type(e).__name__}
 

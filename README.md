@@ -7,8 +7,8 @@ Jednostavan duo vodič: početna s dva profila i najviše četiri korisne novost
 ## Raspored
 
 - Početna: zajedničke novosti, novi questovi, korisni itemi i Addons. Detalji i postojeće dungeon checkliste ostaju sklopljeni dok ih ne otvorite.
-- Faruk: Shaman vijesti i kratke klasne napomene.
-- Mirza: Hunter vijesti, pet promjene i kratke klasne napomene.
+- Faruk: Shaman vijesti, dva stalna linka za levelanje/talente i kratke klasne napomene.
+- Mirza: Hunter vijesti, dva stalna linka za levelanje/talente, pet promjene i kratke klasne napomene.
 - Klase se usmjeravaju prema naslovu/linku i oznakama izvora. Opći vodiči ne dobijaju klasnu oznaku samo zbog usputnog spominjanja klase.
 - Na stranici se ne učitavaju lokalni talent ni Legacy kalkulatori. Svaki profil ima direktan link na Wowhead za planiranje talenata.
 - Leveli, profesije, pročitane vijesti i odvojene quest kvačice ostaju sačuvani u istim lokalnim browser ključevima. Nema automatske sinhronizacije između uređaja.
@@ -16,6 +16,10 @@ Jednostavan duo vodič: početna s dva profila i najviše četiri korisne novost
 ## Novosti i dnevni raspored
 
 `.github/workflows/scrape.yml` pokreće se svaki dan u **11:50 Europe/Vienna**, s ciljem osvježavanja oko podneva. GitHub red čekanja i Pages deployment mogu kasniti; nema garancije tačno u 12:00. Promjena ljetnog i zimskog vremena obrađuje se kroz nativni `timezone`.
+
+`scraper/check_guides.py` u istom poslu provjerava četiri odabrana Method/Icy Veins vodiča iz `data/guide_sources.json`. Profil prikazuje linkove i kada nema novih vijesti. `data/recommendations.json` razlikuje posljednji pokušaj, uspješnu provjeru i stvarnu izmjenu glavnog teksta ili ugrađene raspodjele talenata. Build podaci ulaze samo u fingerprint; kalkulator se ne kopira na dashboard. Prva provjera postavlja baseline bez lažnog ažuriranja; greška zadržava prethodni hash i vrijeme uspješne provjere. Nakon 26 sati bez uspješne provjere profil upozorava da provjera kasni, uz toleranciju za red čekanja i promjenu sata.
+
+Linkovi otvaraju aktuelne preporuke autora, bez lokalnog kalkulatora. Noviji članak se ne proglašava automatski boljim buildom. Oznaka „Inhalt geändert” znači da se sadržaj izvora promijenio. Dnevni posao izričito traži Pages build i čeka završetak jer push s `GITHUB_TOKEN` sam ne pokreće Pages. Izmjena scrapera, konfiguracije vodiča ili dnevnog workflow-a pokreće i provjeru odmah, bez čekanja narednog termina.
 
 Scraper pregledava sve vraćene RSS stavke, Method i Icy Veins Forever indeks te Reddit RSS. Prati konkretne questove, predmete, petove, spellove, profesije i korisne zajedničke mehanike. Marketing, PTR/tehničke teme, podcasti i nepovezane verzije igre se odbacuju. Izvori imaju odvojene brojače ulaznih, relevantnih i obrađenih stavki te neuspjelih čitanja članaka.
 
@@ -40,6 +44,7 @@ node --test tests/*.test.js
 
 ```bash
 python scraper/scrape.py
+python scraper/check_guides.py
 ```
 
 `Verify dashboard` provjerava push i pull requestove, uključujući odvajanje zajedničkih i klasnih vijesti. Dnevni posao više ne preuzima podatke za kalkulatore.
