@@ -9,6 +9,10 @@ from scraper import scrape as S
 
 
 class SourceTests(unittest.TestCase):
+    def test_shared_addons_items_and_mobs_do_not_require_a_class_name(self):
+        for title in ['WoW Forever: Recommended addons for a clean UI', 'WoW Forever: A useful early item from a rare mob', 'WoW Forever: Newly discovered weapon drop location']:
+            self.assertTrue(S.is_relevant_context(title,'Practical details, locations and requirements.'))
+
     def test_noise_is_not_accepted_as_gameplay(self):
         for title in ['349 players planned their characters in my app', "Lok'tar Ogar! Chapter 2 of my TTRPG campaign", 'No PTRs and new datamining restrictions in WoW Forever', 'New Player’s Starter Guide for WoW Forever']:
             self.assertFalse(S.is_relevant_context(title,'WoW Forever Hunter Shaman pet quest guide'))

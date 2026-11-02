@@ -563,7 +563,8 @@ def is_relevant_context(title, summary, full_text=""):
         "camping", "legacy", "dungeon", "quest", "leveling", "gold",
         "todesminen", "deadmines", "verlies", "stockades", "gnomeregan",
         "bergbau", "mining", "engineering", "ingenieur", "kürschnerei", "skinning", "kräuterkunde", "herbalism",
-        "bag", "recipe", "rezept", "enchant", "verzauber", "consumable", "travel route", "party", "gruppe", "seed", "library book", "reward"
+        "bag", "recipe", "rezept", "enchant", "verzauber", "consumable", "travel route", "party", "gruppe", "seed", "library book", "reward",
+        "addon", "add-on", "item", "weapon", "loot", "beute", "drop", "rare mob"
     ]
     if has_forever and any(g in combined for g in common_practical_words):
         return True
@@ -622,7 +623,7 @@ def discover_guide_links(html, base_url, source):
         slug = parsed.path.split("/wow-forever/",1)[1].strip("/")
         if not slug or slug in {"class-guides", "leveling-guides", "dungeons", "news", "talent-calculator", "legacy-calculator"}: continue
         # Select on the URL first: index cards may contain dates or empty image links.
-        useful = re.search(r"(?:^|[/_-])(?:hunter|shaman|quests?|bags?|vendors?|recipes?|enchants?|enchanting|consumables?|camping|legacy|professions?|herbs?|herbalism|skinning|mining|engineering|dungeons?|rewards?|library-books?|travel-routes?|party|seeds?|greenhouse|blood-shards?|bank-alts?)(?=$|[/_-])", slug)
+        useful = re.search(r"(?:^|[/_-])(?:hunter|shaman|addons?|items?|loot|mobs?|quests?|bags?|vendors?|recipes?|enchants?|enchanting|consumables?|camping|legacy|professions?|herbs?|herbalism|skinning|mining|engineering|dungeons?|rewards?|library-books?|travel-routes?|party|seeds?|greenhouse|blood-shards?|bank-alts?)(?=$|[/_-])", slug)
         if not useful: continue
         name = a.get_text(" ", strip=True) or slug.replace("-", " ").title()
         title = name if "forever" in name.lower() else "WoW Forever: " + name
@@ -759,7 +760,7 @@ def run_scraper(skip_reddit=False):
         context=(item["title"]+" "+item["summary"]).lower()
         scoped=("forever" in context or re.search(r"/(?:wow-forever|forever)/", item["url"]) or item["source"]=="Reddit r/wowforever")
         if not scoped: continue
-        if item["source"].startswith("Reddit") and not re.search(r"quest|pet|tame|spell|talent|totem|weapon|item|drop|vendor|bag|enchant|recipe|beruf|gather|herb|mining|skinn|camp|legacy|hotfix|buff|nerf|level|dungeon|mob|guide", item["title"], re.I): continue
+        if item["source"].startswith("Reddit") and not re.search(r"addon|add-on|quest|pet|tame|spell|talent|totem|weapon|item|drop|vendor|bag|enchant|recipe|beruf|gather|herb|mining|skinn|camp|legacy|hotfix|buff|nerf|level|dungeon|mob|guide", item["title"], re.I): continue
         if not item["url"] or not is_relevant_context(item["title"],item["summary"]): continue
         norm=normalize_url(item["url"])
         if norm in candidates: continue
