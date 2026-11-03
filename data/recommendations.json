@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-11-02T20:32:48.246042+00:00",
+  "checked_at": "2026-11-03T18:07:07.541694+00:00",
   "items": [
     {
       "id": "shaman-icy-leveling",
@@ -9,14 +9,14 @@
       "title": "Enhancement · Talente nach Level",
       "description": "Talentvorschläge, Rotation und Ausrüstung passend zur Stufe.",
       "url": "https://www.icy-veins.com/wow-forever/enhancement-shaman-leveling",
-      "checked_at": "2026-11-02T20:32:48.246042+00:00",
+      "checked_at": "2026-11-03T18:07:07.541694+00:00",
       "status": "ok",
       "error": "",
-      "last_success_at": "2026-11-02T20:32:48.246042+00:00",
-      "source_content_hash": "a65a1faa3839096e",
+      "last_success_at": "2026-11-03T18:07:07.541694+00:00",
+      "source_content_hash": "64a24d4148249988",
       "source_updated_at": null,
-      "content_version": 1,
-      "changed_at": null,
+      "content_version": 2,
+      "changed_at": "2026-11-03T18:07:07.541694+00:00",
       "notice": ""
     },
     {
@@ -27,10 +27,10 @@
       "title": "Shaman · Leveling & Talente",
       "description": "Zweite Einschätzung zu Talenten, wichtigen Spells und Spielweise.",
       "url": "https://www.method.gg/wow-forever/wow-forever-shaman-leveling-guide-and-talents",
-      "checked_at": "2026-11-02T20:32:48.246042+00:00",
+      "checked_at": "2026-11-03T18:07:07.541694+00:00",
       "status": "ok",
       "error": "",
-      "last_success_at": "2026-11-02T20:32:48.246042+00:00",
+      "last_success_at": "2026-11-03T18:07:07.541694+00:00",
       "source_content_hash": "e90d5c389ca61f5c",
       "source_updated_at": null,
       "content_version": 1,
@@ -45,14 +45,14 @@
       "title": "Beast Mastery · Talente nach Level",
       "description": "Talentvorschläge, Pet-Spielweise und Ausrüstung passend zur Stufe.",
       "url": "https://www.icy-veins.com/wow-forever/beast-mastery-hunter-leveling",
-      "checked_at": "2026-11-02T20:32:48.246042+00:00",
+      "checked_at": "2026-11-03T18:07:07.541694+00:00",
       "status": "ok",
       "error": "",
-      "last_success_at": "2026-11-02T20:32:48.246042+00:00",
-      "source_content_hash": "cac1a1a0f3c86fbc",
+      "last_success_at": "2026-11-03T18:07:07.541694+00:00",
+      "source_content_hash": "afa1648165b31be4",
       "source_updated_at": null,
-      "content_version": 1,
-      "changed_at": null,
+      "content_version": 2,
+      "changed_at": "2026-11-03T18:07:07.541694+00:00",
       "notice": ""
     },
     {
@@ -63,15 +63,15 @@
       "title": "Hunter · Leveling & Talente",
       "description": "Zweite Einschätzung zu Talenten, Pet-Management und wichtigen Spells.",
       "url": "https://www.method.gg/wow-forever/wow-forever-hunter-leveling-guide-and-talents",
-      "checked_at": "2026-11-02T20:32:48.246042+00:00",
+      "checked_at": "2026-11-03T18:07:07.541694+00:00",
       "status": "ok",
       "error": "",
-      "last_success_at": "2026-11-02T20:32:48.246042+00:00",
-      "source_content_hash": "ec9facd09fb73323",
+      "last_success_at": "2026-11-03T18:07:07.541694+00:00",
+      "source_content_hash": "511ab7e44d56ec1e",
       "source_updated_at": null,
-      "content_version": 1,
-      "changed_at": null,
-      "notice": "Stufe-60-Build im Guide noch nicht vollständig; zusätzliche Legacy-Punkte beachten."
+      "content_version": 2,
+      "changed_at": "2026-11-03T18:07:07.541694+00:00",
+      "notice": ""
     }
   ]
 }
