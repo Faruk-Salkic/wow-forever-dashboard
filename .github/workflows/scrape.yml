@@ -56,7 +56,9 @@ jobs:
       - name: 🔍 Run scraper & AI validator
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-        run: python scraper/scrape.py
+        run: |
+          python scraper/probe_gemini.py
+          python scraper/scrape.py
 
       - name: 📚 Check current leveling & talent guides
         run: python scraper/check_guides.py

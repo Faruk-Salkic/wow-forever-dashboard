@@ -19,9 +19,11 @@ if hasattr(sys.stdout, "reconfigure"):
         pass
 
 # ─── GEMINI CLIENT ─────────────────────────────────────────────────────────────
-GEMINI_KEY = os.environ.get("GEMINI_API_KEY", "")
+GEMINI_KEY = os.environ.get("GEMINI_API_KEY", "").strip()
 GEMINI_MODEL = os.environ.get("GEMINI_MODEL", "gemini-3.5-flash-lite")
 AI_FAILURES = 0
+AI_MAX_CALLS = max(1, int(os.environ.get("AI_MAX_CALLS", "10")))
+AI_STATE = {"status": "not_configured", "attempts": 0, "succeeded": 0, "failed": 0, "reason": ""}
 TRANSLATION_FAILURES = 0
 TRANSLATION_CACHE = {}
 client = None
@@ -32,15 +34,7 @@ if GEMINI_KEY:
         client = genai.Client(api_key=GEMINI_KEY)
         print("✅ Google GenAI Klijent uspešno inicijalizovan.")
     except Exception as e:
-        print(f"⚠️ google-genai greška: {e}. Pokušavam fallback na legacy...")
-        try:
-            import google.generativeai as legacy_genai
-            legacy_genai.configure(api_key=GEMINI_KEY)
-            client = legacy_genai.GenerativeModel(GEMINI_MODEL)
-            print("✅ Legacy generativeai fallback aktivan.")
-        except Exception as e2:
-            print(f"❌ Neuspešna inicijalizacija AI: {e2}")
-            client = None
+        print(f"⚠️ Gemini SDK konnte nicht gestartet werden: {type(e).__name__}")
 
 # ─── KONFIGURACIJA ────────────────────────────────────────────────────────────
 REPO_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -697,23 +691,45 @@ Text:\n{content}
 """
 
 
+def safe_ai_error(error):
+    """Keep useful diagnostics without exposing keys, request headers or project IDs."""
+    message = str(getattr(error, "message", "") or error)
+    if GEMINI_KEY:
+        message = message.replace(GEMINI_KEY, "[REDACTED]")
+    message = re.sub(r"AIza[A-Za-z0-9_-]{20,}|Bearer\s+\S+|projects/\d+", "[REDACTED]", message)
+    lower = message.lower()
+    reason = ("invalid_key" if any(t in lower for t in ["api key not valid", "api_key_invalid", "key expired", "reported as leaked"])
+              else "billing_or_region" if any(t in lower for t in ["free tier", "billing", "location is not supported"])
+              else "rate_limit" if getattr(error, "code", None) == 429
+              else "permission" if getattr(error, "code", None) == 403
+              else "model_not_found" if getattr(error, "code", None) == 404
+              else "invalid_response" if isinstance(error, ValueError)
+              else "request_error")
+    return reason, message[:350]
+
+
 def generate_german_brief(title, content, source):
     global AI_FAILURES
-    if not client or AI_FAILURES >= 2 or len(content.strip()) < 50: return None
+    if not client or AI_FAILURES >= 2 or AI_STATE["attempts"] >= AI_MAX_CALLS or len(content.strip()) < 50: return None
     try:
+        AI_STATE["attempts"] += 1
         prompt=AI_PROMPT.format(title=title,source=source,content=content[:3500])
-        if hasattr(client,"models"):
-            response=client.models.generate_content(model=GEMINI_MODEL,contents=prompt,config={"response_mime_type":"application/json","max_output_tokens":1200,"temperature":0.1})
-        else:
-            response=client.generate_content(prompt)
+        schema={"type":"object","properties":{k:{"type":"string"} for k in ["title_de","summary_de","action_de"]},"required":["title_de","summary_de","action_de"]}
+        response=client.models.generate_content(model=GEMINI_MODEL,contents=prompt,config={"response_mime_type":"application/json","response_schema":schema,"max_output_tokens":1400})
         text=re.sub(r"^```(?:json)?\s*|\s*```$","",response.text.strip())
         value=json.loads(text)
         for key,limit in [("title_de",220),("summary_de",1000),("action_de",600)]:
             if not isinstance(value.get(key),str) or not value[key].strip() or len(value[key])>limit: raise ValueError("Ungültiger Kurzbericht")
+        AI_STATE.update(status="ok", reason="")
+        AI_STATE["succeeded"] += 1
         return value
     except Exception as e:
         AI_FAILURES += 1
-        print(f"⚠️ KI-Kurzbericht nicht verfügbar: {type(e).__name__}, Code {getattr(e,'code','unbekannt')}",flush=True)
+        reason, diagnostic = safe_ai_error(e)
+        AI_STATE.update(status="error", reason=reason)
+        AI_STATE["failed"] += 1
+        if reason in {"invalid_key", "billing_or_region", "permission"}: AI_FAILURES = 2
+        print(f"⚠️ Gemini: {reason}; Code {getattr(e,'code','unbekannt')}; {diagnostic}",flush=True)
         return None
 
 
@@ -725,6 +741,9 @@ def generate_ai_summary(title, content, source):
 
 # ─── GLAVNI SCRAPER FLOW ──────────────────────────────────────────────────────
 def run_scraper(skip_reddit=False):
+    global AI_FAILURES
+    AI_FAILURES = 0
+    AI_STATE.update(status="ready" if client else "not_configured", attempts=0, succeeded=0, failed=0, reason="")
     start_time_utc = datetime.now(timezone.utc).isoformat()
     today = datetime.now(ZoneInfo("Europe/Vienna")).strftime("%Y-%m-%d")
     existing_data = load_json(OUTPUT_FILE, {"items": []})
@@ -853,7 +872,8 @@ def run_scraper(skip_reddit=False):
             sources_health[name]=f"OK: {m['fetched']} Eingänge" + (f" + {m['tracked_guides']} gespeicherte Guides" if m.get('tracked_guides') else "") + f" · {m['relevant']} passend · {m['accepted']} verarbeitet" + (f" · {m['full_text_failures']} Artikelabrufe fehlgeschlagen" if m['full_text_failures'] else "")
     result={"scraper_started_at":start_time_utc,"data_processed_at":finish,"last_updated":finish,
             "total_count":len(merged),"new_count":new_count,"updated_count":updated_count,"daily_summary":daily_summary,
-            "castle_status":existing_data.get("castle_status",{"verified":False}),"items":merged[:100],"sources_status":sources_health,"sources_metrics":metrics}
+            "castle_status":existing_data.get("castle_status",{"verified":False}),"items":merged[:100],"sources_status":sources_health,"sources_metrics":metrics,
+            "ai_status":{**AI_STATE,"model":GEMINI_MODEL,"max_calls":AI_MAX_CALLS}}
     for item in merged: seen_ids.update([item["id"]]+item.get("migrated_ids",[]))
     save_json(OUTPUT_FILE,result);save_json(CLIENT_OUTPUT_FILE,make_client_payload(result));save_json(SEEN_IDS_FILE,sorted(seen_ids))
     print(f"✅ {new_count} neu, {updated_count} aktualisiert, {len(merged)} eindeutige Artikel.",flush=True)
