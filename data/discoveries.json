@@ -14,7 +14,7 @@
       "priority": 10,
       "source": "Method",
       "url": "https://www.method.gg/wow-forever/best-early-bags-in-wow-forever-crafted-bags-quest-bags-vendor-bags-and-more",
-      "checked_at": "2026-11-01"
+      "checked_at": "2026-11-04"
     },
     {
       "id": "early-vendor-bags",
@@ -22,14 +22,27 @@
         "Faruk",
         "Mirza"
       ],
-      "min_level": 5,
+      "min_level": 1,
       "max_level": 25,
-      "title": "Taschen kaufen: erst günstig auffüllen",
-      "action": "Small Brown Pouch: 6 Plätze für 5 Silber bei General Goods/Supplies. Brown Leather Satchel: 8 Plätze für 25 Silber. Fraktionsrabatte können gelten. Nicht das ganze Trainingsgeld in eine große Tasche stecken.",
+      "title": "Taschen-Budget zum Start",
+      "action": "Basispreise vor Rabatten: Small Brown Pouch, 6 Plätze = 5 Silber; Brown Leather Satchel, 8 Plätze = 25 Silber. Vier 6er-Taschen kosten 20 Silber; mit einer Gratis-Questtasche fehlen nur drei: 15 Silber. In Kharanos bei General Supplies nachsehen (Kreg Bilmn). Red Linen Bag bietet ebenfalls 8 Plätze; den Preis beim Schneider oder im AH vergleichen, nicht als Festpreis behandeln.",
       "priority": 5,
       "source": "Method",
       "url": "https://www.method.gg/wow-forever/best-early-bags-in-wow-forever-crafted-bags-quest-bags-vendor-bags-and-more",
-      "checked_at": "2026-11-01"
+      "checked_at": "2026-11-04",
+      "pricing": {
+        "currency": "copper",
+        "vendor_base_prices": {
+          "small_brown_pouch": 500,
+          "brown_leather_satchel": 2500
+        },
+        "examples": {
+          "four_small_pouches": 2000,
+          "three_small_pouches_after_free_quest_bag": 1500
+        },
+        "auction_price_verified": false,
+        "discounts_possible": true
+      }
     },
     {
       "id": "shaman-first-weapon",
@@ -116,6 +129,92 @@
       "source": "Method",
       "url": "https://www.method.gg/wow-forever/leveling-as-a-party-in-wow-forever-whats-changed-and-what-you-need-to-know",
       "checked_at": "2026-11-01"
+    },
+    {
+      "id": "shaman-trainer-coldridge",
+      "players": [
+        "Faruk"
+      ],
+      "min_level": 1,
+      "max_level": 6,
+      "title": "Start: Teo Hammerstorm in Anvilmar",
+      "action": "Schamanenlehrer in Coldridge Valley: Teo Hammerstorm, Anvilmar, 28.8 / 66.2. Laut Forever-Guide unterrichtet er Fähigkeiten bis Stufe 6. Beim Start prüfen, was dir fehlt; neue wichtige Fähigkeiten mit Questabgabe und Verkauf verbinden. Für höhere Ränge nach Kharanos wechseln. Guide-/Beta-Stand, im Spiel abgleichen.",
+      "priority": 10,
+      "source": "Warcraft Tavern · Forever-Trainerguide",
+      "url": "https://www.warcrafttavern.com/forever/guides/class-trainers/",
+      "checked_at": "2026-11-04",
+      "trainer_max_spell_level": 6,
+      "training_prices_verified": false
+    },
+    {
+      "id": "shaman-trainer-kharanos-ironforge",
+      "players": [
+        "Faruk"
+      ],
+      "min_level": 7,
+      "max_level": 60,
+      "title": "Weiterlernen: Kharanos oder Ironforge",
+      "action": "Ingrid Dunwald steht in Kharanos (47.6 / 52.0). In Ironforge findest du Eldrun Stormbreaker in der Forlorn Cavern (47.3 / 13.5). Für den nächsten Besuch zählen deine Stufe, dein aktueller Ort und bereits gelernte Ränge. Die genaue Einkaufssumme im Trainingsfenster prüfen; keine alten Classic-Preise übernehmen. Guide-/Beta-Stand.",
+      "priority": 9,
+      "source": "Warcraft Tavern · Forever-Trainerguide",
+      "url": "https://www.warcrafttavern.com/forever/guides/class-trainers/",
+      "checked_at": "2026-11-04",
+      "training_prices_verified": false
+    },
+    {
+      "id": "training-prices-launch-change",
+      "players": [
+        "Faruk",
+        "Mirza"
+      ],
+      "min_level": 1,
+      "max_level": 60,
+      "title": "Trainingsgeld reservieren: neue Forever-Preise",
+      "action": "Blizzard hat die Ausbildungskosten vor dem Start für alle Klassen geändert. Eine aktuell belegte Preisliste je Fähigkeit liegt hier noch nicht vor. Erst benötigte Fähigkeiten bezahlen und danach Taschen kaufen; die genaue Summe ergibt sich aus den noch fehlenden Rängen im Trainingsfenster.",
+      "priority": 8,
+      "source": "Blizzard · Entwicklungsnotizen vom 2. November",
+      "url": "https://us.forums.blizzard.com/en/wow/t/wow-forever-beta-development-notes-%E2%80%93-updated-november-2/2360696/9",
+      "checked_at": "2026-11-04",
+      "training_prices_verified": false
     }
-  ]
+  ],
+  "planning_reference": {
+    "checked_at": "2026-11-04",
+    "training_prices_verified": false,
+    "training_price_notice": "Blizzard changed training costs in the November 2 notes. Individual live rank prices remain unconfirmed; do not substitute Classic prices.",
+    "training_price_source": "https://us.forums.blizzard.com/en/wow/t/wow-forever-beta-development-notes-%E2%80%93-updated-november-2/2360696/9",
+    "shaman_spell_checkpoints": [
+      {
+        "spell": "Rockbiter Weapon",
+        "requires_level": 1,
+        "source": "https://www.wowhead.com/forever/spell=8017/rockbiter-weapon",
+        "cost_copper": null
+      },
+      {
+        "spell": "Earth Shock, Rank 1",
+        "requires_level": 4,
+        "source": "https://www.wowhead.com/forever/spell=8042/earth-shock",
+        "cost_copper": null
+      },
+      {
+        "spell": "Earthbind Totem",
+        "requires_level": 6,
+        "source": "https://www.wowhead.com/forever/spell=2484/earthbind-totem",
+        "cost_copper": null
+      },
+      {
+        "spell": "Lightning Shield, Rank 1",
+        "requires_level": 8,
+        "source": "https://foreverdb.net/spell/324",
+        "cost_copper": null
+      },
+      {
+        "spell": "Ghost Wolf",
+        "requires_level": 20,
+        "source": "https://www.wowhead.com/forever/spell=415233/ghost-wolf",
+        "cost_copper": null
+      }
+    ],
+    "scope": "Selected spell-level checkpoints, not a complete trainer purchase list. Already learned spells, race quests and required totem items must be checked in game."
+  }
 }
