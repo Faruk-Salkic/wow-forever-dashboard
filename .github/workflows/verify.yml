@@ -6,6 +6,19 @@ on:
 permissions:
   contents: read
 jobs:
+  gemini-smoke:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/codex/launch-updates'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install requests
+      - name: Check live Gemini response without exposing the API key
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python scraper/check_ai.py
   verify:
     runs-on: ubuntu-latest
     steps:
