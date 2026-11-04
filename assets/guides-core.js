@@ -18,5 +18,11 @@
   function forPlayer(data,player){
     return (data.items||[]).filter(item=>item.player===player).slice(0,2);
   }
-  return {state,changedRecently,forPlayer};
+  function refreshPolicy(policy,now=Date.now()){
+    const value=policy||{interval_hours:24};
+    if(value.mode==='launch'&&now>=Date.parse(value.frequent_until))
+      return {...value,mode:'daily',interval_hours:24,description_de:'Tägliche Quellenprüfung um 11:50 (Wien).'};
+    return value;
+  }
+  return {state,changedRecently,forPlayer,refreshPolicy};
 });

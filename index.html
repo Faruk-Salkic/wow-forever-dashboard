@@ -948,7 +948,7 @@ async function loadNews() {
     const d = await r.json();
     allItems = d.items || [];
     sourceHealth = d.sources_status || {};
-    refreshPolicy = d.update_policy || {interval_hours:24};
+    refreshPolicy = WowGuides.refreshPolicy(d.update_policy);
     renderRecommendations();renderDungeonPreparation();
     document.querySelectorAll('.refresh-policy').forEach(el=>el.textContent=refreshPolicy.description_de||'Tägliche Quellenprüfung um 11:50 (Wien).');
     const aiNote=document.getElementById('ai-status-note');

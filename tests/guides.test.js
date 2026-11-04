@@ -25,6 +25,13 @@ test('launch cadence detects a missed two-hour refresh sooner than daily mode',(
   assert.equal(Guides.state(guide,now,26),'ok');
 });
 
+test('a cached launch feed uses daily freshness after the cutoff, before the next daily run',()=>{
+  const policy={mode:'launch',interval_hours:2,frequent_until:'2026-11-19T00:00:00+01:00'};
+  assert.equal(Guides.refreshPolicy(policy,Date.parse('2026-11-18T22:59:00Z')).interval_hours,2);
+  assert.equal(Guides.refreshPolicy(policy,Date.parse('2026-11-18T23:00:00Z')).interval_hours,24);
+  assert.equal(policy.interval_hours,2);
+});
+
 test('persistent guide links remain available even when news are older than seven days',()=>{
   const faruk={player:'Faruk',source_updated_at:'2026-10-01'};
   const mirza={player:'Mirza',source_updated_at:'2026-10-01'};
