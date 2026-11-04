@@ -12,10 +12,10 @@ def test_new_dashboard_structure():
     for player in ['faruk','mirza']:
         assert soup.find(id='class-news-'+player)
         assert soup.find(id='discoveries-'+player)
-        assert soup.find(id='all-quests-'+player)
-    for element in ['home-news-list','discoveries-home','shared-addons','f-items-list','m-items-list']:
+    for element in ['home-news-list','discoveries-home','shared-addons','dungeon-list','dungeon-pickups','dungeon-show-all','dungeon-section']:
         assert soup.find(id=element)
     assert soup.find('script',src='assets/news-core.js')
+    assert soup.find('script',src='assets/dungeons-core.js')
     assert not soup.select('[id^="planner-"], [id*="talent-milestones"]')
     assert not soup.find('script',src='assets/planner-core.js')
     assert not soup.find('script',src='assets/planner-ui.js')

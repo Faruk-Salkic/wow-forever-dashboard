@@ -1,0 +1,51 @@
+{
+  "dungeons": {
+    "ruins_of_lordaeron": {
+      "replace_minimum": {"16": 15},
+      "notice": "Blizzards Beta-Notizen korrigieren den Mindestlevel dieser Dungeon-Quests auf 15. Auch Vorquests wurden geändert; genaue Freischaltung beim NPC prüfen.",
+      "source_url": "https://us.forums.blizzard.com/en/wow/t/2360696/5"
+    }
+  },
+  "quests": {
+    "92753": {
+      "min_lvl": 9,
+      "prepare_from_level": 9,
+      "prepare_quest": "Testing the Wells",
+      "prepare_url": "https://www.wowhead.com/forever/quest=92742/testing-the-wells",
+      "evidence_url": "https://www.wowhead.com/forever/quest=92753/destruction-in-deadmines",
+      "evidence_checked_at": "2026-11-04",
+      "pickup": "Westfall · Alba Fairmoon · /way 52.6 53.2 · Beginn der Kette: Testing the Wells",
+      "chain": "Ab Stufe 9 bei Alba Fairmoon in Westfall mit Testing the Wells beginnen und ihrer Questkette folgen. Der Dungeon-Auftrag kommt erst nach den Vorquests.",
+      "preparation_hint": "Sprengstoff am Schmiedeofen bei Gilnid platzieren. Danach zum Hinterausgang gehen und Alba aufsuchen; nicht sofort wegporten.",
+      "race_note": "Diese Questvariante gilt laut Datenbank für Dwarf, Night Elf, Gnome und High Order Skyborne. Für Mirzas noch offene Rasse die Variante beim NPC prüfen."
+    },
+    "2040": {
+      "chain": "Direkt bei Shoni the Shilent annehmen. Speak with Shoni von Gnoarn in Ironforge ist nur ein optionaler Wegweiser.",
+      "preparation_hint": "Ab Stufe 15 im Dwarven District von Stormwind mitnehmen."
+    },
+    "168": {
+      "chain": "Keine Vorquest. Die Untoten im Vorraum vor dem Instanzportal zählen; anschließend bei Wilder in Stormwind abgeben."
+    },
+    "167": {
+      "chain": "Keine Vorquest. Den Gegner im Vorraum vor dem Instanzportal erledigen; anschließend bei Wilder in Stormwind abgeben."
+    },
+    "214": {
+      "chain": "Den Defias-Vorlauf einschließlich Eskorte von The Defias Traitor abschließen, bevor ihr die Gruppe sammelt."
+    },
+    "166": {
+      "prerequisites": [],
+      "chain": "Gryans Defias-Questkette in Westfall bis zum Auftrag für VanCleef abschließen. Nicht erst vor dem Dungeon damit anfangen."
+    },
+    "373": {
+      "chain": "Ab Stufe 16 das An Unsent Letter bei VanCleef selbst looten. Danach Baros Alexston in Stormwind aufsuchen; der Folgelauf führt zu The Stockade Riots."
+    },
+    "3802": {
+      "chain": "Franclorn Forgewright im Blackrock Mountain ist nur als Geist ansprechbar. Die Quest führt zu Ironfel von Fineous Darkvire und anschließend zum Schrein; nicht zu Incendius.",
+      "preparation_hint": "Schlüssel-Vorbereitung vor dem eigentlichen BRD-Lauf mit der Gruppe klären."
+    },
+    "1053": {
+      "chain": "Vor dem Kloster-Lauf die Down the Scarlet Path-Kette über Brother Anton und Raleigh the Devout vorbereiten; den Endauftrag in Southshore abholen."
+    },
+    "2962": {"prerequisites": ["Gnogaine"], "chain": "Zuerst Gnogaine bei Ozzie Togglevolt in Kharanos erledigen."}
+  }
+}

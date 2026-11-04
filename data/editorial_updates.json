@@ -1,0 +1,18 @@
+{
+  "items": [
+    {
+      "date": "2026-11-04",
+      "title": "Dungeon-Quests vorbereiten: Abholorte, Mindestlevel & Vorquests",
+      "teaser_de": "Die Vorbereitungsliste wurde mit dem Forever-Guide abgeglichen. Seht unterwegs, welche Quests ihr in Ironforge, Stormwind, Westfall und anderen Gebieten mitnehmen könnt.",
+      "article_de": "Im Bereich Dungeon-Quests findet ihr Abholorte, Mindestlevel und notwendige Vorquests für eure Klassen. Die Vorbereitung könnt ihr nach eurer Stufe filtern; eure Häkchen bleiben für Faruk und Mirza getrennt.\n\nFür Deadmines: Collecting Memories ab 14 und Oh Brother... ab 15 bei Wilder Thistlenettle; Underground Assault ab 15 bei Shoni the Shilent in Stormwind. Gnoarns Speak with Shoni in Ironforge ist optional. Gryans Defias-Kette und Scout Riells Freischaltung vorher in Westfall vorbereiten.\n\nTesting the Wells beginnt laut Questdatensatz ab 9 bei Alba Fairmoon; die Kette führt zu Destruction in Deadmines. Diese Variante hat Rassenvorgaben. Vor dem Dungeon die Vorquests erledigen; am Ende nicht sofort wegporten, sondern Alba am Hinterausgang aufsuchen. An Unsent Letter bei VanCleef selbst looten.\n\nAuch die anderen Instanzen sind enthalten. Die Quelle nutzt für noch nicht getestete Inhalte teilweise Classic-Referenzen; offene Angaben bleiben gekennzeichnet.",
+      "url": "https://faruk-salkic.github.io/wow-forever-dashboard/?view=home&focus=dungeons",
+      "category": "guide",
+      "classes": [],
+      "internal_action": "dungeons",
+      "references": [
+        {"label":"Wowhead: Dungeon-Questübersicht","url":"https://www.wowhead.com/forever/guide/dungeons/every-dungeon-quest-location"},
+        {"label":"Destruction in Deadmines: Questdatensatz","url":"https://www.wowhead.com/forever/quest=92753/destruction-in-deadmines"}
+      ]
+    }
+  ]
+}

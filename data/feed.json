@@ -2,10 +2,10 @@
   "scraper_started_at": "2026-11-04T14:31:13.569552+00:00",
   "data_processed_at": "2026-11-04T14:31:53.931181+00:00",
   "last_updated": "2026-11-04T14:31:53.931181+00:00",
-  "total_count": 46,
-  "new_count": 12,
+  "total_count": 47,
+  "new_count": 13,
   "updated_count": 8,
-  "daily_summary": "Tagesbriefing (04.11.2026): 12 neue und 8 aktualisierte Updates erfasst. Themen: [Aktualisiert] World of Warcraft: Forever Herbalism Guide; [Aktualisiert] World of Warcraft: Forever Mining Guide.",
+  "daily_summary": "Tagesbriefing (04.11.2026): 12 neue und 8 aktualisierte Updates erfasst. Themen: [Aktualisiert] World of Warcraft: Forever Herbalism Guide; [Aktualisiert] World of Warcraft: Forever Mining Guide. Zusätzlich wurde der Hinweis zur Dungeon-Vorbereitung aktualisiert.",
   "castle_status": {
     "status": "Keine Live-Daten verifiziert",
     "details": "Aktuell liegen keine automatischen Burgen-Telemetriedaten vor. Status wird nach Serverstart über Live-Events angebunden.",
@@ -37,7 +37,7 @@
       "content_version": 4,
       "last_checked_at": "2026-11-04T14:31:53.931181+00:00",
       "summary_mode": "untranslated",
-      "source_text_length": 18975,
+      "source_text_length": 18883,
       "has_source_baseline": true,
       "updated_at": "2026-11-04T14:31:53.931181+00:00",
       "update_note": "Der Haupttext der Quelle wurde geändert. Den aktuellen Kurzbericht und die Quelle prüfen."
@@ -66,7 +66,7 @@
       "content_version": 4,
       "last_checked_at": "2026-11-04T14:31:53.931181+00:00",
       "summary_mode": "untranslated",
-      "source_text_length": 17655,
+      "source_text_length": 17563,
       "has_source_baseline": true,
       "updated_at": "2026-11-04T14:31:53.931181+00:00",
       "update_note": "Der Haupttext der Quelle wurde geändert. Den aktuellen Kurzbericht und die Quelle prüfen."
@@ -95,7 +95,7 @@
       "content_version": 4,
       "last_checked_at": "2026-11-04T14:31:53.931181+00:00",
       "summary_mode": "untranslated",
-      "source_text_length": 16087,
+      "source_text_length": 15995,
       "has_source_baseline": true,
       "updated_at": "2026-11-04T14:31:53.931181+00:00",
       "update_note": "Der Haupttext der Quelle wurde geändert. Den aktuellen Kurzbericht und die Quelle prüfen."
@@ -124,7 +124,7 @@
       "content_version": 4,
       "last_checked_at": "2026-11-04T14:31:53.931181+00:00",
       "summary_mode": "untranslated",
-      "source_text_length": 15454,
+      "source_text_length": 15362,
       "has_source_baseline": true,
       "updated_at": "2026-11-04T14:31:53.931181+00:00",
       "update_note": "Der Haupttext der Quelle wurde geändert. Den aktuellen Kurzbericht und die Quelle prüfen."
@@ -153,7 +153,7 @@
       "content_version": 4,
       "last_checked_at": "2026-11-04T14:31:53.931181+00:00",
       "summary_mode": "untranslated",
-      "source_text_length": 16576,
+      "source_text_length": 16484,
       "has_source_baseline": true,
       "updated_at": "2026-11-04T14:31:53.931181+00:00",
       "update_note": "Der Haupttext der Quelle wurde geändert. Den aktuellen Kurzbericht und die Quelle prüfen."
@@ -182,7 +182,7 @@
       "content_version": 3,
       "last_checked_at": "2026-11-04T14:31:53.931181+00:00",
       "summary_mode": "untranslated",
-      "source_text_length": 6868,
+      "source_text_length": 6776,
       "has_source_baseline": true,
       "updated_at": "2026-11-04T14:31:53.931181+00:00",
       "update_note": "Der Haupttext der Quelle wurde geändert. Den aktuellen Kurzbericht und die Quelle prüfen."
@@ -211,7 +211,7 @@
       "content_version": 3,
       "last_checked_at": "2026-11-04T14:31:53.931181+00:00",
       "summary_mode": "untranslated",
-      "source_text_length": 7211,
+      "source_text_length": 7119,
       "has_source_baseline": true,
       "updated_at": "2026-11-04T14:31:53.931181+00:00",
       "update_note": "Der Haupttext der Quelle wurde geändert. Den aktuellen Kurzbericht und die Quelle prüfen."
@@ -243,7 +243,7 @@
       "content_extractor": 2,
       "date_basis": "first_seen",
       "summary_mode": "curated",
-      "source_text_length": 5608,
+      "source_text_length": 8338,
       "has_source_baseline": true,
       "update_note": "Der Haupttext der Quelle wurde geändert. Den aktuellen Kurzbericht und die Quelle prüfen."
     },
@@ -272,7 +272,9 @@
       "content_extractor": 2,
       "is_updated": false,
       "content_version": 1,
-      "last_checked_at": "2026-11-04T14:31:53.931181+00:00"
+      "last_checked_at": "2026-11-04T14:31:53.931181+00:00",
+      "source_text_length": 33815,
+      "has_source_baseline": true
     },
     {
       "id": "a5c812fb1c19",
@@ -297,7 +299,9 @@
       "content_extractor": 2,
       "is_updated": false,
       "content_version": 1,
-      "last_checked_at": "2026-11-04T14:31:53.931181+00:00"
+      "last_checked_at": "2026-11-04T14:31:53.931181+00:00",
+      "source_text_length": 6508,
+      "has_source_baseline": true
     },
     {
       "id": "497ea4897ab9",
@@ -322,7 +326,9 @@
       "content_extractor": 2,
       "is_updated": false,
       "content_version": 1,
-      "last_checked_at": "2026-11-04T14:31:53.931181+00:00"
+      "last_checked_at": "2026-11-04T14:31:53.931181+00:00",
+      "source_text_length": 6048,
+      "has_source_baseline": true
     },
     {
       "id": "3c49d16c59d1",
@@ -349,7 +355,9 @@
       "content_extractor": 2,
       "is_updated": false,
       "content_version": 1,
-      "last_checked_at": "2026-11-04T14:31:53.931181+00:00"
+      "last_checked_at": "2026-11-04T14:31:53.931181+00:00",
+      "source_text_length": 34507,
+      "has_source_baseline": true
     },
     {
       "id": "ff401e88de53",
@@ -376,7 +384,9 @@
       "content_extractor": 0,
       "is_updated": false,
       "content_version": 1,
-      "last_checked_at": "2026-11-04T14:31:53.931181+00:00"
+      "last_checked_at": "2026-11-04T14:31:53.931181+00:00",
+      "source_text_length": 1077,
+      "has_source_baseline": true
     },
     {
       "id": "7635551ffcf3",
@@ -401,7 +411,9 @@
       "content_extractor": 0,
       "is_updated": false,
       "content_version": 1,
-      "last_checked_at": "2026-11-04T14:31:53.931181+00:00"
+      "last_checked_at": "2026-11-04T14:31:53.931181+00:00",
+      "source_text_length": 1200,
+      "has_source_baseline": true
     },
     {
       "id": "fbf08b35df81",
@@ -426,7 +438,9 @@
       "content_extractor": 0,
       "is_updated": false,
       "content_version": 1,
-      "last_checked_at": "2026-11-04T14:31:53.931181+00:00"
+      "last_checked_at": "2026-11-04T14:31:53.931181+00:00",
+      "source_text_length": 660,
+      "has_source_baseline": true
     },
     {
       "id": "1e4136a0d2de",
@@ -451,7 +465,9 @@
       "content_extractor": 0,
       "is_updated": false,
       "content_version": 1,
-      "last_checked_at": "2026-11-04T14:31:53.931181+00:00"
+      "last_checked_at": "2026-11-04T14:31:53.931181+00:00",
+      "source_text_length": 1200,
+      "has_source_baseline": true
     },
     {
       "id": "53c3c537c705",
@@ -476,7 +492,48 @@
       "content_extractor": 0,
       "is_updated": false,
       "content_version": 1,
-      "last_checked_at": "2026-11-04T14:31:53.931181+00:00"
+      "last_checked_at": "2026-11-04T14:31:53.931181+00:00",
+      "source_text_length": 136,
+      "has_source_baseline": true
+    },
+    {
+      "date": "2026-11-04",
+      "title": "Dungeon-Quests vorbereiten: Abholorte, Mindestlevel & Vorquests",
+      "teaser_de": "Die Vorbereitungsliste wurde mit dem Forever-Guide abgeglichen. Seht unterwegs, welche Quests ihr in Ironforge, Stormwind, Westfall und anderen Gebieten mitnehmen könnt.",
+      "article_de": "Im Bereich Dungeon-Quests findet ihr Abholorte, Mindestlevel und notwendige Vorquests für eure Klassen. Die Vorbereitung könnt ihr nach eurer Stufe filtern; eure Häkchen bleiben für Faruk und Mirza getrennt.\n\nFür Deadmines: Collecting Memories ab 14 und Oh Brother... ab 15 bei Wilder Thistlenettle; Underground Assault ab 15 bei Shoni the Shilent in Stormwind. Gnoarns Speak with Shoni in Ironforge ist optional. Gryans Defias-Kette und Scout Riells Freischaltung vorher in Westfall vorbereiten.\n\nTesting the Wells beginnt laut Questdatensatz ab 9 bei Alba Fairmoon; die Kette führt zu Destruction in Deadmines. Diese Variante hat Rassenvorgaben. Vor dem Dungeon die Vorquests erledigen; am Ende nicht sofort wegporten, sondern Alba am Hinterausgang aufsuchen. An Unsent Letter bei VanCleef selbst looten.\n\nAuch die anderen Instanzen sind enthalten. Die Quelle nutzt für noch nicht getestete Inhalte teilweise Classic-Referenzen; offene Angaben bleiben gekennzeichnet.",
+      "url": "https://faruk-salkic.github.io/wow-forever-dashboard/?view=home&focus=dungeons",
+      "category": "news",
+      "classes": [],
+      "internal_action": "dungeons",
+      "references": [
+        {
+          "label": "Wowhead: Dungeon-Questübersicht",
+          "url": "https://www.wowhead.com/forever/guide/dungeons/every-dungeon-quest-location"
+        },
+        {
+          "label": "Destruction in Deadmines: Questdatensatz",
+          "url": "https://www.wowhead.com/forever/quest=92753/destruction-in-deadmines"
+        }
+      ],
+      "id": "4f8472355c82",
+      "normalized_url": "https://faruk-salkic.github.io/wow-forever-dashboard?focus=dungeons&view=home",
+      "raw_title": "WoW Forever: Dungeon-Quests vorbereiten: Abholorte, Mindestlevel & Vorquests",
+      "source": "Dashboard · Questvorbereitung",
+      "source_icon": "🏰",
+      "radar_status": "Redaktionell",
+      "verified_type": "Redaktioneller Hinweis mit verlinkten Quellen",
+      "date_basis": "editorial",
+      "fetched_at": "2026-11-04T15:04:53.738130+00:00",
+      "specific_change": true,
+      "summary_mode": "curated",
+      "content_extractor": 2,
+      "source_content_hash": "971a377f30660035",
+      "has_source_baseline": true,
+      "is_updated": false,
+      "content_version": 1,
+      "last_checked_at": "2026-11-04T15:04:53.742829+00:00",
+      "source_text_length": 969,
+      "migrated_ids": []
     },
     {
       "id": "edb04e992e47",
@@ -698,7 +755,9 @@
       "content_extractor": 0,
       "is_updated": false,
       "content_version": 1,
-      "last_checked_at": "2026-11-04T14:31:53.931181+00:00"
+      "last_checked_at": "2026-11-04T14:31:53.931181+00:00",
+      "source_text_length": 173,
+      "has_source_baseline": true
     },
     {
       "id": "6a71684d73a3",
@@ -723,7 +782,9 @@
       "content_extractor": 0,
       "is_updated": false,
       "content_version": 1,
-      "last_checked_at": "2026-11-04T14:31:53.931181+00:00"
+      "last_checked_at": "2026-11-04T14:31:53.931181+00:00",
+      "source_text_length": 1200,
+      "has_source_baseline": true
     },
     {
       "id": "3a4ab9c1f523",
@@ -1145,7 +1206,9 @@
       "content_extractor": 2,
       "is_updated": false,
       "content_version": 1,
-      "last_checked_at": "2026-11-04T14:31:53.931181+00:00"
+      "last_checked_at": "2026-11-04T14:31:53.931181+00:00",
+      "source_text_length": 2286,
+      "has_source_baseline": true
     },
     {
       "id": "d55e49e80a02",
@@ -1405,5 +1468,13 @@
     "reason": "invalid_key",
     "model": "gemini-3.5-flash-lite",
     "max_calls": 10
+  },
+  "update_policy": {
+    "mode": "launch",
+    "interval_hours": 2,
+    "timezone": "Europe/Vienna",
+    "frequent_until": "2026-11-19T00:00:00+01:00",
+    "schedule": "17 */2 * * *",
+    "description_de": "Alle 2 Stunden bis einschließlich 18.11.; danach täglich um 11:50 (Wien)."
   }
 }

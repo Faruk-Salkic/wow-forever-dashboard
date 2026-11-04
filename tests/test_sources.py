@@ -9,6 +9,11 @@ from scraper import scrape as S
 
 
 class SourceTests(unittest.TestCase):
+    def test_existing_dedicated_reddit_posts_keep_the_game_context(self):
+        old={'id':'old','url':'https://www.reddit.com/r/wowforever/comments/example','source':'Reddit r/wowforever','raw_title':'ShotRange addon: Hunter auto-shot range indicator','title':'ShotRange für Hunter','teaser_de':'Addon für die Reichweite von Auto Shot.','article_de':'Hunter addon range indicator.','date':'2026-11-04'}
+        merged,new,updated,_=S.merge_and_deduplicate_items([old],[],{},'2026-11-04T12:00:00Z')
+        self.assertEqual((len(merged),new,updated),(1,0,0))
+
     def test_shared_addons_items_and_mobs_do_not_require_a_class_name(self):
         for title in ['WoW Forever: Recommended addons for a clean UI', 'WoW Forever: A useful early item from a rare mob', 'WoW Forever: Newly discovered weapon drop location']:
             self.assertTrue(S.is_relevant_context(title,'Practical details, locations and requirements.'))

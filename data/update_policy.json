@@ -1,0 +1,7 @@
+{
+  "timezone": "Europe/Vienna",
+  "frequent_cron": "17 */2 * * *",
+  "daily_cron": "50 11 * * *",
+  "frequent_until": "2026-11-19T00:00:00+01:00",
+  "max_ai_briefs_per_run": 10
+}

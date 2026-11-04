@@ -19,6 +19,12 @@ test('a successful recheck alone does not produce an update badge',()=>{
   assert.equal(Guides.changedRecently({changed_at:'2026-10-20T10:59:00Z'},now),false);
 });
 
+test('launch cadence detects a missed two-hour refresh sooner than daily mode',()=>{
+  const guide={status:'ok',last_success_at:'2026-11-03T06:00:00Z'};
+  assert.equal(Guides.state(guide,now,4),'stale');
+  assert.equal(Guides.state(guide,now,26),'ok');
+});
+
 test('persistent guide links remain available even when news are older than seven days',()=>{
   const faruk={player:'Faruk',source_updated_at:'2026-10-01'};
   const mirza={player:'Mirza',source_updated_at:'2026-10-01'};

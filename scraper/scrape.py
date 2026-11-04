@@ -11,6 +11,10 @@ from datetime import datetime, timedelta, timezone
 from zoneinfo import ZoneInfo
 from concurrent.futures import ThreadPoolExecutor
 from bs4 import BeautifulSoup
+if __package__:
+    from .update_policy import policy_at
+else:
+    from update_policy import policy_at
 
 if hasattr(sys.stdout, "reconfigure"):
     try:
@@ -172,7 +176,8 @@ def merge_and_deduplicate_items(existing_items, incoming_items, sources_health=N
         canonical_id = make_canonical_id(norm_u, old_it.get("title", ""))
 
         # Filtriraj kroz strogi is_relevant_context
-        if not is_relevant_context(old_it.get("raw_title") or old_it.get("title", ""), old_it.get("teaser_de", ""), old_it.get("raw_content") or old_it.get("article_de", "")):
+        old_context = {**old_it,"summary":old_it.get("summary") or old_it.get("teaser_de", "")}
+        if not relevant_feed_item(old_context, old_it.get("raw_title") or old_it.get("title", ""), old_it.get("raw_content") or old_it.get("article_de", "")):
             continue
 
         if norm_u in items_by_url:
@@ -820,7 +825,9 @@ def run_scraper(skip_reddit=False):
         if not content:
             metrics[src]["full_text_failures"]+=1
             # A failed article read must never overwrite a good full-content baseline.
-            if norm in previous or len(item["summary"])<100: continue
+            old_fallback = previous.get(norm, {})
+            repairable = old_fallback.get("content_extractor") == 0 and old_fallback.get("summary_mode") == "untranslated"
+            if (norm in previous and not repairable) or len(item["summary"])<100: continue
             content=item["summary"]
         title=doc.get("title") or item["title"]
         if not relevant_feed_item(item,title,content): continue
@@ -873,7 +880,7 @@ def run_scraper(skip_reddit=False):
     result={"scraper_started_at":start_time_utc,"data_processed_at":finish,"last_updated":finish,
             "total_count":len(merged),"new_count":new_count,"updated_count":updated_count,"daily_summary":daily_summary,
             "castle_status":existing_data.get("castle_status",{"verified":False}),"items":merged[:100],"sources_status":sources_health,"sources_metrics":metrics,
-            "ai_status":{**AI_STATE,"model":GEMINI_MODEL,"max_calls":AI_MAX_CALLS}}
+            "ai_status":{**AI_STATE,"model":GEMINI_MODEL,"max_calls":AI_MAX_CALLS},"update_policy":policy_at()}
     for item in merged: seen_ids.update([item["id"]]+item.get("migrated_ids",[]))
     save_json(OUTPUT_FILE,result);save_json(CLIENT_OUTPUT_FILE,make_client_payload(result));save_json(SEEN_IDS_FILE,sorted(seen_ids))
     print(f"✅ {new_count} neu, {updated_count} aktualisiert, {len(merged)} eindeutige Artikel.",flush=True)

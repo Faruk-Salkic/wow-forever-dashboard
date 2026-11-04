@@ -1,9 +1,10 @@
-name: 🗡️ WoW Forever Daily News Scraper
+name: 🗡️ WoW Forever Updates
 
 on:
   schedule:
-    # Daily scrape at 11:50 Europe/Vienna timezone.
-    # Targets availability around noon; GitHub queue/deploy delays are possible.
+    # First two launch weeks: every two hours. Then the daily event is selected.
+    - cron: "17 */2 * * *"
+      timezone: "Europe/Vienna"
     - cron: "50 11 * * *"
       timezone: "Europe/Vienna"
   workflow_dispatch:
@@ -13,6 +14,9 @@ on:
       - '.github/workflows/scrape.yml'
       - 'scraper/**'
       - 'data/guide_sources.json'
+      - 'data/update_policy.json'
+      - 'data/dungeon_overrides.json'
+      - 'data/editorial_updates.json'
 
 permissions:
   contents: write
@@ -23,14 +27,30 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  schedule_policy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    outputs:
+      run_update: ${{ steps.policy.outputs.run_update }}
+      mode: ${{ steps.policy.outputs.mode }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: policy
+        env:
+          TRIGGER_CRON: ${{ github.event.schedule }}
+        run: python scraper/update_policy.py
+
   scrape:
+    needs: schedule_policy
+    if: needs.schedule_policy.outputs.run_update == 'true'
     name: 🔍 Scrape, Validate & Deploy
     runs-on: ubuntu-latest
 
     steps:
       - name: ⏰ Log execution timing & runner delay
         run: |
-          TARGET_SCHEDULE="11:50 Europe/Vienna"
+          TARGET_SCHEDULE="${{ github.event.schedule || 'manual/push' }} · ${{ needs.schedule_policy.outputs.mode }} · Europe/Vienna"
           CURRENT_VIENNA=$(TZ="Europe/Vienna" date '+%Y-%m-%d %H:%M:%S %Z')
           CURRENT_UTC=$(date -u '+%Y-%m-%d %H:%M:%S UTC')
           echo "⏰ Scheduled trigger target: $TARGET_SCHEDULE"
@@ -53,18 +73,23 @@ jobs:
       - name: 📦 Install dependencies
         run: pip install -r scraper/requirements.txt
 
-      - name: 🔍 Run scraper & AI validator
-        env:
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-        run: |
-          python scraper/probe_gemini.py
-          python scraper/scrape.py
-
       - name: 📚 Check current leveling & talent guides
         run: python scraper/check_guides.py
 
       - name: 🎁 Check new quests and changed item rewards
         run: python scraper/check_quest_rewards.py
+
+      - name: 🏰 Verify dungeon quest preparation
+        run: python scraper/check_dungeons.py
+
+      - name: 🔍 Run scraper & AI validator
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          AI_MAX_CALLS: "10"
+        run: |
+          python scraper/probe_gemini.py
+          python scraper/scrape.py
+          python scraper/publish_editorial.py
 
       - name: 🧪 Verify data integrity
         run: |
@@ -79,7 +104,7 @@ jobs:
           git config --global user.name  "WoW-Bot 🤖"
           git config --global user.email "wow-bot@faruk-mirza.github.io"
           git add data/feed.json data/news.json data/seen_ids.json data/guides.json data/bis.json data/recommendations.json data/quest_rewards.json data/quest_reward_state.json
-          git diff --cached --quiet || git commit -m "🗞️ Daily verified update $(date -u '+%Y-%m-%d %H:%M UTC')"
+          git diff --cached --quiet || git commit -m "🗞️ Verified update $(date -u '+%Y-%m-%d %H:%M UTC')"
           git push
 
       # GITHUB_TOKEN commits do not trigger a branch-based Pages build on their own.

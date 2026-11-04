@@ -4,11 +4,11 @@
   else root.WowGuides=api;
 })(typeof globalThis!=='undefined'?globalThis:this,function(){
   const HOUR=3600000;
-  function state(item,now=Date.now()){
+  function state(item,now=Date.now(),maxAgeHours=26){
     const checked=Date.parse(item.last_success_at||'');
     if(item.status!=='ok') return item.last_success_at?'failed':'unverified';
     if(!Number.isFinite(checked)) return 'unverified';
-    if(checked>now||now-checked>26*HOUR) return 'stale';
+    if(checked>now||now-checked>maxAgeHours*HOUR) return 'stale';
     return 'ok';
   }
   function changedRecently(item,now=Date.now()){

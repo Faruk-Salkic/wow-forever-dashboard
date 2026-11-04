@@ -510,6 +510,7 @@
         <p class="section-subtitle">Neue Quests, interessante Items, Addons und gemeinsame Spielinfos · letzte 7 Tage · höchstens 4 Meldungen.</p>
 
         <p id="home-source-note" class="guide-note" role="status"></p>
+        <p id="ai-status-note" class="guide-note" role="status"></p>
         <div id="home-news-list" class="home-news-grid">
           <div class="empty"><div class="empty-ico">⏳</div><div>Suche spielrelevante Neuigkeiten...</div></div>
         </div>
@@ -523,11 +524,13 @@
       </div>
       <details class="shared-section" id="shared-hints"><summary>🎁 Quests, interessante Items &amp; praktische Tipps <span id="quest-rewards-badge" class="badge b-gold"></span></summary><p id="quest-source-note" class="guide-note"></p><div id="quest-rewards-home" class="profile-discoveries"></div><div id="discoveries-home" class="profile-discoveries"></div></details>
       <details class="shared-section" id="section-addons"><summary>🔌 Addons für uns</summary><p class="guide-note">Unsere vorbereitete Auswahl. Vor der Installation die passende Forever-Version prüfen.</p><div id="shared-addons" class="profile-discoveries"></div></details>
-      <details class="shared-section"><summary>🏰 Dungeon-Quests · Fortschritt</summary>
-        <p class="local-notice">Lokale Browser-Speicherung: Häkchen bleiben getrennt für Faruk und Mirza auf diesem Gerät erhalten.</p>
-        <div class="quest-players-grid">
-          <div><h3>Faruk</h3><label class="guide-note"><input type="checkbox" id="all-quests-faruk" onchange="renderPlayerItems('Faruk')"> Alle Dungeon-Quests zeigen</label><div id="f-items-list"></div></div>
-          <div><h3>Mirza</h3><label class="guide-note"><input type="checkbox" id="all-quests-mirza" onchange="renderPlayerItems('Mirza')"> Alle Dungeon-Quests zeigen</label><div id="m-items-list"></div></div>
+      <details class="shared-section" id="dungeon-section"><summary>🏰 Dungeon-Quests · Fortschritt</summary>
+        <div id="dungeon-prep"><p class="guide-note" id="dungeon-source-note"></p>
+          <h3 class="dungeon-prep-title">Unterwegs vorbereiten</h3>
+          <div id="dungeon-pickups" class="profile-discoveries"><p>Abholorte werden geladen…</p></div>
+          <p class="local-notice">Lokale Browser-Speicherung: Häkchen bedeuten „erledigt“ und bleiben für Faruk und Mirza getrennt auf diesem Gerät gespeichert.</p>
+          <label class="guide-note"><input type="checkbox" id="dungeon-show-all" onchange="renderDungeonPreparation()"> Alle Levelbereiche zeigen</label>
+          <div id="dungeon-list"></div>
         </div>
       </details>
     </section>
@@ -543,7 +546,7 @@
       </div>
       <section class="guide-links-section" aria-labelledby="guide-title-faruk">
         <h2 id="guide-title-faruk">Leveling &amp; Talente</h2>
-        <p class="guide-note">Empfohlene Guides direkt öffnen. Quellenprüfung täglich um 11:50 (Wien).</p>
+        <p class="guide-note">Empfohlene Guides direkt öffnen. <span class="refresh-policy">Quellenprüfung wird geladen…</span></p>
         <div id="profile-guides-faruk" class="profile-guide-links" aria-live="polite"><p>Guides werden geprüft…</p></div>
       </section>
       <div class="home-news-section">
@@ -589,7 +592,7 @@
       </div>
       <section class="guide-links-section" aria-labelledby="guide-title-mirza">
         <h2 id="guide-title-mirza">Leveling &amp; Talente</h2>
-        <p class="guide-note">Empfohlene Guides direkt öffnen. Quellenprüfung täglich um 11:50 (Wien).</p>
+        <p class="guide-note">Empfohlene Guides direkt öffnen. <span class="refresh-policy">Quellenprüfung wird geladen…</span></p>
         <div id="profile-guides-mirza" class="profile-guide-links" aria-live="polite"><p>Guides werden geprüft…</p></div>
       </section>
       <div class="home-news-section">
@@ -717,6 +720,7 @@
 <script src="assets/news-core.js"></script>
 <script src="assets/guides-core.js"></script>
 <script src="assets/quests-core.js"></script>
+<script src="assets/dungeons-core.js"></script>
 <script>
 const safeStorage = {
   getItem(key) { try { return localStorage.getItem(key); } catch { return null; } },
@@ -893,9 +897,11 @@ function isArticleRecent(item) {
 // ── DUAL QUEST CHECKLIST ───────────────────────────────────────────────────
 function togglePlayerQuest(player, qid) {
   const chk = document.getElementById(`qchk-${player.toLowerCase()}-${qid}`);
-  if (!chk) return;
+  const quest=(guidesData.dungeon_quests?.dungeons||[]).flatMap(d=>d.quests||[]).find(q=>q.id===qid);
+  if (!chk || !quest || !WowDungeons.allowed(quest,player)) return;
   const isChecked = chk.checked;
-  const storageKey = (player === 'Faruk') ? ('wow_quest_Faruk_' + qid) : ('wow_quest_Mirza_' + qid);
+  const progressId=quest.progress_id||qid;
+  const storageKey = (player === 'Faruk') ? ('wow_quest_Faruk_' + progressId) : ('wow_quest_Mirza_' + progressId);
   try {
     safeStorage.setItem(storageKey, isChecked ? '1' : '0');
   } catch(e){}
@@ -903,8 +909,9 @@ function togglePlayerQuest(player, qid) {
 }
 
 // ── DATA SOURCES & INITIALIZATION ──────────────────────────────────────────
-let allItems = [], guidesData = {}, discoveriesData = [], questRewardsData = null;
+let allItems = [], guidesData = {}, discoveriesData = [], questRewardsData = null, recommendationsData = null;
 let sourceHealth = {};
+let refreshPolicy = {interval_hours:24};
 let newsLoadError = false;
 let activeProfile = safeStorage.getItem('wow_active_profile') || 'all';
 let activeFilter  = safeStorage.getItem('wow_active_filter')  || 'all';
@@ -929,6 +936,7 @@ async function init() {
     const el=document.getElementById(`home-profs-${p.toLowerCase()}`); if(el) el.textContent=playerProfs[p].join(' & ');
   });
   showView(currentView);
+  if(new URLSearchParams(location.search).get('focus')==='dungeons')openDungeonPrep();
   renderHomeCards();
 }
 
@@ -940,6 +948,11 @@ async function loadNews() {
     const d = await r.json();
     allItems = d.items || [];
     sourceHealth = d.sources_status || {};
+    refreshPolicy = d.update_policy || {interval_hours:24};
+    renderRecommendations();renderDungeonPreparation();
+    document.querySelectorAll('.refresh-policy').forEach(el=>el.textContent=refreshPolicy.description_de||'Tägliche Quellenprüfung um 11:50 (Wien).');
+    const aiNote=document.getElementById('ai-status-note');
+    if(aiNote)aiNote.textContent=d.ai_status?.status==='error'?'Automatische Kurzberichte derzeit nicht verfügbar. Quellen und Quest-Hinweise werden weiter geprüft.':'';
     renderSourcesStatus(d.sources_status);
     renderDataProcTime(d.data_processed_at || d.last_updated);
     renderNewsHub();
@@ -963,7 +976,7 @@ async function loadGuides() {
     guidesData = await r.json();
     renderAllProfileGuides();
   } catch(e){
-    for(const id of ['shared-addons','f-items-list','m-items-list']) {
+    for(const id of ['shared-addons','dungeon-pickups','dungeon-list']) {
       const el=document.getElementById(id);
       if(el) el.innerHTML='<p>Hinweise konnten nicht geladen werden.</p><button class="retry-btn" onclick="loadGuides()">Erneut versuchen</button>';
     }
@@ -985,12 +998,22 @@ async function loadRecommendations() {
     const response=await fetch('data/recommendations.json?v='+Date.now());
     if(!response.ok) throw new Error('HTTP '+response.status);
     const data=await response.json();
+    if(targets.some(player=>!WowGuides.forPlayer(data,player).length))throw new Error('Missing guide links');
+    recommendationsData=data;
+    renderRecommendations();
+  } catch(e) {
+    for(const player of targets) document.getElementById('profile-guides-'+player.toLowerCase()).innerHTML='<p>Guide-Prüfung derzeit nicht verfügbar.</p><button class="retry-btn" onclick="loadRecommendations()">Erneut versuchen</button>';
+    console.error('Guide links error:',e);
+  }
+}
+function renderRecommendations() {
+    const data=recommendationsData;if(!data)return;
+    const targets=['Faruk','Mirza'];
     const when=ts=>new Date(ts).toLocaleString('de-DE',{timeZone:'Europe/Vienna',dateStyle:'short',timeStyle:'short'});
     for(const player of targets) {
       const items=WowGuides.forPlayer(data,player);
-      if(!items.length) throw new Error('No guide links for '+player);
       document.getElementById('profile-guides-'+player.toLowerCase()).innerHTML=items.map(item=>{
-        const state=WowGuides.state(item);
+        const state=WowGuides.state(item,Date.now(),(refreshPolicy.interval_hours||24)+2);
         const status=state==='ok'?'Geprüft: '+when(item.last_success_at)+' (Wien)':
           state==='stale'?'Prüfung überfällig · zuletzt erfolgreich: '+when(item.last_success_at):
           state==='failed'?'Prüfung fehlgeschlagen · zuletzt erfolgreich: '+when(item.last_success_at):'Quelle noch nicht erfolgreich geprüft';
@@ -998,10 +1021,6 @@ async function loadRecommendations() {
         return `<article class="profile-guide"><a href="${safeURL(item.url)}" target="_blank" rel="noopener"><strong>${esc(item.title)}</strong><span>${esc(item.source)} · Build im Guide öffnen ↗</span></a><p>${esc(item.description)}</p>${changed}<small class="guide-check ${state==='ok'?'':'guide-warning'}">${esc(status)}</small>${item.notice?`<small class="guide-warning">${esc(item.notice)}</small>`:''}</article>`;
       }).join('');
     }
-  } catch(e) {
-    for(const player of targets) document.getElementById('profile-guides-'+player.toLowerCase()).innerHTML='<p>Guide-Prüfung derzeit nicht verfügbar.</p><button class="retry-btn" onclick="loadRecommendations()">Erneut versuchen</button>';
-    console.error('Guide links error:',e);
-  }
 }
 
 // ── HOME NEWS: MAX 4 CONCRETE/ACTIONABLE UPDATES ───────────────────────────
@@ -1081,7 +1100,7 @@ async function loadQuestRewards(){
 function renderQuestRewards(){
   const data=questRewardsData;if(!data)return;
   const when=data.last_success_at?new Date(data.last_success_at).toLocaleString('de-DE',{timeZone:'Europe/Vienna',dateStyle:'short',timeStyle:'short'}):'noch nicht erfolgreich';
-  const stale=!data.last_success_at||Date.now()-Date.parse(data.last_success_at)>26*3600000;
+  const stale=!data.last_success_at||Date.now()-Date.parse(data.last_success_at)>((refreshPolicy.interval_hours||24)+2)*3600000;
   document.getElementById('quest-source-note').textContent=`Wowhead Forever · zuletzt geprüft: ${when} (Wien). ${data.status==='error'?'Abruf fehlgeschlagen; letzter erfolgreicher Stand bleibt sichtbar. ':stale?'Prüfung überfällig. ':''}Auswahl aus ${data.checked_count||0} geladenen Quests. Datenbankstand; Annahmebedingungen und Belohnungen im Spiel prüfen.`;
   const changed=data.items.filter(q=>WowQuests.recent(q)).length;
   document.getElementById('quest-rewards-badge').textContent=changed?`${changed} neue/geänderte Funde`:'Quest-Belohnungen';
@@ -1108,56 +1127,35 @@ function toggleSection(id) {
 }
 
 // ── ITEMS & QUEST CHECKLIST RENDERING ──────────────────────────────────────
-function renderPlayerItems(player) {
-  const container = document.getElementById(`${player === 'Faruk' ? 'f' : 'm'}-items-list`);
-  if (!container || !guidesData.dungeon_quests) return;
-  const currLvl = playerLevels[player];
-  const dungeons = guidesData.dungeon_quests.dungeons || [];
-
-  let html = '';
-  const showAll = document.getElementById('all-quests-'+player.toLowerCase())?.checked;
-  dungeons.forEach(d => {
-    const nearby=(d.quests||[]).filter(q=>showAll || (Number(q.min_lvl)<=currLvl+7 && Number(q.min_lvl)>=currLvl-10));
-    if (!nearby.length) return;
-    const quests = nearby.map(q => {
-      const qid = q.id;
-      let isDone = false;
-      try {
-        const sKey = (player === 'Faruk') ? ('wow_quest_Faruk_' + qid) : ('wow_quest_Mirza_' + qid);
-        isDone = safeStorage.getItem(sKey) === '1';
-      } catch(e){}
-
-      return `
-        <div class="item-quest-row">
-          <input type="checkbox" class="iq-check" aria-label="${esc(player + ': ' + q.title)}" id="qchk-${player.toLowerCase()}-${qid}" ${isDone ? 'checked' : ''} onchange="togglePlayerQuest('${player}', '${qid}')" />
-          <div class="iq-body">
-            <div class="iq-title-line">
-              <span class="iq-item">${esc(q.title)}</span>
-              <span class="iq-lvl">Min Lvl ${esc(q.min_lvl)} • ${esc(d.name)}</span>
-            </div>
-            <div class="iq-how">📍 <strong>Geber:</strong> ${esc(q.giver)}</div>
-            ${q.chain ? `<div style="font-size:0.73rem;color:#ffb74d">🔗 ${esc(q.chain)}</div>` : ''}
-            <div class="iq-source">🎁 <strong>Belohnung:</strong> ${esc(q.reward)}</div>
-          </div>
-        </div>
-      `;
+function renderPlayerItems() { renderDungeonPreparation(); }
+function openDungeonPrep() {
+  closeModalDirect();showView('home');
+  const section=document.getElementById('dungeon-section');
+  section.open=true;section.scrollIntoView({block:'start'});
+}
+function renderDungeonPreparation() {
+  const data=guidesData.dungeon_quests;if(!data)return;
+  const list=document.getElementById('dungeon-list');
+  const opened=new Set([...list.querySelectorAll('details[open]')].map(el=>el.dataset.dungeon));
+  const focused=document.activeElement?.id;
+  const when=data.last_success_at?new Date(data.last_success_at).toLocaleString('de-DE',{timeZone:'Europe/Vienna',dateStyle:'short',timeStyle:'short'}):'noch nicht erfolgreich';
+  document.getElementById('dungeon-source-note').textContent=`Wowhead · zuletzt geprüft: ${when} (Wien). ${data.status==='error'?'Abruf fehlgeschlagen; letzter erfolgreicher Stand bleibt sichtbar. ':''}${data.coverage_note||''} ${data.detail_warning||''}`;
+  const prep=WowDungeons.preparation(data,playerLevels,safeStorage);
+  document.getElementById('dungeon-pickups').innerHTML=prep.map(({dungeon:d,quest:q,players,ready})=>`<article class="discovery-card"><small>${esc(d.name)} · ${esc(players.join(' & '))}</small><p><strong>${esc(q.prepare_quest||q.title)}</strong></p><p>${esc(q.pickup)}</p><small>${players.map(p=>esc(p)+': '+(playerLevels[p]>=(q.prepare_from_level||q.min_lvl)?'jetzt':'ab Stufe '+esc(q.prepare_from_level||q.min_lvl))).join(' · ')} · Dungeon-Auftrag ab ${esc(q.min_lvl)}</small>${q.chain?`<p>${esc(q.chain)}</p>`:''}${q.race_note?`<p class="guide-warning">${esc(q.race_note)}</p>`:''}<p><a href="${safeURL(q.prepare_url||q.url)}" target="_blank" rel="noopener">Quest &amp; Voraussetzungen ↗</a></p></article>`).join('')||'<p class="guide-note">Keine offenen Abholhinweise im nächsten Levelbereich. Eure Stufen oben einstellen oder alle Levelbereiche öffnen.</p>';
+  const dungeons=WowDungeons.visible(data,playerLevels,document.getElementById('dungeon-show-all').checked);
+  list.innerHTML=dungeons.map(d=>`<details class="dungeon-group" data-dungeon="${esc(d.id)}" ${opened.has(d.id)?'open':''}><summary>${esc(d.name)} <small>${d.recommended_level?'Richtwert Stufe '+esc(d.recommended_level)+' · ':''}${d.quests.length} Quest(s)</small></summary>${d.notice?`<p class="guide-warning">${esc(d.notice)} ${d.notice_source?`<a href="${safeURL(d.notice_source)}" target="_blank" rel="noopener">Quelle ↗</a>`:''}</p>`:''}${d.quests.map(q=>{
+    const players=['Faruk','Mirza'].map(p=>{
+      const allowed=WowDungeons.allowed(q,p),done=allowed&&WowDungeons.done(q,p,safeStorage);
+      return `<label><input type="checkbox" id="qchk-${p.toLowerCase()}-${esc(q.id)}" aria-label="${esc(p+': '+q.title)}" ${done?'checked':''} ${allowed?'':'disabled'} onchange="togglePlayerQuest('${p}','${esc(q.id)}')"> ${esc(p)}${allowed?' · erledigt':' · andere Klasse'}</label>`;
     }).join('');
-
-    html += `
-      <div style="margin-bottom:14px">
-        <div style="font-family:'Cinzel',serif;font-size:0.92rem;color:var(--gold);font-weight:700;margin-bottom:6px">
-          🏰 ${esc(d.name)} (Stufe ${esc(d.level)} • ${esc(d.zone)})
-        </div>
-        ${quests}
-      </div>
-    `;
-  });
-
-  container.innerHTML = html || '<p style="font-size:.82rem;color:var(--dim);margin-top:12px">Noch keine Dungeon-Quests in deiner Nähe. Mit höherer Stufe erneut prüfen oder alle anzeigen.</p>';
+    const prereqs=q.chain||(q.prerequisites?.length?'Vorher: '+q.prerequisites.join(' → '):q.requires_chain?'Vorquest nötig; genaue Kette im Quest-Link prüfen.':'');
+    return `<article class="dungeon-quest"><div class="dungeon-quest-heading"><strong>${esc(q.title)}</strong><small>Annahme ab ${esc(q.min_lvl)} · ${q.phase==='inside'?'Im Dungeon aufnehmen':'Vor dem Lauf abholen'}</small></div><p>📍 ${esc(q.pickup)}${q.location_confirmed?'':' · noch nicht bestätigt'}</p>${prereqs?`<p class="guide-warning">🔗 ${esc(prereqs)}</p>`:''}${q.preparation_hint?`<p>${esc(q.preparation_hint)}</p>`:''}${q.race_note||q.race_limited?`<p class="guide-warning">${esc(q.race_note||'Rassenvorgabe im Quest-Link prüfen.')}</p>`:''}<div class="quest-progress">${players}</div><a href="${safeURL(q.url)}" target="_blank" rel="noopener">Quest, Belohnungen &amp; Vorquests ↗</a></article>`;
+  }).join('')||'<p class="guide-note">In dieser Quelle keine passenden Alliance-Quests für eure Klassen bestätigt.</p>'}</details>`).join('')||'<p class="guide-note">Noch keine Dungeon-Aufträge in eurem Levelbereich. Vorbereitung oben prüfen oder alle Levelbereiche zeigen.</p>';
+  if(focused?.startsWith('qchk-'))document.getElementById(focused)?.focus();
 }
 
 function renderAllProfileGuides() {
-  ['Faruk','Mirza'].forEach(renderPlayerItems);
+  renderDungeonPreparation();
   renderSharedAddons();
 }
 function renderSharedAddons() {
@@ -1289,7 +1287,9 @@ function openModalById(id) {
     updateNotice = `<div style="background:rgba(255,179,0,0.12);border-left:3px solid #ffb300;padding:8px 12px;margin-bottom:12px;border-radius:4px;font-size:0.85rem">🔄 <strong>Aktualisierung:</strong> ${esc(item.update_note)}</div>`;
   }
   const raw = (['original','untranslated'].includes(item.summary_mode)?'Kurzbericht derzeit nicht verfügbar.\n\n':'') + (item.article_de || item.summary_de || item.teaser_de || 'Kein Inhalt verfügbar.');
-  document.getElementById('m-article').innerHTML = updateNotice + formatArticle(raw);
+  const refs=(item.references||[]).map(r=>`<a href="${safeURL(r.url)}" target="_blank" rel="noopener">${esc(r.label)} ↗</a>`).join('<br>');
+  const action=item.internal_action==='dungeons'?'<p><button class="retry-btn" onclick="openDungeonPrep()">🏰 Dungeon-Vorbereitung öffnen</button></p>':'';
+  document.getElementById('m-article').innerHTML = updateNotice + formatArticle(raw) + action + (refs?`<p class="guide-source">${refs}</p>`:'');
 
   const link = document.getElementById('m-src-link');
   try { const u=new URL(item.url); link.href=['http:','https:'].includes(u.protocol)?u.href:'#'; } catch { link.href='#'; }
