@@ -57,8 +57,13 @@ class DungeonTests(unittest.TestCase):
             again=D.refresh(first,fixture(),'2026-11-04T12:00:00Z')
             self.assertEqual(first['source_hash'],again['source_hash'])
             self.assertIsNone(again['changed_at'])
+            self.assertNotIn('latest_change',again)
             changed=D.refresh(first,fixture().replace('/way 46.6 56.8','/way 47.6 56.8'),'2026-11-04T14:00:00Z')
             self.assertEqual(changed['changed_at'],'2026-11-04T14:00:00Z')
+            self.assertTrue(changed['latest_change']['entries'])
+            self.assertIn('Abholort:',changed['latest_change']['entries'][0]['description'])
+            unchanged=D.refresh(changed,fixture().replace('/way 46.6 56.8','/way 47.6 56.8'),'2026-11-04T16:00:00Z')
+            self.assertEqual(unchanged['latest_change'],changed['latest_change'])
         snapshot=copy.deepcopy(first)
         with patch.object(D.requests,'get',side_effect=D.requests.Timeout):
             failed=D.refresh(first,now='2026-11-04T16:00:00Z')
@@ -67,6 +72,18 @@ class DungeonTests(unittest.TestCase):
         self.assertEqual(failed['last_success_at'],snapshot['last_success_at'])
         self.assertEqual(first,snapshot)
         self.assertRaises(ValueError,D.parse_guide,'<h2>Broken guide</h2>')
+
+    def test_changed_minimum_and_chain_are_not_mistaken_for_routine_checks(self):
+        old=D.parse_guide(fixture())
+        current=copy.deepcopy(old)
+        quest=current['dungeons'][0]['quests'][0]
+        quest.update(min_lvl=15,chain='Earlier Quest must be completed.')
+        changes=D.preparation_changes(old,current)
+        self.assertEqual(len(changes),1)
+        self.assertIn('Annahme ab: 16 → 15',changes[0]['description'])
+        self.assertIn('Questkette aktualisiert',changes[0]['description'])
+        failed={**current,'status':'error','checked_at':'later','error':'HTTP 403'}
+        self.assertEqual(D.preparation_changes(current,failed),[])
 
     def test_individual_quest_requirement_overrides_aggregate_guide(self):
         raw='$.extend(g_quests[92753], {"id":92753,"reqlevel":9,"level":18});'

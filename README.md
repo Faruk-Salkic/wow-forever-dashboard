@@ -15,7 +15,9 @@ Jednostavan duo vodič: početna s dva profila i najviše četiri korisne novost
 
 ## Novosti i dnevni raspored
 
-`.github/workflows/scrape.yml` pokreće se svaki dan u **11:50 Europe/Vienna**, s ciljem osvježavanja oko podneva. GitHub red čekanja i Pages deployment mogu kasniti; nema garancije tačno u 12:00. Promjena ljetnog i zimskog vremena obrađuje se kroz nativni `timezone`.
+`.github/workflows/scrape.yml` tokom početne dvije sedmice provjerava izvore **svaka dva sata**, u 17. minuti parnog sata po Beču. Od **19.11.2026.** automatski se vraća na dnevnu provjeru u **11:50 Europe/Vienna**. `data/update_policy.json` i `scraper/update_policy.py` biraju odgovarajući termin, bez duplog dnevnog osvježavanja. GitHub red čekanja i Pages deployment mogu kasniti. Promjena ljetnog i zimskog vremena obrađuje se kroz nativni `timezone`.
+
+`scraper/check_dungeons.py` u svakom od tih prolaza provjerava pripremu za sve instance obuhvaćene Forever vodičem i izdvaja questove za Alliance Shamana/Huntera. Prikaz razlikuje preporučeni level instance od minimalnog levela za prihvatanje, te navodi mjesto preuzimanja i poznate preduvjete. Stvarne promjene levela, NPC-a ili preduvjeta objavljuje `scraper/publish_editorial.py` u novostima s izvorima i linkom na checklistu. Prva provjera postavlja referencu; nepromijenjen sadržaj i greške ne stvaraju novu vijest. Ako je izvor blokiran, ostaju prethodni podaci s datumom posljednje uspješne provjere. Pokrivenost izvora nije garancija da je svaki quest u igri uključen.
 
 `scraper/check_guides.py` u istom poslu provjerava četiri odabrana Method/Icy Veins vodiča iz `data/guide_sources.json`. Profil prikazuje linkove i kada nema novih vijesti. `data/recommendations.json` razlikuje posljednji pokušaj, uspješnu provjeru i stvarnu izmjenu glavnog teksta ili ugrađene raspodjele talenata. Build podaci ulaze samo u fingerprint; kalkulator se ne kopira na dashboard. Prva provjera postavlja baseline bez lažnog ažuriranja; greška zadržava prethodni hash i vrijeme uspješne provjere. Nakon 26 sati bez uspješne provjere profil upozorava da provjera kasni, uz toleranciju za red čekanja i promjenu sata.
 

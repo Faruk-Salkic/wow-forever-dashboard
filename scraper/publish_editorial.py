@@ -10,9 +10,32 @@ else:
 ROOT = Path(__file__).resolve().parents[1]
 
 
+def dungeon_change_note(guides):
+    data = guides.get("dungeon_quests", {})
+    change = data.get("latest_change", {})
+    entries = change.get("entries", [])
+    if not entries or not change.get("checked_at"): return None
+    lines = [f"{entry['dungeon']} · {entry['title']}: {entry['description']}" for entry in entries[:8]]
+    if len(entries) > 8:
+        lines.append(f"Weitere {len(entries)-8} Änderungen stehen in der vollständigen Vorbereitungsliste.")
+    return {
+        "date":change["checked_at"][:10],
+        "title":f"Dungeon-Questvorbereitung geändert: {len(entries)} Katalogeintrag(e)",
+        "teaser_de":"Geänderte Mindestlevel, Abholorte oder Vorquests vor eurem nächsten Dungeon prüfen.",
+        "article_de":"Bei der erfolgreichen Quellenprüfung wurden Änderungen in der Vorbereitungsliste erkannt:\n\n"+
+                     "\n\n".join(lines)+"\n\nDie Angaben stammen aus dem verlinkten Katalog; offene Anforderungen im Spiel bestätigen.",
+        "url":"https://faruk-salkic.github.io/wow-forever-dashboard/?view=home&focus=dungeons&notice=source-changes",
+        "category":"guide", "classes":[], "internal_action":"dungeons",
+        "references":[{"label":"Dungeon-Questübersicht", "url":data.get("source_url", "https://www.wowhead.com/forever/guide/dungeons/every-dungeon-quest-location")}] +
+                     [{"label":entry["title"], "url":entry["url"]} for entry in entries[:8]],
+    }
+
+
 def publish():
     now = datetime.now(timezone.utc).isoformat()
     records = S.load_json(str(ROOT/"data/editorial_updates.json"), {"items":[]})["items"]
+    change_note = dungeon_change_note(S.load_json(str(ROOT/"data/guides.json"), {}))
+    if change_note: records = records + [change_note]
     incoming = []
     for item in records:
         url = S.normalize_url(item["url"])

@@ -161,6 +161,46 @@ def detail_level(html, qid):
     return data["reqlevel"]
 
 
+def preparation_changes(previous, current):
+    """Describe factual catalog differences, never timestamps or failed requests."""
+    def quests(data):
+        return {(d["id"], q["game_id"]):(d, q)
+                for d in data.get("dungeons", []) for q in d.get("quests", [])}
+    before, after = quests(previous), quests(current)
+    if not before: return []  # The first successful check establishes a baseline.
+    changes = []
+    labels = {
+        "min_lvl":"Annahme ab", "pickup":"Abholort", "giver":"Questgeber",
+        "coordinates":"Koordinaten", "requires_chain":"Vorquest nötig",
+        "prerequisites":"Vorquests", "prepare_from_level":"Vorbereitung ab",
+        "prepare_quest":"Beginn der Vorbereitung", "chain":"Questkette",
+        "preparation_hint":"Vorbereitungshinweis", "race_note":"Rassenvorgabe",
+        "race_limited":"Rassenbeschränkung", "classes":"Klassen",
+        "faction":"Fraktion", "phase":"Vor oder im Dungeon", "followups":"Folgequests",
+    }
+    for key in sorted(before.keys() | after.keys()):
+        old = before.get(key, (None, {}))[1]
+        dungeon, quest = after.get(key, before.get(key))
+        if key not in before:
+            description = f"Neu im geprüften Katalog · Annahme ab {quest['min_lvl']} · {quest['pickup']}"
+        elif key not in after:
+            description = "Nicht mehr im geprüften Katalog aufgeführt; Verfügbarkeit im Spiel prüfen."
+        else:
+            fields = [field for field in labels if old.get(field) != quest.get(field)]
+            if old.get("title") != quest.get("title"): fields.append("title")
+            if not fields: continue
+            details = []
+            for field in fields:
+                if field in {"min_lvl", "prepare_from_level"}:
+                    details.append(f"{labels[field]}: {old.get(field, 'offen')} → {quest.get(field, 'offen')}")
+                elif field == "pickup": details.append(f"Abholort: {quest[field]}")
+                else: details.append(f"{labels.get(field, 'Questname')} aktualisiert")
+            description = "; ".join(details)
+        changes.append({"dungeon":dungeon["name"], "title":quest["title"],
+                        "description":description, "url":quest["url"]})
+    return changes
+
+
 def refresh(previous, html=None, now=None):
     now = now or datetime.now(timezone.utc).isoformat()
     try:
@@ -189,7 +229,12 @@ def refresh(previous, html=None, now=None):
             for qid,item in pool.map(check_detail,details):overrides["quests"][qid]=item
         current = parse_guide(html, now, overrides)
         if any(q.get("detail_status")=="error" for d in current["dungeons"] for q in d["quests"]):current["detail_warning"]="Einzelne Quest-Detailseiten konnten nicht erneut geprüft werden. Letzte belegte Werte bleiben erhalten."
-        current["changed_at"] = (now if previous.get("source_hash") and previous["source_hash"]!=current["source_hash"] else previous.get("changed_at"))
+        changes = preparation_changes(previous, current)
+        current["changed_at"] = now if changes else previous.get("changed_at")
+        if changes:
+            current["latest_change"] = {"checked_at":now, "entries":changes}
+        elif previous.get("latest_change"):
+            current["latest_change"] = previous["latest_change"]
         return current
     except Exception as error:
         return {**previous,"checked_at":now,"status":"error","error":str(error)[:160]}
