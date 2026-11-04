@@ -38,3 +38,14 @@ test('persistent guide links remain available even when news are older than seve
   assert.deepEqual(Guides.forPlayer({items:[faruk,mirza]},'Faruk'),[faruk]);
   assert.deepEqual(Guides.forPlayer({items:[faruk,mirza]},'Mirza'),[mirza]);
 });
+
+test('mixed Gemini results keep successful summaries available in the status message',()=>{
+  const mixed=Guides.aiNotice({status:'error',succeeded:8,failed:2});
+  const unavailable=Guides.aiNotice({status:'error',succeeded:0,failed:1});
+  assert.match(mixed,/Einzelne neue Kurzberichte/);
+  assert.match(mixed,/Bereits erstellte Zusammenfassungen bleiben sichtbar/);
+  assert.notEqual(mixed,unavailable);
+  assert.match(unavailable,/Neue automatische Kurzberichte/);
+  assert.equal(Guides.aiNotice({status:'ok',succeeded:10,failed:0}),'');
+  assert.equal(Guides.aiNotice(),'');
+});

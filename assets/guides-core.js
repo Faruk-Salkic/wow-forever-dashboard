@@ -24,5 +24,12 @@
       return {...value,mode:'daily',interval_hours:24,description_de:'Tägliche Quellenprüfung um 11:50 (Wien).'};
     return value;
   }
-  return {state,changedRecently,forPlayer,refreshPolicy};
+  function aiNotice(status={}){
+    if(Number(status.succeeded)>0&&Number(status.failed)>0)
+      return 'Einzelne neue Kurzberichte sind derzeit nicht verfügbar. Bereits erstellte Zusammenfassungen bleiben sichtbar.';
+    if(status.status==='error')
+      return 'Neue automatische Kurzberichte sind derzeit nicht verfügbar. Quellen und Quest-Hinweise werden weiter geprüft.';
+    return '';
+  }
+  return {state,changedRecently,forPlayer,refreshPolicy,aiNotice};
 });

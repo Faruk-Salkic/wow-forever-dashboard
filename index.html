@@ -952,7 +952,7 @@ async function loadNews() {
     renderRecommendations();renderDungeonPreparation();
     document.querySelectorAll('.refresh-policy').forEach(el=>el.textContent=refreshPolicy.description_de||'Tägliche Quellenprüfung um 11:50 (Wien).');
     const aiNote=document.getElementById('ai-status-note');
-    if(aiNote)aiNote.textContent=d.ai_status?.status==='error'?'Automatische Kurzberichte derzeit nicht verfügbar. Quellen und Quest-Hinweise werden weiter geprüft.':'';
+    if(aiNote)aiNote.textContent=WowGuides.aiNotice(d.ai_status);
     renderSourcesStatus(d.sources_status);
     renderDataProcTime(d.data_processed_at || d.last_updated);
     renderNewsHub();
