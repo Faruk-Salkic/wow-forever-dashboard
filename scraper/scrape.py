@@ -487,6 +487,8 @@ def is_relevant_context(title, summary, full_text=""):
     """
     combined = (title + " " + summary + " " + full_text[:1200]).lower()
     title_l = title.lower()
+    if re.search(r"twitch.?drops?|pouch of violet dust", title_l):
+        return False
     if re.search(r"ttrpg|fan.?art|my .*campaign|chapter \d|meme|cosplay|\bptrs?\b|datamining|data mining", title_l):
         return False
     if re.search(r"players.*planned|spieler.*geplant|my app|meiner app|ultimate.*hud|ultimative.*hud|i (?:built|made)|sponsored|giveaway", title_l):

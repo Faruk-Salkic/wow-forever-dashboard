@@ -22,6 +22,17 @@ class SourceTests(unittest.TestCase):
         for title in ['349 players planned their characters in my app', "Lok'tar Ogar! Chapter 2 of my TTRPG campaign", 'No PTRs and new datamining restrictions in WoW Forever', 'New Player’s Starter Guide for WoW Forever']:
             self.assertFalse(S.is_relevant_context(title,'WoW Forever Hunter Shaman pet quest guide'))
 
+    def test_twitch_promotions_do_not_return_as_camping_or_item_news(self):
+        titles = [
+            'Set Your Campfire Ablaze with the Pouch of Violet Dust!',
+            'Secret Twitch Drop Awards Pouch of Violet Dust Toy in WoW: Forever',
+            'Twitch Drop: Pouch of Violet Dust - Hidden, Random Drop Just Occurred',
+        ]
+        for title in titles:
+            self.assertFalse(S.is_relevant_context(title, 'WoW Forever camping item reward and buff.'))
+        self.assertTrue(S.is_relevant_context('WoW Forever: Camping profession buffs changed',
+                                             'Mining and Engineering camp effects and requirements.'))
+
     def test_general_practical_guides_are_discovered_but_other_class_tools_are_not(self):
         html='''<main>
         <a href="/wow-forever/best-early-bags-in-wow-forever">Early bags</a>
