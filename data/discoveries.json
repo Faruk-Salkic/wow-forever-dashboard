@@ -2,6 +2,36 @@
   "schema": 1,
   "items": [
     {
+      "id": "mining-find-minerals",
+      "players": [
+        "Faruk"
+      ],
+      "min_level": 1,
+      "max_level": 60,
+      "title": "Bergbau: Mineraliensuche einschalten",
+      "action": "Nach dem Lernen von Bergbau im Berufe-Fenster bei Bergbau auf Mineraliensuche (Find Minerals) klicken und die Fähigkeit auf die Aktionsleiste ziehen. Sie zeigt nahe Erzvorkommen auf der Minikarte, keine vollständige Zonenkarte. Laut Forever-Guide nach dem Tod erneut aktivieren. Zum Abbauen einen Mining Pick mitnehmen. Guide-/Beta-Stand; keine neue Live-Änderung und keine Preisbestätigung.",
+      "priority": 9,
+      "source": "WoW-professions · Forever-Bergbauguide",
+      "url": "https://www.wow-professions.com/forever/mining-leveling-guide",
+      "checked_at": "2026-11-05",
+      "evidence_status": "forever_guide_not_live_tested"
+    },
+    {
+      "id": "engineering-harvesting-the-harvesters",
+      "players": [
+        "Faruk"
+      ],
+      "min_level": 8,
+      "max_level": 25,
+      "title": "Westfall: Quest mit Engineering-Rezept vormerken",
+      "action": "Harvesting the Harvesters kann laut Forever-Questdatensatz ab Stufe 8 angenommen werden (Quest-Stufe 15). Belohnungen sind Harvester Override Signalcaster und Schematic: Harvester Override Signalcaster. Für Engineering vormerken; den benötigten Berufsskill im Rezept prüfen. Start-NPC und Vorquests sind hier noch unbestätigt. Neu im Dashboard erfasst, kein Beleg für eine heutige Live-Änderung.",
+      "priority": 7,
+      "source": "Wowhead Forever · Questdatensatz",
+      "url": "https://www.wowhead.com/forever/quest=92911",
+      "checked_at": "2026-11-05",
+      "evidence_status": "database_record_confirmed"
+    },
+    {
       "id": "dwarf-first-bag",
       "players": [
         "Faruk",

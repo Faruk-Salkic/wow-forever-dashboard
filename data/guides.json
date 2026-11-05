@@ -725,9 +725,10 @@
             "prepare_quest": "Testing the Wells",
             "prepare_url": "https://www.wowhead.com/forever/quest=92742/testing-the-wells",
             "evidence_url": "https://www.wowhead.com/forever/quest=92753/destruction-in-deadmines",
-            "evidence_checked_at": "2026-11-04",
+            "evidence_checked_at": "2026-11-05T01:27:13.522484+00:00",
             "preparation_hint": "Sprengstoff am Schmiedeofen bei Gilnid platzieren. Danach zum Hinterausgang gehen und Alba aufsuchen; nicht sofort wegporten.",
-            "race_note": "Diese Questvariante gilt laut Datenbank für Dwarf, Night Elf, Gnome und High Order Skyborne. Für Mirzas noch offene Rasse die Variante beim NPC prüfen."
+            "race_note": "Diese Questvariante gilt laut Datenbank für Dwarf, Night Elf, Gnome und High Order Skyborne. Für Mirzas noch offene Rasse die Variante beim NPC prüfen.",
+            "detail_status": "ok"
           }
         ]
       },
@@ -4572,11 +4573,11 @@
         ]
       }
     ],
-    "checked_at": "2026-11-05T01:04:47.253921+00:00",
-    "last_success_at": "2026-11-04T15:02:57.370922+00:00",
+    "checked_at": "2026-11-05T01:27:13.522484+00:00",
+    "last_success_at": "2026-11-05T01:27:13.522484+00:00",
     "source_url": "https://www.wowhead.com/forever/guide/dungeons/every-dungeon-quest-location",
-    "status": "error",
-    "error": "403 Client Error: Forbidden for url: https://www.wowhead.com/forever/guide/dungeons/every-dungeon-quest-location",
+    "status": "ok",
+    "error": "",
     "source_hash": "5b110e0c6ef6eebf",
     "skipped_rows": 2,
     "coverage_note": "Forever-Guide mit Beta-/Classic-Referenzen. Offene Angaben bleiben markiert; Voraussetzungen im Spiel bestätigen.",
