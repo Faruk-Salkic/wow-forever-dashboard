@@ -25,11 +25,11 @@
       "min_level": 1,
       "max_level": 25,
       "title": "Taschen-Budget zum Start",
-      "action": "Basispreise vor Rabatten: Small Brown Pouch, 6 Plätze = 5 Silber; Brown Leather Satchel, 8 Plätze = 25 Silber. Vier 6er-Taschen kosten 20 Silber; mit einer Gratis-Questtasche fehlen nur drei: 15 Silber. In Kharanos bei General Supplies nachsehen (Kreg Bilmn). Red Linen Bag bietet ebenfalls 8 Plätze; den Preis beim Schneider oder im AH vergleichen, nicht als Festpreis behandeln.",
+      "action": "Guide-Basiswerte vom 28.10., nicht live bestätigt: Small Brown Pouch, 6 Plätze = 5 Silber; Brown Leather Satchel, 8 Plätze = 25 Silber. Vier 6er-Taschen wären danach 20 Silber, mit einer Gratis-Questtasche drei für 15 Silber. Tatsächliche Live-Preise und Rabatte im Händlerfenster prüfen; sie sind hier noch unbekannt. In Kharanos bei General Supplies nachsehen (Kreg Bilmn). Red Linen Bag bietet laut Guide ebenfalls 8 Plätze; Schneider- und AH-Preise sind nicht bestätigt.",
       "priority": 5,
       "source": "Method",
       "url": "https://www.method.gg/wow-forever/best-early-bags-in-wow-forever-crafted-bags-quest-bags-vendor-bags-and-more",
-      "checked_at": "2026-11-04",
+      "checked_at": "2026-11-05",
       "pricing": {
         "currency": "copper",
         "vendor_base_prices": {
@@ -41,7 +41,14 @@
           "three_small_pouches_after_free_quest_bag": 1500
         },
         "auction_price_verified": false,
-        "discounts_possible": true
+        "discounts_possible": true,
+        "source_published_at": "2026-10-28",
+        "evidence_status": "guide_reference_not_live_verified",
+        "live_vendor_prices_verified": false,
+        "live_vendor_prices": {
+          "small_brown_pouch": null,
+          "brown_leather_satchel": null
+        }
       }
     },
     {
