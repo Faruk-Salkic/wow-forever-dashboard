@@ -4573,11 +4573,11 @@
         ]
       }
     ],
-    "checked_at": "2026-11-05T01:27:13.522484+00:00",
+    "checked_at": "2026-11-05T01:39:10.558814+00:00",
     "last_success_at": "2026-11-05T01:27:13.522484+00:00",
     "source_url": "https://www.wowhead.com/forever/guide/dungeons/every-dungeon-quest-location",
-    "status": "ok",
-    "error": "",
+    "status": "error",
+    "error": "403 Client Error: Forbidden for url: https://www.wowhead.com/forever/guide/dungeons/every-dungeon-quest-location",
     "source_hash": "5b110e0c6ef6eebf",
     "skipped_rows": 2,
     "coverage_note": "Forever-Guide mit Beta-/Classic-Referenzen. Offene Angaben bleiben markiert; Voraussetzungen im Spiel bestätigen.",
