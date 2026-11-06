@@ -213,6 +213,377 @@
       "url": "https://us.forums.blizzard.com/en/wow/t/wow-forever-beta-development-notes-%E2%80%93-updated-november-2/2360696/9",
       "checked_at": "2026-11-04",
       "training_prices_verified": false
+    },
+    {
+      "id": "quest-gear-heavehammer",
+      "players": [
+        "Faruk"
+      ],
+      "min_level": 24,
+      "max_level": 38,
+      "title": "Ab 24: Heavehammer aus dem Sumpfland",
+      "action": "Zweihand-Streitkolben für Faruk: 27,73 DPS und 32 Angriffskraft. Für ein Heil-Set steht stattdessen Healer's Staff zur Wahl; nur eine Belohnung wählen.",
+      "priority": 100,
+      "source": "Wowhead Forever · Quest / Item",
+      "url": "https://www.wowhead.com/forever/quest=98824/prehistoric-prism",
+      "checked_at": "2026-11-06",
+      "evidence_status": "forever_database_and_guide_not_live_tested",
+      "quest_gear": {
+        "quest_id": 98824,
+        "quest_name": "Prehistoric Prism",
+        "min_accept_level": 24,
+        "quest_level": 31,
+        "show_from_level": 20,
+        "pickup": "Titan Relic beim Relic Guardian in Excavation Site: Wetlands looten. Lost Relic Carry zu Prospector Whelgar vor der Instanz bringen.",
+        "prerequisites": "Lost Relic Carry → Prehistoric Prism. Danach zu High Explorer Magellas in die Halle der Forscher in Ironforge.",
+        "route": "Beim Sumpfland-Besuch vormerken. Der Dungeon-Guide empfiehlt Stufe 26–32; Mindeststufe 24 bedeutet nicht, dass der Lauf mit 24 leicht ist.",
+        "rewards": [
+          {
+            "id": 271766,
+            "name": "Heavehammer",
+            "icon": "inv_hammer_09",
+            "stats_text": "Wuchthammer Gegenstandsstufe 33 Wird beim Aufheben gebunden Zweihändig Streitkolben 73 - 110 Schaden Tempo 3.30 (27.73 Schaden pro Sekunde) +60 Rüstung Haltbarkeit 100 / 100 Anlegen: + 32 Angriffskraft.",
+            "note": "",
+            "source_url": "https://www.wowhead.com/forever/item=271766",
+            "checked_at": "2026-11-06"
+          },
+          {
+            "id": 271767,
+            "name": "Healer's Staff",
+            "icon": "inv_staff_10",
+            "stats_text": "Heilerstab Gegenstandsstufe 33 Wird beim Aufheben gebunden Zweihändig Stab 43 - 65 Schaden Tempo 2.60 (20.77 Schaden pro Sekunde) +12 Ausdauer Stellt alle 5 Sek. + 5 Mana wieder her. Haltbarkeit 100 / 100 Anlegen: Erhöht durch sämtliche Zauber und magische Effekte verursachte Heilung um bis zu 67 und den verursachten Schaden um bis zu 22 .",
+            "note": "Alternative für ein Heil-Set; dieselbe Belohnungsauswahl.",
+            "source_url": "https://www.wowhead.com/forever/item=271767",
+            "checked_at": "2026-11-06"
+          }
+        ],
+        "notice": "",
+        "sources": [
+          {
+            "url": "https://www.wowhead.com/forever/quest=98824/prehistoric-prism",
+            "checked_at": "2026-11-06"
+          },
+          {
+            "url": "https://www.wowhead.com/forever/item=271766",
+            "checked_at": "2026-11-06"
+          },
+          {
+            "url": "https://www.wowhead.com/forever/item=271767",
+            "checked_at": "2026-11-06"
+          }
+        ]
+      }
+    },
+    {
+      "id": "quest-gear-tempest",
+      "players": [
+        "Faruk"
+      ],
+      "min_level": 30,
+      "max_level": 47,
+      "title": "Ab 30: Shaman-Waffenquest · Rage of the Storm",
+      "action": "Enhancement-Option: Zweihand-Streitkolben mit 35,63 DPS und +10 % Schaden für Sturmschlag. Kein garantierter Vorteil gegenüber jeder anderen Waffe.",
+      "priority": 100,
+      "source": "Icy Veins Forever · Wowhead-Itemdaten",
+      "url": "https://www.icy-veins.com/wow-forever/shaman-class-quests",
+      "checked_at": "2026-11-06",
+      "evidence_status": "forever_database_and_guide_not_live_tested",
+      "quest_gear": {
+        "quest_id": 96016,
+        "quest_name": "The Tempest's Weapons",
+        "min_accept_level": 30,
+        "quest_level": 40,
+        "show_from_level": 22,
+        "pickup": "Mit 30 Ruf der Luft beim Schamanenlehrer annehmen; danach Veyric Thundervein im Arathihochland.",
+        "prerequisites": "Call of Air → Elemental Aid (Charlga Razorflank in Razorfen Kraul) → Storm, Earth, and Fire → Heed My Call → The Tempest's Weapons.",
+        "route": "Nach dem Lufttotem starten. Sammelgebiete liegen um 35–40; für die Elite-Wellen in Tausend Nadeln Hilfe suchen. Abschluss bei Bath'rah the Windwatcher im Alteracgebirge.",
+        "rewards": [
+          {
+            "id": 280604,
+            "name": "Rage of the Storm",
+            "icon": "inv_mace_42",
+            "stats_text": "Wut des Sturms Gegenstandsstufe 40 Wird beim Aufheben gebunden Zweihändig Streitkolben 91 - 137 Schaden Tempo 3.20 (35.63 Schaden pro Sekunde) +15 Ausdauer +12 Intelligenz Haltbarkeit 100 / 100 Anlegen: Erhöht den von Eurer Fähigkeit 'Sturmschlag' verursachten Schaden um 10%.",
+            "note": "",
+            "source_url": "https://www.wowhead.com/forever/item=280604",
+            "checked_at": "2026-11-06"
+          }
+        ],
+        "notice": "Start ab 30, Abschluss deutlich schwerer. Die Forever-Klassenquest ist im Guide beschrieben; kein eigener Live-Test.",
+        "sources": [
+          {
+            "url": "https://www.icy-veins.com/wow-forever/shaman-class-quests",
+            "checked_at": "2026-11-06"
+          },
+          {
+            "url": "https://www.wowhead.com/forever/item=280604",
+            "checked_at": "2026-11-06"
+          }
+        ]
+      }
+    },
+    {
+      "id": "quest-gear-seal-wrynn",
+      "players": [
+        "Faruk",
+        "Mirza"
+      ],
+      "min_level": 16,
+      "max_level": 40,
+      "title": "Ring: Seal of Wrynn · Deadmines + Verlies",
+      "action": "Ein vielseitiger Ring für beide. Den Brief von VanCleef nicht liegen lassen, wenn ihr ohnehin Deadmines und das Verlies einplant.",
+      "priority": 100,
+      "source": "Wowhead Forever · Quest / Item",
+      "url": "https://www.wowhead.com/forever/quest=396/an-audience-with-the-king",
+      "checked_at": "2026-11-06",
+      "evidence_status": "forever_database_and_guide_not_live_tested",
+      "quest_gear": {
+        "quest_id": 396,
+        "quest_name": "An Audience with the King",
+        "min_accept_level": 16,
+        "quest_level": 31,
+        "show_from_level": 16,
+        "pickup": "An Unsent Letter von Edwin VanCleef in den Deadmines looten; zu Baros Alexston in Stormwind bringen.",
+        "prerequisites": "Lange Anschlusskette über Bazil Thredd / The Stockade Riots bis An Audience with the King. Die angezeigten Folgequests abschließen.",
+        "route": "Brief beim Deadmines-Lauf aufnehmen und die Verlies-Vorbereitung vor dem nächsten Dungeon erledigen. Abgabe am Ende bei Lady Katrana Prestor in der Burg Stormwind.",
+        "rewards": [
+          {
+            "id": 2933,
+            "name": "Seal of Wrynn",
+            "icon": "inv_jewelry_ring_05",
+            "stats_text": "Siegel von Wrynn Gegenstandsstufe 31 Wird beim Aufheben gebunden Einzigartig anlegbar Finger +3 Stärke +3 Beweglichkeit +4 Ausdauer +4 Intelligenz +3 Willenskraft",
+            "note": "",
+            "source_url": "https://www.wowhead.com/forever/item=2933",
+            "checked_at": "2026-11-06"
+          }
+        ],
+        "notice": "Mindeststufe 16 ist ein Datenbankwert für die Kette, keine Empfehlung für die späteren Kämpfe.",
+        "sources": [
+          {
+            "url": "https://www.wowhead.com/forever/quest=396/an-audience-with-the-king",
+            "checked_at": "2026-11-06"
+          },
+          {
+            "url": "https://www.wowhead.com/forever/item=2933",
+            "checked_at": "2026-11-06"
+          }
+        ]
+      }
+    },
+    {
+      "id": "quest-gear-willix-rings",
+      "players": [
+        "Faruk",
+        "Mirza"
+      ],
+      "min_level": 22,
+      "max_level": 40,
+      "title": "Ringe im Kral: Willix the Importer",
+      "action": "Eine Begleitquest mit Ring-Auswahl. Monkey Ring bietet Beweglichkeit, Tiger Band Stärke; anhand eurer Klasse und bisherigen Ringe wählen. Nicht beide gleichzeitig als Belohnung einplanen.",
+      "priority": 100,
+      "source": "Wowhead Forever · Quest / Item",
+      "url": "https://www.wowhead.com/forever/quest=1144/willix-the-importer",
+      "checked_at": "2026-11-06",
+      "evidence_status": "forever_database_and_guide_not_live_tested",
+      "quest_gear": {
+        "quest_id": 1144,
+        "quest_name": "Willix the Importer",
+        "min_accept_level": 22,
+        "quest_level": 30,
+        "show_from_level": 22,
+        "pickup": "Willix the Importer im Zelt nahe dem Endboss in Razorfen Kraul / Kral von Razorfen.",
+        "prerequisites": "Im aktuellen Dungeon-Guide ist keine Vorquest aufgeführt. Die Begleitquest müssen beide annehmen und in Reichweite begleiten.",
+        "route": "Beim Kral-Lauf mitnehmen. Den Abschluss bei Willix abgeben, bevor ihr die Instanz verlasst.",
+        "rewards": [
+          {
+            "id": 6748,
+            "name": "Monkey Ring",
+            "icon": "inv_jewelry_ring_14",
+            "stats_text": "[Monkey Ring] Gegenstandsstufe 32 Wird beim Aufheben gebunden Finger +5 Beweglichkeit +5 Willenskraft",
+            "note": "Beweglichkeit statt Stärke; für Mirza zuerst mit dem eigenen Ring vergleichen.",
+            "source_url": "https://www.wowhead.com/forever/item=6748",
+            "checked_at": "2026-11-06"
+          },
+          {
+            "id": 6749,
+            "name": "Tiger Band",
+            "icon": "inv_jewelry_ring_13",
+            "stats_text": "[Tiger Band] Gegenstandsstufe 32 Wird beim Aufheben gebunden Finger +5 Stärke +5 Willenskraft",
+            "note": "Stärke statt Beweglichkeit; für Faruk mit der aktuellen Ausrüstung vergleichen.",
+            "source_url": "https://www.wowhead.com/forever/item=6749",
+            "checked_at": "2026-11-06"
+          }
+        ],
+        "notice": "Forever-Dungeon-Guide: Annahme ab 22. Ältere Classic-Angaben nennen teils 23; bei Willix im Spiel prüfen.",
+        "sources": [
+          {
+            "url": "https://www.wowhead.com/forever/quest=1144/willix-the-importer",
+            "checked_at": "2026-11-06"
+          },
+          {
+            "url": "https://www.wowhead.com/forever/item=6748",
+            "checked_at": "2026-11-06"
+          },
+          {
+            "url": "https://www.wowhead.com/forever/item=6749",
+            "checked_at": "2026-11-06"
+          }
+        ]
+      }
+    },
+    {
+      "id": "quest-gear-quilboar-blaster",
+      "players": [
+        "Mirza"
+      ],
+      "min_level": 29,
+      "max_level": 42,
+      "title": "Ab 29: Quilboar Blaster für Mirza",
+      "action": "Konkrete Quest-Schusswaffe: 18,57 DPS und +4 Beweglichkeit. Mit Mirzas aktueller Fernkampfwaffe vergleichen; ein Boss-Drop kann bereits besser sein.",
+      "priority": 100,
+      "source": "Wowhead Forever · Quest / Item",
+      "url": "https://www.wowhead.com/forever/quest=1101/the-crone-of-the-kraul",
+      "checked_at": "2026-11-06",
+      "evidence_status": "forever_database_and_guide_not_live_tested",
+      "quest_gear": {
+        "quest_id": 1101,
+        "quest_name": "The Crone of the Kraul",
+        "min_accept_level": 29,
+        "quest_level": 34,
+        "show_from_level": 22,
+        "pickup": "Falfindel Waywarder bei Thalanaar am Ostrand von Feralas, etwa 89 / 46.",
+        "prerequisites": "Lonebrow's Journal zuerst abgeben. Das Tagebuch stammt von Henrig Lonebrow am Fuß des Großen Aufzugs in Tausend Nadeln.",
+        "route": "Vor dem Kral-Lauf abholen. Charlga Razorflank töten und Razorflank's Medallion zurückbringen. Lässt sich mit Faruks Elemental Aid im selben Dungeon verbinden.",
+        "rewards": [
+          {
+            "id": 274084,
+            "name": "Quilboar Blaster",
+            "icon": "inv_weapon_rifle_05",
+            "stats_text": "[Quilboar Blaster] Gegenstandsstufe 36 Wird beim Aufheben gebunden Distanz Schusswaffe 36 - 68 Schaden Tempo 2.80 (18.57 Schaden pro Sekunde) +4 Beweglichkeit +4 Willenskraft Haltbarkeit 75 / 75",
+            "note": "",
+            "source_url": "https://www.wowhead.com/forever/item=274084",
+            "checked_at": "2026-11-06"
+          }
+        ],
+        "notice": "",
+        "sources": [
+          {
+            "url": "https://www.wowhead.com/forever/quest=1101/the-crone-of-the-kraul",
+            "checked_at": "2026-11-06"
+          },
+          {
+            "url": "https://www.wowhead.com/forever/item=274084",
+            "checked_at": "2026-11-06"
+          }
+        ]
+      }
+    },
+    {
+      "id": "quest-gear-big-game-hunter",
+      "players": [
+        "Mirza"
+      ],
+      "min_level": 28,
+      "max_level": 49,
+      "title": "Für später: Master Hunter's Bow / Rifle",
+      "action": "Zwei Fernkampf-Belohnungen zur Auswahl. Die Jagdketten im Schlingendorntal lassen sich unterwegs vorbereiten; die Schlussaufgabe ist keine leichte Stufe-28-Quest.",
+      "priority": 100,
+      "source": "Wowhead Forever · Quest / Item",
+      "url": "https://www.wowhead.com/forever/quest=208/big-game-hunter",
+      "checked_at": "2026-11-06",
+      "evidence_status": "forever_database_and_guide_not_live_tested",
+      "quest_gear": {
+        "quest_id": 208,
+        "quest_name": "Big Game Hunter",
+        "min_accept_level": 28,
+        "quest_level": 43,
+        "show_from_level": 28,
+        "pickup": "Hemet Nesingwary im Expeditionslager im nördlichen Schlingendorntal.",
+        "prerequisites": "Die Tiger-, Panther- und Raptor-Jagdketten mit Sin'Dall, Bag'thera und Tethis abschließen. Danach Big Game Hunter.",
+        "route": "Beim Questen im Schlingendorntal vorbereiten. Für King Bangalash und seine Begleiter Hilfe einplanen; danach bei Hemet genau eine Fernkampfwaffe auswählen.",
+        "rewards": [
+          {
+            "id": 17686,
+            "name": "Master Hunter's Bow",
+            "icon": "inv_weapon_bow_11",
+            "stats_text": "Meisterjägerbogen Gegenstandsstufe 43 Wird beim Aufheben gebunden Distanz Bogen 32 - 61 Schaden Tempo 2.40 (19.38 Schaden pro Sekunde) +6 Beweglichkeit Haltbarkeit 65 / 65",
+            "note": "",
+            "source_url": "https://www.wowhead.com/forever/item=17686",
+            "checked_at": "2026-11-06"
+          },
+          {
+            "id": 17687,
+            "name": "Master Hunter's Rifle",
+            "icon": "inv_weapon_rifle_05",
+            "stats_text": "Meisterjäger-Gewehr Gegenstandsstufe 43 Wird beim Aufheben gebunden Distanz Schusswaffe 35 - 66 Schaden Tempo 2.60 (19.42 Schaden pro Sekunde) +4 Stärke +4 Beweglichkeit Haltbarkeit 65 / 65",
+            "note": "",
+            "source_url": "https://www.wowhead.com/forever/item=17687",
+            "checked_at": "2026-11-06"
+          }
+        ],
+        "notice": "Annahme ab 28 laut Datenbank, Schlussquest Stufe 43. Keine aktuelle Live-Bestätigung des gesamten Ablaufs.",
+        "sources": [
+          {
+            "url": "https://www.wowhead.com/forever/quest=208/big-game-hunter",
+            "checked_at": "2026-11-06"
+          },
+          {
+            "url": "https://www.wowhead.com/forever/item=17686",
+            "checked_at": "2026-11-06"
+          },
+          {
+            "url": "https://www.wowhead.com/forever/item=17687",
+            "checked_at": "2026-11-06"
+          }
+        ]
+      }
+    },
+    {
+      "id": "quest-gear-nifty-stopwatch",
+      "players": [
+        "Faruk",
+        "Mirza"
+      ],
+      "min_level": 35,
+      "max_level": 60,
+      "title": "Schmuckstück für später: Nifty Stopwatch",
+      "action": "Nützlich für kurze Laufwege oder zum Entkommen: laut Forever-Itemdaten +40 % Lauftempo für 10 Sekunden, 6 Minuten Abklingzeit. Kein dauerhafter Schadensbonus.",
+      "priority": 100,
+      "source": "Wowhead Forever · Quest / Item",
+      "url": "https://www.wowhead.com/forever/quest=778/this-is-going-to-be-hard",
+      "checked_at": "2026-11-06",
+      "evidence_status": "forever_database_and_guide_not_live_tested",
+      "quest_gear": {
+        "quest_id": 778,
+        "quest_name": "This Is Going to Be Hard",
+        "min_accept_level": 35,
+        "quest_level": 45,
+        "show_from_level": 30,
+        "pickup": "Lotwil Veriatus im Ödland / Badlands, etwa 26 / 45.",
+        "prerequisites": "Forschungs- und Elementarquest-Kette bei Lotwil. Die genaue Forever-Freischaltung der Material-Vorquests ist hier noch offen.",
+        "route": "Bei der Ödland-Route vormerken. Der Schluss verlangt den Fam'retor Guardian. Materialkäufe erst nach Abgleich im Questlog; keine ungeprüfte Classic-Einkaufsliste abarbeiten.",
+        "rewards": [
+          {
+            "id": 2820,
+            "name": "Nifty Stopwatch",
+            "icon": "inv_misc_pocketwatch_01",
+            "stats_text": "Schicke Stoppuhr Gegenstandsstufe 50 Wird beim Aufheben gebunden Einzigartig anlegbar Schmuck Benutzen: Erhöht das Lauftempo 10 Sek. lang um 40%. (6 Min Abklingzeit)",
+            "note": "",
+            "source_url": "https://www.wowhead.com/forever/item=2820",
+            "checked_at": "2026-11-06"
+          }
+        ],
+        "notice": "Annahme ab 35 laut Datenbank; Live-Voraussetzungen noch prüfen. Alte Kommentare nennen andere Cooldowns, maßgeblich ist der verlinkte Forever-Itemdatensatz.",
+        "sources": [
+          {
+            "url": "https://www.wowhead.com/forever/quest=778/this-is-going-to-be-hard",
+            "checked_at": "2026-11-06"
+          },
+          {
+            "url": "https://www.wowhead.com/forever/item=2820",
+            "checked_at": "2026-11-06"
+          }
+        ]
+      }
     }
   ],
   "planning_reference": {

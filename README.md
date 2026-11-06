@@ -59,3 +59,7 @@ python scraper/check_quest_rewards.py
 `Verify dashboard` provjerava push i pull requestove, uključujući odvajanje zajedničkih i klasnih vijesti. Dnevni posao više ne preuzima podatke za kalkulatore.
 
 `data/discoveries.json` sadrži kratke provjerene praktične napomene i izvore. `data/guides.json` zadržava stabilne ID-eve postojećih dungeon questova; prije puta treba provjeriti konkretne zahtjeve u igri. `data/news.json` čuva sažetke i hashove; puni izvorni članci obrađuju se samo u memoriji i ne objavljuju se u bazi. Browser dobija `data/feed.json`, a vrijeme obrade nije isto što i vrijeme Pages objave.
+
+Ručni `quest_gear` pregledi u `data/discoveries.json` dopunjuju automatski izbor: konkretna nagrada, minimalni level, mjesto preuzimanja, prethodni zadaci i kada ih uklopiti u rutu. Klase imaju svoje napomene, a zajednički prstenovi i trinketi ostaju na početnoj. `show_from_level` određuje kada pripremu pokazati, odvojeno od minimalnog levela za prihvatanje. Isti quest iz automatskog kataloga tada se ne ponavlja. Nepotvrđena live dostupnost i otvoreni preduvjeti pišu uz napomenu.
+
+`assets/items-core.js` povezuje nagrade s njemačkim Wowhead Forever tooltipovima (`domain=de.forever`). Originalna imena ostaju vidljiva; ikone i kratki rezervni opisi ručno odabranih itema dolaze iz Forever podataka s datumom provjere. Službeni Wowhead widget učitava se asinhrono, pa njegov prekid ne blokira dashboard; klik i dalje otvara Forever item. Na mobitelu dodir otvara taj link.
