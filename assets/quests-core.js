@@ -8,5 +8,13 @@
     return list.filter(q=>active.some(level=>q.level>=level-8&&q.min_level<=level+10))
       .sort((a,b)=>Number(recent(b))-Number(recent(a))||distance(a)-distance(b)||a.id-b.id).slice(0,player?2:3);
   }
-  return {select,recent};
+  function classHints(items,levels,player){
+    const level=levels[player]||1;
+    return items.filter(x=>x.players?.length===1&&x.players[0]===player)
+      .filter(x=>x.quest_gear?level<=x.max_level:level+7>=x.min_level&&level<=x.max_level)
+      .sort((a,b)=>Number(!!b.quest_gear)-Number(!!a.quest_gear)||
+        (a.quest_gear&&b.quest_gear?Math.abs(a.min_level-level)-Math.abs(b.min_level-level):0)||
+        (b.priority||0)-(a.priority||0));
+  }
+  return {select,recent,classHints};
 });

@@ -721,7 +721,7 @@
 
 <script src="assets/news-core.js"></script>
 <script src="assets/guides-core.js?v=20261104-ai-status"></script>
-<script src="assets/quests-core.js"></script>
+<script src="assets/quests-core.js?v=20261106-hunter-weapons"></script>
 <script src="assets/items-core.js"></script>
 <script src="assets/dungeons-core.js"></script>
 <script>
@@ -1075,20 +1075,21 @@ async function loadDiscoveries() {
 }
 function renderDiscoveries() {
   renderQuestRewards();
-  const card=x=>{
+  const card=(x,level=null)=>{
     const g=x.quest_gear;
     const gear=g?`<small>Quest: ${esc(g.quest_name)}</small><ul class="gear-rewards">${g.rewards.map(item=>`<li>${WowItems.link(item,item)}${item.note?`<small>${esc(item.note)}</small>`:''}</li>`).join('')}</ul><p><strong>Annahme:</strong> ${g.min_accept_level==null?'Mindeststufe noch offen':`ab Stufe ${esc(g.min_accept_level)} (Datenbank)`}${g.quest_level?` · Quest-Stufe ${esc(g.quest_level)}`:''}</p><p><strong>Start:</strong> ${esc(g.pickup)}</p><p><strong>Vorher:</strong> ${esc(g.prerequisites)}</p><p><strong>Einplanen:</strong> ${esc(g.route)}</p>${g.notice?`<p class="guide-warning">${esc(g.notice)}</p>`:''}`:'';
-    return `<article class="discovery-card${g?' quest-gear-card':''}"><strong>${esc(x.title)}</strong><p>${esc(x.action)}</p>${gear}<small>${g?'Guide-/Datenbankstand':`Stufe ${x.min_level}–${x.max_level}`} · ${esc(x.source)} · geprüft ${esc(x.checked_at)}</small><p><a href="${safeURL(x.url)}" target="_blank" rel="noopener">Quelle und Details ↗</a></p></article>`;
+    const later=g&&level!==null&&g.min_accept_level!=null&&level<g.min_accept_level;
+    return `<article class="discovery-card${g?' quest-gear-card':''}">${later?'<small class="guide-warning">Für später vormerken</small>':''}<strong>${esc(x.title)}</strong><p>${esc(x.action)}</p>${gear}<small>${g?'Guide-/Datenbankstand':`Stufe ${x.min_level}–${x.max_level}`} · ${esc(x.source)} · geprüft ${esc(x.checked_at)}</small><p><a href="${safeURL(x.url)}" target="_blank" rel="noopener">Quelle und Details ↗</a></p></article>`;
   };
   const relevant=(x,levels)=>levels.some(lvl=>x.quest_gear?lvl>=(x.quest_gear.show_from_level??x.min_level)&&lvl<=x.max_level:lvl+7>=x.min_level&&lvl<=x.max_level);
   const rewardNames=WowQuests.select(questRewardsData?.items||[],playerLevels).flatMap(q=>q.rewards.map(i=>i.name.toLowerCase()));
   const shared=discoveriesData.filter(x=>!x.players || x.players.length!==1).filter(x=>x.quest_gear||!rewardNames.some(name=>(x.title+' '+x.action).toLowerCase().includes(name))).filter(x=>relevant(x,Object.values(playerLevels))).sort((a,b)=>(b.priority||0)-(a.priority||0));
   const home=document.getElementById('discoveries-home');
-  if(home) home.innerHTML=shared.slice(0,6).map(card).join('') || '<p>Derzeit keine zusätzlichen Hinweise für euren Levelbereich.</p>';
+  if(home) home.innerHTML=shared.slice(0,6).map(x=>card(x)).join('') || '<p>Derzeit keine zusätzlichen Hinweise für euren Levelbereich.</p>';
   for(const player of ['Faruk','Mirza']) {
     const el=document.getElementById('discoveries-'+player.toLowerCase());
-    const own=discoveriesData.filter(x=>x.players?.length===1 && x.players[0]===player).filter(x=>relevant(x,[playerLevels[player]])).sort((a,b)=>(b.priority||0)-(a.priority||0));
-    if(el) el.innerHTML=own.map(card).join('') || '<p>Derzeit keine zusätzlichen Klassenhinweise für deine Stufe.</p>';
+    const own=WowQuests.classHints(discoveriesData,playerLevels,player);
+    if(el) el.innerHTML=own.map(x=>card(x,playerLevels[player])).join('') || '<p>Derzeit keine zusätzlichen Klassenhinweise für deine Stufe.</p>';
   }
   WowItems.refreshTooltips();
 }

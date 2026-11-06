@@ -584,6 +584,108 @@
           }
         ]
       }
+    },
+    {
+      "id": "quest-gear-raptors-end",
+      "players": [
+        "Mirza"
+      ],
+      "min_level": 22,
+      "max_level": 32,
+      "title": "Sumpfland ab 22: Raptor's End · ohne Dungeon",
+      "action": "Konkreter Quest-Bogen für Mirza: 12,07 DPS, +2 Beweglichkeit und +2 Ausdauer. Mit der eigenen Fernkampfwaffe vergleichen; ein besserer Dungeon-Drop muss dafür nicht ersetzt werden.",
+      "priority": 110,
+      "source": "Wowhead Forever · Mobalytics / Gladius",
+      "url": "https://www.wowhead.com/forever/quest=296/ormers-revenge",
+      "checked_at": "2026-11-06",
+      "evidence_status": "forever_database_and_guide_not_live_tested",
+      "quest_gear": {
+        "quest_id": 296,
+        "quest_name": "Ormers Rache / Ormer's Revenge (3/3)",
+        "min_accept_level": 22,
+        "quest_level": 29,
+        "show_from_level": 20,
+        "pickup": "Ormer Ironbraid bei Whelgar's Excavation Site im offenen Sumpfland, ungefähr 38 / 51. Das ist die alte Ausgrabung im Freien, nicht die neue Instanz.",
+        "prerequisites": "Alle drei Teile von Ormer's Revenge abschließen: #294 → #295 → #296. Zum Schluss Sarltooth töten und Sarltooth's Talon zurückbringen.",
+        "route": "Bei eurer Sumpfland-Route ab 22 beginnen. Die Schlussquest ist Stufe 29; die spätere Raptor-Gruppe und Sarltooth je nach Gegnerstufe mit Hilfe oder nach weiteren Leveln erledigen.",
+        "rewards": [
+          {
+            "id": 3493,
+            "name": "Raptor's End",
+            "icon": "inv_weapon_bow_03",
+            "stats_text": "Raptor-Ex Gegenstandsstufe 30 Wird beim Aufheben gebunden Distanz Bogen 24 - 46 Schaden Tempo 2.90 (12.07 Schaden pro Sekunde) +2 Beweglichkeit +2 Ausdauer Haltbarkeit 65 / 65",
+            "note": "",
+            "source_url": "https://www.wowhead.com/forever/item=3493",
+            "checked_at": "2026-11-06"
+          }
+        ],
+        "notice": "Annahme ab 22 laut Forever-Levelingguide; kein eigener Live-Test. Nur eine der Quest-Belohnungen wählen.",
+        "sources": [
+          {
+            "url": "https://www.wowhead.com/forever/quest=294/ormers-revenge",
+            "checked_at": "2026-11-06"
+          },
+          {
+            "url": "https://www.wowhead.com/forever/quest=296/ormers-revenge",
+            "checked_at": "2026-11-06"
+          },
+          {
+            "url": "https://www.wowhead.com/forever/item=3493/raptors-end",
+            "checked_at": "2026-11-06"
+          },
+          {
+            "url": "https://mobalytics.gg/wow-forever/classes/forever-solo-hunter-gladius-gaming",
+            "checked_at": "2026-11-06"
+          }
+        ]
+      }
+    },
+    {
+      "id": "quest-gear-calibrated-blunderbuss",
+      "players": [
+        "Mirza"
+      ],
+      "min_level": 9,
+      "max_level": 22,
+      "title": "Frühe Alternative: Calibrated Blunderbuss",
+      "action": "Schusswaffe aus einer Dungeon-Quest mit 9,57 DPS und +3 Ausdauer. Interessant im frühen Spiel; mit 22 kein Pflichtumweg, wenn Mirza bereits eine gleich gute oder bessere Waffe besitzt.",
+      "priority": 90,
+      "source": "Wowhead Forever · Quest / Item",
+      "url": "https://www.wowhead.com/forever/quest=96393/old-ironforge-incursion",
+      "checked_at": "2026-11-06",
+      "evidence_status": "forever_database_and_guide_not_live_tested",
+      "quest_gear": {
+        "quest_id": 96393,
+        "quest_name": "Old Ironforge Incursion",
+        "min_accept_level": 9,
+        "quest_level": 16,
+        "show_from_level": 9,
+        "pickup": "Dark Iron Map bei den Dark-Iron-Zwergen im südöstlichen Dun Morogh suchen; laut Quest-Kommentar etwa 77 / 60. Die Karte zu Earthseer Farsen bringen.",
+        "prerequisites": "Underground Map abschließen → Old Ironforge Incursion. Ob eine weitere lokale Vorquest für den Karten-Drop nötig ist, ist nicht sicher bestätigt.",
+        "route": "Vor einem Lauf durch The Hall of Thanes vorbereiten. Durgen Dirgehammer's Head holen und bei King Magni Bronzebeard in Ironforge abgeben. Die Schusswaffe ist eine Belohnung zur Auswahl, kein zufälliger Boss-Drop.",
+        "rewards": [
+          {
+            "id": 279894,
+            "name": "Calibrated Blunderbuss",
+            "icon": "inv_weapon_rifle_01",
+            "stats_text": "Kalibrierte Donnerbüchse Gegenstandsstufe 18 Wird beim Aufheben gebunden Distanz Schusswaffe 15 - 29 Schaden Tempo 2.30 (9.57 Schaden pro Sekunde) +3 Ausdauer Haltbarkeit 50 / 50",
+            "note": "",
+            "source_url": "https://www.wowhead.com/forever/item=279894",
+            "checked_at": "2026-11-06"
+          }
+        ],
+        "notice": "Annahme ab 9 laut zuletzt geladenem Forever-Katalog, Quest-Stufe 16. Mindeststufe und sinnvolle Dungeon-Stufe unterscheiden; offene Karten-Voraussetzung im Spiel prüfen.",
+        "sources": [
+          {
+            "url": "https://www.wowhead.com/forever/quest=96393/old-ironforge-incursion",
+            "checked_at": "2026-11-06"
+          },
+          {
+            "url": "https://www.wowhead.com/forever/item=279894",
+            "checked_at": "2026-11-06"
+          }
+        ]
+      }
     }
   ],
   "planning_reference": {
