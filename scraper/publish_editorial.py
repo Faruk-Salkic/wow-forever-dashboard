@@ -41,7 +41,8 @@ def publish():
         url = S.normalize_url(item["url"])
         incoming.append({**item,"id":S.make_canonical_id(url),"normalized_url":url,
                          "raw_title":"WoW Forever: "+item["title"],"raw_content":item["article_de"],
-                         "source":"Dashboard · Questvorbereitung","source_icon":"🏰","radar_status":"Redaktionell",
+                         "source":item.get("source","Dashboard · Questvorbereitung"),
+                         "source_icon":item.get("source_icon","🏰"),"radar_status":"Redaktionell",
                          "verified_type":"Redaktioneller Hinweis mit verlinkten Quellen","date_basis":"editorial",
                          "fetched_at":now,"specific_change":True,"summary_mode":"curated","content_extractor":2,
                          "source_content_hash":S.compute_source_hash(item["title"],item["article_de"]),
@@ -54,11 +55,13 @@ def publish():
     merged,new,updated,_ = S.merge_and_deduplicate_items(notes,incoming,{},now)
     current = {item["normalized_url"]:item for item in incoming}
     for item in merged:
-        for field in ["references","internal_action"]:
+        for field in ["references","internal_action","category","classes","source","source_icon"]:
             if field in current[item["normalized_url"]]:item[field]=current[item["normalized_url"]][field]
     items = sorted(untouched+merged,key=lambda item:item.get("updated_at") if item.get("is_updated") else item.get("date",""),reverse=True)
     data.update(items=items,total_count=len(items),new_count=data.get("new_count",0)+new,updated_count=data.get("updated_count",0)+updated)
-    if new or updated:data["daily_summary"] = data.get("daily_summary","")+" Zusätzlich wurde der Hinweis zur Dungeon-Vorbereitung aktualisiert."
+    if new or updated:
+        summary = data.get("daily_summary", "")
+        data["daily_summary"] = (summary + " Redaktionelle Hinweise wurden ergänzt oder aktualisiert.").strip()
     S.save_json(str(ROOT/"data/news.json"),data);S.save_json(str(ROOT/"data/feed.json"),S.make_client_payload(data))
     print(f"Editorial notes: {new} new, {updated} updated; stable IDs retained.")
 

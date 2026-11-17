@@ -2,6 +2,21 @@
   "schema": 1,
   "items": [
     {
+      "id": "faruk-level-49-searing-gorge",
+      "players": [
+        "Faruk"
+      ],
+      "min_level": 48,
+      "max_level": 50,
+      "title": "Stufe 49 in der Sengenden Schlucht",
+      "action": "An der Thoriumspitze Hansel Heavyhands (38.6, 27.8) und die Questtafel (37.6, 26.5) mitnehmen. Im Kessel bei 43.1, 40.4 sind die Zuchtmeister Stufe 47–48, die Sklavenhändler 45–46. Schwere Kriegsgolems bei 41.7, 41.4 sind 47–49. Falls die Quests erledigt sind, zu Andi Lynn nach Gadgetzan und zu den Ogern auf Stufe 46–48 in Tanaris. Die Gegner auf 51–52 in den Verwüsteten Landen passen besser ab 52–53.",
+      "priority": 10,
+      "source": "Polestar · Forever-Allianzroute",
+      "url": "https://polestar.guide/guides/alliance/40-50/06-searing-gorge",
+      "checked_at": "2026-11-17",
+      "evidence_status": "forever_guide_not_live_tested"
+    },
+    {
       "id": "mining-find-minerals",
       "players": [
         "Faruk"

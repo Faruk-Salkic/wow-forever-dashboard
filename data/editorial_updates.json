@@ -1,6 +1,77 @@
 {
   "items": [
     {
+      "date": "2026-11-17",
+      "title": "Quest-Hotfix für Twilight’s Shroud und Zul’Farrak",
+      "teaser_de": "In „No Soldier Left Behind“ zählt jeder befreite Späher für die ganze Gruppe. Witch Doctor Zum’rah erscheint in „The Talisman of Kazdor“ wieder wie vorgesehen.",
+      "article_de": "Für „No Soldier Left Behind“ wird die Befreiung der Späher in Twilight’s Shroud jetzt allen Gruppenmitgliedern angerechnet. Wenn ihr zu zweit unterwegs seid, reicht es, pro Späher einmal zu interagieren.\n\nBlizzard hat auch den Fehler korrigiert, durch den Witch Doctor Zum’rah bei „The Talisman of Kazdor“ in Zul’Farrak nicht zuverlässig erschien.",
+      "url": "https://eu.forums.blizzard.com/en/wow/t/wow-forever-hotfixes-november-16-2026/639885/1",
+      "category": "hotfix",
+      "classes": [],
+      "source": "Dashboard · Blizzard-Hotfix",
+      "source_icon": "🔵",
+      "references": [
+        {
+          "label": "Quest-Korrekturen in Blizzards Hotfix-Notiz",
+          "url": "https://us.forums.blizzard.com/en/wow/t/wow-forever-hotfixes-november-16-2026/2403040/11"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-17",
+      "title": "Schamane · Windfury Totem und Maelstrom Weapon korrigiert",
+      "teaser_de": "Windfury Totem berücksichtigt wieder Rüstung und eine interne Abklingzeit. Maelstrom Weapon wirkt pro Verbrauch auf einen Zauber.",
+      "article_de": "Blizzard hat bestätigt, dass die Zusatzangriffe von Windfury Totem wieder Rüstung und eine interne Abklingzeit berücksichtigen.\n\nBei Verstärkung konnte Maelstrom Weapon durch einen Fehler zwei Zauber verstärken. Nach dem Hotfix gilt der Effekt pro Verbrauch für einen Zauber.",
+      "url": "https://us.forums.blizzard.com/en/wow/t/wow-forever-hotfixes-november-16-2026/2403040/11",
+      "category": "hotfix",
+      "classes": [
+        "Shaman"
+      ],
+      "source": "Dashboard · Blizzard-Hotfix",
+      "source_icon": "🔵",
+      "references": [
+        {
+          "label": "Offizielle Hotfix-Notiz vom 16. November",
+          "url": "https://us.forums.blizzard.com/en/wow/t/wow-forever-hotfixes-november-16-2026/2403040/11"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-17",
+      "title": "Faruks Questroute auf Stufe 49 in der Sengenden Schlucht",
+      "teaser_de": "Von der Thoriumspitze in den Kessel. Die Zuchtmeister sind Stufe 47–48, die Sklavenhändler 45–46.",
+      "article_de": "Für deinen Verstärkungs-Schamanen auf Stufe 49 lohnt sich der Kessel, falls die Quests dort noch offen sind. Die empfohlenen Gegner sind auf Stufe 47–48 oder etwas darunter.\n\n1. An der Thoriumspitze den Flugpunkt holen. Bei Hansel Heavyhands (38.6, 27.8) „Verdammt seien diese fetten Finger“ annehmen. An der Questtafel (37.6, 26.5) „STELLE ZU VERGEBEN: Erledige die Konkurrenz“ mitnehmen.\n\n2. Am Kessel bei 43.1, 40.4 Zuchtmeister der Dunkeleisenzwerge (47–48) und Sklavenhändler (45–46) einzeln heranziehen. Bei 41.7, 41.4 stehen Schwere Kriegsgolems (47–49). Für leichtere Kämpfe die Golems auf 47–48 wählen. Vorarbeiter Maltorius für eine Gruppe aufheben.\n\n3. Falls die Schlucht schon erledigt ist, bei Andi Lynn in Gadgetzan „Das Truppenlager der Dünenbrecher“ holen. Die normalen Oger um das Lager in Tanaris (41.9, 56.1) sind Stufe 46–48, Gor’marok ist Stufe 49. Die Gegner auf 51–52 in den Verwüsteten Landen kannst du ab 52–53 einplanen.",
+      "url": "https://polestar.guide/guides/alliance/40-50/06-searing-gorge",
+      "category": "guide",
+      "classes": [
+        "Shaman"
+      ],
+      "source": "Dashboard · Levelroute",
+      "source_icon": "🗺️",
+      "references": [
+        {
+          "label": "Forever-Allianzroute für Stufe 48–49",
+          "url": "https://polestar.guide/guides/alliance/40-50/06-searing-gorge"
+        },
+        {
+          "label": "Questgeber und Abholorte auf Deutsch",
+          "url": "https://eternadex.com/de/karte/sengende-schlucht/"
+        },
+        {
+          "label": "Gegnerstufen im Kessel",
+          "url": "https://wowfdb.com/zones/searing-gorge/"
+        },
+        {
+          "label": "Karte mit Wegpunkten im Kessel",
+          "url": "https://wowhandbook.com/zones/eastern-kingdoms/searing-gorge/"
+        },
+        {
+          "label": "Das Truppenlager der Dünenbrecher",
+          "url": "https://forever-tool.com/de/quests/5863/"
+        }
+      ]
+    },
+    {
       "date": "2026-11-04",
       "title": "Dungeon-Quests vorbereiten: Abholorte, Mindestlevel & Vorquests",
       "teaser_de": "Die Vorbereitungsliste wurde mit dem Forever-Guide abgeglichen. Seht unterwegs, welche Quests ihr in Ironforge, Stormwind, Westfall und anderen Gebieten mitnehmen könnt.",
