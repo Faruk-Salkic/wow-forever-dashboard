@@ -9,6 +9,12 @@ from scraper import scrape as S
 
 
 class SourceTests(unittest.TestCase):
+    def test_dedicated_forever_forum_keeps_context_without_claiming_all_posts_are_official(self):
+        feed=next(x for x in S.RSS_FEEDS if x['name']=='Blizzard Forever Forum')
+        self.assertIn('/wow-forever/346.rss',feed['url'])
+        self.assertFalse(feed['official'])
+        self.assertTrue(S.relevant_feed_item({'source':feed['name'],'title':'Water Pouch Bounty no longer grants experience','summary':'A quest XP hotfix.'}))
+
     def test_existing_dedicated_reddit_posts_keep_the_game_context(self):
         old={'id':'old','url':'https://www.reddit.com/r/wowforever/comments/example','source':'Reddit r/wowforever','raw_title':'ShotRange addon: Hunter auto-shot range indicator','title':'ShotRange für Hunter','teaser_de':'Addon für die Reichweite von Auto Shot.','article_de':'Hunter addon range indicator.','date':'2026-11-04'}
         merged,new,updated,_=S.merge_and_deduplicate_items([old],[],{},'2026-11-04T12:00:00Z')

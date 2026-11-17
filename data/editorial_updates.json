@@ -38,9 +38,9 @@
     },
     {
       "date": "2026-11-17",
-      "title": "Faruks Questroute auf Stufe 49 in der Sengenden Schlucht",
-      "teaser_de": "Von der Thoriumspitze in den Kessel. Die Zuchtmeister sind Stufe 47–48, die Sklavenhändler 45–46.",
-      "article_de": "Für deinen Verstärkungs-Schamanen auf Stufe 49 lohnt sich der Kessel, falls die Quests dort noch offen sind. Die empfohlenen Gegner sind auf Stufe 47–48 oder etwas darunter.\n\n1. An der Thoriumspitze den Flugpunkt holen. Bei Hansel Heavyhands (38.6, 27.8) „Verdammt seien diese fetten Finger“ annehmen. An der Questtafel (37.6, 26.5) „STELLE ZU VERGEBEN: Erledige die Konkurrenz“ mitnehmen.\n\n2. Am Kessel bei 43.1, 40.4 Zuchtmeister der Dunkeleisenzwerge (47–48) und Sklavenhändler (45–46) einzeln heranziehen. Bei 41.7, 41.4 stehen Schwere Kriegsgolems (47–49). Für leichtere Kämpfe die Golems auf 47–48 wählen. Vorarbeiter Maltorius für eine Gruppe aufheben.\n\n3. Falls die Schlucht schon erledigt ist, bei Andi Lynn in Gadgetzan „Das Truppenlager der Dünenbrecher“ holen. Die normalen Oger um das Lager in Tanaris (41.9, 56.1) sind Stufe 46–48, Gor’marok ist Stufe 49. Die Gegner auf 51–52 in den Verwüsteten Landen kannst du ab 52–53 einplanen.",
+      "title": "Faruks Questroute ab Stufe 50 · normale Gegner auf 46–49",
+      "teaser_de": "Offene Quests in der Sengenden Schlucht abschließen; danach Dunemaul-Oger in Tanaris. Konkrete Route oben im Faruk-Profil.",
+      "article_de": "Faruk ist jetzt Stufe 50. Als Empfehlung für leichtere Einzelkämpfe passen zunächst offene Aufgaben in der Sengenden Schlucht. An der Thoriumspitze „Verdammt seien diese fetten Finger“ und „STELLE ZU VERGEBEN: Erledige die Konkurrenz“ holen. Im Kessel normale Zwerge und Golems auf 45–49 wählen. Maltorius für eine Gruppe aufheben.\n\nWenn dort alles erledigt ist, bei Andi Lynn in Gadgetzan „Das Truppenlager der Dünenbrecher“ holen. Die normalen Oger im Lager um 40–42, 52–58 sind 46–48; Gor’marok ist 49. Einzelne Ziele am Rand ziehen. Der bestehende Feralas-Abschnitt ist eine weitere Option. Wer bereits im südlichen Teufelswald steht, kann die Brühschlammer-Proben vor dem Wechsel abschließen.\n\nDie Route und XP-Buffs sind oben im Faruk-Profil sichtbar. Auswahl nach Gegnerstufen; aktuelle Questabschlüsse und Ausrüstung sind unbekannt.",
       "url": "https://polestar.guide/guides/alliance/40-50/06-searing-gorge",
       "category": "guide",
       "classes": [
@@ -81,8 +81,98 @@
       "classes": [],
       "internal_action": "dungeons",
       "references": [
-        {"label":"Wowhead: Dungeon-Questübersicht","url":"https://www.wowhead.com/forever/guide/dungeons/every-dungeon-quest-location"},
-        {"label":"Destruction in Deadmines: Questdatensatz","url":"https://www.wowhead.com/forever/quest=92753/destruction-in-deadmines"}
+        {
+          "label": "Wowhead: Dungeon-Questübersicht",
+          "url": "https://www.wowhead.com/forever/guide/dungeons/every-dungeon-quest-location"
+        },
+        {
+          "label": "Destruction in Deadmines: Questdatensatz",
+          "url": "https://www.wowhead.com/forever/quest=92753/destruction-in-deadmines"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-17",
+      "title": "XP-Buffs beim Questen · Essen und fremden Schlafsack nutzen",
+      "teaser_de": "Tender Wolf Steak bringt +5 % Kill-XP. Drei Minuten im Schlafsack eines Gruppenmitglieds geben bis zu +3 % Erfahrung.",
+      "article_de": "Tender Wolf Steak gewährt nach mindestens 10 Sekunden Essen +15 Beweglichkeit für 15 Minuten und +5 % Erfahrung aus Kills. Der Kill-XP-Bonus betrifft die besiegten Gegner.\n\nLaut Wowhead kannst du den Gemütlichen Schlafsack eines Gruppenmitglieds benutzen. Pro Minute kommt 1 % Erfahrung hinzu, bis zu 3 %. So lässt sich der Buff auch vor Abschluss deiner eigenen Reisekette holen.\n\nBlizzard beschreibt beim Camp Tent das Auffüllen des Erholt-Vorrats bis 5 % eines Levels, falls der Vorrat darunter liegt. Ein Camp Chair bringt 2 % kritische Trefferchance. Im Faruk-Profil stehen die Quellen und der Startpunkt der Schlafsack-Kette.",
+      "url": "https://faruk-salkic.github.io/wow-forever-dashboard/?view=faruk&notice=xp-buffs-20261117",
+      "category": "guide",
+      "classes": [],
+      "source": "Dashboard · XP-Check",
+      "source_icon": "🏕️",
+      "references": [
+        {
+          "label": "Tender Wolf Steak · Forever-Tooltip",
+          "url": "https://www.wowhead.com/forever/item=18045/tender-wolf-steak"
+        },
+        {
+          "label": "Schlafsack in der Gruppe benutzen",
+          "url": "https://www.wowhead.com/forever/news/party-with-other-players-to-use-their-sleeping-bags-for-experience-buff-in-wow-383807"
+        },
+        {
+          "label": "Blizzard · Camping",
+          "url": "https://worldofwarcraft.blizzard.com/en-gb/news/24301516"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-17",
+      "title": "Dungeon-XP · aktuelle 12-Level-Regel beachten",
+      "teaser_de": "Die Gruppe verliert Kill-XP erst, wenn ein Mitglied mehr als 12 Level über dem jeweiligen Gegner liegt.",
+      "article_de": "Blizzard hat die zunächst strengere Regel am 14. November korrigiert. Dungeon-Kill-XP fällt für die Gruppe weg, sobald ein Mitglied mehr als 12 Level über dem jeweiligen Gegner liegt. Beispiel: Ein 60er bei einem Gegner auf 47 überschreitet die Grenze, bei einem Gegner auf 48 beträgt der Abstand genau 12.\n\nFür Faruk auf 50 sind Questläufe mit ähnlich hochstufigen Mitspielern in Zul’Farrak oder Maraudon eine Ergänzung. Die konkrete Gruppe, Wartezeit und offenen Quests bestimmen, ob sich der Lauf zeitlich lohnt.",
+      "url": "https://us.forums.blizzard.com/en/wow/t/player-level-dungeon-xp-adjustment-november-14/2416343",
+      "category": "hotfix",
+      "classes": [],
+      "source": "Dashboard · Blizzard-XP-Regel",
+      "source_icon": "🔵",
+      "references": [
+        {
+          "label": "Blizzard · Dungeon-XP-Anpassung",
+          "url": "https://us.forums.blizzard.com/en/wow/t/player-level-dungeon-xp-adjustment-november-14/2416343"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-17",
+      "title": "XP-Farm geschlossen · Water Pouch Bounty gibt keine Erfahrung mehr",
+      "teaser_de": "Der wiederholbare Wasserbeutel-Auftrag wurde mit den Hotfixes vom 16. November geändert.",
+      "article_de": "Laut Blizzard gewährt der wiederholbare Auftrag „Water Pouch Bounty“ keine Erfahrung mehr. Ältere Tipps zum XP-Farmen über Wasserbeutel sind damit überholt.",
+      "url": "https://faruk-salkic.github.io/wow-forever-dashboard/?view=home&notice=water-pouch-xp-20261117",
+      "category": "hotfix",
+      "classes": [],
+      "source": "Dashboard · Blizzard-Hotfix",
+      "source_icon": "🔵",
+      "references": [
+        {
+          "label": "Offizielle Hotfix-Notiz · 16. November",
+          "url": "https://us.forums.blizzard.com/en/wow/t/wow-forever-hotfixes-november-16-2026/2403040/11"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-17",
+      "title": "Blackmaw-Hold-Exploit · Goldfarm bereits korrigiert",
+      "teaser_de": "Die aktuelle Meldung betrifft fehlerhafte Beute von Nicht-Elitegegnern. Der gemeldete Goldfarm wurde bereits am 16. November korrigiert.",
+      "article_de": "In Blackmaw Hold hatten Nicht-Elitegegner ungewöhnlich umfangreiche Beute abgegeben. Wowhead meldete am 16. November, dass die betroffenen Gegner nach einem Hotfix keine Beute mehr liefern. Das betrifft einen Goldfarm; eine zusätzliche schnelle Solo-XP-Route für Faruk auf 50 ist damit nicht belegt.\n\nAm 17. November wird eine Blizzard-Erklärung zu Goldentzug und Sperren bei erheblichem Missbrauch auf Reddit wiedergegeben. Der Originalthread konnte bei dieser Prüfung nicht direkt geladen werden. Die Sanktionen sind hier deshalb als Bericht mit verlinktem Original gekennzeichnet.",
+      "url": "https://www.wowhead.com/forever/news/100-gold-per-hour-farm-nerfed-in-wow-forever-383898",
+      "category": "exploit",
+      "classes": [],
+      "source": "Dashboard · Exploit-Status",
+      "source_icon": "🚨",
+      "references": [
+        {
+          "label": "Wowhead · Hotfix des Farms",
+          "url": "https://www.wowhead.com/forever/news/100-gold-per-hour-farm-nerfed-in-wow-forever-383898"
+        },
+        {
+          "label": "Blizzard · Original der gemeldeten Erklärung",
+          "url": "https://us.forums.blizzard.com/en/wow/t/actions-for-blackmaw-hold-abuse-november-17/2419757"
+        },
+        {
+          "label": "Wiedergegebene Blizzard-Erklärung",
+          "url": "https://www.reddit.com/r/classicwow/comments/1xysirk/actions_for_blackmaw_hold_abuse_november_17/"
+        }
       ]
     }
   ]

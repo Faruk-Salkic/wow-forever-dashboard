@@ -56,6 +56,7 @@ HEADERS = {
 
 # Aktivni, provereni RSS izvori (ispravljeni URL-ovi koji vraćaju HTTP 200)
 RSS_FEEDS = [
+    {"name": "Blizzard Forever Forum", "icon": "🔷", "url": "https://us.forums.blizzard.com/en/wow/c/wow-forever/346.rss", "lang": "en", "official": False},
     {"name": "Blizzard Announcements", "icon": "🔵", "url": "https://us.forums.blizzard.com/en/wow/c/classic/classic-announcements/168.rss", "lang": "en", "official": True},
     {"name": "Blizzard Classic Forum",  "icon": "🔷", "url": "https://us.forums.blizzard.com/en/wow/c/classic/167.rss",                       "lang": "en", "official": False},
     {"name": "WoWhead Forever",        "icon": "🌐", "url": "https://www.wowhead.com/news/rss/all",                                           "lang": "en", "official": False},
@@ -74,8 +75,8 @@ REDDIT_SUBREDDITS = [feed["subreddit"] for feed in REDDIT_FEEDS]
 
 def relevant_feed_item(item, title=None, content=""):
     summary = item.get("summary", "")
-    # Posts in the dedicated subreddit need not repeat the game's name in their title.
-    if item.get("source") == "Reddit r/wowforever" or item.get("forever_link"):
+    # Dedicated Forever feeds need not repeat the game's name in every title.
+    if item.get("source") in {"Reddit r/wowforever", "Blizzard Forever Forum"} or item.get("forever_link"):
         summary = "WoW Forever. " + summary
     return is_relevant_context(title or item.get("title", ""), summary, content)
 
@@ -806,7 +807,7 @@ def run_scraper(skip_reddit=False):
     for item in collected_raw:
         if urllib.parse.urlparse(item["url"]).scheme not in {"http","https"}: continue
         context=(item["title"]+" "+item["summary"]).lower()
-        scoped=("forever" in context or item.get("forever_link") or re.search(r"/(?:wow-forever|forever)/", item["url"]) or item["source"]=="Reddit r/wowforever")
+        scoped=("forever" in context or item.get("forever_link") or re.search(r"/(?:wow-forever|forever)/", item["url"]) or item["source"] in {"Reddit r/wowforever", "Blizzard Forever Forum"})
         if not scoped: continue
         if item["source"].startswith("Reddit") and not re.search(r"addon|add-on|quest|pet|tame|spell|talent|totem|weapon|item|reward|loot|drop|vendor|bag|enchant|recipe|beruf|gather|herb|mining|skinn|camp|legacy|hotfix|buff|nerf|level|dungeon|mob|guide|bow|rifle|shield|trinket", item["title"], re.I): continue
         if not item["url"] or not relevant_feed_item(item): continue

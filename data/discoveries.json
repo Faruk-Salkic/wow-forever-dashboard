@@ -6,15 +6,30 @@
       "players": [
         "Faruk"
       ],
-      "min_level": 48,
-      "max_level": 50,
-      "title": "Stufe 49 in der Sengenden Schlucht",
-      "action": "An der Thoriumspitze Hansel Heavyhands (38.6, 27.8) und die Questtafel (37.6, 26.5) mitnehmen. Im Kessel bei 43.1, 40.4 sind die Zuchtmeister Stufe 47–48, die Sklavenhändler 45–46. Schwere Kriegsgolems bei 41.7, 41.4 sind 47–49. Falls die Quests erledigt sind, zu Andi Lynn nach Gadgetzan und zu den Ogern auf Stufe 46–48 in Tanaris. Die Gegner auf 51–52 in den Verwüsteten Landen passen besser ab 52–53.",
-      "priority": 10,
+      "min_level": 50,
+      "max_level": 52,
+      "title": "Stufe 50 · leichte Questroute für Faruk",
+      "action": "Empfehlung für deinen Allianz-Verstärker, wenn die Quests noch offen sind. In der Sengenden Schlucht an der Thoriumspitze „STELLE ZU VERGEBEN: Erledige die Konkurrenz“ und bei Hansel „Verdammt seien diese fetten Finger“ holen. Im Kessel um 43, 40 stehen Zuchtmeister (47–48) und Sklavenhändler (45–46), schwere Kriegsgolems (47–49) in der Umgebung. Einzelne Gegner am Rand wählen und Maltorius für eine Gruppe aufheben. Wenn die Schlucht erledigt ist, in Gadgetzan bei Andi Lynn „Das Truppenlager der Dünenbrecher“ annehmen. Am Dunemaul-Lager um 40–42, 52–58 normale Oger auf 46–48 einzeln ziehen. Gor’marok ist 49. Danach offene Feralas-Quests um 46–49 abschließen. Wenn du schon im südlichen Teufelswald bist, die verfluchten Brühschlammer (49–50) für deine Proben mitnehmen. Ab 52 die nächsten Abschnitte im Teufelswald oder Un’Goro angehen. Die Auswahl ist eine Empfehlung anhand der Gegnerstufen, kein gemessener XP/h-Vergleich.",
+      "priority": 150,
       "source": "Polestar · Forever-Allianzroute",
       "url": "https://polestar.guide/guides/alliance/40-50/06-searing-gorge",
       "checked_at": "2026-11-17",
-      "evidence_status": "forever_guide_not_live_tested"
+      "evidence_status": "forever_guide_not_live_tested",
+      "featured": true,
+      "references": [
+        {
+          "label": "Sengende Schlucht · Gegnerstufen",
+          "url": "https://www.wowhead.com/forever/zone=51/searing-gorge"
+        },
+        {
+          "label": "Culling the Competition",
+          "url": "https://www.wowhead.com/forever/quest=7729/job-opportunity-culling-the-competition"
+        },
+        {
+          "label": "Dunemaul-Quest",
+          "url": "https://www.wowhead.com/forever/quest=5863/the-dunemaul-compound"
+        }
+      ]
     },
     {
       "id": "mining-find-minerals",
@@ -701,6 +716,51 @@
           }
         ]
       }
+    },
+    {
+      "id": "faruk-xp-food-sleeping-bag",
+      "players": [
+        "Faruk"
+      ],
+      "min_level": 50,
+      "max_level": 59,
+      "priority": 145,
+      "featured": true,
+      "title": "Vor dem Questen · XP-Buffs auffrischen",
+      "action": "Zartes Wolfsteak / Tender Wolf Steak gibt nach 10 Sekunden Essen 15 Beweglichkeit für 15 Minuten und +5 % Erfahrung aus Kills. Den Well-Fed-Buff erneuern. Im Gemütlichen Schlafsack 3 Minuten liegen ergibt bis zu +3 % Erfahrung. Du kannst den Schlafsack eines Gruppenmitglieds nutzen. Für einen eigenen Schlafsack beginnt die Allianz-Kette bei den verbrannten Überresten in Westfall, Alexstons Hof (37, 50), ab Stufe 14. Die Reise lohnt eher bei längeren Sessions bis 60. Camp Tent füllt Erholt-Erfahrung bis 5 % eines Levels auf, wenn du darunter liegst. Das ist ein kleiner Erholt-Vorrat. Ein Camp Chair gibt 2 % kritische Trefferchance und kann beim Töten helfen. Werte anhand der Buff-Tooltips im Spiel prüfen.",
+      "source": "Wowhead Forever · Blizzard Camping",
+      "url": "https://www.wowhead.com/forever/news/party-with-other-players-to-use-their-sleeping-bags-for-experience-buff-in-wow-383807",
+      "checked_at": "2026-11-17",
+      "evidence_status": "published_sources_not_live_tested",
+      "references": [
+        {
+          "label": "Tender Wolf Steak",
+          "url": "https://www.wowhead.com/forever/item=18045/tender-wolf-steak"
+        },
+        {
+          "label": "Schlafsack-Kette",
+          "url": "https://www.wowhead.com/forever/guide/cozy-sleeping-bag-locations-rewards"
+        },
+        {
+          "label": "Blizzard Camping",
+          "url": "https://worldofwarcraft.blizzard.com/en-gb/news/24301516"
+        }
+      ]
+    },
+    {
+      "id": "faruk-lvl50-easier-combat",
+      "players": [
+        "Faruk"
+      ],
+      "min_level": 50,
+      "max_level": 59,
+      "priority": 130,
+      "title": "Leichter töten · Zielstufe und Ausrüstung prüfen",
+      "action": "Für entspanntes Soloquesten zuerst einzelne normale Gegner auf 47–49 wählen. Die tatsächliche Geschwindigkeit hängt von Waffe, Talenten und Pausen ab. Wenn du noch den größeren Stein auf größerem Stock aus Eye of Mugg trägst, hat er 41,2 Waffen-DPS und +14 Stärke. Einen Wechsel anhand von Waffenschaden und Stärke/AP vergleichen. Im verlinkten Levelguide Stufe 50 einstellen und die Rotation sowie neu verfügbare Ränge mit deinem Trainer abgleichen. Dein Armory und deine erledigten Quests wurden hier nicht ausgelesen.",
+      "source": "Icy Veins · Enhancement-Levelguide",
+      "url": "https://www.icy-veins.com/wow-forever/enhancement-shaman-leveling/",
+      "checked_at": "2026-11-17",
+      "evidence_status": "recommendation_from_guide_and_item_data"
     }
   ],
   "planning_reference": {
